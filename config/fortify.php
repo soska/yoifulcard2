@@ -163,7 +163,7 @@ return [
     'features' => [
         Features::registration(),
         Features::resetPasswords(),
-        Features::emailVerification(),
+        // Email verification is off in v1 (no mail provider). See REWRITE-PRD.md.
         Features::twoFactorAuthentication([
             'confirm' => true,
             'confirmPassword' => true,

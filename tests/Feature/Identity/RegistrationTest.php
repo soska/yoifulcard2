@@ -8,6 +8,8 @@ use App\Models\Organization;
 use App\Models\Program;
 use App\Models\User;
 use App\Support\CurrentOrganization;
+use Illuminate\Support\Facades\Notification;
+use Inertia\Testing\AssertableInertia as Assert;
 
 test('registration creates user, organization, owner membership, and Gift Card program', function () {
     $response = $this->post(route('register.store'), [
@@ -78,4 +80,28 @@ test('organization slugs are unique for duplicate names', function () {
     expect($slugs)->toHaveCount(3)
         ->and($slugs->unique())->toHaveCount(3)
         ->and($slugs->every(fn (string $slug) => str_starts_with($slug, 'ana-perezs-business')))->toBeTrue();
+});
+
+test('registration lands on the dashboard without email verification', function () {
+    Notification::fake();
+
+    $this->post(route('register.store'), [
+        'name' => 'Ana Pérez',
+        'email' => 'ana@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ])->assertRedirect(route('dashboard', absolute: false));
+
+    $user = User::where('email', 'ana@example.com')->sole();
+
+    expect($user->email_verified_at)->toBeNull();
+    Notification::assertNothingSent();
+
+    $this->get(route('dashboard'))
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page->component('dashboard'));
+
+    $this->get(route('scan'))->assertOk();
+    $this->get(route('profile.edit'))->assertOk();
+    $this->get('/email/verify')->assertNotFound();
 });
