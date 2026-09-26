@@ -162,7 +162,7 @@ return [
 
     'features' => [
         Features::registration(),
-        Features::resetPasswords(),
+        // Password reset is off in v1 (no mail provider). See REWRITE-PRD.md.
         // Email verification is off in v1 (no mail provider). See REWRITE-PRD.md.
         Features::twoFactorAuthentication([
             'confirm' => true,
