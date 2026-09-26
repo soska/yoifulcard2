@@ -116,7 +116,7 @@ class CardController extends Controller
                 ]);
             }
 
-            $program = $organization->programs()->where('is_active', true)->oldest()->oldest('id')->first();
+            $program = $organization->defaultProgram();
 
             if ($program === null) {
                 throw ValidationException::withMessages([

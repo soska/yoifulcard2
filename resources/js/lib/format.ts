@@ -68,3 +68,30 @@ export function formatSignedMoney(
         signDisplay: signed ? 'exceptZero' : 'auto',
     }).format(Number(amount));
 }
+
+/**
+ * Format a calendar date such as "2026-09-15" (already a local day of the
+ * organization, so no timezone shift applies). `style` picks a short
+ * "Sep 15" label for chart axes or a medium date.
+ */
+export function formatDay(
+    date: string,
+    style: 'short' | 'medium' = 'medium',
+): string {
+    const options: Intl.DateTimeFormatOptions =
+        style === 'short'
+            ? { month: 'short', day: 'numeric', timeZone: 'UTC' }
+            : { dateStyle: 'medium', timeZone: 'UTC' };
+
+    return new Intl.DateTimeFormat(LOCALE, options).format(
+        new Date(`${date}T00:00:00Z`),
+    );
+}
+
+/** The month name of a calendar date such as "2026-09-01". */
+export function formatMonth(date: string): string {
+    return new Intl.DateTimeFormat(LOCALE, {
+        month: 'long',
+        timeZone: 'UTC',
+    }).format(new Date(`${date}T00:00:00Z`));
+}

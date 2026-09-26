@@ -96,8 +96,9 @@ final readonly class TransactionFilters
      * Local midnight of a day (plus some days) in the organization's
      * timezone, converted to the app timezone the database stores. Days are
      * added before converting, so a DST change still lands on midnight.
+     * Analytics uses it too, so its days match the transactions filter.
      */
-    private static function dayStart(string $date, string $timezone, int $addDays = 0): Carbon
+    public static function dayStart(string $date, string $timezone, int $addDays = 0): Carbon
     {
         return Carbon::parse($date, $timezone)
             ->addDays($addDays)

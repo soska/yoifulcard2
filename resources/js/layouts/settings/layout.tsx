@@ -8,9 +8,15 @@ import { cn, toUrl } from '@/lib/utils';
 import { edit as editAppearance } from '@/routes/appearance';
 import { edit } from '@/routes/profile';
 import { edit as editSecurity } from '@/routes/security';
+import { edit as editBusiness } from '@/routes/settings';
 import type { NavItem } from '@/types';
 
 const sidebarNavItems: NavItem[] = [
+    {
+        title: 'Business',
+        href: editBusiness(),
+        icon: null,
+    },
     {
         title: 'Profile',
         href: edit(),
@@ -29,13 +35,20 @@ const sidebarNavItems: NavItem[] = [
 ];
 
 export default function SettingsLayout({ children }: PropsWithChildren) {
-    const { isCurrentOrParentUrl } = useCurrentUrl();
+    const { isCurrentUrl, isCurrentOrParentUrl } = useCurrentUrl();
+
+    // `/settings` is the parent of every settings page, so the business
+    // item only matches exactly.
+    const isActive = (item: NavItem) =>
+        toUrl(item.href) === toUrl(editBusiness())
+            ? isCurrentUrl(item.href)
+            : isCurrentOrParentUrl(item.href);
 
     return (
         <div className="px-4 py-6">
             <Heading
                 title="Settings"
-                description="Manage your profile and account settings"
+                description="Manage your business, profile, and account settings"
             />
 
             <div className="flex flex-col lg:flex-row lg:space-x-12">
@@ -50,7 +63,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                                 size="sm"
                                 variant="ghost"
                                 className={cn('w-full justify-start', {
-                                    'bg-muted': isCurrentOrParentUrl(item.href),
+                                    'bg-muted': isActive(item),
                                 })}
                                 nativeButton={false}
                                 render={<Link href={item.href} />}

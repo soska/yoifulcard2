@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\ClaimSuperadminController;
+use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\CardController;
 use App\Http\Controllers\Dashboard\CardEmailController;
 use App\Http\Controllers\Dashboard\CardLedgerController;
 use App\Http\Controllers\Dashboard\CardQrController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\TransactionController;
 use App\Http\Controllers\PublicCardController;
 use App\Http\Controllers\Reader\ScanController;
@@ -21,7 +24,7 @@ Route::post('c/{token}/email', [PublicCardController::class, 'email'])
 
 // Dashboard: members of an organization.
 Route::middleware(['auth', 'organization'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
 
     Route::get('cards', [CardController::class, 'index'])->name('cards.index');
     Route::get('cards/create', [CardController::class, 'create'])->name('cards.create');
@@ -31,6 +34,12 @@ Route::middleware(['auth', 'organization'])->group(function () {
 
     Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('transactions/export', [TransactionController::class, 'export'])->name('transactions.export');
+
+    Route::get('analytics', AnalyticsController::class)->name('analytics');
+
+    // Business settings. The profile, security and appearance pages are in
+    // routes/settings.php.
+    Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
 
     // Writes: refused while the organization is suspended or cancelled.
     Route::middleware('organization.writable')->group(function () {
@@ -43,6 +52,10 @@ Route::middleware(['auth', 'organization'])->group(function () {
         Route::post('cards/{card}/load', [CardLedgerController::class, 'load'])->whereUuid('card')->name('cards.load');
         Route::post('cards/{card}/spend', [CardLedgerController::class, 'spend'])->whereUuid('card')->name('cards.spend');
         Route::post('cards/{card}/adjust', [CardLedgerController::class, 'adjust'])->whereUuid('card')->name('cards.adjust');
+
+        // Owners and managers only; the form requests check the role.
+        Route::patch('settings/organization', [SettingsController::class, 'updateOrganization'])->name('settings.organization.update');
+        Route::patch('settings/program', [SettingsController::class, 'updateProgram'])->name('settings.program.update');
     });
 });
 

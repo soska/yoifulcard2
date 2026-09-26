@@ -1,6 +1,8 @@
 import { Link, usePage } from '@inertiajs/react';
 import {
     BookOpen,
+    ChartColumn,
+    Settings,
     CreditCard,
     Folder,
     LayoutGrid,
@@ -40,8 +42,9 @@ import { UserMenuContent } from '@/components/user-menu-content';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { useInitials } from '@/hooks/use-initials';
 import { cn, toUrl } from '@/lib/utils';
-import { dashboard } from '@/routes';
+import { analytics, dashboard } from '@/routes';
 import { index as cardsIndex } from '@/routes/cards';
+import { edit as settingsEdit } from '@/routes/settings';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { BreadcrumbItem, NavItem } from '@/types';
 
@@ -64,6 +67,16 @@ const mainNavItems: NavItem[] = [
         title: 'Transactions',
         href: transactionsIndex(),
         icon: ReceiptText,
+    },
+    {
+        title: 'Analytics',
+        href: analytics(),
+        icon: ChartColumn,
+    },
+    {
+        title: 'Settings',
+        href: settingsEdit(),
+        icon: Settings,
     },
 ];
 

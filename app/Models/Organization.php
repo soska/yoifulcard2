@@ -40,6 +40,15 @@ class Organization extends Model
     public const DEFAULT_TIMEZONE = 'America/Mexico_City';
 
     /**
+     * Currencies the settings form offers. An organization keeps a currency
+     * outside this list until someone changes it.
+     */
+    public const CURRENCIES = ['MXN', 'USD', 'CAD', 'EUR', 'GBP'];
+
+    /** Where uploaded logos go on the public disk. */
+    public const LOGO_DIRECTORY = 'logos';
+
+    /**
      * @var array<string, mixed>
      */
     protected $attributes = [
@@ -97,6 +106,15 @@ class Organization extends Model
     public function cards(): HasManyThrough
     {
         return $this->hasManyThrough(Card::class, Program::class);
+    }
+
+    /**
+     * The program cards are issued from and that settings edit: the oldest
+     * active one.
+     */
+    public function defaultProgram(): ?Program
+    {
+        return $this->programs()->where('is_active', true)->oldest()->oldest('id')->first();
     }
 
     /**

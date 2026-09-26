@@ -1,6 +1,8 @@
 import { Link } from '@inertiajs/react';
 import {
     BookOpen,
+    ChartColumn,
+    Settings,
     CreditCard,
     FolderGit2,
     LayoutGrid,
@@ -19,8 +21,9 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { analytics, dashboard } from '@/routes';
 import { index as cardsIndex } from '@/routes/cards';
+import { edit as settingsEdit } from '@/routes/settings';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { NavItem } from '@/types';
 
@@ -39,6 +42,16 @@ const mainNavItems: NavItem[] = [
         title: 'Transactions',
         href: transactionsIndex(),
         icon: ReceiptText,
+    },
+    {
+        title: 'Analytics',
+        href: analytics(),
+        icon: ChartColumn,
+    },
+    {
+        title: 'Settings',
+        href: settingsEdit(),
+        icon: Settings,
     },
 ];
 
