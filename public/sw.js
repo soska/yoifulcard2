@@ -6,10 +6,12 @@
  * - Built assets (/build/assets/*) have hashed names, so they are served
  *   from the cache once fetched. That keeps the app shell loading offline.
  * - Nothing else is cached: pages and Inertia responses carry signed-in data.
+ * - The offline page holds every language and picks one from the `locale`
+ *   cookie when shown, so one cached copy follows language changes.
  *
  * Bump VERSION to drop old caches when this file's caching rules change.
  */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL_CACHE = `yoiful-shell-${VERSION}`;
 const ASSET_CACHE = `yoiful-assets-${VERSION}`;
 const OFFLINE_URL = '/offline';

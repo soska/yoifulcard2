@@ -276,8 +276,8 @@ export default function AdminOrganizationsCreate() {
 
 AdminOrganizationsCreate.layout = {
     breadcrumbs: [
-        { title: 'Admin', href: adminIndex() },
-        { title: 'Organizations', href: index() },
-        { title: 'Create', href: create() },
+        { titleKey: 'Admin', href: adminIndex() },
+        { titleKey: 'Organizations', href: index() },
+        { titleKey: 'Create', href: create() },
     ],
 };

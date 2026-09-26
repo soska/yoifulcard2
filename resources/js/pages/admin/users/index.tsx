@@ -346,7 +346,7 @@ export default function AdminUsersIndex({ users, filters }: Props) {
 
 AdminUsersIndex.layout = {
     breadcrumbs: [
-        { title: 'Admin', href: adminIndex() },
-        { title: 'Users', href: index() },
+        { titleKey: 'Admin', href: adminIndex() },
+        { titleKey: 'Users', href: index() },
     ],
 };

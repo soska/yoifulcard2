@@ -254,5 +254,5 @@ export default function Analytics({
 }
 
 Analytics.layout = {
-    breadcrumbs: [{ title: 'Analytics', href: analytics() }],
+    breadcrumbs: [{ titleKey: 'Analytics', href: analytics() }],
 };

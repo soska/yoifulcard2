@@ -367,5 +367,5 @@ export default function CardsIndex({
 }
 
 CardsIndex.layout = {
-    breadcrumbs: [{ title: 'Cards', href: index() }],
+    breadcrumbs: [{ titleKey: 'Cards', href: index() }],
 };

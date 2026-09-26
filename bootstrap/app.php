@@ -7,12 +7,12 @@ use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\ResolveCurrentOrganization;
 use App\Http\Middleware\SetLocale;
 use App\Models\Superadmin;
+use App\Support\ErrorPage;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -44,16 +44,29 @@ return Application::configure(basePath: dirname(__DIR__))
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
 
-        // Show the Inertia forbidden page for any 403 outside JSON requests.
+        // Translated Inertia pages for 403, 404, 419, 500 and 503 outside JSON
+        // requests (500 keeps Laravel's debug page while APP_DEBUG is on).
+        // The public card's not-found page is returned by its controller and
+        // never reaches this.
         $exceptions->respond(function (Response $response, Throwable $e, Request $request) {
-            if ($response->getStatusCode() !== 403 || $request->expectsJson()) {
+            if (! ErrorPage::handles($request, $response)) {
                 return $response;
             }
 
-            return Inertia::render('errors/forbidden', [
-                'canClaimSuperadmin' => $request->user() !== null
-                    && $request->is('admin', 'admin/*')
-                    && ! Superadmin::query()->exists(),
-            ])->toResponse($request)->setStatusCode(403);
+            $status = $response->getStatusCode();
+
+            if ($status === 403) {
+                return ErrorPage::render($request, 'errors/forbidden', 403, [
+                    'canClaimSuperadmin' => rescue(
+                        fn () => $request->user() !== null
+                            && $request->is('admin', 'admin/*')
+                            && ! Superadmin::query()->exists(),
+                        false,
+                        false,
+                    ),
+                ]);
+            }
+
+            return ErrorPage::render($request, 'errors/error', $status, ['status' => $status]);
         });
     })->create();

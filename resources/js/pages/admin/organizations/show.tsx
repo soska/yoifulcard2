@@ -481,8 +481,8 @@ export default function AdminOrganizationShow({
 
 AdminOrganizationShow.layout = (props: AdminOrganizationPage) => ({
     breadcrumbs: [
-        { title: 'Admin', href: adminIndex() },
-        { title: 'Organizations', href: index() },
+        { titleKey: 'Admin', href: adminIndex() },
+        { titleKey: 'Organizations', href: index() },
         {
             title: props.organization.name,
             href: show(props.organization.id),

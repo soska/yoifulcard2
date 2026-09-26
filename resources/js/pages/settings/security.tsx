@@ -147,7 +147,7 @@ export default function Security(props: Props) {
 Security.layout = {
     breadcrumbs: [
         {
-            title: 'Security settings',
+            titleKey: 'Security settings',
             href: edit(),
         },
     ],

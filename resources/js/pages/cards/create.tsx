@@ -179,7 +179,7 @@ export default function CreateCard({ currency, usage }: Props) {
 
 CreateCard.layout = {
     breadcrumbs: [
-        { title: 'Cards', href: index() },
-        { title: 'Create card', href: create() },
+        { titleKey: 'Cards', href: index() },
+        { titleKey: 'Create card', href: create() },
     ],
 };

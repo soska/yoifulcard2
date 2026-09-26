@@ -179,5 +179,5 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
 }
 
 AdminIndex.layout = {
-    breadcrumbs: [{ title: 'Admin', href: index() }],
+    breadcrumbs: [{ titleKey: 'Admin', href: index() }],
 };

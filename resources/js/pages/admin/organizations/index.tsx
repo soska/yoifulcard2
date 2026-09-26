@@ -275,7 +275,7 @@ export default function AdminOrganizationsIndex({
 
 AdminOrganizationsIndex.layout = {
     breadcrumbs: [
-        { title: 'Admin', href: adminIndex() },
-        { title: 'Organizations', href: index() },
+        { titleKey: 'Admin', href: adminIndex() },
+        { titleKey: 'Organizations', href: index() },
     ],
 };

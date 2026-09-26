@@ -391,7 +391,7 @@ export default function ShowCard({
 
 ShowCard.layout = (props: Props) => ({
     breadcrumbs: [
-        { title: 'Cards', href: index() },
+        { titleKey: 'Cards', href: index() },
         { title: props.card.code, href: show(props.card) },
     ],
 });

@@ -437,7 +437,7 @@ export default function BusinessSettings({
 BusinessSettings.layout = {
     breadcrumbs: [
         {
-            title: 'Business settings',
+            titleKey: 'Business settings',
             href: edit(),
         },
     ],

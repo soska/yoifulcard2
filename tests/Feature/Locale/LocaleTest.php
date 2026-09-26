@@ -174,6 +174,12 @@ test('every translation key used in the code exists in en.json', function () {
         foreach ($matches as $match) {
             $keys[] = stripslashes($match[2] ?? '' ?: $match[1]);
         }
+
+        // Breadcrumb labels marked as translation keys.
+        if (! str_ends_with($file->getFilename(), '.php')) {
+            preg_match_all('/\btitleKey:\s*\'((?:[^\'\\\\]|\\\\.)+)\'/', $source, $titleKeys);
+            array_push($keys, ...array_map('stripslashes', $titleKeys[1]));
+        }
     }
 
     $missing = array_values(array_unique(array_diff($keys, array_keys($en))));
