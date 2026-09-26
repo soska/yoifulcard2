@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -64,6 +65,14 @@ class Organization extends Model
     }
 
     /**
+     * @return HasManyThrough<Card, Program, $this>
+     */
+    public function cards(): HasManyThrough
+    {
+        return $this->hasManyThrough(Card::class, Program::class);
+    }
+
+    /**
      * @return HasMany<Membership, $this>
      */
     public function memberships(): HasMany
@@ -88,6 +97,33 @@ class Organization extends Model
     public function isWritable(): bool
     {
         return $this->status === OrganizationStatus::Active;
+    }
+
+    /**
+     * Card usage against the plan's card limit. A null limit is unlimited.
+     * Usage at 80% or more is "near" the limit; at 100% creation is blocked.
+     *
+     * @return array{used: int, limit: int|null, percent: int|null, nearLimit: bool, atLimit: bool}
+     */
+    public function cardUsage(): array
+    {
+        $used = $this->cards()->count();
+        $limit = $this->card_limit;
+
+        if ($limit === null) {
+            return ['used' => $used, 'limit' => null, 'percent' => null, 'nearLimit' => false, 'atLimit' => false];
+        }
+
+        $atLimit = $used >= $limit;
+        $percent = $limit > 0 ? (int) floor($used * 100 / $limit) : 100;
+
+        return [
+            'used' => $used,
+            'limit' => $limit,
+            'percent' => $percent,
+            'nearLimit' => ! $atLimit && $percent >= 80,
+            'atLimit' => $atLimit,
+        ];
     }
 
     /**

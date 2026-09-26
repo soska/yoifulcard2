@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Organization;
+use App\Models\Program;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -44,7 +47,17 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+/**
+ * A user who is the owner of a new organization with one program.
+ *
+ * @param  array<string, mixed>  $organization  Attributes for the organization.
+ * @return array{0: User, 1: Organization, 2: Program}
+ */
+function cardOwner(array $organization = []): array
 {
-    // ..
+    $user = User::factory()->create();
+    $organization = Organization::factory()->withMember($user)->create($organization);
+    $program = Program::factory()->for($organization)->create();
+
+    return [$user, $organization, $program];
 }
