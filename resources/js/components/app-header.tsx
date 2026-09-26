@@ -4,6 +4,7 @@ import {
     CreditCard,
     Folder,
     LayoutGrid,
+    ReceiptText,
     Menu,
     Search,
 } from 'lucide-react';
@@ -41,6 +42,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn, toUrl } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import { index as cardsIndex } from '@/routes/cards';
+import { index as transactionsIndex } from '@/routes/transactions';
 import type { BreadcrumbItem, NavItem } from '@/types';
 
 type Props = {
@@ -57,6 +59,11 @@ const mainNavItems: NavItem[] = [
         title: 'Cards',
         href: cardsIndex(),
         icon: CreditCard,
+    },
+    {
+        title: 'Transactions',
+        href: transactionsIndex(),
+        icon: ReceiptText,
     },
 ];
 

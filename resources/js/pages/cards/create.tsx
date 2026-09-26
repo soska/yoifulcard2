@@ -101,9 +101,8 @@ export default function CreateCard({ currency, usage }: Props) {
                                                     }
                                                 />
                                                 <FieldDescription>
-                                                    Cards start at 0 for now.
-                                                    Adding funds comes with the
-                                                    ledger.
+                                                    0 or more. An amount above 0
+                                                    is recorded as a load.
                                                 </FieldDescription>
                                                 <FieldError>
                                                     {errors.initial_balance}

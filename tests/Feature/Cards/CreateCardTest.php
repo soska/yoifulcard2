@@ -57,7 +57,6 @@ test('card creation validates the initial balance and email', function (array $i
     'missing balance' => [['email' => null], 'initial_balance'],
     'negative balance' => [['initial_balance' => '-1'], 'initial_balance'],
     'three decimals' => [['initial_balance' => '1.005'], 'initial_balance'],
-    'nonzero balance before the ledger' => [['initial_balance' => '25.00'], 'initial_balance'],
     'bad email' => [['initial_balance' => '0', 'email' => 'not-an-email'], 'email'],
 ]);
 

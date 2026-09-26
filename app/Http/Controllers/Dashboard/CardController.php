@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\CardStatus;
+use App\Exceptions\LedgerException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cards\StoreCardRequest;
 use App\Models\Card;
 use App\Models\Organization;
+use App\Models\Transaction;
 use App\Services\CardCodeGenerator;
+use App\Services\CardLedger;
 use App\Support\CurrentOrganization;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -21,6 +24,12 @@ use Inertia\Response;
 class CardController extends Controller
 {
     public const PER_PAGE = 20;
+
+    /**
+     * How many recent transactions the card page shows. The full history is
+     * on the transactions page, filtered by the card's code.
+     */
+    public const HISTORY_LIMIT = 20;
 
     public const SORTS = ['code', 'balance', 'created_at', 'last_used_at'];
 
@@ -80,15 +89,16 @@ class CardController extends Controller
 
     /**
      * Create a card in the organization's default program, unless the
-     * organization has reached its card limit.
+     * organization has reached its card limit. A nonzero initial balance is
+     * posted as a load in the same database transaction as the card insert.
      */
-    public function store(StoreCardRequest $request, CardCodeGenerator $generator): RedirectResponse
+    public function store(StoreCardRequest $request, CardCodeGenerator $generator, CardLedger $ledger): RedirectResponse
     {
         $organization = $this->organization($request);
 
         Gate::authorize('create', [Card::class, $organization]);
 
-        $card = DB::transaction(function () use ($organization, $request, $generator): Card {
+        $card = DB::transaction(function () use ($organization, $request, $generator, $ledger): Card {
             // Lock the organization so two requests cannot both take the last slot.
             $organization = Organization::query()->lockForUpdate()->findOrFail($organization->id);
 
@@ -114,13 +124,25 @@ class CardController extends Controller
                 ]);
             }
 
-            return $program->cards()->create([
+            $card = $program->cards()->create([
                 'code' => $generator->code(),
                 'qr_token' => $generator->qrToken(),
                 'balance' => '0.00',
                 'status' => CardStatus::Active,
                 'email' => $request->validated('email'),
             ]);
+
+            if (bccomp($request->initialBalance(), '0', 2) > 0) {
+                try {
+                    $ledger->load($card, $request->initialBalance(), $request->user());
+                } catch (LedgerException $exception) {
+                    throw ValidationException::withMessages([
+                        $exception->field === 'amount' ? 'initial_balance' : $exception->field => $exception->translated(),
+                    ]);
+                }
+            }
+
+            return $card;
         });
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Card :code created.', ['code' => $card->code])]);
@@ -134,6 +156,15 @@ class CardController extends Controller
 
         $card->loadMissing('program.organization');
 
+        $transactions = $card->transactions()
+            ->with('performer:id,name')
+            ->latest()
+            ->orderByDesc('id')
+            ->limit(self::HISTORY_LIMIT)
+            ->get()
+            ->each(fn (Transaction $transaction) => $transaction->setRelation('card', $card))
+            ->map(fn (Transaction $transaction) => TransactionController::props($transaction));
+
         return Inertia::render('cards/show', [
             'card' => [
                 ...$this->cardProps($card),
@@ -141,6 +172,8 @@ class CardController extends Controller
                 'updated_at' => $card->updated_at?->toIso8601String(),
             ],
             'currency' => $card->program->organization->currency,
+            'transactions' => $transactions,
+            'transactionCount' => $card->transactions()->count(),
         ]);
     }
 

@@ -29,3 +29,19 @@ export function formatDateTime(value: string | null, fallback = '—'): string {
         timeStyle: 'short',
     }).format(new Date(value));
 }
+
+/**
+ * Format a decimal string as money with an explicit sign, such as "+$5.00"
+ * or "-$2.50". Pass `signed = false` for a plain amount.
+ */
+export function formatSignedMoney(
+    amount: string,
+    currency: string,
+    signed = true,
+): string {
+    return new Intl.NumberFormat(LOCALE, {
+        style: 'currency',
+        currency,
+        signDisplay: signed ? 'exceptZero' : 'auto',
+    }).format(Number(amount));
+}

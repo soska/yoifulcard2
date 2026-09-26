@@ -1,6 +1,15 @@
 import { Form, Head, Link, usePage } from '@inertiajs/react';
-import { AlertCircle, ArrowLeft, Download, Snowflake, Sun } from 'lucide-react';
+import {
+    AlertCircle,
+    ArrowLeft,
+    Download,
+    History,
+    Snowflake,
+    Sun,
+} from 'lucide-react';
+import { CardBalanceActions } from '@/components/cards/card-balance-actions';
 import { CardStatusBadge } from '@/components/cards/card-status-badge';
+import { TransactionsTable } from '@/components/transactions/transactions-table';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,21 +25,36 @@ import {
     FieldError,
     FieldLabel,
 } from '@/components/ui/field';
+import {
+    Empty,
+    EmptyDescription,
+    EmptyHeader,
+    EmptyMedia,
+    EmptyTitle,
+} from '@/components/ui/empty';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { formatDateTime, formatMoney } from '@/lib/format';
 import { email, freeze, index, show, unfreeze } from '@/routes/cards';
 import { png, svg } from '@/routes/cards/qr';
-import type { CardDetail } from '@/types';
+import { index as transactionsIndex } from '@/routes/transactions';
+import type { CardDetail, TransactionRow } from '@/types';
 
 type Props = {
     card: CardDetail;
     currency: string;
+    transactions: TransactionRow[];
+    transactionCount: number;
 };
 
 const SUSPENDED = 'This business is suspended. Contact support.';
 
-export default function ShowCard({ card, currency }: Props) {
+export default function ShowCard({
+    card,
+    currency,
+    transactions,
+    transactionCount,
+}: Props) {
     const { currentOrganization, errors } = usePage().props;
     const writable = currentOrganization?.status === 'active';
     const pageError =
@@ -109,6 +133,12 @@ export default function ShowCard({ card, currency }: Props) {
                                 </dl>
                             </CardContent>
                         </Card>
+
+                        <CardBalanceActions
+                            card={card}
+                            currency={currency}
+                            writable={writable}
+                        />
 
                         <Card>
                             <CardHeader>
@@ -277,6 +307,59 @@ export default function ShowCard({ card, currency }: Props) {
                         </CardContent>
                     </Card>
                 </div>
+
+                <Card>
+                    <CardHeader>
+                        <div className="flex flex-wrap items-center justify-between gap-3">
+                            <div className="flex flex-col gap-1">
+                                <CardTitle>History</CardTitle>
+                                <CardDescription>
+                                    {transactionCount > transactions.length
+                                        ? `The latest ${transactions.length} of ${transactionCount} transactions.`
+                                        : 'Every balance change on this card.'}
+                                </CardDescription>
+                            </div>
+                            {transactionCount > transactions.length && (
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    render={
+                                        <Link
+                                            href={transactionsIndex({
+                                                query: { card: card.code },
+                                            })}
+                                        />
+                                    }
+                                >
+                                    <History data-icon="inline-start" />
+                                    See all
+                                </Button>
+                            )}
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        {transactions.length === 0 ? (
+                            <Empty className="border">
+                                <EmptyHeader>
+                                    <EmptyMedia variant="icon">
+                                        <History />
+                                    </EmptyMedia>
+                                    <EmptyTitle>No transactions yet</EmptyTitle>
+                                    <EmptyDescription>
+                                        Loads, charges, and adjustments show up
+                                        here.
+                                    </EmptyDescription>
+                                </EmptyHeader>
+                            </Empty>
+                        ) : (
+                            <TransactionsTable
+                                transactions={transactions}
+                                currency={currency}
+                                showCard={false}
+                            />
+                        )}
+                    </CardContent>
+                </Card>
             </div>
         </>
     );

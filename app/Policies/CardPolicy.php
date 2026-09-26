@@ -36,4 +36,16 @@ class CardPolicy
         return $organization->isWritable()
             && $user->membershipFor($organization) !== null;
     }
+
+    /**
+     * Members can load, charge, and adjust the card while its organization
+     * is active. CardLedger checks the organization again under its lock.
+     */
+    public function transact(User $user, Card $card): bool
+    {
+        $organization = $card->organization();
+
+        return $organization->isWritable()
+            && $user->membershipFor($organization) !== null;
+    }
 }

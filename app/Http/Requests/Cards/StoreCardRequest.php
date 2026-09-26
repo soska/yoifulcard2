@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Cards;
 
-use Closure;
+use App\Services\CardLedger;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCardRequest extends FormRequest
@@ -19,16 +19,17 @@ class StoreCardRequest extends FormRequest
                 'required',
                 'decimal:0,2',
                 'gte:0',
-                'lte:99999999.99',
-                // A nonzero initial balance is posted as a ledger load, which
-                // arrives with the ledger. Until then only zero is accepted.
-                function (string $attribute, mixed $value, Closure $fail): void {
-                    if (is_numeric($value) && bccomp((string) $value, '0', 2) !== 0) {
-                        $fail(__('The initial balance must be 0 for now.'));
-                    }
-                },
+                'lte:'.CardLedger::MAX_BALANCE,
             ],
             'email' => ['nullable', 'string', 'email', 'max:255'],
         ];
+    }
+
+    /**
+     * The initial balance as a decimal string.
+     */
+    public function initialBalance(): string
+    {
+        return trim((string) $this->validated('initial_balance'));
     }
 }
