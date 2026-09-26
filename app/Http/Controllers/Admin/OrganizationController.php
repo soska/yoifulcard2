@@ -115,7 +115,7 @@ class OrganizationController extends Controller
             ]);
 
             $organization->programs()->create([
-                'name' => 'Gift Card',
+                'name' => __('Gift Card'),
                 'type' => ProgramType::Prepaid,
             ]);
 
@@ -249,7 +249,11 @@ class OrganizationController extends Controller
 
             if ($locked->status !== $from) {
                 throw ValidationException::withMessages([
-                    'status' => __('This organization is :status.', ['status' => $locked->status->value]),
+                    'status' => match ($locked->status) {
+                        OrganizationStatus::Active => __('This organization is already active.'),
+                        OrganizationStatus::Suspended => __('This organization is already suspended.'),
+                        OrganizationStatus::Cancelled => __('This organization is cancelled.'),
+                    },
                 ]);
             }
 

@@ -1,4 +1,4 @@
-import { createInertiaApp } from '@inertiajs/react';
+import { createInertiaApp, router } from '@inertiajs/react';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { initializeTheme } from '@/hooks/use-appearance';
@@ -43,3 +43,13 @@ void createInertiaApp({
 
 // This will set light / dark mode on load...
 initializeTheme();
+
+// The server renders `<html lang>` from the locale cookie; keep it in step
+// when the language changes without a full page load.
+router.on('navigate', (event) => {
+    const locale = event.detail.page.props.locale;
+
+    if (typeof locale === 'string') {
+        document.documentElement.lang = locale;
+    }
+});

@@ -35,10 +35,12 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { formatDay, formatMoney } from '@/lib/format';
+import { useDateFormat } from '@/hooks/use-date-format';
+import { useMoneyFormat } from '@/hooks/use-money-format';
 import { analytics } from '@/routes';
 import { exportMethod } from '@/routes/transactions';
 import type { AnalyticsDay, AnalyticsSummary } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     days: number;
@@ -83,19 +85,25 @@ export default function Analytics({
     ranges,
     currency,
 }: Props) {
+    const { t } = useTranslation();
+    const { formatMoney } = useMoneyFormat();
+    const { formatDay } = useDateFormat();
     const rangeItems = ranges.map((range) => ({
         value: String(range),
-        label: `Last ${range} days`,
+        label: t('Last :days days', { days: range }),
     }));
 
     return (
         <>
-            <Head title="Analytics" />
+            <Head title={t('Analytics')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <Heading
-                        title="Analytics"
-                        description={`${formatDay(from)} to ${formatDay(to)}, in your business's timezone.`}
+                        title={t('Analytics')}
+                        description={t(
+                            ":from to :to, in your business's timezone.",
+                            { from: formatDay(from), to: formatDay(to) },
+                        )}
                     />
                     <div className="flex gap-2">
                         <Select
@@ -111,7 +119,7 @@ export default function Analytics({
                         >
                             <SelectTrigger
                                 className="w-40"
-                                aria-label="Date range"
+                                aria-label={t('Date range')}
                             >
                                 <SelectValue />
                             </SelectTrigger>
@@ -138,29 +146,29 @@ export default function Analytics({
                             }
                         >
                             <ArrowDownToLine data-icon="inline-start" />
-                            Export CSV
+                            {t('Export CSV')}
                         </Button>
                     </div>
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <SummaryCard
-                        title="Cards created"
+                        title={t('Cards created')}
                         value={summary.cards}
                         icon={<CreditCard />}
                     />
                     <SummaryCard
-                        title="Transactions"
+                        title={t('Transactions')}
                         value={summary.transactions}
                         icon={<ReceiptText />}
                     />
                     <SummaryCard
-                        title="Loaded"
+                        title={t('Loaded')}
                         value={formatMoney(summary.loadAmount, currency)}
                         icon={<ArrowDownToLine />}
                     />
                     <SummaryCard
-                        title="Charged"
+                        title={t('Charged')}
                         value={formatMoney(summary.spendAmount, currency)}
                         icon={<ArrowUpFromLine />}
                     />
@@ -174,33 +182,33 @@ export default function Analytics({
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>By day</CardTitle>
+                        <CardTitle>{t('By day')}</CardTitle>
                         <CardDescription>
-                            The numbers behind the charts, newest first.
+                            {t('The numbers behind the charts, newest first.')}
                         </CardDescription>
                     </CardHeader>
                     <div className="px-(--card-spacing)">
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>Day</TableHead>
+                                    <TableHead>{t('Day')}</TableHead>
                                     <TableHead className="text-right">
-                                        Cards
+                                        {t('Cards')}
                                     </TableHead>
                                     <TableHead className="text-right">
-                                        Loads
+                                        {t('Loads')}
                                     </TableHead>
                                     <TableHead className="text-right">
-                                        Charges
+                                        {t('Charges')}
                                     </TableHead>
                                     <TableHead className="text-right">
-                                        Adjustments
+                                        {t('Adjustments')}
                                     </TableHead>
                                     <TableHead className="text-right">
-                                        Loaded
+                                        {t('Loaded')}
                                     </TableHead>
                                     <TableHead className="text-right">
-                                        Charged
+                                        {t('Charged')}
                                     </TableHead>
                                 </TableRow>
                             </TableHeader>

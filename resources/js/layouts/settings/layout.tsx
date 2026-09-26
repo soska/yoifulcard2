@@ -10,6 +10,7 @@ import { edit } from '@/routes/profile';
 import { edit as editSecurity } from '@/routes/security';
 import { edit as editBusiness } from '@/routes/settings';
 import type { NavItem } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 const sidebarNavItems: NavItem[] = [
     {
@@ -36,6 +37,7 @@ const sidebarNavItems: NavItem[] = [
 
 export default function SettingsLayout({ children }: PropsWithChildren) {
     const { isCurrentUrl, isCurrentOrParentUrl } = useCurrentUrl();
+    const { t } = useTranslation();
 
     // `/settings` is the parent of every settings page, so the business
     // item only matches exactly.
@@ -47,15 +49,17 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
     return (
         <div className="px-4 py-6">
             <Heading
-                title="Settings"
-                description="Manage your business, profile, and account settings"
+                title={t('Settings')}
+                description={t(
+                    'Manage your business, profile, and account settings',
+                )}
             />
 
             <div className="flex flex-col lg:flex-row lg:space-x-12">
                 <aside className="w-full max-w-xl lg:w-48">
                     <nav
                         className="flex flex-col space-y-1 space-x-0"
-                        aria-label="Settings"
+                        aria-label={t('Settings')}
                     >
                         {sidebarNavItems.map((item, index) => (
                             <Button
@@ -69,7 +73,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                                 render={<Link href={item.href} />}
                             >
                                 {item.icon && <item.icon className="h-4 w-4" />}
-                                {item.title}
+                                {t(item.title)}
                             </Button>
                         ))}
                     </nav>

@@ -1,6 +1,7 @@
 import type { OneTimeCredentials } from '@/types/admin';
 import type { Auth } from '@/types/auth';
 import type { CurrentOrganization } from '@/types/organization';
+import type { Translations } from '@/lib/i18n';
 import type { FlashToast } from '@/types/ui';
 
 declare module 'react' {
@@ -16,6 +17,14 @@ declare module '@inertiajs/core' {
             auth: Auth;
             currentOrganization: CurrentOrganization | null;
             sidebarOpen: boolean;
+            /** App locale from the `locale` cookie. */
+            locale: 'en' | 'es';
+            /** Intl locale for dates and money, `en-US` or `es-MX`. */
+            intlLocale: string;
+            /** The `theme` cookie. */
+            theme: 'light' | 'dark' | 'system';
+            /** JSON lines for `locale` whose text differs from the key. */
+            translations: Translations;
             [key: string]: unknown;
         };
         flashDataType: {

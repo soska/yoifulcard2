@@ -31,6 +31,7 @@ import type {
     TransactionRow,
     TransactionType,
 } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     transactions: Paginated<TransactionRow>;
@@ -57,6 +58,7 @@ export default function TransactionsIndex({
     currency,
 }: Props) {
     const [draft, setDraft] = useState<TransactionFilters>(filters);
+    const { t } = useTranslation();
 
     const visit = (next: TransactionFilters) => {
         router.get(
@@ -90,21 +92,23 @@ export default function TransactionsIndex({
         filters.card !== '';
 
     const typeItems = [
-        { value: ALL, label: 'All types' },
+        { value: ALL, label: t('All types') },
         ...types.map((type) => ({
             value: type,
-            label: transactionTypeLabels[type],
+            label: t(transactionTypeLabels[type]),
         })),
     ];
 
     return (
         <>
-            <Head title="Transactions" />
+            <Head title={t('Transactions')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <Heading
-                        title="Transactions"
-                        description="Every load, charge, and adjustment on your cards."
+                        title={t('Transactions')}
+                        description={t(
+                            'Every load, charge, and adjustment on your cards.',
+                        )}
                     />
                     <Button
                         variant="outline"
@@ -118,7 +122,7 @@ export default function TransactionsIndex({
                         }
                     >
                         <Download data-icon="inline-start" />
-                        Export CSV
+                        {t('Export CSV')}
                     </Button>
                 </div>
 
@@ -128,11 +132,11 @@ export default function TransactionsIndex({
                             onSubmit={submit}
                             className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[repeat(4,minmax(0,1fr))_auto]"
                             role="search"
-                            aria-label="Filter transactions"
+                            aria-label={t('Filter transactions')}
                         >
                             <Field>
                                 <FieldLabel htmlFor="filter-type">
-                                    Type
+                                    {t('Type')}
                                 </FieldLabel>
                                 <Select
                                     value={draft.type ?? ALL}
@@ -167,7 +171,7 @@ export default function TransactionsIndex({
                             </Field>
                             <Field>
                                 <FieldLabel htmlFor="filter-from">
-                                    From
+                                    {t('From')}
                                 </FieldLabel>
                                 <Input
                                     id="filter-from"
@@ -183,7 +187,9 @@ export default function TransactionsIndex({
                                 />
                             </Field>
                             <Field>
-                                <FieldLabel htmlFor="filter-to">To</FieldLabel>
+                                <FieldLabel htmlFor="filter-to">
+                                    {t('To')}
+                                </FieldLabel>
                                 <Input
                                     id="filter-to"
                                     type="date"
@@ -199,7 +205,7 @@ export default function TransactionsIndex({
                             </Field>
                             <Field>
                                 <FieldLabel htmlFor="filter-card">
-                                    Card code
+                                    {t('Card code')}
                                 </FieldLabel>
                                 <Input
                                     id="filter-card"
@@ -217,7 +223,7 @@ export default function TransactionsIndex({
                             <div className="flex items-end gap-2">
                                 <Button type="submit" variant="secondary">
                                     <Filter data-icon="inline-start" />
-                                    Apply
+                                    {t('Apply')}
                                 </Button>
                                 {filtered && (
                                     <Button
@@ -226,7 +232,7 @@ export default function TransactionsIndex({
                                         onClick={clear}
                                     >
                                         <X data-icon="inline-start" />
-                                        Clear
+                                        {t('Clear')}
                                     </Button>
                                 )}
                             </div>
@@ -240,13 +246,19 @@ export default function TransactionsIndex({
                                     </EmptyMedia>
                                     <EmptyTitle>
                                         {filtered
-                                            ? 'No transactions match these filters'
-                                            : 'No transactions yet'}
+                                            ? t(
+                                                  'No transactions match these filters',
+                                              )
+                                            : t('No transactions yet')}
                                     </EmptyTitle>
                                     <EmptyDescription>
                                         {filtered
-                                            ? 'Try another type, date range, or card code.'
-                                            : 'Loads, charges, and adjustments show up here.'}
+                                            ? t(
+                                                  'Try another type, date range, or card code.',
+                                              )
+                                            : t(
+                                                  'Loads, charges, and adjustments show up here.',
+                                              )}
                                     </EmptyDescription>
                                 </EmptyHeader>
                             </Empty>
@@ -260,9 +272,14 @@ export default function TransactionsIndex({
                         {transactions.total > 0 && (
                             <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
                                 <p className="text-sm text-muted-foreground">
-                                    Showing {transactions.from} to{' '}
-                                    {transactions.to} of {transactions.total}{' '}
-                                    transactions
+                                    {t(
+                                        'Showing :from to :to of :total transactions',
+                                        {
+                                            from: transactions.from ?? 0,
+                                            to: transactions.to ?? 0,
+                                            total: transactions.total,
+                                        },
+                                    )}
                                 </p>
                                 <div>
                                     <ListPagination paginator={transactions} />

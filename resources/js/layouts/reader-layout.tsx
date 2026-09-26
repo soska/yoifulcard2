@@ -3,11 +3,13 @@ import { LayoutDashboard, WifiOff } from 'lucide-react';
 import { useEffect } from 'react';
 import AppLogoIcon from '@/components/app-logo-icon';
 import { SuspendedBanner } from '@/components/organization/suspended-banner';
+import { PreferenceSwitchers } from '@/components/preferences/preference-switchers';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useOnline } from '@/hooks/use-online';
 import { registerServiceWorker } from '@/lib/service-worker';
 import { dashboard } from '@/routes';
+import { useTranslation } from '@/hooks/use-translation';
 
 /**
  * Full-screen, phone-first layout for the reader. No sidebar: large
@@ -20,6 +22,7 @@ export default function ReaderLayout({
 }) {
     const { currentOrganization } = usePage().props;
     const online = useOnline();
+    const { t } = useTranslation();
 
     useEffect(() => {
         registerServiceWorker();
@@ -32,7 +35,7 @@ export default function ReaderLayout({
                     <AppLogoIcon className="size-7 shrink-0 fill-current" />
                     <div className="min-w-0">
                         <p className="text-sm leading-tight font-semibold">
-                            Reader
+                            {t('Reader')}
                         </p>
                         {currentOrganization && (
                             <p className="truncate text-xs text-muted-foreground">
@@ -41,15 +44,18 @@ export default function ReaderLayout({
                         )}
                     </div>
                 </div>
-                <Button
-                    variant="ghost"
-                    size="lg"
-                    nativeButton={false}
-                    render={<Link href={dashboard()} />}
-                >
-                    <LayoutDashboard data-icon="inline-start" />
-                    Dashboard
-                </Button>
+                <div className="flex items-center gap-1">
+                    <PreferenceSwitchers />
+                    <Button
+                        variant="ghost"
+                        size="lg"
+                        nativeButton={false}
+                        render={<Link href={dashboard()} />}
+                    >
+                        <LayoutDashboard data-icon="inline-start" />
+                        {t('Dashboard')}
+                    </Button>
+                </div>
             </header>
 
             <div className="flex flex-col gap-2 px-4 pt-3 empty:hidden">
@@ -58,8 +64,9 @@ export default function ReaderLayout({
                     <Alert>
                         <WifiOff />
                         <AlertDescription>
-                            You are offline. Scans and charges need a
-                            connection.
+                            {t(
+                                'You are offline. Scans and charges need a connection.',
+                            )}
                         </AlertDescription>
                     </Alert>
                 )}

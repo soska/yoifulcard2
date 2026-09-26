@@ -35,11 +35,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { useDateFormat } from '@/hooks/use-date-format';
-import { formatMoney } from '@/lib/format';
+import { useMoneyFormat } from '@/hooks/use-money-format';
 import { email, freeze, index, show, unfreeze } from '@/routes/cards';
 import { png, svg } from '@/routes/cards/qr';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { CardDetail, TransactionRow } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     card: CardDetail;
@@ -58,6 +59,8 @@ export default function ShowCard({
 }: Props) {
     const { currentOrganization, errors } = usePage().props;
     const { formatDateTime } = useDateFormat();
+    const { formatMoney } = useMoneyFormat();
+    const { t } = useTranslation();
     const writable = currentOrganization?.status === 'active';
     const pageError =
         (errors as Record<string, string | undefined>).organization ??
@@ -74,14 +77,14 @@ export default function ShowCard({
                         render={<Link href={index()} />}
                     >
                         <ArrowLeft data-icon="inline-start" />
-                        Back to cards
+                        {t('Back to cards')}
                     </Button>
                 </div>
 
                 {pageError && (
                     <Alert variant="destructive">
                         <AlertCircle />
-                        <AlertTitle>That did not work</AlertTitle>
+                        <AlertTitle>{t('That did not work')}</AlertTitle>
                         <AlertDescription>{pageError}</AlertDescription>
                     </Alert>
                 )}
@@ -104,7 +107,7 @@ export default function ShowCard({
                                 <dl className="grid grid-cols-2 gap-4">
                                     <div className="col-span-2">
                                         <dt className="text-sm text-muted-foreground">
-                                            Balance
+                                            {t('Balance')}
                                         </dt>
                                         <dd className="text-3xl font-semibold tabular-nums">
                                             {formatMoney(
@@ -115,7 +118,7 @@ export default function ShowCard({
                                     </div>
                                     <div>
                                         <dt className="text-sm text-muted-foreground">
-                                            Created
+                                            {t('Created')}
                                         </dt>
                                         <dd>
                                             {formatDateTime(card.created_at)}
@@ -123,12 +126,12 @@ export default function ShowCard({
                                     </div>
                                     <div>
                                         <dt className="text-sm text-muted-foreground">
-                                            Last used
+                                            {t('Last used')}
                                         </dt>
                                         <dd>
                                             {formatDateTime(
                                                 card.last_used_at,
-                                                'Never',
+                                                t('Never'),
                                             )}
                                         </dd>
                                     </div>
@@ -144,9 +147,11 @@ export default function ShowCard({
 
                         <Card>
                             <CardHeader>
-                                <CardTitle>Status</CardTitle>
+                                <CardTitle>{t('Status')}</CardTitle>
                                 <CardDescription>
-                                    A frozen card cannot be charged or loaded.
+                                    {t(
+                                        'A frozen card cannot be charged or loaded.',
+                                    )}
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
@@ -165,7 +170,7 @@ export default function ShowCard({
                                                 title={
                                                     writable
                                                         ? undefined
-                                                        : SUSPENDED
+                                                        : t(SUSPENDED)
                                                 }
                                             >
                                                 {processing ? (
@@ -173,7 +178,7 @@ export default function ShowCard({
                                                 ) : (
                                                     <Sun data-icon="inline-start" />
                                                 )}
-                                                Unfreeze card
+                                                {t('Unfreeze card')}
                                             </Button>
                                         )}
                                     </Form>
@@ -194,7 +199,7 @@ export default function ShowCard({
                                                 title={
                                                     writable
                                                         ? undefined
-                                                        : SUSPENDED
+                                                        : t(SUSPENDED)
                                                 }
                                             >
                                                 {processing ? (
@@ -202,7 +207,7 @@ export default function ShowCard({
                                                 ) : (
                                                     <Snowflake data-icon="inline-start" />
                                                 )}
-                                                Freeze card
+                                                {t('Freeze card')}
                                             </Button>
                                         )}
                                     </Form>
@@ -212,9 +217,11 @@ export default function ShowCard({
 
                         <Card>
                             <CardHeader>
-                                <CardTitle>Cardholder email</CardTitle>
+                                <CardTitle>{t('Cardholder email')}</CardTitle>
                                 <CardDescription>
-                                    Optional. Saved for balance updates later.
+                                    {t(
+                                        'Optional. Saved for balance updates later.',
+                                    )}
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
@@ -230,7 +237,7 @@ export default function ShowCard({
                                                 htmlFor="email"
                                                 className="sr-only"
                                             >
-                                                Cardholder email
+                                                {t('Cardholder email')}
                                             </FieldLabel>
                                             <div className="flex gap-2">
                                                 <Input
@@ -241,7 +248,9 @@ export default function ShowCard({
                                                     defaultValue={
                                                         card.email ?? ''
                                                     }
-                                                    placeholder="customer@example.com"
+                                                    placeholder={t(
+                                                        'customer@example.com',
+                                                    )}
                                                     disabled={!writable}
                                                     aria-invalid={
                                                         !!formErrors.email
@@ -255,15 +264,15 @@ export default function ShowCard({
                                                     title={
                                                         writable
                                                             ? undefined
-                                                            : SUSPENDED
+                                                            : t(SUSPENDED)
                                                     }
                                                 >
                                                     {processing && <Spinner />}
-                                                    Save
+                                                    {t('Save')}
                                                 </Button>
                                             </div>
                                             <FieldDescription>
-                                                Leave empty to remove it.
+                                                {t('Leave empty to remove it.')}
                                             </FieldDescription>
                                             <FieldError>
                                                 {formErrors.email}
@@ -277,16 +286,18 @@ export default function ShowCard({
 
                     <Card className="h-fit">
                         <CardHeader>
-                            <CardTitle>QR code</CardTitle>
+                            <CardTitle>{t('QR code')}</CardTitle>
                             <CardDescription>
-                                Scan it to open the card.
+                                {t('Scan it to open the card.')}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center gap-4">
                             <div className="rounded-lg border bg-white p-2">
                                 <img
                                     src={svg.url(card)}
-                                    alt={`QR code for card ${card.code}`}
+                                    alt={t('QR code for card :code', {
+                                        code: card.code,
+                                    })}
                                     width={240}
                                     height={240}
                                     className="size-60"
@@ -304,7 +315,7 @@ export default function ShowCard({
                                 }
                             >
                                 <Download data-icon="inline-start" />
-                                Download PNG
+                                {t('Download PNG')}
                             </Button>
                         </CardContent>
                     </Card>
@@ -314,11 +325,19 @@ export default function ShowCard({
                     <CardHeader>
                         <div className="flex flex-wrap items-center justify-between gap-3">
                             <div className="flex flex-col gap-1">
-                                <CardTitle>History</CardTitle>
+                                <CardTitle>{t('History')}</CardTitle>
                                 <CardDescription>
                                     {transactionCount > transactions.length
-                                        ? `The latest ${transactions.length} of ${transactionCount} transactions.`
-                                        : 'Every balance change on this card.'}
+                                        ? t(
+                                              'The latest :count of :total transactions.',
+                                              {
+                                                  count: transactions.length,
+                                                  total: transactionCount,
+                                              },
+                                          )
+                                        : t(
+                                              'Every balance change on this card.',
+                                          )}
                                 </CardDescription>
                             </div>
                             {transactionCount > transactions.length && (
@@ -334,7 +353,7 @@ export default function ShowCard({
                                     }
                                 >
                                     <History data-icon="inline-start" />
-                                    See all
+                                    {t('See all')}
                                 </Button>
                             )}
                         </div>
@@ -346,10 +365,13 @@ export default function ShowCard({
                                     <EmptyMedia variant="icon">
                                         <History />
                                     </EmptyMedia>
-                                    <EmptyTitle>No transactions yet</EmptyTitle>
+                                    <EmptyTitle>
+                                        {t('No transactions yet')}
+                                    </EmptyTitle>
                                     <EmptyDescription>
-                                        Loads, charges, and adjustments show up
-                                        here.
+                                        {t(
+                                            'Loads, charges, and adjustments show up here.',
+                                        )}
                                     </EmptyDescription>
                                 </EmptyHeader>
                             </Empty>

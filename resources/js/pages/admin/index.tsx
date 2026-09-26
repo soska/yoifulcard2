@@ -25,6 +25,7 @@ import {
 } from '@/routes/admin/organizations';
 import { index as usersIndex } from '@/routes/admin/users';
 import type { AdminOrganizationSummary, AdminStats } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     stats: AdminStats;
@@ -33,46 +34,52 @@ type Props = {
 
 export default function AdminIndex({ stats, recentOrganizations }: Props) {
     const { formatDate } = useDateFormat();
+    const { t } = useTranslation();
 
     const tiles = [
         {
-            label: 'Organizations',
+            label: t('Organizations'),
             value: stats.organizations,
-            detail: `${stats.activeOrganizations} active, ${stats.suspendedOrganizations} suspended`,
+            detail: t(':active active, :suspended suspended', {
+                active: stats.activeOrganizations,
+                suspended: stats.suspendedOrganizations,
+            }),
             icon: Building2,
         },
         {
-            label: 'Cards',
+            label: t('Cards'),
             value: stats.cards,
-            detail: 'Across all organizations',
+            detail: t('Across all organizations'),
             icon: CreditCard,
         },
         {
-            label: 'Users',
+            label: t('Users'),
             value: stats.users,
-            detail: 'Registered accounts',
+            detail: t('Registered accounts'),
             icon: Users,
         },
         {
-            label: 'Superadmins',
+            label: t('Superadmins'),
             value: stats.superadmins,
-            detail: 'Can open this area',
+            detail: t('Can open this area'),
             icon: ShieldCheck,
         },
     ];
 
     return (
         <>
-            <Head title="Admin" />
+            <Head title={t('Admin')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <Heading
-                        title="Admin"
-                        description="Manage organizations, plans, and users."
+                        title={t('Admin')}
+                        description={t(
+                            'Manage organizations, plans, and users.',
+                        )}
                     />
                     <Button render={<Link href={createOrganization()} />}>
                         <Plus data-icon="inline-start" />
-                        Create organization
+                        {t('Create organization')}
                     </Button>
                 </div>
 
@@ -98,9 +105,9 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between gap-4">
                         <div className="flex flex-col gap-1">
-                            <CardTitle>Recent organizations</CardTitle>
+                            <CardTitle>{t('Recent organizations')}</CardTitle>
                             <CardDescription>
-                                The newest businesses on Yoiful.
+                                {t('The newest businesses on Yoiful.')}
                             </CardDescription>
                         </div>
                         <div className="flex gap-2">
@@ -109,14 +116,14 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
                                 size="sm"
                                 render={<Link href={usersIndex()} />}
                             >
-                                Users
+                                {t('Users')}
                             </Button>
                             <Button
                                 variant="outline"
                                 size="sm"
                                 render={<Link href={organizationsIndex()} />}
                             >
-                                View all
+                                {t('View all')}
                             </Button>
                         </div>
                     </CardHeader>
@@ -125,10 +132,10 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
                             <Empty className="border">
                                 <EmptyHeader>
                                     <EmptyTitle>
-                                        No organizations yet
+                                        {t('No organizations yet')}
                                     </EmptyTitle>
                                     <EmptyDescription>
-                                        Create one to onboard a business.
+                                        {t('Create one to onboard a business.')}
                                     </EmptyDescription>
                                 </EmptyHeader>
                             </Empty>
@@ -149,10 +156,12 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
                                                 {organization.name}
                                             </Link>
                                             <p className="truncate text-sm text-muted-foreground">
-                                                /{organization.slug} · Created{' '}
-                                                {formatDate(
-                                                    organization.created_at,
-                                                )}
+                                                /{organization.slug} ·{' '}
+                                                {t('Created :date', {
+                                                    date: formatDate(
+                                                        organization.created_at,
+                                                    ),
+                                                })}
                                             </p>
                                         </div>
                                         <OrganizationStatusBadge

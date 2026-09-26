@@ -29,11 +29,14 @@ import {
     EmptyMedia,
     EmptyTitle,
 } from '@/components/ui/empty';
-import { formatMoney, formatMonth } from '@/lib/format';
+import { useDateFormat } from '@/hooks/use-date-format';
+import { useMoneyFormat } from '@/hooks/use-money-format';
+import type { Translate } from '@/lib/i18n';
 import { analytics, dashboard, scan } from '@/routes';
 import { create, index as cardsIndex } from '@/routes/cards';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { CardUsage, DashboardStats, TransactionRow } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     stats: DashboardStats;
@@ -74,16 +77,23 @@ function StatCard({
     );
 }
 
-function cardBreakdown(stats: DashboardStats): string | undefined {
+function cardBreakdown(
+    stats: DashboardStats,
+    t: Translate,
+): string | undefined {
     if (stats.cards === 0) {
         return undefined;
     }
 
     return [
-        `${stats.active} active`,
-        stats.frozen > 0 ? `${stats.frozen} frozen` : null,
-        stats.depleted > 0 ? `${stats.depleted} depleted` : null,
-        stats.cancelled > 0 ? `${stats.cancelled} cancelled` : null,
+        t(':count active', { count: stats.active }),
+        stats.frozen > 0 ? t(':count frozen', { count: stats.frozen }) : null,
+        stats.depleted > 0
+            ? t(':count depleted', { count: stats.depleted })
+            : null,
+        stats.cancelled > 0
+            ? t(':count cancelled', { count: stats.cancelled })
+            : null,
     ]
         .filter(Boolean)
         .join(' · ');
@@ -97,10 +107,13 @@ export default function Dashboard({
     canCreateCards,
 }: Props) {
     const createBlocked = !canCreateCards || usage.atLimit;
+    const { t } = useTranslation();
+    const { formatMoney } = useMoneyFormat();
+    const { formatMonth } = useDateFormat();
 
     return (
         <>
-            <Head title="Dashboard" />
+            <Head title={t('Dashboard')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-wrap gap-2">
                     {createBlocked ? (
@@ -109,12 +122,14 @@ export default function Dashboard({
                             disabled
                             title={
                                 canCreateCards
-                                    ? 'Card limit reached'
-                                    : 'This business is suspended. Contact support.'
+                                    ? t('Card limit reached')
+                                    : t(
+                                          'This business is suspended. Contact support.',
+                                      )
                             }
                         >
                             <Plus data-icon="inline-start" />
-                            Create card
+                            {t('Create card')}
                         </Button>
                     ) : (
                         <Button
@@ -123,7 +138,7 @@ export default function Dashboard({
                             render={<Link href={create()} />}
                         >
                             <Plus data-icon="inline-start" />
-                            Create card
+                            {t('Create card')}
                         </Button>
                     )}
                     <Button
@@ -133,7 +148,7 @@ export default function Dashboard({
                         render={<Link href={scan()} />}
                     >
                         <ScanLine data-icon="inline-start" />
-                        Open reader
+                        {t('Open reader')}
                     </Button>
                     <Button
                         size="lg"
@@ -142,7 +157,7 @@ export default function Dashboard({
                         render={<Link href={cardsIndex()} />}
                     >
                         <List data-icon="inline-start" />
-                        All cards
+                        {t('All cards')}
                     </Button>
                     <Button
                         size="lg"
@@ -151,7 +166,7 @@ export default function Dashboard({
                         render={<Link href={transactionsIndex()} />}
                     >
                         <ReceiptText data-icon="inline-start" />
-                        Transactions
+                        {t('Transactions')}
                     </Button>
                     <Button
                         size="lg"
@@ -160,7 +175,7 @@ export default function Dashboard({
                         render={<Link href={analytics()} />}
                     >
                         <ChartColumn data-icon="inline-start" />
-                        Analytics
+                        {t('Analytics')}
                     </Button>
                 </div>
 
@@ -168,34 +183,36 @@ export default function Dashboard({
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     <StatCard
-                        title="Cards"
+                        title={t('Cards')}
                         value={
                             usage.limit === null
                                 ? stats.cards
                                 : `${stats.cards} / ${usage.limit}`
                         }
-                        detail={cardBreakdown(stats)}
+                        detail={cardBreakdown(stats, t)}
                         icon={<CreditCard />}
                     />
                     <StatCard
-                        title="Outstanding balance"
+                        title={t('Outstanding balance')}
                         value={formatMoney(stats.outstandingBalance, currency)}
-                        detail="Across all cards"
+                        detail={t('Across all cards')}
                         icon={<Wallet />}
                     />
                     <StatCard
-                        title="This month"
+                        title={t('This month')}
                         value={stats.monthTransactions}
-                        detail={`Transactions in ${formatMonth(stats.month)}`}
+                        detail={t('Transactions in :month', {
+                            month: formatMonth(stats.month),
+                        })}
                         icon={<Activity />}
                     />
                 </div>
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>Recent activity</CardTitle>
+                        <CardTitle>{t('Recent activity')}</CardTitle>
                         <CardDescription>
-                            The latest transactions across all cards.
+                            {t('The latest transactions across all cards.')}
                         </CardDescription>
                         {recentTransactions.length > 0 && (
                             <CardAction>
@@ -205,7 +222,7 @@ export default function Dashboard({
                                     nativeButton={false}
                                     render={<Link href={transactionsIndex()} />}
                                 >
-                                    View all
+                                    {t('View all')}
                                     <ArrowRight data-icon="inline-end" />
                                 </Button>
                             </CardAction>
@@ -218,10 +235,13 @@ export default function Dashboard({
                                     <EmptyMedia variant="icon">
                                         <ReceiptText />
                                     </EmptyMedia>
-                                    <EmptyTitle>No activity yet</EmptyTitle>
+                                    <EmptyTitle>
+                                        {t('No activity yet')}
+                                    </EmptyTitle>
                                     <EmptyDescription>
-                                        Create a card and add funds to get
-                                        started.
+                                        {t(
+                                            'Create a card and add funds to get started.',
+                                        )}
                                     </EmptyDescription>
                                 </EmptyHeader>
                             </Empty>

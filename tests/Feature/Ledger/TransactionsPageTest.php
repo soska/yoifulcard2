@@ -132,7 +132,7 @@ test('csv export matches the filtered list', function () {
         $lines = array_values(array_filter(explode("\n", $response->streamedContent())));
         $csv = array_map(fn (string $line) => str_getcsv($line, escape: ''), $lines);
 
-        expect($csv[0])->toBe(['date', 'card', 'type', 'amount', 'balance_after', 'note', 'performed_by']);
+        expect($csv[0])->toBe(['Date', 'Card', 'Type', 'Amount', 'Balance after', 'Note', 'Performed by']);
 
         $byId = collect($rows)->keyBy('id');
         $expectedRows = array_map(function (string $id) use ($byId, $user, $organization) {
@@ -141,7 +141,7 @@ test('csv export matches the filtered list', function () {
             return [
                 $transaction->created_at->setTimezone($organization->timezone)->toIso8601String(),
                 $transaction->card->code,
-                $transaction->type->value,
+                $transaction->type->label(),
                 $transaction->amount,
                 $transaction->balance_after,
                 $transaction->note === null ? '' : "'".$transaction->note,

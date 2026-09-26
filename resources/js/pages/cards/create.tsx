@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { create, index, store } from '@/routes/cards';
 import type { CardUsage } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     currency: string;
@@ -29,12 +30,13 @@ type Props = {
 
 export default function CreateCard({ currency, usage }: Props) {
     const { currentOrganization } = usePage().props;
+    const { t } = useTranslation();
     const writable = currentOrganization?.status === 'active';
     const blocked = !writable || usage.atLimit;
 
     return (
         <>
-            <Head title="Create card" />
+            <Head title={t('Create card')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div>
                     <Button
@@ -43,7 +45,7 @@ export default function CreateCard({ currency, usage }: Props) {
                         render={<Link href={index()} />}
                     >
                         <ArrowLeft data-icon="inline-start" />
-                        Back to cards
+                        {t('Back to cards')}
                     </Button>
                 </div>
 
@@ -52,9 +54,11 @@ export default function CreateCard({ currency, usage }: Props) {
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>Create a card</CardTitle>
+                            <CardTitle>{t('Create a card')}</CardTitle>
                             <CardDescription>
-                                The card gets a code and a QR code right away.
+                                {t(
+                                    'The card gets a code and a QR code right away.',
+                                )}
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -71,7 +75,9 @@ export default function CreateCard({ currency, usage }: Props) {
                                                 <Alert variant="destructive">
                                                     <AlertCircle />
                                                     <AlertTitle>
-                                                        The card was not created
+                                                        {t(
+                                                            'The card was not created',
+                                                        )}
                                                     </AlertTitle>
                                                     <AlertDescription>
                                                         {formError}
@@ -85,7 +91,12 @@ export default function CreateCard({ currency, usage }: Props) {
                                                 }
                                             >
                                                 <FieldLabel htmlFor="initial_balance">
-                                                    Initial balance ({currency})
+                                                    {t(
+                                                        'Initial balance (:currency)',
+                                                        {
+                                                            currency,
+                                                        },
+                                                    )}
                                                 </FieldLabel>
                                                 <Input
                                                     id="initial_balance"
@@ -101,8 +112,9 @@ export default function CreateCard({ currency, usage }: Props) {
                                                     }
                                                 />
                                                 <FieldDescription>
-                                                    0 or more. An amount above 0
-                                                    is recorded as a load.
+                                                    {t(
+                                                        '0 or more. An amount above 0 is recorded as a load.',
+                                                    )}
                                                 </FieldDescription>
                                                 <FieldError>
                                                     {errors.initial_balance}
@@ -113,21 +125,26 @@ export default function CreateCard({ currency, usage }: Props) {
                                                 data-invalid={!!errors.email}
                                             >
                                                 <FieldLabel htmlFor="email">
-                                                    Cardholder email (optional)
+                                                    {t(
+                                                        'Cardholder email (optional)',
+                                                    )}
                                                 </FieldLabel>
                                                 <Input
                                                     id="email"
                                                     name="email"
                                                     type="email"
                                                     autoComplete="off"
-                                                    placeholder="customer@example.com"
+                                                    placeholder={t(
+                                                        'customer@example.com',
+                                                    )}
                                                     aria-invalid={
                                                         !!errors.email
                                                     }
                                                 />
                                                 <FieldDescription>
-                                                    Saved on the card for
-                                                    balance updates later.
+                                                    {t(
+                                                        'Saved on the card for balance updates later.',
+                                                    )}
                                                 </FieldDescription>
                                                 <FieldError>
                                                     {errors.email}
@@ -140,11 +157,13 @@ export default function CreateCard({ currency, usage }: Props) {
                                                 title={
                                                     writable
                                                         ? undefined
-                                                        : 'This business is suspended. Contact support.'
+                                                        : t(
+                                                              'This business is suspended. Contact support.',
+                                                          )
                                                 }
                                             >
                                                 {processing && <Spinner />}
-                                                Create card
+                                                {t('Create card')}
                                             </Button>
                                         </FieldGroup>
                                     );

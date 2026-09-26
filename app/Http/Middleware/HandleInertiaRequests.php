@@ -3,7 +3,11 @@
 namespace App\Http\Middleware;
 
 use App\Support\CurrentOrganization;
+use App\Support\Locale;
+use App\Support\Theme;
+use App\Support\Translations;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -36,6 +40,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $locale = app()->getLocale();
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -44,6 +50,13 @@ class HandleInertiaRequests extends Middleware
                 'isSuperadmin' => fn () => $request->user()?->isSuperadmin() === true,
             ],
             'currentOrganization' => fn () => CurrentOrganization::toProp($request),
+            'locale' => $locale,
+            'intlLocale' => Locale::intl($locale),
+            'theme' => Theme::fromRequest($request),
+            // Sent once per language (and per change to the files); the
+            // browser keeps it across visits.
+            'translations' => Inertia::once(fn () => Translations::for($locale))
+                ->as('translations:'.$locale.':'.Translations::version($locale)),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }

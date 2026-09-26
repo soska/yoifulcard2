@@ -19,4 +19,13 @@ enum TransactionType: string
     {
         return [self::Load->value, self::Spend->value, self::Adjustment->value];
     }
+
+    /**
+     * The name shown to people, in the current language. The keys are
+     * `type.*` because "Charge" is also a verb elsewhere in the app.
+     */
+    public function label(): string
+    {
+        return __('type.'.$this->value);
+    }
 }

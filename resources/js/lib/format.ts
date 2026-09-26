@@ -1,9 +1,18 @@
-// Locale switching arrives with translations. Until then, format for en-US.
-const LOCALE = 'en-US';
+/**
+ * Display formatting for money and dates. Every function takes the Intl
+ * locale (`en-US` or `es-MX`, the shared `intlLocale` prop). Components use
+ * the `useDateFormat` and `useMoneyFormat` hooks, which bind the locale and
+ * the organization's timezone.
+ */
+export const DEFAULT_LOCALE = 'en-US';
 
 /** Format a decimal string such as "12.50" as money. Display only. */
-export function formatMoney(amount: string, currency: string): string {
-    return new Intl.NumberFormat(LOCALE, {
+export function formatMoney(
+    amount: string,
+    currency: string,
+    locale: string = DEFAULT_LOCALE,
+): string {
+    return new Intl.NumberFormat(locale, {
         style: 'currency',
         currency,
     }).format(Number(amount));
@@ -20,18 +29,24 @@ type DateOptions = {
     timeZone?: string;
     /** Shown when the value is empty. */
     fallback?: string;
+    /** Intl locale, `en-US` or `es-MX`. */
+    locale?: string;
 };
 
 /** Format an ISO timestamp as a date in the given timezone. */
 export function formatDate(
     value: string | null,
-    { timeZone = DEFAULT_TIME_ZONE, fallback = '—' }: DateOptions = {},
+    {
+        timeZone = DEFAULT_TIME_ZONE,
+        fallback = '—',
+        locale = DEFAULT_LOCALE,
+    }: DateOptions = {},
 ): string {
     if (!value) {
         return fallback;
     }
 
-    return new Intl.DateTimeFormat(LOCALE, {
+    return new Intl.DateTimeFormat(locale, {
         dateStyle: 'medium',
         timeZone,
     }).format(new Date(value));
@@ -40,13 +55,17 @@ export function formatDate(
 /** Format an ISO timestamp as a date and time in the given timezone. */
 export function formatDateTime(
     value: string | null,
-    { timeZone = DEFAULT_TIME_ZONE, fallback = '—' }: DateOptions = {},
+    {
+        timeZone = DEFAULT_TIME_ZONE,
+        fallback = '—',
+        locale = DEFAULT_LOCALE,
+    }: DateOptions = {},
 ): string {
     if (!value) {
         return fallback;
     }
 
-    return new Intl.DateTimeFormat(LOCALE, {
+    return new Intl.DateTimeFormat(locale, {
         dateStyle: 'medium',
         timeStyle: 'short',
         timeZone,
@@ -61,8 +80,9 @@ export function formatSignedMoney(
     amount: string,
     currency: string,
     signed = true,
+    locale: string = DEFAULT_LOCALE,
 ): string {
-    return new Intl.NumberFormat(LOCALE, {
+    return new Intl.NumberFormat(locale, {
         style: 'currency',
         currency,
         signDisplay: signed ? 'exceptZero' : 'auto',
@@ -77,20 +97,24 @@ export function formatSignedMoney(
 export function formatDay(
     date: string,
     style: 'short' | 'medium' = 'medium',
+    locale: string = DEFAULT_LOCALE,
 ): string {
     const options: Intl.DateTimeFormatOptions =
         style === 'short'
             ? { month: 'short', day: 'numeric', timeZone: 'UTC' }
             : { dateStyle: 'medium', timeZone: 'UTC' };
 
-    return new Intl.DateTimeFormat(LOCALE, options).format(
+    return new Intl.DateTimeFormat(locale, options).format(
         new Date(`${date}T00:00:00Z`),
     );
 }
 
 /** The month name of a calendar date such as "2026-09-01". */
-export function formatMonth(date: string): string {
-    return new Intl.DateTimeFormat(LOCALE, {
+export function formatMonth(
+    date: string,
+    locale: string = DEFAULT_LOCALE,
+): string {
+    return new Intl.DateTimeFormat(locale, {
         month: 'long',
         timeZone: 'UTC',
     }).format(new Date(`${date}T00:00:00Z`));

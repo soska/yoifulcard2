@@ -20,9 +20,10 @@ import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
-import { formatMoney } from '@/lib/format';
+import { useMoneyFormat } from '@/hooks/use-money-format';
 import { adjust, load, spend } from '@/routes/cards';
 import type { CardDetail } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     card: CardDetail;
@@ -40,7 +41,8 @@ const actions: Record<
         route: typeof load;
         submit: string;
         amountLabel: string;
-        amountHelp: (balance: string) => string;
+        /** A translation key; `:balance` is the available balance. */
+        amountHelp: string;
         noteRequired: boolean;
         signed: boolean;
     }
@@ -49,7 +51,7 @@ const actions: Record<
         route: load,
         submit: 'Add funds',
         amountLabel: 'Amount to add',
-        amountHelp: () => 'Greater than 0, up to two decimals.',
+        amountHelp: 'Greater than 0, up to two decimals.',
         noteRequired: false,
         signed: false,
     },
@@ -57,7 +59,7 @@ const actions: Record<
         route: spend,
         submit: 'Charge card',
         amountLabel: 'Amount to charge',
-        amountHelp: (balance) => `Up to the available ${balance}.`,
+        amountHelp: 'Up to the available :balance.',
         noteRequired: false,
         signed: false,
     },
@@ -65,7 +67,7 @@ const actions: Record<
         route: adjust,
         submit: 'Adjust balance',
         amountLabel: 'Adjustment',
-        amountHelp: () =>
+        amountHelp:
             'Use a negative amount to lower the balance, for example -5.00.',
         noteRequired: true,
         signed: true,
@@ -77,12 +79,14 @@ const actions: Record<
  * as validation errors and show next to the field they belong to.
  */
 export function CardBalanceActions({ card, currency, writable }: Props) {
+    const { t } = useTranslation();
+    const { formatMoney } = useMoneyFormat();
     const blockedReason = !writable
-        ? SUSPENDED
+        ? t(SUSPENDED)
         : card.status === 'frozen'
-          ? 'This card is frozen. Unfreeze it to add funds or charge it.'
+          ? t('This card is frozen. Unfreeze it to add funds or charge it.')
           : card.status === 'cancelled'
-            ? 'This card is cancelled.'
+            ? t('This card is cancelled.')
             : null;
 
     const balance = formatMoney(card.balance, currency);
@@ -90,9 +94,9 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Balance</CardTitle>
+                <CardTitle>{t('Balance')}</CardTitle>
                 <CardDescription>
-                    Every change is recorded in the card history.
+                    {t('Every change is recorded in the card history.')}
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
@@ -106,15 +110,15 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                     <TabsList className="w-full">
                         <TabsTrigger value="load">
                             <Plus data-icon="inline-start" />
-                            Add funds
+                            {t('Add funds')}
                         </TabsTrigger>
                         <TabsTrigger value="spend">
                             <Minus data-icon="inline-start" />
-                            Charge
+                            {t('Charge')}
                         </TabsTrigger>
                         <TabsTrigger value="adjust">
                             <SlidersHorizontal data-icon="inline-start" />
-                            Adjust
+                            {t('Adjust')}
                         </TabsTrigger>
                     </TabsList>
                     {(Object.keys(actions) as Action[]).map((action) => {
@@ -151,8 +155,15 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                     <FieldLabel
                                                         htmlFor={`${action}-amount`}
                                                     >
-                                                        {config.amountLabel} (
-                                                        {currency})
+                                                        {t(
+                                                            ':label (:currency)',
+                                                            {
+                                                                label: t(
+                                                                    config.amountLabel,
+                                                                ),
+                                                                currency,
+                                                            },
+                                                        )}
                                                     </FieldLabel>
                                                     <Input
                                                         id={`${action}-amount`}
@@ -171,9 +182,9 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                         }
                                                     />
                                                     <FieldDescription>
-                                                        {config.amountHelp(
+                                                        {t(config.amountHelp, {
                                                             balance,
-                                                        )}
+                                                        })}
                                                     </FieldDescription>
                                                     <FieldError>
                                                         {errors.amount}
@@ -186,8 +197,10 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                         htmlFor={`${action}-note`}
                                                     >
                                                         {config.noteRequired
-                                                            ? 'Reason'
-                                                            : 'Note (optional)'}
+                                                            ? t('Reason')
+                                                            : t(
+                                                                  'Note (optional)',
+                                                              )}
                                                     </FieldLabel>
                                                     <Textarea
                                                         id={`${action}-note`}
@@ -204,9 +217,9 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                     />
                                                     {config.noteRequired && (
                                                         <FieldDescription>
-                                                            Required. Say why
-                                                            the balance is being
-                                                            corrected.
+                                                            {t(
+                                                                'Required. Say why the balance is being corrected.',
+                                                            )}
                                                         </FieldDescription>
                                                     )}
                                                     <FieldError>
@@ -228,7 +241,7 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                         {processing && (
                                                             <Spinner />
                                                         )}
-                                                        {config.submit}
+                                                        {t(config.submit)}
                                                     </Button>
                                                 </div>
                                             </FieldGroup>

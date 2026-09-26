@@ -112,7 +112,7 @@ class SettingsController extends Controller
             'public',
         );
 
-        abort_if($path === false, 500, 'The logo could not be stored.');
+        abort_if($path === false, 500, __('The logo could not be stored.'));
 
         return $disk->url($path);
     }

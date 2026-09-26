@@ -50,7 +50,7 @@ class CreateNewUser implements CreatesNewUsers
             ]);
 
             $organization->programs()->create([
-                'name' => 'Gift Card',
+                'name' => __('Gift Card'),
                 'type' => ProgramType::Prepaid,
             ]);
 
@@ -59,10 +59,11 @@ class CreateNewUser implements CreatesNewUsers
     }
 
     /**
-     * Name the organization after the person, as the original app did.
+     * Name the organization after the person, as the original app did, in
+     * the current language.
      */
     public static function organizationName(string $personName): string
     {
-        return Str::limit(trim($personName), 240, '')."'s Business";
+        return __(':name\'s Business', ['name' => Str::limit(trim($personName), 240, '')]);
     }
 }

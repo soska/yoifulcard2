@@ -10,8 +10,10 @@ import {
     EmptyTitle,
 } from '@/components/ui/empty';
 import { Spinner } from '@/components/ui/spinner';
+import { PreferenceSwitchers } from '@/components/preferences/preference-switchers';
 import { dashboard, home } from '@/routes';
 import { claim } from '@/routes/admin';
+import { useTranslation } from '@/hooks/use-translation';
 
 export default function Forbidden({
     canClaimSuperadmin = false,
@@ -19,11 +21,13 @@ export default function Forbidden({
     canClaimSuperadmin?: boolean;
 }) {
     const { auth } = usePage().props;
+    const { t } = useTranslation();
 
     return (
         <>
-            <Head title="Access denied" />
-            <div className="flex min-h-svh items-center justify-center bg-background p-6">
+            <Head title={t('Access denied')} />
+            <div className="relative flex min-h-svh items-center justify-center bg-background p-6">
+                <PreferenceSwitchers className="absolute top-4 right-4" />
                 <Empty className="max-w-md">
                     <EmptyHeader>
                         <EmptyMedia variant="icon">
@@ -32,9 +36,11 @@ export default function Forbidden({
                         <p className="text-5xl font-bold text-destructive">
                             403
                         </p>
-                        <EmptyTitle>Access Denied</EmptyTitle>
+                        <EmptyTitle>{t('Access denied')}</EmptyTitle>
                         <EmptyDescription>
-                            You do not have permission to access this page.
+                            {t(
+                                'You do not have permission to access this page.',
+                            )}
                         </EmptyDescription>
                     </EmptyHeader>
                     <EmptyContent>
@@ -44,7 +50,7 @@ export default function Forbidden({
                                 <Link href={auth.user ? dashboard() : home()} />
                             }
                         >
-                            {auth.user ? 'Go to Dashboard' : 'Go home'}
+                            {auth.user ? t('Go to dashboard') : t('Go home')}
                         </Button>
                         {canClaimSuperadmin && (
                             <Form {...claim.form()}>
@@ -56,7 +62,7 @@ export default function Forbidden({
                                         data-test="claim-superadmin-button"
                                     >
                                         {processing && <Spinner />}
-                                        Claim superadmin
+                                        {t('Claim superadmin')}
                                     </Button>
                                 )}
                             </Form>

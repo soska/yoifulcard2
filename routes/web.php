@@ -14,11 +14,17 @@ use App\Http\Controllers\Dashboard\CardQrController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\TransactionController;
+use App\Http\Controllers\Preferences\LocaleController;
+use App\Http\Controllers\Preferences\ThemeController;
 use App\Http\Controllers\PublicCardController;
 use App\Http\Controllers\Reader\ScanController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'welcome')->name('home');
+
+// Language and theme cookies, for guests and members alike.
+Route::post('locale', LocaleController::class)->name('locale.update');
+Route::post('theme', ThemeController::class)->name('theme.update');
 
 // Public card: anyone with the link, no login. The token is not constrained
 // here so malformed tokens get the same not-found page as unknown ones.

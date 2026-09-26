@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import type { MembershipRole } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 export const roleLabels: Record<MembershipRole, string> = {
     owner: 'Owner',
@@ -8,9 +9,11 @@ export const roleLabels: Record<MembershipRole, string> = {
 };
 
 export function RoleBadge({ role }: { role: MembershipRole }) {
+    const { t } = useTranslation();
+
     return (
         <Badge variant={role === 'employee' ? 'outline' : 'secondary'}>
-            {roleLabels[role]}
+            {t(roleLabels[role])}
         </Badge>
     );
 }

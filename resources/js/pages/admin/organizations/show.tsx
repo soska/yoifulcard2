@@ -28,7 +28,8 @@ import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Spinner } from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
-import { formatDateTime, formatMoney } from '@/lib/format';
+import { useDateFormat } from '@/hooks/use-date-format';
+import { useMoneyFormat } from '@/hooks/use-money-format';
 import { index as adminIndex } from '@/routes/admin';
 import {
     index,
@@ -39,6 +40,11 @@ import {
 } from '@/routes/admin/organizations';
 import { index as usersIndex } from '@/routes/admin/users';
 import type { AdminOrganizationPage } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
+
+const programTypeLabels: Record<string, string> = {
+    prepaid: 'Prepaid',
+};
 
 export default function AdminOrganizationShow({
     organization,
@@ -47,30 +53,42 @@ export default function AdminOrganizationShow({
     members,
     programs,
 }: AdminOrganizationPage) {
+    const { t, tc } = useTranslation();
+    const { formatMoney } = useMoneyFormat();
+    const { formatDateTimeInZone } = useDateFormat();
     const timeZone = organization.timezone;
     const cards =
         stats.active + stats.frozen + stats.depleted + stats.cancelled;
 
     const tiles = [
         {
-            label: 'Members',
+            label: t('Members'),
             value: String(members.length),
-            detail: `${members.filter((member) => member.role === 'owner').length} owner`,
+            detail: tc(
+                ':count owner|:count owners',
+                members.filter((member) => member.role === 'owner').length,
+            ),
         },
         {
-            label: 'Cards',
+            label: t('Cards'),
             value: String(cards),
-            detail: `${stats.active} active, ${stats.frozen} frozen, ${stats.depleted} depleted`,
+            detail: t(':active active, :frozen frozen, :depleted depleted', {
+                active: stats.active,
+                frozen: stats.frozen,
+                depleted: stats.depleted,
+            }),
         },
         {
-            label: 'Outstanding balance',
+            label: t('Outstanding balance'),
             value: formatMoney(stats.outstandingBalance, organization.currency),
             detail: organization.currency,
         },
         {
-            label: 'Transactions',
+            label: t('Transactions'),
             value: String(stats.transactions),
-            detail: `${formatMoney(stats.loaded, organization.currency)} loaded`,
+            detail: t(':amount loaded', {
+                amount: formatMoney(stats.loaded, organization.currency),
+            }),
         },
     ];
 
@@ -113,12 +131,16 @@ export default function AdminOrganizationShow({
                             triggerLabel={
                                 <>
                                     <Ban data-icon="inline-start" />
-                                    Suspend
+                                    {t('Suspend')}
                                 </>
                             }
-                            title={`Suspend ${organization.name}?`}
-                            description="Members can still sign in and read their cards, transactions, and settings, but they cannot create cards, change balances, or edit anything. The public card page keeps showing balances."
-                            confirmLabel="Suspend organization"
+                            title={t('Suspend :name?', {
+                                name: organization.name,
+                            })}
+                            description={t(
+                                'Members can still sign in and read their cards, transactions, and settings, but they cannot create cards, change balances, or edit anything. The public card page keeps showing balances.',
+                            )}
+                            confirmLabel={t('Suspend organization')}
                             form={suspend.form(organization.id)}
                             destructive
                         />
@@ -129,12 +151,16 @@ export default function AdminOrganizationShow({
                             triggerLabel={
                                 <>
                                     <CircleCheck data-icon="inline-start" />
-                                    Reactivate
+                                    {t('Reactivate')}
                                 </>
                             }
-                            title={`Reactivate ${organization.name}?`}
-                            description="Members can create cards and post transactions again."
-                            confirmLabel="Reactivate organization"
+                            title={t('Reactivate :name?', {
+                                name: organization.name,
+                            })}
+                            description={t(
+                                'Members can create cards and post transactions again.',
+                            )}
+                            confirmLabel={t('Reactivate organization')}
                             form={reactivate.form(organization.id)}
                         />
                     )}
@@ -145,8 +171,9 @@ export default function AdminOrganizationShow({
                 {organization.status === 'cancelled' && (
                     <Alert>
                         <AlertDescription>
-                            This organization is cancelled. Cancelled status is
-                            not managed from the admin area yet.
+                            {t(
+                                'This organization is cancelled. Cancelled status is not managed from the admin area yet.',
+                            )}
                         </AlertDescription>
                     </Alert>
                 )}
@@ -170,10 +197,11 @@ export default function AdminOrganizationShow({
                 <div className="grid gap-4 lg:grid-cols-2">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Plan</CardTitle>
+                            <CardTitle>{t('Plan')}</CardTitle>
                             <CardDescription>
-                                Card limit and internal notes. Only superadmins
-                                see the notes.
+                                {t(
+                                    'Card limit and internal notes. Only superadmins see the notes.',
+                                )}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="flex flex-col gap-6">
@@ -185,13 +213,15 @@ export default function AdminOrganizationShow({
                                             {' '}
                                             /{' '}
                                             {usage.limit === null
-                                                ? 'Unlimited'
+                                                ? t('Unlimited')
                                                 : usage.limit}
                                         </span>
                                     </p>
                                     {usage.limit !== null && (
                                         <p className="text-sm text-muted-foreground">
-                                            {usage.percent ?? 0}% used
+                                            {t(':percent% used', {
+                                                percent: usage.percent ?? 0,
+                                            })}
                                         </p>
                                     )}
                                 </div>
@@ -201,7 +231,7 @@ export default function AdminOrganizationShow({
                                             usage.percent ?? 0,
                                             100,
                                         )}
-                                        aria-label="Cards used"
+                                        aria-label={t('Cards used')}
                                     />
                                 )}
                                 <CardUsageNotice usage={usage} />
@@ -218,7 +248,7 @@ export default function AdminOrganizationShow({
                                             data-invalid={!!errors.card_limit}
                                         >
                                             <FieldLabel htmlFor="card_limit">
-                                                Card limit
+                                                {t('Card limit')}
                                             </FieldLabel>
                                             <Input
                                                 id="card_limit"
@@ -231,16 +261,16 @@ export default function AdminOrganizationShow({
                                                     organization.card_limit ??
                                                     ''
                                                 }
-                                                placeholder="Unlimited"
+                                                placeholder={t('Unlimited')}
                                                 className="w-40"
                                                 aria-invalid={
                                                     !!errors.card_limit
                                                 }
                                             />
                                             <FieldDescription>
-                                                Leave empty for unlimited.
-                                                Creation is refused at the
-                                                limit.
+                                                {t(
+                                                    'Leave empty for unlimited. Creation is refused at the limit.',
+                                                )}
                                             </FieldDescription>
                                             <FieldError>
                                                 {errors.card_limit}
@@ -250,7 +280,7 @@ export default function AdminOrganizationShow({
                                             data-invalid={!!errors.plan_notes}
                                         >
                                             <FieldLabel htmlFor="plan_notes">
-                                                Plan notes
+                                                {t('Plan notes')}
                                             </FieldLabel>
                                             <Textarea
                                                 id="plan_notes"
@@ -261,7 +291,9 @@ export default function AdminOrganizationShow({
                                                     organization.plan_notes ??
                                                     ''
                                                 }
-                                                placeholder="For example: Starter plan, billed annually"
+                                                placeholder={t(
+                                                    'For example: Starter plan, billed annually',
+                                                )}
                                                 aria-invalid={
                                                     !!errors.plan_notes
                                                 }
@@ -276,7 +308,7 @@ export default function AdminOrganizationShow({
                                                 disabled={processing}
                                             >
                                                 {processing && <Spinner />}
-                                                Save plan
+                                                {t('Save plan')}
                                             </Button>
                                         </div>
                                     </FieldGroup>
@@ -289,10 +321,11 @@ export default function AdminOrganizationShow({
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between gap-4">
                                 <div className="flex flex-col gap-1">
-                                    <CardTitle>Members</CardTitle>
+                                    <CardTitle>{t('Members')}</CardTitle>
                                     <CardDescription>
-                                        Set a temporary password from the users
-                                        page.
+                                        {t(
+                                            'Set a temporary password from the users page.',
+                                        )}
                                     </CardDescription>
                                 </div>
                                 <Button
@@ -300,14 +333,14 @@ export default function AdminOrganizationShow({
                                     size="sm"
                                     render={<Link href={usersIndex()} />}
                                 >
-                                    Users
+                                    {t('Users')}
                                     <ExternalLink data-icon="inline-end" />
                                 </Button>
                             </CardHeader>
                             <CardContent>
                                 {members.length === 0 ? (
                                     <p className="text-sm text-muted-foreground">
-                                        No members.
+                                        {t('No members.')}
                                     </p>
                                 ) : (
                                     <ul className="divide-y">
@@ -343,12 +376,12 @@ export default function AdminOrganizationShow({
 
                         <Card>
                             <CardHeader>
-                                <CardTitle>Programs</CardTitle>
+                                <CardTitle>{t('Programs')}</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 {programs.length === 0 ? (
                                     <p className="text-sm text-muted-foreground">
-                                        No programs.
+                                        {t('No programs.')}
                                     </p>
                                 ) : (
                                     <ul className="divide-y">
@@ -361,8 +394,12 @@ export default function AdminOrganizationShow({
                                                     <p className="font-medium">
                                                         {program.name}
                                                     </p>
-                                                    <p className="text-sm text-muted-foreground capitalize">
-                                                        {program.type}
+                                                    <p className="text-sm text-muted-foreground">
+                                                        {t(
+                                                            programTypeLabels[
+                                                                program.type
+                                                            ] ?? program.type,
+                                                        )}
                                                     </p>
                                                 </div>
                                                 <Badge
@@ -373,8 +410,8 @@ export default function AdminOrganizationShow({
                                                     }
                                                 >
                                                     {program.is_active
-                                                        ? 'Active'
-                                                        : 'Inactive'}
+                                                        ? t('Active')
+                                                        : t('Inactive')}
                                                 </Badge>
                                             </li>
                                         ))}
@@ -389,42 +426,49 @@ export default function AdminOrganizationShow({
                     <CardHeader>
                         <Heading
                             variant="small"
-                            title="Details"
-                            description={`Times are in the organization's timezone, ${timeZone.replaceAll('_', ' ')}.`}
+                            title={t('Details')}
+                            description={t(
+                                "Times are in the organization's timezone, :timezone.",
+                                { timezone: timeZone.replaceAll('_', ' ') },
+                            )}
                         />
                     </CardHeader>
                     <CardContent>
                         <dl className="grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-4">
                             <div>
-                                <dt className="text-muted-foreground">ID</dt>
+                                <dt className="text-muted-foreground">
+                                    {t('ID')}
+                                </dt>
                                 <dd className="font-mono text-xs break-all">
                                     {organization.id}
                                 </dd>
                             </div>
                             <div>
                                 <dt className="text-muted-foreground">
-                                    Currency
+                                    {t('Currency')}
                                 </dt>
                                 <dd>{organization.currency}</dd>
                             </div>
                             <div>
                                 <dt className="text-muted-foreground">
-                                    Created
+                                    {t('Created')}
                                 </dt>
                                 <dd>
-                                    {formatDateTime(organization.created_at, {
+                                    {formatDateTimeInZone(
+                                        organization.created_at,
                                         timeZone,
-                                    })}
+                                    )}
                                 </dd>
                             </div>
                             <div>
                                 <dt className="text-muted-foreground">
-                                    Last updated
+                                    {t('Last updated')}
                                 </dt>
                                 <dd>
-                                    {formatDateTime(organization.updated_at, {
+                                    {formatDateTimeInZone(
+                                        organization.updated_at,
                                         timeZone,
-                                    })}
+                                    )}
                                 </dd>
                             </div>
                         </dl>

@@ -1,11 +1,13 @@
 import { Head, usePage } from '@inertiajs/react';
 import { AlertCircle } from 'lucide-react';
 import { CardFace } from '@/components/public-card/card-face';
+import { PreferenceSwitchers } from '@/components/preferences/preference-switchers';
 import { EmailCapture } from '@/components/public-card/email-capture';
 import { WalletButtons } from '@/components/public-card/wallet-buttons';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { PublicCard, PublicOrganization } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     card: PublicCard;
@@ -25,6 +27,7 @@ function tokenFromUrl(url: string): string {
 export default function PublicCardShow({ card, organization }: Props) {
     const { url } = usePage();
     const initial = organization.name.trim().charAt(0).toUpperCase();
+    const { t } = useTranslation();
 
     return (
         <>
@@ -33,6 +36,7 @@ export default function PublicCardShow({ card, organization }: Props) {
             </Head>
             <main className="flex min-h-svh flex-col items-center bg-muted/40 px-4 py-10">
                 <div className="flex w-full max-w-md flex-col gap-6">
+                    <PreferenceSwitchers className="justify-end" />
                     <header className="flex flex-col items-center gap-3 text-center">
                         <Avatar className="size-16">
                             {organization.logo_url && (
@@ -54,21 +58,24 @@ export default function PublicCardShow({ card, organization }: Props) {
                     {card.status === 'frozen' && (
                         <Alert variant="destructive">
                             <AlertCircle />
-                            <AlertTitle>Card frozen</AlertTitle>
+                            <AlertTitle>{t('Card frozen')}</AlertTitle>
                             <AlertDescription>
-                                This card is currently frozen and cannot be
-                                used. Please contact {organization.name} for
-                                assistance.
+                                {t(
+                                    'This card is currently frozen and cannot be used. Please contact :business for assistance.',
+                                    { business: organization.name },
+                                )}
                             </AlertDescription>
                         </Alert>
                     )}
                     {card.status === 'cancelled' && (
                         <Alert variant="destructive">
                             <AlertCircle />
-                            <AlertTitle>Card cancelled</AlertTitle>
+                            <AlertTitle>{t('Card cancelled')}</AlertTitle>
                             <AlertDescription>
-                                This card can no longer be used. Please contact{' '}
-                                {organization.name} for assistance.
+                                {t(
+                                    'This card can no longer be used. Please contact :business for assistance.',
+                                    { business: organization.name },
+                                )}
                             </AlertDescription>
                         </Alert>
                     )}
@@ -80,7 +87,7 @@ export default function PublicCardShow({ card, organization }: Props) {
                     <EmailCapture token={tokenFromUrl(url)} />
 
                     <p className="text-center text-sm text-muted-foreground">
-                        Powered by Yoiful
+                        {t('Powered by Yoiful')}
                     </p>
                 </div>
             </main>

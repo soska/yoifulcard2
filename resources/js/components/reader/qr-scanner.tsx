@@ -4,6 +4,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { cn } from '@/lib/utils';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Detector = {
     detect(source: HTMLVideoElement): Promise<{ rawValue: string }[]>;
@@ -129,6 +130,7 @@ export function QrScanner({ onDetect, paused = false, className }: Props) {
     const detectorRef = useRef<Detector | null>(null);
     const [status, setStatus] = useState<Status>('starting');
     const [attempt, setAttempt] = useState(0);
+    const { t } = useTranslation();
 
     const handleDetect = useEffectEvent((value: string) => onDetect(value));
 
@@ -267,7 +269,7 @@ export function QrScanner({ onDetect, paused = false, className }: Props) {
                 playsInline
                 muted
                 autoPlay
-                aria-label="Camera view"
+                aria-label={t('Camera view')}
             />
 
             {status === 'scanning' && (
@@ -287,7 +289,7 @@ export function QrScanner({ onDetect, paused = false, className }: Props) {
             {status === 'starting' && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white">
                     <Spinner className="size-8" />
-                    <p className="text-sm">Starting camera…</p>
+                    <p className="text-sm">{t('Starting camera…')}</p>
                 </div>
             )}
 
@@ -295,16 +297,16 @@ export function QrScanner({ onDetect, paused = false, className }: Props) {
                 <div className="absolute inset-0 flex items-center justify-center bg-background p-4">
                     <Alert className="max-w-sm">
                         {status === 'denied' ? <CameraOff /> : <Camera />}
-                        <AlertTitle>{problem.title}</AlertTitle>
+                        <AlertTitle>{t(problem.title)}</AlertTitle>
                         <AlertDescription className="flex flex-col gap-3">
-                            <p>{problem.description}</p>
+                            <p>{t(problem.description)}</p>
                             <Button
                                 variant="outline"
                                 size="lg"
                                 onClick={() => setAttempt((value) => value + 1)}
                             >
                                 <RotateCcw data-icon="inline-start" />
-                                Try again
+                                {t('Try again')}
                             </Button>
                         </AlertDescription>
                     </Alert>

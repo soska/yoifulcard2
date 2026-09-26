@@ -1,18 +1,15 @@
 import { Link, usePage } from '@inertiajs/react';
 import {
-    BookOpen,
     Building2,
     ChartColumn,
     ShieldCheck,
     Users,
     Settings,
     CreditCard,
-    FolderGit2,
     LayoutGrid,
     ReceiptText,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
-import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -32,6 +29,7 @@ import { index as cardsIndex } from '@/routes/cards';
 import { edit as settingsEdit } from '@/routes/settings';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { NavItem } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 const mainNavItems: NavItem[] = [
     {
@@ -79,21 +77,9 @@ const adminNavItems: NavItem[] = [
     },
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: FolderGit2,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
-];
-
 export function AppSidebar() {
     const { auth } = usePage().props;
+    const { t } = useTranslation();
 
     return (
         <Sidebar collapsible="icon" variant="inset">
@@ -111,14 +97,13 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={mainNavItems} label={t('Business')} />
                 {auth.isSuperadmin && (
-                    <NavMain items={adminNavItems} label="Superadmin" />
+                    <NavMain items={adminNavItems} label={t('Superadmin')} />
                 )}
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

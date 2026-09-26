@@ -11,11 +11,12 @@ import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { recordRecentScan } from '@/hooks/use-reader-storage';
-import { formatMoney } from '@/lib/format';
+import { useMoneyFormat } from '@/hooks/use-money-format';
 import { playReaderSound } from '@/lib/reader-sound';
 import { scan } from '@/routes';
 import { load, spend } from '@/routes/cards';
 import type { CardStatus } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     card: {
@@ -42,6 +43,8 @@ const labels: Record<Action, { tab: string; submit: string }> = {
  */
 export default function ReaderCard({ card, currency }: Props) {
     const { currentOrganization } = usePage().props;
+    const { t } = useTranslation();
+    const { formatMoney } = useMoneyFormat();
     const [action, setAction] = useState<Action>('spend');
     const form = useForm({ amount: '', reader: true });
 
@@ -51,11 +54,11 @@ export default function ReaderCard({ card, currency }: Props) {
 
     const writable = currentOrganization?.status === 'active';
     const blockedReason = !writable
-        ? SUSPENDED_MESSAGE
+        ? t(SUSPENDED_MESSAGE)
         : card.status === 'frozen'
-          ? 'This card is frozen. It cannot be charged or loaded.'
+          ? t('This card is frozen. It cannot be charged or loaded.')
           : card.status === 'cancelled'
-            ? 'This card is cancelled.'
+            ? t('This card is cancelled.')
             : null;
     const disabled = blockedReason !== null;
     // CardLedger refusals come back on `card` or `organization`.
@@ -79,7 +82,7 @@ export default function ReaderCard({ card, currency }: Props) {
 
     return (
         <>
-            <Head title={`Reader · ${card.code}`} />
+            <Head title={`${t('Reader')} · ${card.code}`} />
             <div className="flex flex-1 flex-col gap-4">
                 <Button
                     variant="ghost"
@@ -89,7 +92,7 @@ export default function ReaderCard({ card, currency }: Props) {
                     render={<Link href={scan()} />}
                 >
                     <ArrowLeft data-icon="inline-start" />
-                    Back to scanner
+                    {t('Back to scanner')}
                 </Button>
 
                 <Card>
@@ -100,7 +103,9 @@ export default function ReaderCard({ card, currency }: Props) {
                             </span>
                             <CardStatusBadge status={card.status} />
                         </div>
-                        <p className="text-sm text-muted-foreground">Balance</p>
+                        <p className="text-sm text-muted-foreground">
+                            {t('Balance')}
+                        </p>
                         <p className="text-4xl font-semibold tabular-nums">
                             {formatMoney(card.balance, currency)}
                         </p>
@@ -124,11 +129,11 @@ export default function ReaderCard({ card, currency }: Props) {
                     <TabsList className="h-12 w-full">
                         <TabsTrigger value="spend" className="text-base">
                             <Minus data-icon="inline-start" />
-                            {labels.spend.tab}
+                            {t(labels.spend.tab)}
                         </TabsTrigger>
                         <TabsTrigger value="load" className="text-base">
                             <Plus data-icon="inline-start" />
-                            {labels.load.tab}
+                            {t(labels.load.tab)}
                         </TabsTrigger>
                     </TabsList>
                 </Tabs>
@@ -160,7 +165,7 @@ export default function ReaderCard({ card, currency }: Props) {
 
                     <Field data-invalid={!!form.errors.amount}>
                         <FieldLabel htmlFor="reader-amount">
-                            Amount ({currency})
+                            {t('Amount (:currency)', { currency })}
                         </FieldLabel>
                         <Input
                             id="reader-amount"
@@ -188,7 +193,7 @@ export default function ReaderCard({ card, currency }: Props) {
                         title={blockedReason ?? undefined}
                     >
                         {form.processing && <Spinner />}
-                        {labels[action].submit}
+                        {t(labels[action].submit)}
                         {amount !== '' &&
                             !Number.isNaN(Number(amount)) &&
                             ` ${formatMoney(amount, currency)}`}

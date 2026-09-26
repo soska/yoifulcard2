@@ -13,6 +13,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Spinner } from '@/components/ui/spinner';
+import { useTranslation } from '@/hooks/use-translation';
 
 type FormSpec = { action: string; method: 'get' | 'post' };
 
@@ -38,6 +39,7 @@ export function ConfirmAction({
     destructive?: boolean;
 }) {
     const [open, setOpen] = useState(false);
+    const { t } = useTranslation();
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -58,7 +60,7 @@ export function ConfirmAction({
                                 render={<Button variant="outline" />}
                                 disabled={processing}
                             >
-                                Cancel
+                                {t('Cancel')}
                             </DialogClose>
                             <Button
                                 type="submit"

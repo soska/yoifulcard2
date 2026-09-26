@@ -56,14 +56,24 @@ class TransactionController extends Controller
         return response()->streamDownload(function () use ($query, $timezone): void {
             $out = fopen('php://output', 'w');
 
-            fputcsv($out, ['date', 'card', 'type', 'amount', 'balance_after', 'note', 'performed_by'], escape: '');
+            // Headers and type names follow the interface language; dates and
+            // amounts stay machine-readable (ISO 8601, plain decimals).
+            fputcsv($out, [
+                __('Date'),
+                __('Card'),
+                __('Type'),
+                __('Amount'),
+                __('Balance after'),
+                __('Note'),
+                __('Performed by'),
+            ], escape: '');
 
             foreach ($query->lazy(500) as $transaction) {
                 /** @var Transaction $transaction */
                 fputcsv($out, [
                     $transaction->created_at?->setTimezone($timezone)->toIso8601String(),
                     $transaction->card->code,
-                    $transaction->type->value,
+                    $transaction->type->label(),
                     $transaction->amount,
                     $transaction->balance_after,
                     self::cell($transaction->note),

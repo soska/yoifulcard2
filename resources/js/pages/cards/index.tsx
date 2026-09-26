@@ -42,7 +42,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { useDateFormat } from '@/hooks/use-date-format';
-import { formatMoney } from '@/lib/format';
+import { useMoneyFormat } from '@/hooks/use-money-format';
 import { create, index, show } from '@/routes/cards';
 import type {
     CardFilters,
@@ -52,6 +52,7 @@ import type {
     CardUsage,
     Paginated,
 } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     cards: Paginated<CardSummary>;
@@ -82,6 +83,8 @@ export default function CardsIndex({
 }: Props) {
     const { currentOrganization } = usePage().props;
     const { formatDate } = useDateFormat();
+    const { formatMoney } = useMoneyFormat();
+    const { t, tc } = useTranslation();
     const writable = currentOrganization?.status === 'active';
     const [search, setSearch] = useState(filters.q);
 
@@ -148,7 +151,7 @@ export default function CardsIndex({
                     className={alignRight ? '-mr-2' : '-ml-2'}
                     onClick={() => sortBy(key)}
                 >
-                    {label}
+                    {t(label)}
                     <Icon
                         className={active ? undefined : 'opacity-40'}
                         data-icon="inline-end"
@@ -160,33 +163,38 @@ export default function CardsIndex({
 
     return (
         <>
-            <Head title="Cards" />
+            <Head title={t('Cards')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <Heading
-                        title="Cards"
+                        title={t('Cards')}
                         description={
                             usage.limit === null
-                                ? `${usage.used} cards`
-                                : `${usage.used} of ${usage.limit} cards used`
+                                ? tc(':count card|:count cards', usage.used)
+                                : t(':used of :limit cards used', {
+                                      used: usage.used,
+                                      limit: usage.limit,
+                                  })
                         }
                     />
                     {writable && !usage.atLimit ? (
                         <Button render={<Link href={create()} />}>
                             <Plus data-icon="inline-start" />
-                            Create card
+                            {t('Create card')}
                         </Button>
                     ) : (
                         <Button
                             disabled
                             title={
                                 writable
-                                    ? 'Card limit reached'
-                                    : 'This business is suspended. Contact support.'
+                                    ? t('Card limit reached')
+                                    : t(
+                                          'This business is suspended. Contact support.',
+                                      )
                             }
                         >
                             <Plus data-icon="inline-start" />
-                            Create card
+                            {t('Create card')}
                         </Button>
                     )}
                 </div>
@@ -208,12 +216,12 @@ export default function CardsIndex({
                                     onChange={(event) =>
                                         setSearch(event.target.value)
                                     }
-                                    placeholder="Search by code or email"
-                                    aria-label="Search by code or email"
+                                    placeholder={t('Search by code or email')}
+                                    aria-label={t('Search by code or email')}
                                 />
                                 <Button type="submit" variant="secondary">
                                     <Search data-icon="inline-start" />
-                                    Search
+                                    {t('Search')}
                                 </Button>
                             </form>
                             <Select
@@ -227,26 +235,26 @@ export default function CardsIndex({
                                     })
                                 }
                                 items={[
-                                    { value: ALL, label: 'All statuses' },
+                                    { value: ALL, label: t('All statuses') },
                                     ...statuses.map((status) => ({
                                         value: status,
-                                        label: cardStatusLabels[status],
+                                        label: t(cardStatusLabels[status]),
                                     })),
                                 ]}
                             >
                                 <SelectTrigger
                                     className="w-full sm:w-44"
-                                    aria-label="Filter by status"
+                                    aria-label={t('Filter by status')}
                                 >
                                     <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value={ALL}>
-                                        All statuses
+                                        {t('All statuses')}
                                     </SelectItem>
                                     {statuses.map((status) => (
                                         <SelectItem key={status} value={status}>
-                                            {cardStatusLabels[status]}
+                                            {t(cardStatusLabels[status])}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
@@ -261,13 +269,17 @@ export default function CardsIndex({
                                     </EmptyMedia>
                                     <EmptyTitle>
                                         {filtered
-                                            ? 'No cards match your search'
-                                            : 'No cards yet'}
+                                            ? t('No cards match your search')
+                                            : t('No cards yet')}
                                     </EmptyTitle>
                                     <EmptyDescription>
                                         {filtered
-                                            ? 'Try another code, email, or status.'
-                                            : 'Create your first card to get started.'}
+                                            ? t(
+                                                  'Try another code, email, or status.',
+                                              )
+                                            : t(
+                                                  'Create your first card to get started.',
+                                              )}
                                     </EmptyDescription>
                                 </EmptyHeader>
                             </Empty>
@@ -282,7 +294,7 @@ export default function CardsIndex({
                                                 column.align === 'right',
                                             ),
                                         )}
-                                        <TableHead>Status</TableHead>
+                                        <TableHead>{t('Status')}</TableHead>
                                         {dateColumns.map((column) =>
                                             sortHeader(
                                                 column.key,
@@ -324,7 +336,7 @@ export default function CardsIndex({
                                             <TableCell className="text-muted-foreground">
                                                 {formatDate(
                                                     card.last_used_at,
-                                                    'Never',
+                                                    t('Never'),
                                                 )}
                                             </TableCell>
                                         </TableRow>
@@ -336,8 +348,11 @@ export default function CardsIndex({
                         {cards.total > 0 && (
                             <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
                                 <p className="text-sm text-muted-foreground">
-                                    Showing {cards.from} to {cards.to} of{' '}
-                                    {cards.total} cards
+                                    {t('Showing :from to :to of :total cards', {
+                                        from: cards.from ?? 0,
+                                        to: cards.to ?? 0,
+                                        total: cards.total,
+                                    })}
                                 </p>
                                 <div>
                                     <ListPagination paginator={cards} />

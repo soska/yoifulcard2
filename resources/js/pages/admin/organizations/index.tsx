@@ -42,6 +42,7 @@ import type {
     OrganizationStatus,
     Paginated,
 } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     organizations: Paginated<AdminOrganizationRow>;
@@ -57,6 +58,7 @@ export default function AdminOrganizationsIndex({
     statuses,
 }: Props) {
     const { formatDate } = useDateFormat();
+    const { t, tc } = useTranslation();
     const [search, setSearch] = useState(filters.q);
 
     const visit = (changes: Partial<AdminOrganizationFilters>) => {
@@ -81,25 +83,28 @@ export default function AdminOrganizationsIndex({
 
     const filtered = filters.q !== '' || filters.status !== null;
     const statusItems = [
-        { value: ALL, label: 'All statuses' },
+        { value: ALL, label: t('All statuses') },
         ...statuses.map((status) => ({
             value: status,
-            label: organizationStatusLabels[status],
+            label: t(organizationStatusLabels[status]),
         })),
     ];
 
     return (
         <>
-            <Head title="Organizations" />
+            <Head title={t('Organizations')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <Heading
-                        title="Organizations"
-                        description={`${organizations.total} ${organizations.total === 1 ? 'organization' : 'organizations'}`}
+                        title={t('Organizations')}
+                        description={tc(
+                            ':count organization|:count organizations',
+                            organizations.total,
+                        )}
                     />
                     <Button render={<Link href={create()} />}>
                         <Plus data-icon="inline-start" />
-                        Create organization
+                        {t('Create organization')}
                     </Button>
                 </div>
 
@@ -118,12 +123,12 @@ export default function AdminOrganizationsIndex({
                                     onChange={(event) =>
                                         setSearch(event.target.value)
                                     }
-                                    placeholder="Search by name or slug"
-                                    aria-label="Search by name or slug"
+                                    placeholder={t('Search by name or slug')}
+                                    aria-label={t('Search by name or slug')}
                                 />
                                 <Button type="submit" variant="secondary">
                                     <Search data-icon="inline-start" />
-                                    Search
+                                    {t('Search')}
                                 </Button>
                             </form>
                             <Select
@@ -140,7 +145,7 @@ export default function AdminOrganizationsIndex({
                             >
                                 <SelectTrigger
                                     className="w-full sm:w-44"
-                                    aria-label="Filter by status"
+                                    aria-label={t('Filter by status')}
                                 >
                                     <SelectValue />
                                 </SelectTrigger>
@@ -165,13 +170,19 @@ export default function AdminOrganizationsIndex({
                                     </EmptyMedia>
                                     <EmptyTitle>
                                         {filtered
-                                            ? 'No organizations match your search'
-                                            : 'No organizations yet'}
+                                            ? t(
+                                                  'No organizations match your search',
+                                              )
+                                            : t('No organizations yet')}
                                     </EmptyTitle>
                                     <EmptyDescription>
                                         {filtered
-                                            ? 'Try another name, slug, or status.'
-                                            : 'Create one to onboard a business.'}
+                                            ? t(
+                                                  'Try another name, slug, or status.',
+                                              )
+                                            : t(
+                                                  'Create one to onboard a business.',
+                                              )}
                                     </EmptyDescription>
                                 </EmptyHeader>
                             </Empty>
@@ -179,15 +190,17 @@ export default function AdminOrganizationsIndex({
                             <Table>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead>Organization</TableHead>
-                                        <TableHead>Status</TableHead>
+                                        <TableHead>
+                                            {t('Organization')}
+                                        </TableHead>
+                                        <TableHead>{t('Status')}</TableHead>
                                         <TableHead className="text-right">
-                                            Members
+                                            {t('Members')}
                                         </TableHead>
                                         <TableHead className="text-right">
-                                            Cards
+                                            {t('Cards')}
                                         </TableHead>
-                                        <TableHead>Created</TableHead>
+                                        <TableHead>{t('Created')}</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
@@ -239,9 +252,14 @@ export default function AdminOrganizationsIndex({
                         {organizations.total > 0 && (
                             <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
                                 <p className="text-sm text-muted-foreground">
-                                    Showing {organizations.from} to{' '}
-                                    {organizations.to} of {organizations.total}{' '}
-                                    organizations
+                                    {t(
+                                        'Showing :from to :to of :total organizations',
+                                        {
+                                            from: organizations.from ?? 0,
+                                            to: organizations.to ?? 0,
+                                            total: organizations.total,
+                                        },
+                                    )}
                                 </p>
                                 <div>
                                     <ListPagination paginator={organizations} />

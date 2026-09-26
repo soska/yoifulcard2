@@ -17,6 +17,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
 import { index as adminIndex } from '@/routes/admin';
 import { create, index, store } from '@/routes/admin/organizations';
+import { useTranslation } from '@/hooks/use-translation';
 
 /** Lowercase letters and numbers joined by single hyphens. */
 function slugify(value: string): string {
@@ -33,14 +34,17 @@ export default function AdminOrganizationsCreate() {
     const [name, setName] = useState('');
     const [slug, setSlug] = useState('');
     const [slugEdited, setSlugEdited] = useState(false);
+    const { t } = useTranslation();
 
     return (
         <>
-            <Head title="Create organization" />
+            <Head title={t('Create organization')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <Heading
-                    title="Create organization"
-                    description="Onboard a business and its owner. A new owner email creates an account with a temporary password, shown once."
+                    title={t('Create organization')}
+                    description={t(
+                        'Onboard a business and its owner. A new owner email creates an account with a temporary password, shown once.',
+                    )}
                 />
 
                 <Card className="max-w-2xl">
@@ -49,11 +53,13 @@ export default function AdminOrganizationsCreate() {
                             {({ processing, errors }) => (
                                 <FieldGroup>
                                     <FieldSet>
-                                        <FieldLegend>Business</FieldLegend>
+                                        <FieldLegend>
+                                            {t('Business')}
+                                        </FieldLegend>
                                         <FieldGroup>
                                             <Field data-invalid={!!errors.name}>
                                                 <FieldLabel htmlFor="name">
-                                                    Business name
+                                                    {t('Business name')}
                                                 </FieldLabel>
                                                 <Input
                                                     id="name"
@@ -75,7 +81,9 @@ export default function AdminOrganizationsCreate() {
                                                     }}
                                                     required
                                                     maxLength={255}
-                                                    placeholder="Acme Coffee Shop"
+                                                    placeholder={t(
+                                                        'Acme Coffee Shop',
+                                                    )}
                                                     aria-invalid={!!errors.name}
                                                 />
                                                 <FieldError>
@@ -85,7 +93,7 @@ export default function AdminOrganizationsCreate() {
 
                                             <Field data-invalid={!!errors.slug}>
                                                 <FieldLabel htmlFor="slug">
-                                                    Slug
+                                                    {t('Slug')}
                                                 </FieldLabel>
                                                 <Input
                                                     id="slug"
@@ -100,12 +108,15 @@ export default function AdminOrganizationsCreate() {
                                                     required
                                                     maxLength={100}
                                                     pattern="[a-z0-9]+(-[a-z0-9]+)*"
-                                                    placeholder="acme-coffee"
+                                                    placeholder={t(
+                                                        'acme-coffee',
+                                                    )}
                                                     aria-invalid={!!errors.slug}
                                                 />
                                                 <FieldDescription>
-                                                    Lowercase letters, numbers,
-                                                    and hyphens. Must be unique.
+                                                    {t(
+                                                        'Lowercase letters, numbers, and hyphens. Must be unique.',
+                                                    )}
                                                 </FieldDescription>
                                                 <FieldError>
                                                     {errors.slug}
@@ -115,7 +126,7 @@ export default function AdminOrganizationsCreate() {
                                     </FieldSet>
 
                                     <FieldSet>
-                                        <FieldLegend>Owner</FieldLegend>
+                                        <FieldLegend>{t('Owner')}</FieldLegend>
                                         <FieldGroup>
                                             <Field
                                                 data-invalid={
@@ -123,7 +134,7 @@ export default function AdminOrganizationsCreate() {
                                                 }
                                             >
                                                 <FieldLabel htmlFor="owner_email">
-                                                    Owner email
+                                                    {t('Owner email')}
                                                 </FieldLabel>
                                                 <Input
                                                     id="owner_email"
@@ -132,16 +143,17 @@ export default function AdminOrganizationsCreate() {
                                                     required
                                                     maxLength={255}
                                                     autoComplete="off"
-                                                    placeholder="owner@example.com"
+                                                    placeholder={t(
+                                                        'owner@example.com',
+                                                    )}
                                                     aria-invalid={
                                                         !!errors.owner_email
                                                     }
                                                 />
                                                 <FieldDescription>
-                                                    An existing user with this
-                                                    email becomes the owner.
-                                                    Otherwise a new account is
-                                                    created.
+                                                    {t(
+                                                        'An existing user with this email becomes the owner. Otherwise a new account is created.',
+                                                    )}
                                                 </FieldDescription>
                                                 <FieldError>
                                                     {errors.owner_email}
@@ -154,7 +166,7 @@ export default function AdminOrganizationsCreate() {
                                                 }
                                             >
                                                 <FieldLabel htmlFor="owner_name">
-                                                    Owner name (optional)
+                                                    {t('Owner name (optional)')}
                                                 </FieldLabel>
                                                 <Input
                                                     id="owner_name"
@@ -166,9 +178,9 @@ export default function AdminOrganizationsCreate() {
                                                     }
                                                 />
                                                 <FieldDescription>
-                                                    Used only for a new account.
-                                                    Defaults to the part of the
-                                                    email before the @.
+                                                    {t(
+                                                        'Used only for a new account. Defaults to the part of the email before the @.',
+                                                    )}
                                                 </FieldDescription>
                                                 <FieldError>
                                                     {errors.owner_name}
@@ -178,7 +190,7 @@ export default function AdminOrganizationsCreate() {
                                     </FieldSet>
 
                                     <FieldSet>
-                                        <FieldLegend>Plan</FieldLegend>
+                                        <FieldLegend>{t('Plan')}</FieldLegend>
                                         <FieldGroup>
                                             <Field
                                                 data-invalid={
@@ -186,7 +198,7 @@ export default function AdminOrganizationsCreate() {
                                                 }
                                             >
                                                 <FieldLabel htmlFor="card_limit">
-                                                    Card limit
+                                                    {t('Card limit')}
                                                 </FieldLabel>
                                                 <Input
                                                     id="card_limit"
@@ -195,14 +207,16 @@ export default function AdminOrganizationsCreate() {
                                                     min={1}
                                                     step={1}
                                                     inputMode="numeric"
-                                                    placeholder="Unlimited"
+                                                    placeholder={t('Unlimited')}
                                                     className="w-40"
                                                     aria-invalid={
                                                         !!errors.card_limit
                                                     }
                                                 />
                                                 <FieldDescription>
-                                                    Leave empty for unlimited.
+                                                    {t(
+                                                        'Leave empty for unlimited.',
+                                                    )}
                                                 </FieldDescription>
                                                 <FieldError>
                                                     {errors.card_limit}
@@ -215,20 +229,24 @@ export default function AdminOrganizationsCreate() {
                                                 }
                                             >
                                                 <FieldLabel htmlFor="plan_notes">
-                                                    Plan notes
+                                                    {t('Plan notes')}
                                                 </FieldLabel>
                                                 <Textarea
                                                     id="plan_notes"
                                                     name="plan_notes"
                                                     rows={3}
                                                     maxLength={5000}
-                                                    placeholder="For example: Starter plan, billed annually"
+                                                    placeholder={t(
+                                                        'For example: Starter plan, billed annually',
+                                                    )}
                                                     aria-invalid={
                                                         !!errors.plan_notes
                                                     }
                                                 />
                                                 <FieldDescription>
-                                                    Only superadmins see these.
+                                                    {t(
+                                                        'Only superadmins see these.',
+                                                    )}
                                                 </FieldDescription>
                                                 <FieldError>
                                                     {errors.plan_notes}
@@ -243,7 +261,7 @@ export default function AdminOrganizationsCreate() {
                                             disabled={processing}
                                         >
                                             {processing && <Spinner />}
-                                            Create organization
+                                            {t('Create organization')}
                                         </Button>
                                     </div>
                                 </FieldGroup>

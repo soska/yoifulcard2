@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
@@ -36,6 +37,28 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDefaults();
         $this->rememberOrganizationOnLogin();
         $this->configureRateLimiting();
+        $this->fallBackToEnglishJsonLines();
+    }
+
+    /**
+     * Laravel falls back to English for PHP group files (validation, auth)
+     * but not for JSON lines: a key missing from es.json comes back as the
+     * key. Keys are English text, so that is usually right; for keys that
+     * are not English text (such as `type.spend`), use the English line.
+     */
+    protected function fallBackToEnglishJsonLines(): void
+    {
+        Lang::handleMissingKeysUsing(function (string $key, array $replace, ?string $locale, bool $fallback): string {
+            $fallbackLocale = (string) config('app.fallback_locale', 'en');
+
+            if (! $fallback || $locale === null || $locale === $fallbackLocale) {
+                return $key;
+            }
+
+            $line = app('translator')->get($key, [], $fallbackLocale, false);
+
+            return is_string($line) ? $line : $key;
+        });
     }
 
     /**

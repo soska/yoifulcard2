@@ -9,10 +9,11 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { useDateFormat } from '@/hooks/use-date-format';
-import { formatSignedMoney } from '@/lib/format';
+import { useMoneyFormat } from '@/hooks/use-money-format';
 import { cn } from '@/lib/utils';
 import { show } from '@/routes/cards';
 import type { TransactionRow } from '@/types';
+import { useTranslation } from '@/hooks/use-translation';
 
 type Props = {
     transactions: TransactionRow[];
@@ -34,18 +35,22 @@ export function TransactionsTable({
     showCard = true,
 }: Props) {
     const { formatDateTime } = useDateFormat();
+    const { formatSignedMoney } = useMoneyFormat();
+    const { t } = useTranslation();
 
     return (
         <Table>
             <TableHeader>
                 <TableRow>
-                    <TableHead>Date</TableHead>
-                    {showCard && <TableHead>Card</TableHead>}
-                    <TableHead>Type</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                    <TableHead className="text-right">Balance after</TableHead>
-                    <TableHead>Note</TableHead>
-                    <TableHead>By</TableHead>
+                    <TableHead>{t('Date')}</TableHead>
+                    {showCard && <TableHead>{t('Card')}</TableHead>}
+                    <TableHead>{t('Type')}</TableHead>
+                    <TableHead className="text-right">{t('Amount')}</TableHead>
+                    <TableHead className="text-right">
+                        {t('Balance after')}
+                    </TableHead>
+                    <TableHead>{t('Note')}</TableHead>
+                    <TableHead>{t('By')}</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>

@@ -29,12 +29,33 @@ const setCookie = (name: string, value: string, days = 365): void => {
     document.cookie = `${name}=${value};path=/;max-age=${maxAge};SameSite=Lax`;
 };
 
+/** The cookie the root Blade layout reads, so the first paint is right. */
+export const THEME_COOKIE = 'theme';
+
+const isAppearance = (value: unknown): value is Appearance =>
+    value === 'light' || value === 'dark' || value === 'system';
+
+/**
+ * The saved theme. The server renders it on `<html data-theme>` from the
+ * `theme` cookie; the cookie itself is the fallback.
+ */
 const getStoredAppearance = (): Appearance => {
-    if (typeof window === 'undefined') {
+    if (typeof document === 'undefined') {
         return 'system';
     }
 
-    return (localStorage.getItem('appearance') as Appearance) || 'system';
+    const fromHtml = document.documentElement.dataset.theme;
+
+    if (isAppearance(fromHtml)) {
+        return fromHtml;
+    }
+
+    const fromCookie = document.cookie
+        .split('; ')
+        .find((part) => part.startsWith(`${THEME_COOKIE}=`))
+        ?.split('=')[1];
+
+    return isAppearance(fromCookie) ? fromCookie : 'system';
 };
 
 const isDarkMode = (appearance: Appearance): boolean => {
@@ -75,11 +96,6 @@ export function initializeTheme(): void {
         return;
     }
 
-    if (!localStorage.getItem('appearance')) {
-        localStorage.setItem('appearance', 'system');
-        setCookie('appearance', 'system');
-    }
-
     currentAppearance = getStoredAppearance();
     applyTheme(currentAppearance);
 
@@ -101,11 +117,9 @@ export function useAppearance(): UseAppearanceReturn {
     const updateAppearance = (mode: Appearance): void => {
         currentAppearance = mode;
 
-        // Store in localStorage for client-side persistence...
-        localStorage.setItem('appearance', mode);
-
-        // Store in cookie for SSR...
-        setCookie('appearance', mode);
+        // The cookie is the only store: the server reads it on every page.
+        setCookie(THEME_COOKIE, mode);
+        document.documentElement.dataset.theme = mode;
 
         applyTheme(mode);
         notify();
