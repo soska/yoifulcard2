@@ -110,10 +110,10 @@ test('adjustment moves balance both ways and requires a note', function () {
         $refusal = ledgerRefusal(fn () => ledger()->adjust($card, '1.00', $user, $note));
 
         expect($refusal->field)->toBe('note')
-            ->and($refusal->key)->toBe('A note is required for adjustments.');
+            ->and($refusal->getMessage())->toBe('A note is required for adjustments.');
     }
 
-    expect(ledgerRefusal(fn () => ledger()->adjust($card, '0.00', $user, 'Nothing'))->key)
+    expect(ledgerRefusal(fn () => ledger()->adjust($card, '0.00', $user, 'Nothing'))->getMessage())
         ->toBe('The adjustment cannot be 0.');
 
     expect($card->fresh()->balance)->toBe('15.50')
@@ -125,7 +125,7 @@ test('adjustment below zero is rejected', function () {
 
     $refusal = ledgerRefusal(fn () => ledger()->adjust($card, '-5.01', $user, 'Too much'));
 
-    expect($refusal->key)->toBe('The adjustment would leave a negative balance.')
+    expect($refusal->getMessage())->toBe('The adjustment would leave a negative balance.')
         ->and($card->fresh()->balance)->toBe('5.00')
         ->and(Transaction::count())->toBe(0);
 
@@ -141,7 +141,7 @@ test('spend above balance throws and leaves card and transactions unchanged', fu
     $refusal = ledgerRefusal(fn () => ledger()->spend($card, '10.01', $user));
 
     $after = $card->fresh();
-    expect($refusal->key)->toBe('Insufficient balance.')
+    expect($refusal->getMessage())->toBe('Insufficient balance.')
         ->and($refusal->field)->toBe('amount')
         ->and($after->balance)->toBe('10.00')
         ->and($after->status)->toBe(CardStatus::Active)
@@ -162,8 +162,8 @@ test('amounts must be positive decimal strings with at most two decimals', funct
 test('loads cannot push the balance past the column maximum', function () {
     [$user, $card] = ledgerCard('99999999.00');
 
-    expect(ledgerRefusal(fn () => ledger()->load($card, '1.00', $user))->key)
-        ->toBe('The balance cannot be more than :max.');
+    expect(ledgerRefusal(fn () => ledger()->load($card, '1.00', $user))->getMessage())
+        ->toBe('The balance cannot be more than 99999999.99.');
 
     ledger()->load($card, '0.99', $user);
     expect($card->fresh()->balance)->toBe('99999999.99');
@@ -175,7 +175,7 @@ test('frozen card rejects load and spend', function () {
     foreach (['load', 'spend'] as $method) {
         $refusal = ledgerRefusal(fn () => ledger()->{$method}($card, '1.00', $user));
 
-        expect($refusal->key)->toBe('This card is frozen.')
+        expect($refusal->getMessage())->toBe('This card is frozen.')
             ->and($refusal->field)->toBe('card');
     }
 
@@ -187,7 +187,7 @@ test('cancelled card rejects load and spend', function () {
     [$user, $card] = ledgerCard('10.00', ['status' => CardStatus::Cancelled]);
 
     foreach (['load', 'spend'] as $method) {
-        expect(ledgerRefusal(fn () => ledger()->{$method}($card, '1.00', $user))->key)
+        expect(ledgerRefusal(fn () => ledger()->{$method}($card, '1.00', $user))->getMessage())
             ->toBe('This card is cancelled.');
     }
 
@@ -211,7 +211,7 @@ test('suspended organization rejects load, spend, and adjust in the service', fu
     foreach ($calls as $call) {
         $refusal = ledgerRefusal($call);
 
-        expect($refusal->key)->toBe('This business is suspended. Contact support.')
+        expect($refusal->getMessage())->toBe('This business is suspended. Contact support.')
             ->and($refusal->field)->toBe('organization');
     }
 

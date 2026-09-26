@@ -4,8 +4,8 @@ Yoiful lets small businesses issue branded prepaid cards. The first customers
 are cafés, bakeries and shops in **Mexico**, and their staff use the app at the
 counter. It talks like a helpful coworker: short, plain and friendly.
 
-Reuse the wording already in `lang/es.json` (Phase 8) wherever the English is
-the same, so the copy doesn't drift.
+Reuse the wording already in the Spanish catalog wherever the English is the
+same, so the copy doesn't drift.
 
 ## Register: tú, always
 

@@ -74,6 +74,7 @@ export default defineConfig({
             'resources/js/components/ui/*',
             'resources/js/locales/*.json',
             'resources/js/types/enums.generated.ts',
+            'resources/js/locales/php-messages.generated.ts',
             'resources/views/mail/*',
         ],
         sortTailwindcss: {

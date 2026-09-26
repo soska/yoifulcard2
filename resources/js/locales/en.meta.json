@@ -49,7 +49,14 @@
   "10rdx7z6m6w": {
     "message": "Balance after",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:48:26"
+      "resources/js/components/transactions/transactions-table.tsx:48:26",
+      "resources/js/locales/php-messages.generated.ts:36:9"
+    ]
+  },
+  "10t1t7hj33a": {
+    "message": "Passkey verification session expired. Please try again.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:64:9"
     ]
   },
   "11cwj6fprvc": {
@@ -156,6 +163,12 @@
       "resources/js/pages/admin/users/index.tsx:310:79"
     ]
   },
+  "13vh9wwjokq": {
+    "message": "Passkey registration session expired. Please try again.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:62:9"
+    ]
+  },
   "13w10qqmr70": {
     "message": "{from} to {to}, in your business's timezone.",
     "refs": [
@@ -206,6 +219,12 @@
     "message": "Note (optional)",
     "refs": [
       "resources/js/components/cards/card-balance-actions.tsx:193:63"
+    ]
+  },
+  "16184re9sin": {
+    "message": "An organization with this slug already exists.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:34:9"
     ]
   },
   "164d0i89snr": {
@@ -264,6 +283,12 @@
     "message": "Card code",
     "refs": [
       "resources/js/pages/transactions/index.tsx:206:38"
+    ]
+  },
+  "181wia46bw0": {
+    "message": "An email is already saved for this card.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:32:9"
     ]
   },
   "18f16q5jxo2": {
@@ -375,6 +400,12 @@
       "resources/js/components/passkey-register.tsx:104:22"
     ]
   },
+  "1bnqxsenmm7": {
+    "message": "The provided two factor recovery code was invalid.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:88:9"
+    ]
+  },
   "1butt4gcv4v": {
     "message": "Loading recovery codes",
     "refs": [
@@ -387,6 +418,12 @@
       "resources/js/pages/admin/index.tsx:106:41"
     ]
   },
+  "1byfp8uuczh": {
+    "message": "This organization is already active.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:100:9"
+    ]
+  },
   "1c0z635zrp1": {
     "message": "This month",
     "refs": [
@@ -397,6 +434,12 @@
     "message": "Recovery codes let you regain access if you lose your 2FA device. Store them in a secure password manager.",
     "refs": [
       "resources/js/components/two-factor-recovery-codes.tsx:64:22"
+    ]
+  },
+  "1cuoyfaghqv": {
+    "message": "Only an active card can be frozen.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:60:9"
     ]
   },
   "1d5l0x57k2m": {
@@ -498,6 +541,12 @@
       "resources/js/pages/admin/organizations/create.tsx:167:54"
     ]
   },
+  "1fd7wm5rn2": {
+    "message": ":name's Business",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:24:9"
+    ]
+  },
   "1fiqoxd9jzg": {
     "message": "Disable 2FA",
     "refs": [
@@ -568,6 +617,12 @@
       "resources/js/pages/auth/two-factor-challenge.tsx:28:30"
     ]
   },
+  "1gvvomqnlf4": {
+    "message": "You are offline",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:114:9"
+    ]
+  },
   "1gyt4suqoib": {
     "message": "Add to Apple Wallet",
     "refs": [
@@ -598,6 +653,18 @@
     "context": "theme",
     "refs": [
       "resources/js/lib/labels.ts:76:15"
+    ]
+  },
+  "1hlp8fxwqv0": {
+    "message": "Charge",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:42:9"
+    ]
+  },
+  "1hm7vq979c2": {
+    "message": "Performed by",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:66:9"
     ]
   },
   "1hnagoswr2z": {
@@ -649,6 +716,12 @@
       "resources/js/pages/admin/users/index.tsx:307:78"
     ]
   },
+  "1ihux2pdbcj": {
+    "message": "The brand color must be a hex color such as #1e40af.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:78:9"
+    ]
+  },
   "1ilkqwmxov4": {
     "message": "It is shown only once. Share it with the user over a safe channel and ask them to change it in their settings after signing in.",
     "refs": [
@@ -665,6 +738,12 @@
     "message": "Confirm with passkey",
     "refs": [
       "resources/js/pages/auth/confirm-password.tsx:25:24"
+    ]
+  },
+  "1iquaqzxuzs": {
+    "message": "The logo could not be stored.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:82:9"
     ]
   },
   "1ivn7mt517c": {
@@ -882,6 +961,12 @@
       "resources/js/components/cards/card-balance-actions.tsx:212:62"
     ]
   },
+  "1p39hysebb2": {
+    "message": "Too many attempts. Please try again in a minute.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:106:9"
+    ]
+  },
   "1pfx99caqy7": {
     "message": "Transaction volume",
     "refs": [
@@ -910,6 +995,12 @@
     "message": "Cards you scan will show up here.",
     "refs": [
       "resources/js/components/reader/recent-scans.tsx:60:38"
+    ]
+  },
+  "1q8uutscthy": {
+    "message": "Gift Card",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:48:9"
     ]
   },
   "1qn5k6z8xr": {
@@ -947,7 +1038,8 @@
   "1r8zizzfdmj": {
     "message": "Note",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:50:33"
+      "resources/js/components/transactions/transactions-table.tsx:50:33",
+      "resources/js/locales/php-messages.generated.ts:56:9"
     ]
   },
   "1ra31kb3tih": {
@@ -1185,6 +1277,12 @@
       "resources/js/components/delete-user.tsx:33:26"
     ]
   },
+  "1x5hrgqzt7z": {
+    "message": "The amount must be greater than 0.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:74:9"
+    ]
+  },
   "1x6on0jacs9": {
     "message": "Analytics",
     "refs": [
@@ -1286,6 +1384,12 @@
     "message": "New cards per day in your timezone.",
     "refs": [
       "resources/js/components/analytics/analytics-charts.tsx:110:26"
+    ]
+  },
+  "1zboqgztnow": {
+    "message": "Only a frozen card can be unfrozen.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:58:9"
     ]
   },
   "1zj65nkezki": {
@@ -1503,6 +1607,12 @@
       "resources/js/pages/settings/business.tsx:121:24"
     ]
   },
+  "23fdu0cyh9q": {
+    "message": "This business has no active program to issue cards from.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:92:9"
+    ]
+  },
   "23rp7apg37x": {
     "message": "Recovery code",
     "refs": [
@@ -1524,7 +1634,14 @@
   "248xs7h38vj": {
     "message": "Card",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:44:46"
+      "resources/js/components/transactions/transactions-table.tsx:44:46",
+      "resources/js/locales/php-messages.generated.ts:38:9"
+    ]
+  },
+  "249xduqwte8": {
+    "message": "The adjustment cannot be 0.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:70:9"
     ]
   },
   "24jbe4xkyk4": {
@@ -1562,6 +1679,12 @@
     "message": "Failed to fetch QR code",
     "refs": [
       "resources/js/hooks/use-two-factor-auth.ts:59:43"
+    ]
+  },
+  "264dl6c9913": {
+    "message": "The adjustment would leave a negative balance.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:72:9"
     ]
   },
   "26ciz7ptwcg": {
@@ -1611,6 +1734,12 @@
     "message": "Reason",
     "refs": [
       "resources/js/components/cards/card-balance-actions.tsx:192:63"
+    ]
+  },
+  "282zvqncs0p": {
+    "message": "This organization is already suspended.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:102:9"
     ]
   },
   "28uv801464p": {
@@ -1865,6 +1994,12 @@
       "resources/js/lib/flash.ts:62:13"
     ]
   },
+  "38vnsidlu": {
+    "message": "The balance cannot be more than :max.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:76:9"
+    ]
+  },
   "3az60now0p": {
     "message": "Camera view",
     "refs": [
@@ -1905,6 +2040,7 @@
     "message": "This card is cancelled.",
     "refs": [
       "resources/js/components/cards/card-balance-actions.tsx:90:15",
+      "resources/js/locales/php-messages.generated.ts:96:9",
       "resources/js/pages/reader/card.tsx:62:15"
     ]
   },
@@ -1924,6 +2060,12 @@
     "message": "Pagination",
     "refs": [
       "resources/js/components/cards/list-pagination.tsx:35:33"
+    ]
+  },
+  "5hbq7sfjc5": {
+    "message": "Invalid credential format.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:52:9"
     ]
   },
   "5mpfz3olim": {
@@ -1968,7 +2110,8 @@
   "6zokvvlav4": {
     "message": "Date",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:43:33"
+      "resources/js/components/transactions/transactions-table.tsx:43:33",
+      "resources/js/locales/php-messages.generated.ts:44:9"
     ]
   },
   "740dfbxccn": {
@@ -1980,7 +2123,8 @@
   "75a28xasw6": {
     "message": "Try again",
     "refs": [
-      "resources/js/components/reader/qr-scanner.tsx:319:34"
+      "resources/js/components/reader/qr-scanner.tsx:319:34",
+      "resources/js/locales/php-messages.generated.ts:108:9"
     ]
   },
   "760pyp2fod": {
@@ -2057,6 +2201,12 @@
     "message": "Save business",
     "refs": [
       "resources/js/pages/settings/business.tsx:304:38"
+    ]
+  },
+  "8lhstr1ku2": {
+    "message": "The provided two factor authentication code was invalid.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:86:9"
     ]
   },
   "8nhmqil6xb": {
@@ -2138,6 +2288,12 @@
     "message": "Make {email} a superadmin?",
     "refs": [
       "resources/js/pages/admin/users/index.tsx:301:72"
+    ]
+  },
+  "b9v71v0281": {
+    "message": "Refund",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:68:9"
     ]
   },
   "be97194fqg": {
@@ -2229,6 +2385,12 @@
       "resources/js/pages/auth/register.tsx:90:50",
       "resources/js/pages/settings/security.tsx:101:38",
       "resources/js/pages/settings/security.tsx:109:50"
+    ]
+  },
+  "ecb6ro616h": {
+    "message": "You have reached your plan limit of :limit cards. Contact support to raise the limit.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:116:9"
     ]
   },
   "eqg9wi2usk": {
@@ -2371,6 +2533,12 @@
       "resources/js/components/cards/card-balance-actions.tsx:72:29"
     ]
   },
+  "idtj14ogqb": {
+    "message": "Insufficient balance.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:50:9"
+    ]
+  },
   "ii2e798x54": {
     "message": "Add",
     "context": "verb: add funds to a card",
@@ -2421,10 +2589,17 @@
       "resources/js/components/cards/card-balance-actions.tsx:88:13"
     ]
   },
+  "k5gm3x3131": {
+    "message": "The reader needs an internet connection to look up cards and post charges. Check your connection and try again.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:90:9"
+    ]
+  },
   "k7wfdtk1dy": {
     "message": "Type",
     "refs": [
       "resources/js/components/transactions/transactions-table.tsx:45:33",
+      "resources/js/locales/php-messages.generated.ts:110:9",
       "resources/js/pages/transactions/index.tsx:137:38"
     ]
   },
@@ -2459,6 +2634,12 @@
       "resources/js/components/public-card/wallet-buttons.tsx:27:53"
     ]
   },
+  "l9gvameg6d": {
+    "message": "Load",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:54:9"
+    ]
+  },
   "lcunbglek6": {
     "message": "Add passkey",
     "refs": [
@@ -2483,6 +2664,12 @@
       "resources/js/components/passkey-verify.tsx:55:44"
     ]
   },
+  "lxdjo92g5x": {
+    "message": "A note is required for adjustments.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:26:9"
+    ]
+  },
   "m997hoz843": {
     "message": "They lose access to the admin area. The last superadmin cannot be revoked.",
     "refs": [
@@ -2494,6 +2681,12 @@
     "refs": [
       "resources/js/pages/errors/forbidden.tsx:26:26",
       "resources/js/pages/errors/forbidden.tsx:37:38"
+    ]
+  },
+  "mnw5q1sgfh": {
+    "message": "Adjustment",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:28:9"
     ]
   },
   "mtb516uze5": {
@@ -2548,6 +2741,7 @@
   "nox4lci43x": {
     "message": "Card not found.",
     "refs": [
+      "resources/js/locales/php-messages.generated.ts:40:9",
       "resources/js/pages/reader/scan.tsx:39:48"
     ]
   },
@@ -2651,6 +2845,12 @@
       "resources/js/pages/dashboard.tsx:234:38"
     ]
   },
+  "qxtifz0t7m": {
+    "message": "The last superadmin cannot be revoked. Grant the role to someone else first.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:80:9"
+    ]
+  },
   "r0q72y2gqq": {
     "message": "Scan it to open the card.",
     "refs": [
@@ -2698,13 +2898,20 @@
   "ryo3bxpr4k": {
     "message": "Amount",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:46:56"
+      "resources/js/components/transactions/transactions-table.tsx:46:56",
+      "resources/js/locales/php-messages.generated.ts:30:9"
     ]
   },
   "rzbxhud6e6": {
     "message": "Starting camera…",
     "refs": [
       "resources/js/components/reader/qr-scanner.tsx:302:45"
+    ]
+  },
+  "sd1vyhwrne": {
+    "message": "This card is frozen.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:98:9"
     ]
   },
   "swsn5779ql": {
@@ -2756,6 +2963,12 @@
       "resources/js/pages/admin/index.tsx:56:21"
     ]
   },
+  "u2wsky91a8": {
+    "message": "Use only lowercase letters, numbers, and single hyphens.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:112:9"
+    ]
+  },
   "uawxgub8b4": {
     "message": "Delete account",
     "refs": [
@@ -2775,6 +2988,7 @@
     "refs": [
       "resources/js/components/organization/suspended-banner.tsx:9:12",
       "resources/js/lib/flash.ts:46:13",
+      "resources/js/locales/php-messages.generated.ts:94:9",
       "resources/js/pages/cards/create.tsx:159:59",
       "resources/js/pages/cards/index.tsx:199:39",
       "resources/js/pages/dashboard.tsx:135:39",
@@ -2812,6 +3026,12 @@
       "resources/js/pages/admin/organizations/create.tsx:193:55",
       "resources/js/pages/admin/organizations/show.tsx:210:41",
       "resources/js/pages/settings/business.tsx:65:24"
+    ]
+  },
+  "vdbommw5va": {
+    "message": "Enter an amount with up to two decimals.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:46:9"
     ]
   },
   "vehukx254v": {
@@ -2961,6 +3181,12 @@
       "resources/js/pages/settings/business.tsx:122:30"
     ]
   },
+  "yt27cbjtke": {
+    "message": "This organization is cancelled.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:104:9"
+    ]
+  },
   "z6az0ecjzu": {
     "message": "Transactions in {month}",
     "refs": [
@@ -2977,6 +3203,12 @@
     "message": "Register passkey",
     "refs": [
       "resources/js/components/passkey-register.tsx:101:57"
+    ]
+  },
+  "zlezvm2rqt": {
+    "message": "The provided password was incorrect.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:84:9"
     ]
   },
   "zrb43vmdtr": {

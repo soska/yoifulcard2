@@ -27,5 +27,5 @@ try {
 
     echo json_encode(['ok' => true, 'balance_after' => $transaction->balance_after]), PHP_EOL;
 } catch (LedgerException $exception) {
-    echo json_encode(['ok' => false, 'error' => $exception->key]), PHP_EOL;
+    echo json_encode(['ok' => false, 'error' => $exception->getMessage()]), PHP_EOL;
 }

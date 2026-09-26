@@ -9,8 +9,11 @@
         "check:fix": "vp check --fix",
         "types:check": "tsc --noEmit",
         "test:js": "vitest run",
-        "i18n:extract": "duckalize extract",
-        "i18n:status": "duckalize translate status"
+        "i18n:manifest": "php artisan i18n:manifest",
+        "i18n:extract": "php artisan i18n:manifest && duckalize extract",
+        "i18n:status": "duckalize translate status",
+        "i18n:lang": "node scripts/build-php-lang.mjs",
+        "i18n:check": "php artisan i18n:manifest --check && duckalize extract && node scripts/build-php-lang.mjs --check && git diff --exit-code -- resources/js/locales lang"
     },
     "dependencies": {
         "@base-ui/react": "^1.8.0",

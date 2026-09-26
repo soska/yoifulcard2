@@ -6,14 +6,6 @@ use App\Models\Program;
 use Illuminate\Support\Facades\File;
 use Inertia\Testing\AssertableInertia as Assert;
 
-/**
- * @return array<string, string>
- */
-function langFile(string $locale): array
-{
-    return json_decode(File::get(lang_path($locale.'.json')), true, flags: JSON_THROW_ON_ERROR);
-}
-
 test('locale cookie switches the language and persists', function () {
     // A guest's switch stores a plain, long-lived cookie and reloads the page.
     $this->from(route('login'))
@@ -73,24 +65,28 @@ test('the browser gets its words from the catalog, not a translations prop', fun
 });
 
 test('missing spanish key falls back to english', function () {
-    // An extra JSON path with a line that only exists in English.
+    // lang/es.json is built from the shared catalog and leaves out anything
+    // not yet translated (never ""), so Laravel shows the English it is keyed
+    // by. The browser does the same with a missing catalog entry
+    // (resources/js/locales/catalog.test.ts).
     $path = storage_path('framework/testing/lang-fallback');
     File::ensureDirectoryExists($path);
-    File::put($path.'/en.json', json_encode(['test.only_in_english' => 'Only in English']));
-    File::put($path.'/es.json', json_encode(['test.translated' => 'Traducido']));
+    File::put($path.'/es.json', json_encode(['Translated line.' => 'Línea traducida.']));
 
     try {
         app('translator')->getLoader()->addJsonPath($path);
         app('translator')->setLoaded([]);
 
         app()->setLocale('es');
-        expect(__('test.only_in_english'))->toBe('Only in English')
-            ->and(__('test.translated'))->toBe('Traducido')
-            // A key missing everywhere is shown as written (English).
-            ->and(__('Nowhere at all'))->toBe('Nowhere at all');
+        expect(__('Translated line.'))->toBe('Línea traducida.')
+            ->and(__('Only in English, with :name.', ['name' => 'Ana']))->toBe('Only in English, with Ana.');
     } finally {
         File::deleteDirectory($path);
     }
+
+    // No real Spanish line is blank.
+    $es = json_decode(File::get(lang_path('es.json')), true, flags: JSON_THROW_ON_ERROR);
+    expect(array_filter($es, fn ($line) => ! is_string($line) || trim($line) === ''))->toBe([]);
 });
 
 test('html lang matches the cookie', function () {
@@ -136,36 +132,6 @@ test('theme cookie persists', function () {
         ->assertSee('data-theme="system"', escape: false);
 
     $this->post(route('theme.update'), ['theme' => 'neon'])->assertSessionHasErrors('theme');
-});
-
-test('every key in en.json exists in es.json', function () {
-    $en = langFile('en');
-    $es = langFile('es');
-
-    $missing = array_values(array_diff(array_keys($en), array_keys($es)));
-    $empty = array_keys(array_filter($es, fn ($value) => ! is_string($value) || trim($value) === ''));
-
-    expect($missing)->toBe([], 'Missing in es.json: '.implode(' | ', $missing))
-        ->and($empty)->toBe([], 'Empty in es.json: '.implode(' | ', $empty))
-        ->and(array_diff(array_keys($es), array_keys($en)))->toBe([], 'es.json keys missing from en.json');
-});
-
-test('every translation key used in the code exists in en.json', function () {
-    // PHP only: React uses __() and the duckalization catalog (checked by
-    // resources/js/locales/catalog.test.ts). Phase 9.3 moves these PHP strings
-    // into the same catalog.
-    $en = langFile('en');
-    $keys = [];
-
-    foreach ([...File::allFiles(app_path()), ...File::allFiles(resource_path('views'))] as $file) {
-        preg_match_all('/\b__\(\s*\'((?:[^\'\\\\]|\\\\.)+)\'\s*[,)]/', $file->getContents(), $matches);
-        array_push($keys, ...array_map('stripslashes', $matches[1]));
-    }
-
-    $missing = array_values(array_unique(array_diff($keys, array_keys($en))));
-
-    expect($keys)->not->toBeEmpty()
-        ->and($missing)->toBe([], 'Missing in en.json: '.implode(' | ', $missing));
 });
 
 test('ledger errors, flash messages, and the csv are translated', function () {

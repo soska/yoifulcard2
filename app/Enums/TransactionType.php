@@ -21,11 +21,17 @@ enum TransactionType: string
     }
 
     /**
-     * The name shown to people, in the current language. The keys are
-     * `type.*` because "Charge" is also a verb elsewhere in the app.
+     * The name shown to people, in the current language (the CSV's type
+     * column). Literal `__()` calls so the i18n manifest declares them; the
+     * browser has its own labels in resources/js/lib/labels.ts.
      */
     public function label(): string
     {
-        return __('type.'.$this->value);
+        return match ($this) {
+            self::Load => __('Load'),
+            self::Spend => __('Charge'),
+            self::Adjustment => __('Adjustment'),
+            self::Refund => __('Refund'),
+        };
     }
 }
