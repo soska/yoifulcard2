@@ -6,5 +6,7 @@ export type CurrentOrganization = {
     id: string;
     name: string;
     status: OrganizationStatus;
+    /** IANA timezone; dates and times are shown in it. */
+    timezone: string;
     role: MembershipRole;
 };

@@ -29,6 +29,7 @@ class OrganizationFactory extends Factory
             'slug' => Str::slug($name).'-'.Str::lower(Str::random(6)),
             'primary_color' => '#000000',
             'currency' => 'MXN',
+            'timezone' => Organization::DEFAULT_TIMEZONE,
             'status' => OrganizationStatus::Active,
             'card_limit' => null,
             'plan_notes' => null,

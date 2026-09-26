@@ -69,7 +69,7 @@ class CurrentOrganization
     /**
      * The shape shared with every page as the `currentOrganization` prop.
      *
-     * @return array{id: string, name: string, status: string, role: string}|null
+     * @return array{id: string, name: string, status: string, timezone: string, role: string}|null
      */
     public static function toProp(Request $request): ?array
     {
@@ -84,6 +84,7 @@ class CurrentOrganization
             'id' => $organization->id,
             'name' => $organization->name,
             'status' => $organization->status->value,
+            'timezone' => $organization->timezone,
             'role' => $membership->role->value,
         ];
     }

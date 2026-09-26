@@ -8,7 +8,8 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { formatDateTime, formatSignedMoney } from '@/lib/format';
+import { useDateFormat } from '@/hooks/use-date-format';
+import { formatSignedMoney } from '@/lib/format';
 import { cn } from '@/lib/utils';
 import { show } from '@/routes/cards';
 import type { TransactionRow } from '@/types';
@@ -32,6 +33,8 @@ export function TransactionsTable({
     currency,
     showCard = true,
 }: Props) {
+    const { formatDateTime } = useDateFormat();
+
     return (
         <Table>
             <TableHeader>

@@ -34,7 +34,8 @@ import {
 } from '@/components/ui/empty';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
-import { formatDateTime, formatMoney } from '@/lib/format';
+import { useDateFormat } from '@/hooks/use-date-format';
+import { formatMoney } from '@/lib/format';
 import { email, freeze, index, show, unfreeze } from '@/routes/cards';
 import { png, svg } from '@/routes/cards/qr';
 import { index as transactionsIndex } from '@/routes/transactions';
@@ -56,6 +57,7 @@ export default function ShowCard({
     transactionCount,
 }: Props) {
     const { currentOrganization, errors } = usePage().props;
+    const { formatDateTime } = useDateFormat();
     const writable = currentOrganization?.status === 'active';
     const pageError =
         (errors as Record<string, string | undefined>).organization ??

@@ -35,6 +35,7 @@ test('login restores the current organization', function () {
                 'id' => $organization->id,
                 'name' => $organization->name,
                 'status' => 'active',
+                'timezone' => 'America/Mexico_City',
                 'role' => 'owner',
             ]));
 });

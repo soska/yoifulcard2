@@ -41,7 +41,8 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { formatDate, formatMoney } from '@/lib/format';
+import { useDateFormat } from '@/hooks/use-date-format';
+import { formatMoney } from '@/lib/format';
 import { create, index, show } from '@/routes/cards';
 import type {
     CardFilters,
@@ -80,6 +81,7 @@ export default function CardsIndex({
     usage,
 }: Props) {
     const { currentOrganization } = usePage().props;
+    const { formatDate } = useDateFormat();
     const writable = currentOrganization?.status === 'active';
     const [search, setSearch] = useState(filters.q);
 

@@ -10,7 +10,8 @@ use Inertia\Testing\AssertableInertia as Assert;
 
 /**
  * An owner with two cards and five transactions spread over September 2026,
- * plus another organization's transaction that must never show up.
+ * plus another organization's transaction that must never show up. The times
+ * are the organization's local times.
  *
  * @return array{0: User, 1: Organization, 2: array<string, Transaction>}
  */
@@ -28,7 +29,7 @@ function transactionHistory(): array
             'balance_after' => '100.00',
             'note' => $note,
             'performed_by' => $user->id,
-            'created_at' => Carbon::parse($at),
+            'created_at' => Carbon::parse($at, $organization->timezone)->utc(),
         ]);
 
     $rows = [
@@ -117,7 +118,7 @@ test('transactions paginate and keep the query string', function () {
 });
 
 test('csv export matches the filtered list', function () {
-    [$user, , $rows] = transactionHistory();
+    [$user, $organization, $rows] = transactionHistory();
     $this->actingAs($user);
 
     foreach ([[], ['type' => 'spend'], ['card' => 'bbb', 'from' => '2026-09-15'], ['to' => '2026-09-10']] as $query) {
@@ -134,11 +135,11 @@ test('csv export matches the filtered list', function () {
         expect($csv[0])->toBe(['date', 'card', 'type', 'amount', 'balance_after', 'note', 'performed_by']);
 
         $byId = collect($rows)->keyBy('id');
-        $expectedRows = array_map(function (string $id) use ($byId, $user) {
+        $expectedRows = array_map(function (string $id) use ($byId, $user, $organization) {
             $transaction = $byId[$id]->load('card');
 
             return [
-                $transaction->created_at->toIso8601String(),
+                $transaction->created_at->setTimezone($organization->timezone)->toIso8601String(),
                 $transaction->card->code,
                 $transaction->type->value,
                 $transaction->amount,
@@ -155,4 +156,67 @@ test('csv export matches the filtered list', function () {
 test('transactions page and export need a membership', function () {
     $this->get(route('transactions.index'))->assertRedirect(route('login'));
     $this->get(route('transactions.export'))->assertRedirect(route('login'));
+});
+
+test('transaction date filter uses the organization\'s day boundaries', function () {
+    [$user, $organization] = cardOwner();
+    expect($organization->timezone)->toBe('America/Mexico_City');
+    $card = Card::factory()->forOrganization($organization)->create();
+
+    $at = fn (string $utc) => Transaction::factory()->for($card)->create([
+        'performed_by' => $user->id,
+        'created_at' => Carbon::parse($utc, 'UTC'),
+    ]);
+
+    // 23:30 on the 1st in Mexico City (UTC-6) is 05:30 on the 2nd in UTC.
+    $lateOnFirst = $at('2026-09-02 05:30:00');
+    // 00:30 on the 1st in UTC is still the 31st of August locally.
+    $lateOnAugust31 = $at('2026-09-01 00:30:00');
+    // 06:00 on the 2nd in UTC is local midnight on the 2nd.
+    $midnightOnSecond = $at('2026-09-02 06:00:00');
+
+    $this->actingAs($user);
+    $ids = fn (array $query) => listedTransactionIds($this->get(route('transactions.index', $query)));
+
+    expect($ids(['from' => '2026-09-01', 'to' => '2026-09-01']))->toBe([$lateOnFirst->id])
+        ->and($ids(['to' => '2026-08-31']))->toBe([$lateOnAugust31->id])
+        ->and($ids(['from' => '2026-09-02']))->toBe([$midnightOnSecond->id]);
+
+    // The CSV uses the same local days.
+    $csv = $this->get(route('transactions.export', ['from' => '2026-09-01', 'to' => '2026-09-01']))->streamedContent();
+    expect(substr_count($csv, "\n"))->toBe(2)
+        ->and($csv)->toContain('2026-09-01T23:30:00-06:00');
+
+    // Another timezone moves the same instants to other days. In Tokyo
+    // (UTC+9) they are 14:30 on the 2nd, 09:30 on the 1st, and 15:00 on the 2nd.
+    $organization->update(['timezone' => 'Asia/Tokyo']);
+    expect($ids(['from' => '2026-09-02', 'to' => '2026-09-02']))->toBe([$midnightOnSecond->id, $lateOnFirst->id])
+        ->and($ids(['from' => '2026-09-01', 'to' => '2026-09-01']))->toBe([$lateOnAugust31->id]);
+});
+
+test('csv export shows times in the organization\'s timezone', function () {
+    [$user, $organization] = cardOwner(['timezone' => 'America/Mexico_City']);
+    $card = Card::factory()->forOrganization($organization)->create(['code' => 'YGFT-TZ01']);
+    Transaction::factory()->for($card)->create([
+        'type' => 'load',
+        'performed_by' => $user->id,
+        'created_at' => Carbon::parse('2026-09-02 05:30:00', 'UTC'),
+    ]);
+
+    $this->actingAs($user);
+    $rows = fn () => array_map(
+        fn (string $line) => str_getcsv($line, escape: ''),
+        array_values(array_filter(explode("\n", $this->get(route('transactions.export'))->streamedContent()))),
+    );
+
+    expect($rows()[1][0])->toBe('2026-09-01T23:30:00-06:00');
+
+    $organization->update(['timezone' => 'Asia/Tokyo']);
+    expect($rows()[1][0])->toBe('2026-09-02T14:30:00+09:00');
+
+    // The page still gets the instant; the browser formats it in the prop's timezone.
+    $this->get(route('transactions.index'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('currentOrganization.timezone', 'Asia/Tokyo')
+            ->where('transactions.data.0.created_at', '2026-09-02T05:30:00+00:00'));
 });

@@ -41,7 +41,8 @@ class TransactionController extends Controller
     }
 
     /**
-     * The same filtered list as CSV, streamed in chunks.
+     * The same filtered list as CSV, streamed in chunks. Dates are in the
+     * organization's timezone, with its UTC offset.
      */
     public function export(Request $request): StreamedResponse
     {
@@ -49,9 +50,10 @@ class TransactionController extends Controller
         $filters = TransactionFilters::fromRequest($request);
         $query = $filters->query($organization)->with(['card:id,code', 'performer:id,name,email']);
 
-        $filename = 'transactions-'.now()->format('Y-m-d').'.csv';
+        $timezone = $organization->timezone;
+        $filename = 'transactions-'.now($timezone)->format('Y-m-d').'.csv';
 
-        return response()->streamDownload(function () use ($query): void {
+        return response()->streamDownload(function () use ($query, $timezone): void {
             $out = fopen('php://output', 'w');
 
             fputcsv($out, ['date', 'card', 'type', 'amount', 'balance_after', 'note', 'performed_by'], escape: '');
@@ -59,7 +61,7 @@ class TransactionController extends Controller
             foreach ($query->lazy(500) as $transaction) {
                 /** @var Transaction $transaction */
                 fputcsv($out, [
-                    $transaction->created_at?->toIso8601String(),
+                    $transaction->created_at?->setTimezone($timezone)->toIso8601String(),
                     $transaction->card->code,
                     $transaction->type->value,
                     $transaction->amount,

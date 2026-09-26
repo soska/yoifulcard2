@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\OrganizationStatus;
 use Database\Factories\OrganizationFactory;
+use DateTimeZone;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use RuntimeException;
 
 /**
@@ -22,17 +24,20 @@ use RuntimeException;
  * @property string|null $logo_url
  * @property string $primary_color
  * @property string $currency
+ * @property string $timezone
  * @property OrganizationStatus $status
  * @property int|null $card_limit
  * @property string|null $plan_notes
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'slug', 'logo_url', 'primary_color', 'currency', 'status', 'card_limit', 'plan_notes'])]
+#[Fillable(['name', 'slug', 'logo_url', 'primary_color', 'currency', 'timezone', 'status', 'card_limit', 'plan_notes'])]
 class Organization extends Model
 {
     /** @use HasFactory<OrganizationFactory> */
     use HasFactory, HasUuids;
+
+    public const DEFAULT_TIMEZONE = 'America/Mexico_City';
 
     /**
      * @var array<string, mixed>
@@ -40,8 +45,30 @@ class Organization extends Model
     protected $attributes = [
         'primary_color' => '#000000',
         'currency' => 'MXN',
+        'timezone' => self::DEFAULT_TIMEZONE,
         'status' => 'active',
     ];
+
+    /**
+     * Refuse to save a timezone PHP does not know, so every date filter and
+     * displayed time can rely on it.
+     */
+    protected static function booted(): void
+    {
+        static::saving(function (Organization $organization): void {
+            if ($organization->isDirty('timezone') && ! self::isValidTimezone($organization->timezone)) {
+                throw new InvalidArgumentException("Unknown timezone [{$organization->timezone}].");
+            }
+        });
+    }
+
+    /**
+     * Whether the value is one of PHP's timezone identifiers.
+     */
+    public static function isValidTimezone(mixed $timezone): bool
+    {
+        return is_string($timezone) && in_array($timezone, DateTimeZone::listIdentifiers(), true);
+    }
 
     /**
      * Get the attributes that should be cast.

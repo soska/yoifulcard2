@@ -15,7 +15,8 @@ use Illuminate\Support\Carbon;
  * the CSV export build their query here, so they always agree.
  *
  * Invalid values are dropped rather than rejected, like the cards list.
- * Dates are whole days in the app timezone; both ends are inclusive.
+ * Dates are whole days in the organization's timezone; both ends are
+ * inclusive.
  */
 final readonly class TransactionFilters
 {
@@ -45,13 +46,15 @@ final readonly class TransactionFilters
      */
     public function query(Organization $organization): Builder
     {
+        $timezone = $organization->timezone;
+
         return Transaction::query()
             ->forOrganization($organization)
             ->when($this->type, fn (Builder $query, TransactionType $type) => $query->where('type', $type))
             ->when($this->from, fn (Builder $query, string $from) => $query
-                ->where('created_at', '>=', Carbon::parse($from)->startOfDay()))
+                ->where('created_at', '>=', self::dayStart($from, $timezone)))
             ->when($this->to, fn (Builder $query, string $to) => $query
-                ->where('created_at', '<', Carbon::parse($to)->addDay()->startOfDay()))
+                ->where('created_at', '<', self::dayStart($to, $timezone, addDays: 1)))
             ->when($this->card !== '', function (Builder $query): void {
                 $pattern = '%'.addcslashes(mb_strtolower($this->card), '\\%_').'%';
 
@@ -87,6 +90,19 @@ final readonly class TransactionFilters
             'to' => $this->to,
             'card' => $this->card,
         ];
+    }
+
+    /**
+     * Local midnight of a day (plus some days) in the organization's
+     * timezone, converted to the app timezone the database stores. Days are
+     * added before converting, so a DST change still lands on midnight.
+     */
+    private static function dayStart(string $date, string $timezone, int $addDays = 0): Carbon
+    {
+        return Carbon::parse($date, $timezone)
+            ->addDays($addDays)
+            ->startOfDay()
+            ->setTimezone(config('app.timezone'));
     }
 
     private static function date(mixed $value): ?string
