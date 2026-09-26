@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\CardLedgerController;
 use App\Http\Controllers\Dashboard\CardQrController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\SettingsController;
+use App\Http\Controllers\Dashboard\SwitchOrganizationController;
 use App\Http\Controllers\Dashboard\TransactionController;
 use App\Http\Controllers\Preferences\LocaleController;
 use App\Http\Controllers\Preferences\ThemeController;
@@ -68,6 +69,14 @@ Route::middleware(['auth', 'organization'])->group(function () {
         Route::patch('settings/organization', [SettingsController::class, 'updateOrganization'])->name('settings.organization.update');
         Route::patch('settings/program', [SettingsController::class, 'updateProgram'])->name('settings.program.update');
     });
+});
+
+// Business switcher: only the user's own memberships. Not under
+// `organization.writable`, so a user can leave a suspended business.
+Route::middleware(['auth'])->group(function () {
+    Route::post('organizations/{organization}/switch', SwitchOrganizationController::class)
+        ->whereUuid('organization')
+        ->name('organizations.switch');
 });
 
 // Reader: members of an organization. Charge and add funds post to the

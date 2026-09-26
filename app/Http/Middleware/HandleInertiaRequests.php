@@ -50,6 +50,7 @@ class HandleInertiaRequests extends Middleware
                 'isSuperadmin' => fn () => $request->user()?->isSuperadmin() === true,
             ],
             'currentOrganization' => fn () => CurrentOrganization::toProp($request),
+            'organizations' => fn () => CurrentOrganization::switchable($request),
             'locale' => $locale,
             'intlLocale' => Locale::intl($locale),
             'theme' => Theme::fromRequest($request),

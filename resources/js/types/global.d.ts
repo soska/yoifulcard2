@@ -1,6 +1,9 @@
 import type { OneTimeCredentials } from '@/types/admin';
 import type { Auth } from '@/types/auth';
-import type { CurrentOrganization } from '@/types/organization';
+import type {
+    CurrentOrganization,
+    SwitchableOrganization,
+} from '@/types/organization';
 import type { Translations } from '@/lib/i18n';
 import type { FlashToast } from '@/types/ui';
 
@@ -16,6 +19,8 @@ declare module '@inertiajs/core' {
             name: string;
             auth: Auth;
             currentOrganization: CurrentOrganization | null;
+            /** The user's businesses; empty unless there are two or more. */
+            organizations: SwitchableOrganization[];
             sidebarOpen: boolean;
             /** App locale from the `locale` cookie. */
             locale: 'en' | 'es';

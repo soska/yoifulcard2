@@ -56,6 +56,56 @@ class CurrentOrganization
         self::store($session, $user->firstMembership());
     }
 
+    /**
+     * Make the given membership's organization the current one for this
+     * session. The caller has already checked that the membership belongs to
+     * the signed-in user.
+     */
+    public static function switchTo(Request $request, Membership $membership): void
+    {
+        $membership->loadMissing('organization');
+
+        self::store($request->session(), $membership);
+        $request->attributes->set(self::ATTRIBUTE, $membership);
+    }
+
+    /**
+     * The businesses the signed-in user can switch between, shared as the
+     * `organizations` prop. Empty unless the user has two or more
+     * memberships, so the switcher stays hidden for everyone else.
+     * Superadmins get only their own memberships here; admin pages are how
+     * they see other businesses.
+     *
+     * @return list<array{id: string, name: string, role: string}>
+     */
+    public static function switchable(Request $request): array
+    {
+        $user = $request->user();
+
+        if (! $user instanceof User) {
+            return [];
+        }
+
+        $memberships = $user->memberships()
+            ->with('organization:id,name')
+            ->oldest()
+            ->oldest('id')
+            ->get();
+
+        if ($memberships->count() < 2) {
+            return [];
+        }
+
+        return $memberships
+            ->map(fn (Membership $membership): array => [
+                'id' => $membership->organization_id,
+                'name' => $membership->organization->name,
+                'role' => $membership->role->value,
+            ])
+            ->values()
+            ->all();
+    }
+
     public static function membership(Request $request): ?Membership
     {
         return self::resolve($request);

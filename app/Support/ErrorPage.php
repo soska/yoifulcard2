@@ -77,6 +77,7 @@ class ErrorPage
                 'isSuperadmin' => false,
             ],
             'currentOrganization' => null,
+            'organizations' => [],
             'locale' => $locale,
             'intlLocale' => Locale::intl($locale),
             'theme' => Theme::fromRequest($request),

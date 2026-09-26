@@ -2,6 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { LayoutDashboard, WifiOff } from 'lucide-react';
 import { useEffect } from 'react';
 import AppLogoIcon from '@/components/app-logo-icon';
+import { ReaderOrganizationSwitcher } from '@/components/organization/organization-switcher';
 import { SuspendedBanner } from '@/components/organization/suspended-banner';
 import { PreferenceSwitchers } from '@/components/preferences/preference-switchers';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -20,7 +21,7 @@ export default function ReaderLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const { currentOrganization } = usePage().props;
+    const { currentOrganization, organizations } = usePage().props;
     const online = useOnline();
     const { t } = useTranslation();
 
@@ -37,10 +38,14 @@ export default function ReaderLayout({
                         <p className="text-sm leading-tight font-semibold">
                             {t('Reader')}
                         </p>
-                        {currentOrganization && (
-                            <p className="truncate text-xs text-muted-foreground">
-                                {currentOrganization.name}
-                            </p>
+                        {organizations.length >= 2 ? (
+                            <ReaderOrganizationSwitcher />
+                        ) : (
+                            currentOrganization && (
+                                <p className="truncate text-xs text-muted-foreground">
+                                    {currentOrganization.name}
+                                </p>
+                            )
                         )}
                     </div>
                 </div>
