@@ -6,10 +6,18 @@ use App\Http\Controllers\Dashboard\CardEmailController;
 use App\Http\Controllers\Dashboard\CardLedgerController;
 use App\Http\Controllers\Dashboard\CardQrController;
 use App\Http\Controllers\Dashboard\TransactionController;
+use App\Http\Controllers\PublicCardController;
 use App\Http\Controllers\Reader\ScanController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'welcome')->name('home');
+
+// Public card: anyone with the link, no login. The token is not constrained
+// here so malformed tokens get the same not-found page as unknown ones.
+Route::get('c/{token}', [PublicCardController::class, 'show'])->where('token', '.*')->name('public-card.show');
+Route::post('c/{token}/email', [PublicCardController::class, 'email'])
+    ->middleware('throttle:public-card-email')
+    ->name('public-card.email');
 
 // Dashboard: members of an organization.
 Route::middleware(['auth', 'organization'])->group(function () {

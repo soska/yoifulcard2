@@ -4,3 +4,4 @@ export type * from './ui';
 export type * from './organization';
 export type * from './card';
 export type * from './transaction';
+export type * from './public-card';
