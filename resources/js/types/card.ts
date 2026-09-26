@@ -1,4 +1,6 @@
-export type CardStatus = 'active' | 'frozen' | 'depleted' | 'cancelled';
+import type { CardStatus } from '@/types/enums.generated';
+
+export type { CardStatus };
 
 export type CardSort = 'code' | 'balance' | 'created_at' | 'last_used_at';
 

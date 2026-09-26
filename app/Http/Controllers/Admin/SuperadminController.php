@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\FlashMessage;
 use App\Http\Controllers\Controller;
 use App\Models\Superadmin;
 use App\Models\User;
+use App\Support\Flash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
-use Inertia\Inertia;
 
 class SuperadminController extends Controller
 {
@@ -23,7 +24,7 @@ class SuperadminController extends Controller
             ['granted_by' => $request->user()->id],
         );
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Superadmin granted to :email.', ['email' => $user->email])]);
+        Flash::success(FlashMessage::SuperadminGranted, ['email' => $user->email]);
 
         return back(fallback: route('admin.users.index'));
     }
@@ -56,7 +57,7 @@ class SuperadminController extends Controller
             $row->delete();
         });
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Superadmin revoked from :email.', ['email' => $user->email])]);
+        Flash::success(FlashMessage::SuperadminRevoked, ['email' => $user->email]);
 
         // Someone who revoked their own role can no longer open admin.
         if ($request->user()->is($user)) {

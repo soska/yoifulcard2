@@ -43,8 +43,10 @@ test('breadcrumb data labels are not translated', function () {
 
     $organization = Organization::factory()->create(['name' => 'Admin']);
 
-    $this->actingAs(superadmin())
-        ->withUnencryptedCookie('locale', 'es')
+    $admin = superadmin();
+    $admin->forceFill(['locale' => 'es'])->save();
+
+    $this->actingAs($admin)
         ->get(route('admin.organizations.show', $organization))
         ->assertOk()
         ->assertInertia(fn (Assert $page) => $page

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\FlashMessage;
 use App\Http\Controllers\Controller;
 use App\Models\Superadmin;
+use App\Support\Flash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Inertia\Inertia;
 
 class ClaimSuperadminController extends Controller
 {
@@ -39,7 +40,7 @@ class ClaimSuperadminController extends Controller
 
         abort_unless($claimed, 403);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Superadmin privileges granted.')]);
+        Flash::success(FlashMessage::SuperadminClaimed);
 
         return to_route('admin.index');
     }

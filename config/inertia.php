@@ -15,11 +15,11 @@ return [
     |
     */
 
+    // Off on purpose (Phase 9): the app has one module-scope duckalization
+    // translator (resources/js/i18n.ts), which is only correct without SSR.
+    // Server rendering would need one translator per request.
     'ssr' => [
-        'enabled' => true,
-        'url' => 'http://127.0.0.1:13714',
-        // 'bundle' => base_path('bootstrap/ssr/ssr.mjs'),
-
+        'enabled' => false,
     ],
 
     /*

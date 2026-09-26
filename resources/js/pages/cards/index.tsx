@@ -9,10 +9,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import {
-    CardStatusBadge,
-    cardStatusLabels,
-} from '@/components/cards/card-status-badge';
+import { CardStatusBadge } from '@/components/cards/card-status-badge';
 import { CardUsageNotice } from '@/components/cards/card-usage-notice';
 import { ListPagination } from '@/components/cards/list-pagination';
 import Heading from '@/components/heading';
@@ -53,6 +50,7 @@ import type {
     Paginated,
 } from '@/types';
 import { useTranslation } from '@/hooks/use-translation';
+import { cardStatusLabel } from '@/lib/labels';
 
 type Props = {
     cards: Paginated<CardSummary>;
@@ -238,7 +236,7 @@ export default function CardsIndex({
                                     { value: ALL, label: t('All statuses') },
                                     ...statuses.map((status) => ({
                                         value: status,
-                                        label: t(cardStatusLabels[status]),
+                                        label: cardStatusLabel(status),
                                     })),
                                 ]}
                             >
@@ -254,7 +252,7 @@ export default function CardsIndex({
                                     </SelectItem>
                                     {statuses.map((status) => (
                                         <SelectItem key={status} value={status}>
-                                            {t(cardStatusLabels[status])}
+                                            {cardStatusLabel(status)}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>

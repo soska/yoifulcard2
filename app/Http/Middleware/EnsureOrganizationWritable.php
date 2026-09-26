@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\FlashMessage;
 use App\Support\CurrentOrganization;
+use App\Support\Flash;
 use Closure;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsureOrganizationWritable
@@ -25,7 +26,7 @@ class EnsureOrganizationWritable
 
         $message = __('This business is suspended. Contact support.');
 
-        Inertia::flash('toast', ['type' => 'error', 'message' => $message]);
+        Flash::error(FlashMessage::OrganizationNotWritable);
 
         return back()->withErrors(['organization' => $message]);
     }

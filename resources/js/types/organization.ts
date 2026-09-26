@@ -1,6 +1,9 @@
-export type OrganizationStatus = 'active' | 'suspended' | 'cancelled';
+import type {
+    MembershipRole,
+    OrganizationStatus,
+} from '@/types/enums.generated';
 
-export type MembershipRole = 'owner' | 'manager' | 'employee';
+export type { MembershipRole, OrganizationStatus };
 
 export type CurrentOrganization = {
     id: string;

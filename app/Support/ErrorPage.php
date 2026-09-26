@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Http\Middleware\HandleInertiaRequests;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -42,7 +43,8 @@ class ErrorPage
      */
     public static function render(Request $request, string $component, int $status, array $props = []): Response
     {
-        $locale = Locale::fromRequest($request);
+        $user = rescue(fn () => $request->user(), null, false);
+        $locale = Locales::resolve($request, $user instanceof User ? $user : null);
         app()->setLocale($locale);
         Carbon::setLocale($locale);
 
@@ -78,8 +80,7 @@ class ErrorPage
             ],
             'currentOrganization' => null,
             'organizations' => [],
-            'locale' => $locale,
-            'intlLocale' => Locale::intl($locale),
+            'locale' => Locales::prop($locale),
             'theme' => Theme::fromRequest($request),
             'translations' => Translations::for($locale),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\CardStatus;
+use App\Enums\FlashMessage;
 use App\Exceptions\LedgerException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cards\StoreCardRequest;
@@ -12,6 +13,7 @@ use App\Models\Transaction;
 use App\Services\CardCodeGenerator;
 use App\Services\CardLedger;
 use App\Support\CurrentOrganization;
+use App\Support\Flash;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -145,7 +147,7 @@ class CardController extends Controller
             return $card;
         });
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Card :code created.', ['code' => $card->code])]);
+        Flash::success(FlashMessage::CardCreated, ['code' => $card->code]);
 
         return to_route('cards.show', $card);
     }
@@ -189,7 +191,7 @@ class CardController extends Controller
 
         $card->update(['status' => CardStatus::Frozen]);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Card frozen.')]);
+        Flash::success(FlashMessage::CardFrozen);
 
         return back();
     }
@@ -206,7 +208,7 @@ class CardController extends Controller
 
         $card->update(['status' => CardStatus::Active]);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Card unfrozen.')]);
+        Flash::success(FlashMessage::CardUnfrozen);
 
         return back();
     }

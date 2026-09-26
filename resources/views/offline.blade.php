@@ -32,7 +32,7 @@
                 (the switcher's cookie, readable here because it is not encrypted), so
                 the cached copy follows later language changes.
             --}}
-            @foreach (array_keys(\App\Support\Locale::SUPPORTED) as $offlineLocale)
+            @foreach (\App\Support\Locales::SUPPORTED as $offlineLocale)
                 <div data-locale="{{ $offlineLocale }}" lang="{{ $offlineLocale }}" data-title="{{ __('You are offline', [], $offlineLocale) }} - {{ config('app.name', 'Yoiful') }}" @if ($offlineLocale !== app()->getLocale()) hidden @endif class="flex w-full max-w-sm flex-col items-center gap-4 text-center">
                     <div class="flex size-14 items-center justify-center rounded-full bg-muted text-muted-foreground">
                         {{-- lucide "wifi-off" --}}

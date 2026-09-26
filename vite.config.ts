@@ -1,3 +1,4 @@
+import duckalization from '@duckalization/bundler-plugin';
 import inertia from '@inertiajs/vite';
 import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import babel from '@rolldown/plugin-babel';
@@ -18,7 +19,12 @@ export default defineConfig({
                 }),
             ],
         }),
-        inertia(),
+        // SSR is off (config/inertia.php): the module-scope translator in
+        // resources/js/i18n.ts is only correct in the browser.
+        inertia({ ssr: false }),
+        // Pre-bakes message ids so the hasher tree-shakes out. Not a gate:
+        // `duckalize extract` is the strict check.
+        duckalization.vite({ failOnError: false }),
         react(),
         babel({
             presets: [reactCompilerPreset()],
@@ -44,7 +50,6 @@ export default defineConfig({
             'vendor/**',
             'node_modules/**',
             'public/**',
-            'bootstrap/ssr/**',
             'tailwind.config.js',
             'resources/js/actions/**',
             'resources/js/components/ui/*',
@@ -67,6 +72,8 @@ export default defineConfig({
             '.github/**',
             'composer.json',
             'resources/js/components/ui/*',
+            'resources/js/locales/*.json',
+            'resources/js/types/enums.generated.ts',
             'resources/views/mail/*',
         ],
         sortTailwindcss: {

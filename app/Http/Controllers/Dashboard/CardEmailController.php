@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enums\FlashMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cards\UpdateCardEmailRequest;
 use App\Models\Card;
+use App\Support\Flash;
 use Illuminate\Http\RedirectResponse;
-use Inertia\Inertia;
 
 class CardEmailController extends Controller
 {
@@ -17,7 +18,7 @@ class CardEmailController extends Controller
     {
         $card->update(['email' => $request->validated('email')]);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Cardholder email saved.')]);
+        Flash::success(FlashMessage::CardEmailSaved);
 
         return back();
     }

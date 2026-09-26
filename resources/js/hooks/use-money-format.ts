@@ -1,15 +1,14 @@
-import { usePage } from '@inertiajs/react';
 import { useCallback } from 'react';
+import { activeLocale } from '@/i18n';
 import {
-    DEFAULT_LOCALE,
     formatMoney as formatMoneyIn,
     formatSignedMoney as formatSignedMoneyIn,
 } from '@/lib/format';
 
-/** Money formatters bound to the interface language (`en-US`, `es-MX`). */
+/** Money formatters bound to the interface language (`activeLocale()`). */
 export function useMoneyFormat() {
-    const { intlLocale } = usePage().props;
-    const locale = intlLocale ?? DEFAULT_LOCALE;
+    // Stable for the page's lifetime: a language change is a full reload.
+    const locale = activeLocale();
 
     const formatMoney = useCallback(
         (amount: string, currency: string) =>

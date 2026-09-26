@@ -5,7 +5,7 @@ import type {
     SwitchableOrganization,
 } from '@/types/organization';
 import type { Translations } from '@/lib/i18n';
-import type { FlashToast } from '@/types/ui';
+import type { FlashToast } from '@/lib/flash';
 
 declare module 'react' {
     interface InputHTMLAttributes<T> {
@@ -22,10 +22,16 @@ declare module '@inertiajs/core' {
             /** The user's businesses; empty unless there are two or more. */
             organizations: SwitchableOrganization[];
             sidebarOpen: boolean;
-            /** App locale from the `locale` cookie. */
-            locale: 'en' | 'es';
-            /** Intl locale for dates and money, `en-US` or `es-MX`. */
-            intlLocale: string;
+            /**
+             * The language the server resolved for this request (see
+             * App\Support\Locales): `current` is what to render, `available`
+             * the switcher's choices, `intl` the Intl locale (`es-MX`).
+             */
+            locale: {
+                current: string;
+                available: string[];
+                intl: string;
+            };
             /** The `theme` cookie. */
             theme: 'light' | 'dark' | 'system';
             /** JSON lines for `locale` whose text differs from the key. */

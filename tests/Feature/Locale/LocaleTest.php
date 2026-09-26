@@ -16,12 +16,21 @@ function langFile(string $locale): array
 }
 
 test('locale cookie switches the language and persists', function () {
-    // Switching stores a plain, long-lived cookie and goes back.
+    // A guest's switch stores a plain, long-lived cookie and reloads the page.
     $this->from(route('login'))
         ->post(route('locale.update'), ['locale' => 'es'])
         ->assertRedirect(route('login'))
         ->assertCookie('locale', 'es', encrypted: false)
         ->assertCookieNotExpired('locale');
+
+    // An Inertia visit gets a full document reload, not an Inertia page, so
+    // server copy and the browser catalog both come back in the new language.
+    $this->from(route('login'))
+        ->withHeaders(['X-Inertia' => 'true'])
+        ->post(route('locale.update'), ['locale' => 'es'])
+        ->assertStatus(409)
+        ->assertHeader('X-Inertia-Location', route('login'));
+    $this->flushHeaders();
 
     // The next requests carry the cookie: pages, shared strings, and
     // server messages are Spanish.
@@ -30,8 +39,9 @@ test('locale cookie switches the language and persists', function () {
         ->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('auth/login')
-            ->where('locale', 'es')
-            ->where('intlLocale', 'es-MX')
+            ->where('locale.current', 'es')
+            ->where('locale.available', ['en', 'es'])
+            ->where('locale.intl', 'es-MX')
             ->where('translations', fn ($lines) => $lines['Log in'] === 'Iniciar sesión'
                 && $lines['This business is suspended. Contact support.'] === 'Este negocio está suspendido. Contacta a soporte.'
                 && $lines['type.spend'] === 'Cobro'));
@@ -41,18 +51,16 @@ test('locale cookie switches the language and persists', function () {
         ->post(route('login.store'), ['email' => '', 'password' => ''])
         ->assertSessionHasErrors(['email' => 'El campo correo electrónico es obligatorio.']);
 
-    // Unknown values are refused and the cookie is ignored.
-    $this->post(route('locale.update'), ['locale' => 'fr'])->assertSessionHasErrors('locale');
-
+    // An unknown cookie value is ignored.
     $this->withUnencryptedCookie('locale', 'fr')
         ->get(route('login'))
-        ->assertInertia(fn (Assert $page) => $page->where('locale', 'en')->where('intlLocale', 'en-US'));
+        ->assertInertia(fn (Assert $page) => $page->where('locale.current', 'en')->where('locale.intl', 'en-US'));
 });
 
 test('english sends no translations and spanish sends every line', function () {
     $this->get(route('login'))
         ->assertInertia(fn (Assert $page) => $page
-            ->where('locale', 'en')
+            ->where('locale.current', 'en')
             // English keys are the text itself, except the type names.
             ->where('translations', ['type.adjustment' => 'Adjustment', 'type.load' => 'Load', 'type.refund' => 'Refund', 'type.spend' => 'Charge']));
 
@@ -190,22 +198,23 @@ test('every translation key used in the code exists in en.json', function () {
 
 test('ledger errors, flash messages, and the csv are translated', function () {
     [$user, $organization, $program] = cardOwner();
+    $user->forceFill(['locale' => 'es'])->save();
     $card = Card::factory()->for($program)->create(['balance' => '5.00']);
 
     $this->actingAs($user)
-        ->withUnencryptedCookie('locale', 'es')
         ->from(route('cards.show', $card))
         ->post(route('cards.spend', $card), ['amount' => '10.00'])
         ->assertSessionHasErrors(['amount' => 'Saldo insuficiente.']);
 
+    // Toasts are codes; the browser says them in the reader's language
+    // (resources/js/lib/flash.ts).
     $this->actingAs($user)
-        ->withUnencryptedCookie('locale', 'es')
         ->from(route('cards.show', $card))
         ->post(route('cards.load', $card), ['amount' => '1.00'])
-        ->assertInertiaFlash('toast.message', 'Se agregaron fondos a '.$card->code.'.');
+        ->assertInertiaFlash('toast.code', 'ledger.loaded')
+        ->assertInertiaFlash('toast.params.code', $card->code);
 
     $csv = $this->actingAs($user)
-        ->withUnencryptedCookie('locale', 'es')
         ->get(route('transactions.export'))
         ->streamedContent();
 
@@ -217,11 +226,11 @@ test('ledger errors, flash messages, and the csv are translated', function () {
 
 test('suspended organizations get the translated error', function () {
     [$user, $organization, $program] = cardOwner();
+    $user->forceFill(['locale' => 'es'])->save();
     $organization->update(['status' => 'suspended']);
     $card = Card::factory()->for($program)->create(['balance' => '5.00']);
 
     $this->actingAs($user)
-        ->withUnencryptedCookie('locale', 'es')
         ->from(route('cards.show', $card))
         ->post(route('cards.spend', $card), ['amount' => '1.00'])
         ->assertSessionHasErrors(['organization' => 'Este negocio está suspendido. Contacta a soporte.']);

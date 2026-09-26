@@ -1,0 +1,22 @@
+{
+    "include": ["resources/js/**/*.{ts,tsx}"],
+    "exclude": [
+        "**/node_modules/**",
+        "**/*.d.ts",
+        "resources/js/test/**",
+        "resources/js/**/*.test.{ts,tsx}",
+        "resources/js/locales/.work/**",
+        "resources/js/locales/.archive/**",
+        "resources/js/actions/**",
+        "resources/js/routes/**",
+        "resources/js/wayfinder/**"
+    ],
+    "functions": ["__"],
+    "outDir": "resources/js/locales",
+    "sourceLocale": "en",
+    "targetLocales": ["es"],
+    "style": {
+        "es": "./resources/js/locales/style/es.md"
+    },
+    "glossary": "resources/js/locales/glossary.json"
+}

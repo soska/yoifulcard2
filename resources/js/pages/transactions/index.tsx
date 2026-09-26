@@ -4,7 +4,6 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { ListPagination } from '@/components/cards/list-pagination';
 import Heading from '@/components/heading';
-import { transactionTypeLabels } from '@/components/transactions/transaction-type-badge';
 import { TransactionsTable } from '@/components/transactions/transactions-table';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -32,6 +31,7 @@ import type {
     TransactionType,
 } from '@/types';
 import { useTranslation } from '@/hooks/use-translation';
+import { transactionTypeLabel } from '@/lib/labels';
 
 type Props = {
     transactions: Paginated<TransactionRow>;
@@ -95,7 +95,7 @@ export default function TransactionsIndex({
         { value: ALL, label: t('All types') },
         ...types.map((type) => ({
             value: type,
-            label: t(transactionTypeLabels[type]),
+            label: transactionTypeLabel(type),
         })),
     ];
 

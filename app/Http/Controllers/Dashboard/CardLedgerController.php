@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enums\FlashMessage;
 use App\Exceptions\LedgerException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ledger\AdjustBalanceRequest;
 use App\Http\Requests\Ledger\LedgerAmountRequest;
 use App\Models\Card;
 use App\Services\CardLedger;
+use App\Support\Flash;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
-use Inertia\Inertia;
 
 /**
  * Add funds, charge, and adjust, from the card page and (load and spend
@@ -27,7 +28,8 @@ class CardLedgerController extends Controller
     {
         return $this->post(
             fn () => $this->ledger->load($card, $request->amount(), $request->user(), $request->note()),
-            __('Funds added to :code.', ['code' => $card->code]),
+            $card,
+            FlashMessage::FundsAdded,
             $request->boolean('reader'),
         );
     }
@@ -36,7 +38,8 @@ class CardLedgerController extends Controller
     {
         return $this->post(
             fn () => $this->ledger->spend($card, $request->amount(), $request->user(), $request->note()),
-            __('Charged :code.', ['code' => $card->code]),
+            $card,
+            FlashMessage::CardCharged,
             $request->boolean('reader'),
         );
     }
@@ -45,7 +48,8 @@ class CardLedgerController extends Controller
     {
         return $this->post(
             fn () => $this->ledger->adjust($card, $request->amount(), $request->user(), $request->note()),
-            __('Balance of :code adjusted.', ['code' => $card->code]),
+            $card,
+            FlashMessage::BalanceAdjusted,
         );
     }
 
@@ -54,7 +58,7 @@ class CardLedgerController extends Controller
      * reader posted (`reader=1`), so it is ready for the next card. Errors
      * always go back to the page that posted.
      */
-    private function post(Closure $action, string $message, bool $toScanner = false): RedirectResponse
+    private function post(Closure $action, Card $card, FlashMessage $message, bool $toScanner = false): RedirectResponse
     {
         try {
             $action();
@@ -64,7 +68,7 @@ class CardLedgerController extends Controller
             ]);
         }
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => $message]);
+        Flash::success($message, ['code' => $card->code]);
 
         return $toScanner ? to_route('scan') : back();
     }

@@ -16,7 +16,7 @@ test('missing page renders the translated 404 in spanish', function () {
     // English by default.
     $this->get('/this-page-does-not-exist')
         ->assertNotFound()
-        ->assertInertia(fn (Assert $page) => $page->component('errors/error')->where('locale', 'en'));
+        ->assertInertia(fn (Assert $page) => $page->component('errors/error')->where('locale.current', 'en'));
 
     // No route matches, so the web middleware never runs: the handler sets
     // the language from the cookie itself.
@@ -27,23 +27,23 @@ test('missing page renders the translated 404 in spanish', function () {
         ->assertInertia(fn (Assert $page) => $page
             ->component('errors/error')
             ->where('status', 404)
-            ->where('locale', 'es')
-            ->where('intlLocale', 'es-MX')
+            ->where('locale.current', 'es')
+            ->where('locale.intl', 'es-MX')
             ->where('auth.user', null)
             ->where('translations', fn ($lines) => $lines['Page not found'] === 'Página no encontrada'
                 && $lines['Go home'] === 'Ir al inicio'));
 
     // A missing model inside a signed-in route gets the same page.
     [$user] = cardOwner();
+    $user->forceFill(['locale' => 'es'])->save();
 
     $this->actingAs($user)
-        ->withUnencryptedCookie('locale', 'es')
         ->get(route('cards.show', '00000000-0000-0000-0000-000000000000'))
         ->assertNotFound()
         ->assertInertia(fn (Assert $page) => $page
             ->component('errors/error')
             ->where('status', 404)
-            ->where('locale', 'es')
+            ->where('locale.current', 'es')
             ->where('auth.user.id', $user->id));
 });
 
@@ -57,7 +57,7 @@ test('419, 500 and 503 render translated error pages', function (int $status, st
         ->assertInertia(fn (Assert $page) => $page
             ->component('errors/error')
             ->where('status', $status)
-            ->where('locale', 'es')
+            ->where('locale.current', 'es')
             ->where('translations.'.$title, $spanish));
 })->with([
     'page expired' => [419, 'Page expired', 'La página expiró'],
@@ -109,19 +109,19 @@ test('inertia visits get the error page as an inertia response', function () {
         ->assertNotFound()
         ->assertHeader('X-Inertia', 'true')
         ->assertJsonPath('component', 'errors/error')
-        ->assertJsonPath('props.locale', 'es');
+        ->assertJsonPath('props.locale.current', 'es');
 });
 
 test('403 still renders the translated forbidden page', function () {
-    $user = User::factory()->create();
+    // Signed-in users speak their saved language (the cookie is for guests).
+    $user = User::factory()->create(['locale' => 'es']);
 
     $this->actingAs($user)
-        ->withUnencryptedCookie('locale', 'es')
         ->get(route('admin.index'))
         ->assertForbidden()
         ->assertInertia(fn (Assert $page) => $page
             ->component('errors/forbidden')
-            ->where('locale', 'es')
+            ->where('locale.current', 'es')
             ->where('canClaimSuperadmin', true));
 });
 

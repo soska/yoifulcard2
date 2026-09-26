@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Support\CurrentOrganization;
+use App\Support\Locales;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -83,6 +84,22 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(function (Login $event): void {
             if ($event->user instanceof User && app()->bound('session')) {
                 CurrentOrganization::remember($event->user, app('session')->driver());
+            }
+        });
+
+        // A language picked on the login or register page (the guest cookie)
+        // is a choice the person made, so it becomes their saved language the
+        // first time they sign in without one. A saved language is never
+        // overwritten.
+        Event::listen(function (Login $event): void {
+            if (! $event->user instanceof User || $event->user->preferredLocale() !== null || ! app()->bound('request')) {
+                return;
+            }
+
+            $chosen = Locales::fromCookie(request());
+
+            if ($chosen !== null) {
+                $event->user->forceFill(['locale' => $chosen])->save();
             }
         });
     }

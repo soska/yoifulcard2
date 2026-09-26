@@ -1,4 +1,6 @@
-export type TransactionType = 'load' | 'spend' | 'adjustment' | 'refund';
+import type { TransactionType } from '@/types/enums.generated';
+
+export type { TransactionType };
 
 /** A ledger entry as pages see it. */
 export type TransactionRow = {

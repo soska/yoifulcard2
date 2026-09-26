@@ -5,7 +5,7 @@ use App\Http\Middleware\EnsureSuperadmin;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\ResolveCurrentOrganization;
-use App\Http\Middleware\SetLocale;
+use App\Http\Middleware\ResolveLocale;
 use App\Models\Superadmin;
 use App\Support\ErrorPage;
 use Illuminate\Foundation\Application;
@@ -26,8 +26,11 @@ return Application::configure(basePath: dirname(__DIR__))
         // against a fixed list wherever the server reads them.
         $middleware->encryptCookies(except: ['theme', 'locale', 'sidebar_state']);
 
+        // ResolveLocale is the FIRST appended middleware on purpose: after
+        // StartSession (it needs $request->user() for users.locale) and before
+        // HandleInertiaRequests (whose shared props call __()). See its docblock.
         $middleware->web(append: [
-            SetLocale::class,
+            ResolveLocale::class,
             HandleAppearance::class,
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,

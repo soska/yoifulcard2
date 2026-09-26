@@ -1,7 +1,7 @@
 import { usePage } from '@inertiajs/react';
 import { useCallback } from 'react';
+import { activeLocale } from '@/i18n';
 import {
-    DEFAULT_LOCALE,
     DEFAULT_TIME_ZONE,
     formatDate as formatDateIn,
     formatDateTime as formatDateTimeIn,
@@ -11,13 +11,15 @@ import {
 
 /**
  * Date formatters bound to the current organization's timezone and the
- * interface language (`en-US` or `es-MX`), so every date the business sees
+ * interface language (`activeLocale()`: `en-US` or `es-MX`), so every date the business sees
  * matches its local day and its language.
  */
 export function useDateFormat() {
-    const { currentOrganization, intlLocale } = usePage().props;
+    const { currentOrganization } = usePage().props;
     const timeZone = currentOrganization?.timezone ?? DEFAULT_TIME_ZONE;
-    const locale = intlLocale ?? DEFAULT_LOCALE;
+    // The page's language never changes without a full reload, so this is
+    // stable for the page's lifetime.
+    const locale = activeLocale();
 
     const formatDate = useCallback(
         (value: string | null, fallback?: string) =>

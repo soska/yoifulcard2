@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Support\CurrentOrganization;
-use App\Support\Locale;
+use App\Support\Locales;
 use App\Support\Theme;
 use App\Support\Translations;
 use Illuminate\Http\Request;
@@ -51,8 +51,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'currentOrganization' => fn () => CurrentOrganization::toProp($request),
             'organizations' => fn () => CurrentOrganization::switchable($request),
-            'locale' => $locale,
-            'intlLocale' => Locale::intl($locale),
+            'locale' => Locales::prop($locale),
             'theme' => Theme::fromRequest($request),
             // Sent once per language (and per change to the files); the
             // browser keeps it across visits.

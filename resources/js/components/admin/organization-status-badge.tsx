@@ -1,12 +1,6 @@
 import { Badge } from '@/components/ui/badge';
+import { organizationStatusLabel } from '@/lib/labels';
 import type { OrganizationStatus } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
-
-export const organizationStatusLabels: Record<OrganizationStatus, string> = {
-    active: 'Active',
-    suspended: 'Suspended',
-    cancelled: 'Cancelled',
-};
 
 const variants = {
     active: 'default',
@@ -19,11 +13,9 @@ export function OrganizationStatusBadge({
 }: {
     status: OrganizationStatus;
 }) {
-    const { t } = useTranslation();
-
     return (
         <Badge variant={variants[status]}>
-            {t(organizationStatusLabels[status])}
+            {organizationStatusLabel(status)}
         </Badge>
     );
 }

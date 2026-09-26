@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\FlashMessage;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Support\Flash;
 use App\Support\OneTimeCredentials;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
 
 class UserPasswordController extends Controller
 {
@@ -36,7 +37,7 @@ class UserPasswordController extends Controller
         }
 
         OneTimeCredentials::put($request, $user->email, $password);
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Temporary password set for :email.', ['email' => $user->email])]);
+        Flash::success(FlashMessage::TemporaryPasswordSet, ['email' => $user->email]);
 
         return back(fallback: route('admin.users.index'));
     }

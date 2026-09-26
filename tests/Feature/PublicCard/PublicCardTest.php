@@ -99,7 +99,7 @@ test('unknown and malformed tokens return the same page and status', function ()
 
 test('public card props contain only the allowed fields', function () {
     $card = publicCard();
-    $shared = ['errors', 'name', 'auth', 'currentOrganization', 'organizations', 'sidebarOpen', 'locale', 'intlLocale', 'theme', 'translations'];
+    $shared = ['errors', 'name', 'auth', 'currentOrganization', 'organizations', 'sidebarOpen', 'locale', 'theme', 'translations'];
 
     $response = $this->get(route('public-card.show', ['token' => $card->qr_token]))
         ->assertOk()

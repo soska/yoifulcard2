@@ -1,6 +1,6 @@
 /**
  * Display formatting for money and dates. Every function takes the Intl
- * locale (`en-US` or `es-MX`, the shared `intlLocale` prop). Components use
+ * locale (`en-US` or `es-MX`, `activeLocale()` from `@/i18n`). Components use
  * the `useDateFormat` and `useMoneyFormat` hooks, which bind the locale and
  * the organization's timezone.
  */

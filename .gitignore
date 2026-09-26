@@ -42,3 +42,7 @@ yarn-error.log
 /boost.json
 /opencode.json
 /opencode.jsonc
+
+# duckalization scratch: translation briefs/outputs and pruned orphans.
+/resources/js/locales/.work
+/resources/js/locales/.archive

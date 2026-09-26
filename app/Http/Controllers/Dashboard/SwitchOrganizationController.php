@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enums\FlashMessage;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Support\CurrentOrganization;
+use App\Support\Flash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class SwitchOrganizationController extends Controller
 {
@@ -25,10 +26,7 @@ class SwitchOrganizationController extends Controller
 
         CurrentOrganization::switchTo($request, $membership);
 
-        Inertia::flash('toast', [
-            'type' => 'success',
-            'message' => __('Switched to :name.', ['name' => $organization->name]),
-        ]);
+        Flash::success(FlashMessage::OrganizationSwitched, ['name' => $organization->name]);
 
         return $request->boolean('reader') ? to_route('scan') : to_route('dashboard');
     }

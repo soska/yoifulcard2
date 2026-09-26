@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Support\Locales;
 use Database\Factories\UserFactory;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +23,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property int $id
  * @property string $name
  * @property string $email
+ * @property string|null $locale
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $two_factor_secret
@@ -32,7 +35,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  */
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
-class User extends Authenticatable implements PasskeyUser
+class User extends Authenticatable implements HasLocalePreference, PasskeyUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
@@ -99,5 +102,23 @@ class User extends Authenticatable implements PasskeyUser
         }
 
         return $this->memberships()->where('organization_id', $id)->first();
+    }
+
+    /**
+     * The language this person chose, or null when they never chose (then the
+     * browser decides; see App\Support\Locales::resolve).
+     *
+     * HasLocalePreference is the interface Laravel's mail and notification
+     * layers check, so a queued email (Email release) is written in the
+     * recipient's language, not the language of the request that sent it.
+     *
+     * The stored value is re-checked against App\Support\Locales: a language
+     * dropped from the list later must not reach App::setLocale().
+     */
+    public function preferredLocale(): ?string
+    {
+        $stored = $this->attributes['locale'] ?? null;
+
+        return Locales::isSupported($stored) ? $stored : null;
     }
 }

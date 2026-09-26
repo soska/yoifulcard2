@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enums\FlashMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\UpdateOrganizationSettingsRequest;
 use App\Http\Requests\Settings\UpdateProgramSettingsRequest;
 use App\Models\Organization;
 use App\Support\CurrentOrganization;
+use App\Support\Flash;
 use DateTimeZone;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -74,7 +76,7 @@ class SettingsController extends Controller
             $this->deleteLogo($previousLogo);
         }
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Business settings saved.')]);
+        Flash::success(FlashMessage::BusinessSettingsSaved);
 
         return to_route('settings.edit');
     }
@@ -94,7 +96,7 @@ class SettingsController extends Controller
 
         $program->update($request->safe()->only(['name', 'terms_url']));
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Program settings saved.')]);
+        Flash::success(FlashMessage::ProgramSettingsSaved);
 
         return to_route('settings.edit');
     }

@@ -4,6 +4,8 @@ export type User = {
     email: string;
     avatar?: string;
     email_verified_at: string | null;
+    /** Saved language; null means "match my browser". */
+    locale?: string | null;
     two_factor_enabled?: boolean;
     created_at: string;
     updated_at: string;

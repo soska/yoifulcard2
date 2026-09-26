@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FlashMessage;
 use App\Http\Requests\PublicCard\SaveCardEmailRequest;
 use App\Models\Card;
 use App\Services\CardCodeGenerator;
+use App\Support\Flash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -67,7 +69,7 @@ class PublicCardController extends Controller
 
         $card->update(['email' => $request->email()]);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Thanks! Your email is saved.')]);
+        Flash::success(FlashMessage::CardholderEmailSaved);
 
         return $this->redirectBack($token);
     }

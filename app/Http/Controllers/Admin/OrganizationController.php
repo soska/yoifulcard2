@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\CardStatus;
+use App\Enums\FlashMessage;
 use App\Enums\MembershipRole;
 use App\Enums\OrganizationStatus;
 use App\Enums\ProgramType;
@@ -16,6 +17,7 @@ use App\Models\Organization;
 use App\Models\Program;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Support\Flash;
 use App\Support\OneTimeCredentials;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -124,9 +126,9 @@ class OrganizationController extends Controller
 
         if ($password !== null) {
             OneTimeCredentials::put($request, $data['owner_email'], $password);
-            Inertia::flash('toast', ['type' => 'success', 'message' => __('Organization created with a new owner account.')]);
+            Flash::success(FlashMessage::OrganizationCreatedWithNewOwner);
         } else {
-            Inertia::flash('toast', ['type' => 'success', 'message' => __('Organization created and linked to :email.', ['email' => $data['owner_email']])]);
+            Flash::success(FlashMessage::OrganizationCreatedForExistingOwner, ['email' => $data['owner_email']]);
         }
 
         return to_route('admin.organizations.show', $organization);
@@ -216,7 +218,7 @@ class OrganizationController extends Controller
             'plan_notes' => $request->validated('plan_notes'),
         ]);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => __('Plan saved.')]);
+        Flash::success(FlashMessage::PlanSaved);
 
         return to_route('admin.organizations.show', $organization);
     }
@@ -227,7 +229,7 @@ class OrganizationController extends Controller
      */
     public function suspend(Organization $organization): RedirectResponse
     {
-        return $this->changeStatus($organization, OrganizationStatus::Active, OrganizationStatus::Suspended, __('Organization suspended.'));
+        return $this->changeStatus($organization, OrganizationStatus::Active, OrganizationStatus::Suspended, FlashMessage::OrganizationSuspended);
     }
 
     /**
@@ -235,14 +237,14 @@ class OrganizationController extends Controller
      */
     public function reactivate(Organization $organization): RedirectResponse
     {
-        return $this->changeStatus($organization, OrganizationStatus::Suspended, OrganizationStatus::Active, __('Organization reactivated.'));
+        return $this->changeStatus($organization, OrganizationStatus::Suspended, OrganizationStatus::Active, FlashMessage::OrganizationReactivated);
     }
 
     /**
      * The admin area only moves between active and suspended. Cancelled
      * organizations are left alone.
      */
-    private function changeStatus(Organization $organization, OrganizationStatus $from, OrganizationStatus $to, string $message): RedirectResponse
+    private function changeStatus(Organization $organization, OrganizationStatus $from, OrganizationStatus $to, FlashMessage $message): RedirectResponse
     {
         DB::transaction(function () use ($organization, $from, $to): void {
             $locked = Organization::query()->lockForUpdate()->findOrFail($organization->id);
@@ -260,7 +262,7 @@ class OrganizationController extends Controller
             $locked->update(['status' => $to]);
         });
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => $message]);
+        Flash::success($message);
 
         return to_route('admin.organizations.show', $organization);
     }

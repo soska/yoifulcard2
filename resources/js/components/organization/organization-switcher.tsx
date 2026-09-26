@@ -1,6 +1,5 @@
 import { router, usePage } from '@inertiajs/react';
 import { Check, ChevronsUpDown, Store } from 'lucide-react';
-import { roleLabels } from '@/components/admin/role-badge';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -19,6 +18,7 @@ import {
 import { useTranslation } from '@/hooks/use-translation';
 import { switchMethod } from '@/routes/organizations';
 import type { SwitchableOrganization } from '@/types';
+import { roleLabel } from '@/lib/labels';
 
 /**
  * The user's businesses and the current one. The server sends an empty list
@@ -72,7 +72,7 @@ function SwitcherItems({
                             {organization.name}
                         </span>
                         <span className="truncate text-xs text-muted-foreground">
-                            {t(roleLabels[organization.role])}
+                            {roleLabel(organization.role)}
                         </span>
                     </div>
                     {organization.id === currentId && (
@@ -119,7 +119,7 @@ export function SidebarOrganizationSwitcher() {
                             </span>
                             {current && (
                                 <span className="truncate text-xs">
-                                    {t(roleLabels[current.role])}
+                                    {roleLabel(current.role)}
                                 </span>
                             )}
                         </div>

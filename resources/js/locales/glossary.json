@@ -1,0 +1,82 @@
+{
+    "Yoiful": {
+        "translate": false,
+        "note": "The product name. Never translated, never given an article."
+    },
+    "Apple Wallet": {
+        "translate": false,
+        "note": "Third-party brand."
+    },
+    "Google Wallet": {
+        "translate": false,
+        "note": "Third-party brand."
+    },
+    "card": {
+        "note": "A prepaid gift card a business issues to a customer. It has a code like YGFT-AB12, a QR code and a balance. Feminine in Spanish (la tarjeta), so its statuses are feminine: activa, congelada, agotada, cancelada.",
+        "translations": { "es": "tarjeta" }
+    },
+    "balance": {
+        "note": "The money left on a card.",
+        "translations": { "es": "saldo" }
+    },
+    "load": {
+        "note": "Adding money to a card. As a button it is 'Add funds' (Agregar fondos). As a transaction type (noun) it is 'Carga'.",
+        "translations": { "es": "carga" }
+    },
+    "charge": {
+        "note": "Taking money off a card for a purchase. Verb on buttons ('Cobrar'); as a transaction type (noun) it is 'Cobro'. Not 'cargo'.",
+        "translations": { "es": "cobrar" }
+    },
+    "adjust": {
+        "note": "A manual correction of a card's balance, with a required note. Verb 'Ajustar'; noun (transaction type) 'Ajuste'.",
+        "translations": { "es": "ajustar" }
+    },
+    "frozen": {
+        "note": "A card status: blocked on purpose, cannot be charged or loaded until unfrozen. Freeze = congelar, unfreeze = descongelar.",
+        "translations": { "es": "congelada" }
+    },
+    "depleted": {
+        "note": "A card status: the balance reached zero.",
+        "translations": { "es": "agotada" }
+    },
+    "business": {
+        "note": "The customer of Yoiful: a café, bakery or shop that issues cards. Same thing as 'organization' in admin screens.",
+        "translations": { "es": "negocio" }
+    },
+    "organization": {
+        "note": "A business, as the superadmin area calls it. Feminine: activa, suspendida, cancelada.",
+        "translations": { "es": "organización" }
+    },
+    "cardholder": {
+        "note": "The person who holds a card. They have no account.",
+        "translations": { "es": "titular" }
+    },
+    "reader": {
+        "note": "The staff screen that scans a card's QR code to add funds or charge it.",
+        "translations": { "es": "lector" }
+    },
+    "program": {
+        "note": "A card program of a business (v1 has one, 'Gift Card' / 'Tarjeta de regalo').",
+        "translations": { "es": "programa" }
+    },
+    "dashboard": {
+        "note": "The business home screen.",
+        "translations": { "es": "panel" }
+    },
+    "superadmin": {
+        "note": "A Yoiful staff member who manages every business. Kept as is in Spanish.",
+        "translations": { "es": "superadmin" }
+    },
+    "owner": {
+        "note": "A membership role: the business owner.",
+        "translations": { "es": "propietario" }
+    },
+    "manager": {
+        "note": "A membership role between owner and employee.",
+        "translations": { "es": "gerente" }
+    },
+    "employee": {
+        "note": "A membership role: staff who scan and charge cards.",
+        "translations": { "es": "empleado" }
+    }
+}

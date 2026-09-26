@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Preferences;
 
 use App\Http\Controllers\Controller;
-use App\Support\Locale;
+use App\Support\Locales;
 use App\Support\Theme;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,7 +25,7 @@ class ThemeController extends Controller
         return back()->withCookie(cookie(
             Theme::COOKIE,
             $validated['theme'],
-            Locale::COOKIE_MINUTES,
+            Locales::COOKIE_MINUTES,
             httpOnly: false,
             sameSite: 'lax',
         ));

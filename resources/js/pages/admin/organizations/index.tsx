@@ -2,10 +2,7 @@ import { Head, Link, router } from '@inertiajs/react';
 import { Building2, Plus, Search } from 'lucide-react';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import {
-    OrganizationStatusBadge,
-    organizationStatusLabels,
-} from '@/components/admin/organization-status-badge';
+import { OrganizationStatusBadge } from '@/components/admin/organization-status-badge';
 import { ListPagination } from '@/components/cards/list-pagination';
 import Heading from '@/components/heading';
 import { Button } from '@/components/ui/button';
@@ -43,6 +40,7 @@ import type {
     Paginated,
 } from '@/types';
 import { useTranslation } from '@/hooks/use-translation';
+import { organizationStatusLabel } from '@/lib/labels';
 
 type Props = {
     organizations: Paginated<AdminOrganizationRow>;
@@ -86,7 +84,7 @@ export default function AdminOrganizationsIndex({
         { value: ALL, label: t('All statuses') },
         ...statuses.map((status) => ({
             value: status,
-            label: t(organizationStatusLabels[status]),
+            label: organizationStatusLabel(status),
         })),
     ];
 

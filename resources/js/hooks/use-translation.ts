@@ -8,7 +8,9 @@ import { translate, translateChoice } from '@/lib/i18n';
  * `lang/en.json` and `lang/es.json`, keyed by the English text.
  */
 export function useTranslation() {
-    const { translations, locale, intlLocale } = usePage().props;
+    const { translations, locale: resolved } = usePage().props;
+    const locale = resolved.current;
+    const intlLocale = resolved.intl;
 
     const t = useCallback(
         (key: string, replacements?: Replacements) =>

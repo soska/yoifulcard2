@@ -1,0 +1,244 @@
+{
+  "11cwj6fprvc": {
+    "message": "Card {code} created.",
+    "refs": [
+      "resources/js/lib/flash.ts:29:13"
+    ]
+  },
+  "12aiv6yg7xr": {
+    "message": "Owner",
+    "context": "membership role",
+    "refs": [
+      "resources/js/lib/labels.ts:52:16"
+    ]
+  },
+  "164d0i89snr": {
+    "message": "Profile updated.",
+    "refs": [
+      "resources/js/lib/flash.ts:40:43"
+    ]
+  },
+  "16vz52anzdz": {
+    "message": "Organization created and linked to {email}.",
+    "refs": [
+      "resources/js/lib/flash.ts:50:13"
+    ]
+  },
+  "1779l401as3": {
+    "message": "Frozen",
+    "context": "card status",
+    "refs": [
+      "resources/js/lib/labels.ts:29:17"
+    ]
+  },
+  "18f16q5jxo2": {
+    "message": "Charge",
+    "context": "transaction type",
+    "refs": [
+      "resources/js/lib/labels.ts:41:16"
+    ]
+  },
+  "1d5l0x57k2m": {
+    "message": "Employee",
+    "context": "membership role",
+    "refs": [
+      "resources/js/lib/labels.ts:54:19"
+    ]
+  },
+  "1jubhoknu0l": {
+    "message": "Load",
+    "context": "transaction type",
+    "refs": [
+      "resources/js/lib/labels.ts:40:15"
+    ]
+  },
+  "1pk11ctiyxw": {
+    "message": "Superadmin privileges granted.",
+    "refs": [
+      "resources/js/lib/flash.ts:60:43"
+    ]
+  },
+  "1r0fwkhl12x": {
+    "message": "Refund",
+    "context": "transaction type",
+    "refs": [
+      "resources/js/lib/labels.ts:43:17"
+    ]
+  },
+  "1tlt3qrgqsx": {
+    "message": "Funds added to {code}.",
+    "refs": [
+      "resources/js/lib/flash.ts:34:13"
+    ]
+  },
+  "1v1qyt6cszf": {
+    "message": "Organization created with a new owner account.",
+    "refs": [
+      "resources/js/lib/flash.ts:48:13"
+    ]
+  },
+  "1v9oyjvzd9t": {
+    "message": "Suspended",
+    "context": "organization status",
+    "refs": [
+      "resources/js/lib/labels.ts:64:20"
+    ]
+  },
+  "21nwd6dniz": {
+    "message": "Temporary password set for {email}.",
+    "refs": [
+      "resources/js/lib/flash.ts:57:13"
+    ]
+  },
+  "25pf2spfmo0": {
+    "message": "Depleted",
+    "context": "card status",
+    "refs": [
+      "resources/js/lib/labels.ts:30:19"
+    ]
+  },
+  "27a7k4osvpt": {
+    "message": "Card frozen.",
+    "refs": [
+      "resources/js/lib/flash.ts:30:30"
+    ]
+  },
+  "27tdlr0ne3b": {
+    "message": "Card unfrozen.",
+    "refs": [
+      "resources/js/lib/flash.ts:31:32"
+    ]
+  },
+  "2chcc47wtt5": {
+    "message": "Program settings saved.",
+    "refs": [
+      "resources/js/lib/flash.ts:39:41"
+    ]
+  },
+  "2d4kn4u1206": {
+    "message": "Manager",
+    "context": "membership role",
+    "refs": [
+      "resources/js/lib/labels.ts:53:18"
+    ]
+  },
+  "2e5dk8q3r6a": {
+    "message": "Cancelled",
+    "context": "organization status",
+    "refs": [
+      "resources/js/lib/labels.ts:65:20"
+    ]
+  },
+  "2khkneof19": {
+    "message": "Balance of {code} adjusted.",
+    "refs": [
+      "resources/js/lib/flash.ts:37:13"
+    ]
+  },
+  "36o0x9wkg4": {
+    "message": "Superadmin granted to {email}.",
+    "refs": [
+      "resources/js/lib/flash.ts:62:13"
+    ]
+  },
+  "43sqe7fnyk": {
+    "message": "Superadmin revoked from {email}.",
+    "refs": [
+      "resources/js/lib/flash.ts:64:13"
+    ]
+  },
+  "5n0n0gv9gu": {
+    "message": "Switched to {name}.",
+    "refs": [
+      "resources/js/lib/flash.ts:44:13"
+    ]
+  },
+  "740dfbxccn": {
+    "message": "Plan saved.",
+    "refs": [
+      "resources/js/lib/flash.ts:53:35"
+    ]
+  },
+  "a8p5m3vimm": {
+    "message": "Active",
+    "context": "organization status",
+    "refs": [
+      "resources/js/lib/labels.ts:63:17"
+    ]
+  },
+  "a9iatti38r": {
+    "message": "Thanks! Your email is saved.",
+    "refs": [
+      "resources/js/lib/flash.ts:42:42"
+    ]
+  },
+  "ciy321kmmx": {
+    "message": "Charged {code}.",
+    "refs": [
+      "resources/js/lib/flash.ts:35:34"
+    ]
+  },
+  "gktxymbq14": {
+    "message": "Organization reactivated.",
+    "refs": [
+      "resources/js/lib/flash.ts:55:49"
+    ]
+  },
+  "go9h267ewj": {
+    "message": "Cardholder email saved.",
+    "refs": [
+      "resources/js/lib/flash.ts:32:35"
+    ]
+  },
+  "grngmmjbyn": {
+    "message": "Password updated.",
+    "refs": [
+      "resources/js/lib/flash.ts:41:44"
+    ]
+  },
+  "jez1pi8470": {
+    "message": "Cancelled",
+    "context": "card status",
+    "refs": [
+      "resources/js/lib/labels.ts:31:20"
+    ]
+  },
+  "ji96g5zh8j": {
+    "message": "Business settings saved.",
+    "refs": [
+      "resources/js/lib/flash.ts:38:42"
+    ]
+  },
+  "n6rto3r6ys": {
+    "message": "Organization suspended.",
+    "refs": [
+      "resources/js/lib/flash.ts:54:47"
+    ]
+  },
+  "rihfbbqbh1": {
+    "message": "Active",
+    "context": "card status",
+    "refs": [
+      "resources/js/lib/labels.ts:28:17"
+    ]
+  },
+  "ul2xjyd8pi": {
+    "message": "This business is suspended. Contact support.",
+    "refs": [
+      "resources/js/lib/flash.ts:46:13"
+    ]
+  },
+  "ux34lm8sqs": {
+    "message": "Match my browser",
+    "refs": [
+      "resources/js/components/preferences/locale-switcher.tsx:108:38"
+    ]
+  },
+  "x6wool4650": {
+    "message": "Adjustment",
+    "context": "transaction type",
+    "refs": [
+      "resources/js/lib/labels.ts:42:21"
+    ]
+  }
+}

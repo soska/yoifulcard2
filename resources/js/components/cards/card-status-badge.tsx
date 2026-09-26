@@ -1,13 +1,6 @@
 import { Badge } from '@/components/ui/badge';
+import { cardStatusLabel } from '@/lib/labels';
 import type { CardStatus } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
-
-export const cardStatusLabels: Record<CardStatus, string> = {
-    active: 'Active',
-    frozen: 'Frozen',
-    depleted: 'Depleted',
-    cancelled: 'Cancelled',
-};
 
 const variants = {
     active: 'default',
@@ -17,9 +10,5 @@ const variants = {
 } as const satisfies Record<CardStatus, string>;
 
 export function CardStatusBadge({ status }: { status: CardStatus }) {
-    const { t } = useTranslation();
-
-    return (
-        <Badge variant={variants[status]}>{t(cardStatusLabels[status])}</Badge>
-    );
+    return <Badge variant={variants[status]}>{cardStatusLabel(status)}</Badge>;
 }
