@@ -5,7 +5,7 @@ import Heading from '@/components/heading';
 import PasskeyItem from '@/components/passkey-item';
 import PasskeyRegistration from '@/components/passkey-register';
 import type { Passkey } from '@/types/auth';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 export type Props = {
     canManagePasskeys?: boolean;
@@ -13,15 +13,14 @@ export type Props = {
 };
 
 const EmptyState = () => {
-    const { t } = useTranslation();
     return (
         <div className="p-8 text-center">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-muted">
                 <KeyRound className="h-7 w-7 text-muted-foreground" />
             </div>
-            <p className="font-medium">{t('No passkeys yet')}</p>
+            <p className="font-medium">{__('No passkeys yet')}</p>
             <p className="mt-1 text-sm text-muted-foreground">
-                {t('Add a passkey to sign in without a password')}
+                {__('Add a passkey to sign in without a password')}
             </p>
         </div>
     );
@@ -29,8 +28,6 @@ const EmptyState = () => {
 
 export default function ManagePasskeys(props: Props) {
     const passkeys = props.passkeys ?? [];
-    const { t } = useTranslation();
-
     const handleDelete = (id: number, onError: () => void) => {
         router.delete(destroy.url(id), {
             preserveScroll: true,
@@ -50,8 +47,10 @@ export default function ManagePasskeys(props: Props) {
         <div className="space-y-6">
             <Heading
                 variant="small"
-                title={t('Passkeys')}
-                description={t('Manage your passkeys for passwordless sign-in')}
+                title={__('Passkeys')}
+                description={__(
+                    'Manage your passkeys for passwordless sign-in',
+                )}
             />
 
             <div className="overflow-hidden rounded-lg border border-border">

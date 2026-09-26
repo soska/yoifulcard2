@@ -8,7 +8,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Spinner } from '@/components/ui/spinner';
 import { playReaderSound } from '@/lib/reader-sound';
 import { lookup } from '@/routes/scan';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 /**
  * The reader's home: point the camera at a card QR. The server finds the
@@ -18,8 +18,6 @@ import { useTranslation } from '@/hooks/use-translation';
 export default function Scan() {
     const [processing, setProcessing] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const { t } = useTranslation();
-
     function handleDetect(payload: string) {
         if (processing) {
             return;
@@ -38,7 +36,7 @@ export default function Scan() {
                 preserveState: true,
                 preserveScroll: true,
                 onError: (errors) => {
-                    setError(errors.payload ?? t('Card not found.'));
+                    setError(errors.payload ?? __('Card not found.'));
                     playReaderSound('error');
                 },
                 onFinish: () => setProcessing(false),
@@ -48,14 +46,14 @@ export default function Scan() {
 
     return (
         <>
-            <Head title={t('Reader')} />
+            <Head title={__('Reader')} />
             <div className="flex flex-1 flex-col gap-4">
                 <div>
                     <h1 className="text-xl font-semibold">
-                        {t('Scan a card')}
+                        {__('Scan a card')}
                     </h1>
                     <p className="text-sm text-muted-foreground">
-                        {t("Hold the card's QR code inside the frame.")}
+                        {__("Hold the card's QR code inside the frame.")}
                     </p>
                 </div>
 
@@ -69,7 +67,7 @@ export default function Scan() {
                         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 rounded-xl bg-black/60 text-white">
                             <Spinner className="size-8" />
                             <p className="text-sm font-medium">
-                                {t('Looking up card…')}
+                                {__('Looking up card…')}
                             </p>
                         </div>
                     )}

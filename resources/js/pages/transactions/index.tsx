@@ -30,7 +30,7 @@ import type {
     TransactionRow,
     TransactionType,
 } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 import { transactionTypeLabel } from '@/lib/labels';
 
 type Props = {
@@ -58,8 +58,6 @@ export default function TransactionsIndex({
     currency,
 }: Props) {
     const [draft, setDraft] = useState<TransactionFilters>(filters);
-    const { t } = useTranslation();
-
     const visit = (next: TransactionFilters) => {
         router.get(
             index.url({ query: toQuery(next) }),
@@ -92,7 +90,7 @@ export default function TransactionsIndex({
         filters.card !== '';
 
     const typeItems = [
-        { value: ALL, label: t('All types') },
+        { value: ALL, label: __('All types') },
         ...types.map((type) => ({
             value: type,
             label: transactionTypeLabel(type),
@@ -101,12 +99,12 @@ export default function TransactionsIndex({
 
     return (
         <>
-            <Head title={t('Transactions')} />
+            <Head title={__('Transactions')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <Heading
-                        title={t('Transactions')}
-                        description={t(
+                        title={__('Transactions')}
+                        description={__(
                             'Every load, charge, and adjustment on your cards.',
                         )}
                     />
@@ -122,7 +120,7 @@ export default function TransactionsIndex({
                         }
                     >
                         <Download data-icon="inline-start" />
-                        {t('Export CSV')}
+                        {__('Export CSV')}
                     </Button>
                 </div>
 
@@ -132,11 +130,11 @@ export default function TransactionsIndex({
                             onSubmit={submit}
                             className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[repeat(4,minmax(0,1fr))_auto]"
                             role="search"
-                            aria-label={t('Filter transactions')}
+                            aria-label={__('Filter transactions')}
                         >
                             <Field>
                                 <FieldLabel htmlFor="filter-type">
-                                    {t('Type')}
+                                    {__('Type')}
                                 </FieldLabel>
                                 <Select
                                     value={draft.type ?? ALL}
@@ -171,7 +169,7 @@ export default function TransactionsIndex({
                             </Field>
                             <Field>
                                 <FieldLabel htmlFor="filter-from">
-                                    {t('From')}
+                                    {__('From')}
                                 </FieldLabel>
                                 <Input
                                     id="filter-from"
@@ -188,7 +186,7 @@ export default function TransactionsIndex({
                             </Field>
                             <Field>
                                 <FieldLabel htmlFor="filter-to">
-                                    {t('To')}
+                                    {__('To')}
                                 </FieldLabel>
                                 <Input
                                     id="filter-to"
@@ -205,7 +203,7 @@ export default function TransactionsIndex({
                             </Field>
                             <Field>
                                 <FieldLabel htmlFor="filter-card">
-                                    {t('Card code')}
+                                    {__('Card code')}
                                 </FieldLabel>
                                 <Input
                                     id="filter-card"
@@ -223,7 +221,7 @@ export default function TransactionsIndex({
                             <div className="flex items-end gap-2">
                                 <Button type="submit" variant="secondary">
                                     <Filter data-icon="inline-start" />
-                                    {t('Apply')}
+                                    {__('Apply')}
                                 </Button>
                                 {filtered && (
                                     <Button
@@ -232,7 +230,7 @@ export default function TransactionsIndex({
                                         onClick={clear}
                                     >
                                         <X data-icon="inline-start" />
-                                        {t('Clear')}
+                                        {__('Clear')}
                                     </Button>
                                 )}
                             </div>
@@ -246,17 +244,17 @@ export default function TransactionsIndex({
                                     </EmptyMedia>
                                     <EmptyTitle>
                                         {filtered
-                                            ? t(
+                                            ? __(
                                                   'No transactions match these filters',
                                               )
-                                            : t('No transactions yet')}
+                                            : __('No transactions yet')}
                                     </EmptyTitle>
                                     <EmptyDescription>
                                         {filtered
-                                            ? t(
+                                            ? __(
                                                   'Try another type, date range, or card code.',
                                               )
-                                            : t(
+                                            : __(
                                                   'Loads, charges, and adjustments show up here.',
                                               )}
                                     </EmptyDescription>
@@ -272,8 +270,8 @@ export default function TransactionsIndex({
                         {transactions.total > 0 && (
                             <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
                                 <p className="text-sm text-muted-foreground">
-                                    {t(
-                                        'Showing :from to :to of :total transactions',
+                                    {__(
+                                        'Showing {from} to {to} of {total} transactions',
                                         {
                                             from: transactions.from ?? 0,
                                             to: transactions.to ?? 0,
@@ -293,6 +291,6 @@ export default function TransactionsIndex({
     );
 }
 
-TransactionsIndex.layout = {
-    breadcrumbs: [{ titleKey: 'Transactions', href: index() }],
-};
+TransactionsIndex.layout = () => ({
+    breadcrumbs: [{ title: __('Transactions'), href: index() }],
+});

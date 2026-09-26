@@ -8,18 +8,16 @@ import {
     EmptyMedia,
     EmptyTitle,
 } from '@/components/ui/empty';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 /**
  * Shown for unknown and malformed card links alike, with the same status,
  * so the page does not reveal whether other cards exist.
  */
 export default function PublicCardNotFound() {
-    const { t } = useTranslation();
-
     return (
         <>
-            <Head title={t('Card not found')}>
+            <Head title={__('Card not found')}>
                 <meta name="robots" content="noindex, nofollow" />
             </Head>
             <main className="relative flex min-h-svh items-center justify-center bg-muted/40 p-4">
@@ -29,9 +27,9 @@ export default function PublicCardNotFound() {
                         <EmptyMedia variant="icon">
                             <AlertCircle />
                         </EmptyMedia>
-                        <EmptyTitle>{t('Card not found')}</EmptyTitle>
+                        <EmptyTitle>{__('Card not found')}</EmptyTitle>
                         <EmptyDescription>
-                            {t(
+                            {__(
                                 'This card link is invalid or has expired. Please check the QR code or contact the business.',
                             )}
                         </EmptyDescription>

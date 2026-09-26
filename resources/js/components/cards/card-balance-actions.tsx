@@ -1,5 +1,6 @@
 import { Form } from '@inertiajs/react';
 import { AlertCircle, Minus, Plus, SlidersHorizontal } from 'lucide-react';
+import { suspendedMessage } from '@/components/organization/suspended-banner';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,7 +24,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useMoneyFormat } from '@/hooks/use-money-format';
 import { adjust, load, spend } from '@/routes/cards';
 import type { CardDetail } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     card: CardDetail;
@@ -33,60 +34,60 @@ type Props = {
 
 type Action = 'load' | 'spend' | 'adjust';
 
-const SUSPENDED = 'This business is suspended. Contact support.';
-
 const actions: Record<
     Action,
-    {
-        route: typeof load;
-        submit: string;
-        amountLabel: string;
-        /** A translation key; `:balance` is the available balance. */
-        amountHelp: string;
-        noteRequired: boolean;
-        signed: boolean;
-    }
+    { route: typeof load; noteRequired: boolean; signed: boolean }
 > = {
-    load: {
-        route: load,
-        submit: 'Add funds',
-        amountLabel: 'Amount to add',
-        amountHelp: 'Greater than 0, up to two decimals.',
-        noteRequired: false,
-        signed: false,
-    },
-    spend: {
-        route: spend,
-        submit: 'Charge card',
-        amountLabel: 'Amount to charge',
-        amountHelp: 'Up to the available :balance.',
-        noteRequired: false,
-        signed: false,
-    },
-    adjust: {
-        route: adjust,
-        submit: 'Adjust balance',
-        amountLabel: 'Adjustment',
-        amountHelp:
-            'Use a negative amount to lower the balance, for example -5.00.',
-        noteRequired: true,
-        signed: true,
-    },
+    load: { route: load, noteRequired: false, signed: false },
+    spend: { route: spend, noteRequired: false, signed: false },
+    adjust: { route: adjust, noteRequired: true, signed: true },
 };
+
+/**
+ * Each form's words, built at render time (never at module scope). The
+ * currency and the available balance are part of whole sentences, so Spanish
+ * can put them where it needs to.
+ */
+function actionCopy(
+    action: Action,
+    { balance, currency }: { balance: string; currency: string },
+): { submit: string; amountLabel: string; amountHelp: string } {
+    switch (action) {
+        case 'load':
+            return {
+                submit: __('Add funds'),
+                amountLabel: __('Amount to add ({currency})', { currency }),
+                amountHelp: __('Greater than 0, up to two decimals.'),
+            };
+        case 'spend':
+            return {
+                submit: __('Charge card'),
+                amountLabel: __('Amount to charge ({currency})', { currency }),
+                amountHelp: __('Up to the available {balance}.', { balance }),
+            };
+        case 'adjust':
+            return {
+                submit: __('Adjust balance'),
+                amountLabel: __('Adjustment ({currency})', { currency }),
+                amountHelp: __(
+                    'Use a negative amount to lower the balance, for example -5.00.',
+                ),
+            };
+    }
+}
 
 /**
  * Add funds, charge, and adjust-with-note. Errors from CardLedger come back
  * as validation errors and show next to the field they belong to.
  */
 export function CardBalanceActions({ card, currency, writable }: Props) {
-    const { t } = useTranslation();
     const { formatMoney } = useMoneyFormat();
     const blockedReason = !writable
-        ? t(SUSPENDED)
+        ? suspendedMessage()
         : card.status === 'frozen'
-          ? t('This card is frozen. Unfreeze it to add funds or charge it.')
+          ? __('This card is frozen. Unfreeze it to add funds or charge it.')
           : card.status === 'cancelled'
-            ? t('This card is cancelled.')
+            ? __('This card is cancelled.')
             : null;
 
     const balance = formatMoney(card.balance, currency);
@@ -94,9 +95,9 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>{t('Balance')}</CardTitle>
+                <CardTitle>{__('Balance')}</CardTitle>
                 <CardDescription>
-                    {t('Every change is recorded in the card history.')}
+                    {__('Every change is recorded in the card history.')}
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
@@ -110,19 +111,20 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                     <TabsList className="w-full">
                         <TabsTrigger value="load">
                             <Plus data-icon="inline-start" />
-                            {t('Add funds')}
+                            {__('Add funds')}
                         </TabsTrigger>
                         <TabsTrigger value="spend">
                             <Minus data-icon="inline-start" />
-                            {t('Charge')}
+                            {__('Charge', { context: 'verb: charge a card' })}
                         </TabsTrigger>
                         <TabsTrigger value="adjust">
                             <SlidersHorizontal data-icon="inline-start" />
-                            {t('Adjust')}
+                            {__('Adjust')}
                         </TabsTrigger>
                     </TabsList>
                     {(Object.keys(actions) as Action[]).map((action) => {
                         const config = actions[action];
+                        const copy = actionCopy(action, { balance, currency });
                         const disabled = blockedReason !== null;
 
                         return (
@@ -155,15 +157,7 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                     <FieldLabel
                                                         htmlFor={`${action}-amount`}
                                                     >
-                                                        {t(
-                                                            ':label (:currency)',
-                                                            {
-                                                                label: t(
-                                                                    config.amountLabel,
-                                                                ),
-                                                                currency,
-                                                            },
-                                                        )}
+                                                        {copy.amountLabel}
                                                     </FieldLabel>
                                                     <Input
                                                         id={`${action}-amount`}
@@ -182,9 +176,7 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                         }
                                                     />
                                                     <FieldDescription>
-                                                        {t(config.amountHelp, {
-                                                            balance,
-                                                        })}
+                                                        {copy.amountHelp}
                                                     </FieldDescription>
                                                     <FieldError>
                                                         {errors.amount}
@@ -197,8 +189,8 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                         htmlFor={`${action}-note`}
                                                     >
                                                         {config.noteRequired
-                                                            ? t('Reason')
-                                                            : t(
+                                                            ? __('Reason')
+                                                            : __(
                                                                   'Note (optional)',
                                                               )}
                                                     </FieldLabel>
@@ -217,7 +209,7 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                     />
                                                     {config.noteRequired && (
                                                         <FieldDescription>
-                                                            {t(
+                                                            {__(
                                                                 'Required. Say why the balance is being corrected.',
                                                             )}
                                                         </FieldDescription>
@@ -241,7 +233,7 @@ export function CardBalanceActions({ card, currency, writable }: Props) {
                                                         {processing && (
                                                             <Spinner />
                                                         )}
-                                                        {t(config.submit)}
+                                                        {copy.submit}
                                                     </Button>
                                                 </div>
                                             </FieldGroup>

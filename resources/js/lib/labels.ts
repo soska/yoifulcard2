@@ -1,4 +1,5 @@
 import { __ } from '@/i18n';
+import type { Appearance } from '@/hooks/use-appearance';
 import type {
     CardStatus,
     MembershipRole,
@@ -66,4 +67,15 @@ export function organizationStatusLabel(status: OrganizationStatus): string {
     };
 
     return labels[status];
+}
+
+/** A theme choice, as the theme switcher and the appearance settings say it. */
+export function appearanceLabel(appearance: Appearance): string {
+    const labels: Record<Appearance, string> = {
+        light: __('Light', { context: 'theme' }),
+        dark: __('Dark', { context: 'theme' }),
+        system: __('System', { context: 'theme' }),
+    };
+
+    return labels[appearance];
 }

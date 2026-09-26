@@ -31,12 +31,11 @@ import {
 } from '@/components/ui/empty';
 import { useDateFormat } from '@/hooks/use-date-format';
 import { useMoneyFormat } from '@/hooks/use-money-format';
-import type { Translate } from '@/lib/i18n';
 import { analytics, dashboard, scan } from '@/routes';
 import { create, index as cardsIndex } from '@/routes/cards';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { CardUsage, DashboardStats, TransactionRow } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     stats: DashboardStats;
@@ -77,22 +76,33 @@ function StatCard({
     );
 }
 
-function cardBreakdown(
-    stats: DashboardStats,
-    t: Translate,
-): string | undefined {
+function cardBreakdown(stats: DashboardStats): string | undefined {
     if (stats.cards === 0) {
         return undefined;
     }
 
     return [
-        t(':count active', { count: stats.active }),
-        stats.frozen > 0 ? t(':count frozen', { count: stats.frozen }) : null,
+        __(
+            { one: '{count} active', other: '{count} active' },
+            { count: stats.active, context: 'cards' },
+        ),
+        stats.frozen > 0
+            ? __(
+                  { one: '{count} frozen', other: '{count} frozen' },
+                  { count: stats.frozen, context: 'cards' },
+              )
+            : null,
         stats.depleted > 0
-            ? t(':count depleted', { count: stats.depleted })
+            ? __(
+                  { one: '{count} depleted', other: '{count} depleted' },
+                  { count: stats.depleted, context: 'cards' },
+              )
             : null,
         stats.cancelled > 0
-            ? t(':count cancelled', { count: stats.cancelled })
+            ? __(
+                  { one: '{count} cancelled', other: '{count} cancelled' },
+                  { count: stats.cancelled, context: 'cards' },
+              )
             : null,
     ]
         .filter(Boolean)
@@ -107,13 +117,12 @@ export default function Dashboard({
     canCreateCards,
 }: Props) {
     const createBlocked = !canCreateCards || usage.atLimit;
-    const { t } = useTranslation();
     const { formatMoney } = useMoneyFormat();
     const { formatMonth } = useDateFormat();
 
     return (
         <>
-            <Head title={t('Dashboard')} />
+            <Head title={__('Dashboard')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-wrap gap-2">
                     {createBlocked ? (
@@ -122,14 +131,14 @@ export default function Dashboard({
                             disabled
                             title={
                                 canCreateCards
-                                    ? t('Card limit reached')
-                                    : t(
+                                    ? __('Card limit reached')
+                                    : __(
                                           'This business is suspended. Contact support.',
                                       )
                             }
                         >
                             <Plus data-icon="inline-start" />
-                            {t('Create card')}
+                            {__('Create card')}
                         </Button>
                     ) : (
                         <Button
@@ -138,7 +147,7 @@ export default function Dashboard({
                             render={<Link href={create()} />}
                         >
                             <Plus data-icon="inline-start" />
-                            {t('Create card')}
+                            {__('Create card')}
                         </Button>
                     )}
                     <Button
@@ -148,7 +157,7 @@ export default function Dashboard({
                         render={<Link href={scan()} />}
                     >
                         <ScanLine data-icon="inline-start" />
-                        {t('Open reader')}
+                        {__('Open reader')}
                     </Button>
                     <Button
                         size="lg"
@@ -157,7 +166,7 @@ export default function Dashboard({
                         render={<Link href={cardsIndex()} />}
                     >
                         <List data-icon="inline-start" />
-                        {t('All cards')}
+                        {__('All cards')}
                     </Button>
                     <Button
                         size="lg"
@@ -166,7 +175,7 @@ export default function Dashboard({
                         render={<Link href={transactionsIndex()} />}
                     >
                         <ReceiptText data-icon="inline-start" />
-                        {t('Transactions')}
+                        {__('Transactions')}
                     </Button>
                     <Button
                         size="lg"
@@ -175,7 +184,7 @@ export default function Dashboard({
                         render={<Link href={analytics()} />}
                     >
                         <ChartColumn data-icon="inline-start" />
-                        {t('Analytics')}
+                        {__('Analytics')}
                     </Button>
                 </div>
 
@@ -183,25 +192,25 @@ export default function Dashboard({
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     <StatCard
-                        title={t('Cards')}
+                        title={__('Cards')}
                         value={
                             usage.limit === null
                                 ? stats.cards
                                 : `${stats.cards} / ${usage.limit}`
                         }
-                        detail={cardBreakdown(stats, t)}
+                        detail={cardBreakdown(stats)}
                         icon={<CreditCard />}
                     />
                     <StatCard
-                        title={t('Outstanding balance')}
+                        title={__('Outstanding balance')}
                         value={formatMoney(stats.outstandingBalance, currency)}
-                        detail={t('Across all cards')}
+                        detail={__('Across all cards')}
                         icon={<Wallet />}
                     />
                     <StatCard
-                        title={t('This month')}
+                        title={__('This month')}
                         value={stats.monthTransactions}
-                        detail={t('Transactions in :month', {
+                        detail={__('Transactions in {month}', {
                             month: formatMonth(stats.month),
                         })}
                         icon={<Activity />}
@@ -210,9 +219,9 @@ export default function Dashboard({
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>{t('Recent activity')}</CardTitle>
+                        <CardTitle>{__('Recent activity')}</CardTitle>
                         <CardDescription>
-                            {t('The latest transactions across all cards.')}
+                            {__('The latest transactions across all cards.')}
                         </CardDescription>
                         {recentTransactions.length > 0 && (
                             <CardAction>
@@ -222,7 +231,7 @@ export default function Dashboard({
                                     nativeButton={false}
                                     render={<Link href={transactionsIndex()} />}
                                 >
-                                    {t('View all')}
+                                    {__('View all')}
                                     <ArrowRight data-icon="inline-end" />
                                 </Button>
                             </CardAction>
@@ -236,10 +245,10 @@ export default function Dashboard({
                                         <ReceiptText />
                                     </EmptyMedia>
                                     <EmptyTitle>
-                                        {t('No activity yet')}
+                                        {__('No activity yet')}
                                     </EmptyTitle>
                                     <EmptyDescription>
-                                        {t(
+                                        {__(
                                             'Create a card and add funds to get started.',
                                         )}
                                     </EmptyDescription>
@@ -258,11 +267,11 @@ export default function Dashboard({
     );
 }
 
-Dashboard.layout = {
+Dashboard.layout = () => ({
     breadcrumbs: [
         {
-            titleKey: 'Dashboard',
+            title: __('Dashboard'),
             href: dashboard(),
         },
     ],
-};
+});

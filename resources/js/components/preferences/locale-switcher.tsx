@@ -11,7 +11,6 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useTranslation } from '@/hooks/use-translation';
 import { __ } from '@/i18n';
 import { cn } from '@/lib/utils';
 import { update as updateLocale } from '@/routes/locale';
@@ -52,7 +51,6 @@ export function LocaleSwitcher({
     className?: string;
     showLabel?: boolean;
 }) {
-    const { t } = useTranslation();
     const { auth, locale } = usePage().props;
     const signedIn = Boolean(auth.user);
     const saved = signedIn
@@ -77,7 +75,7 @@ export function LocaleSwitcher({
                         variant="ghost"
                         size={showLabel ? 'default' : 'icon'}
                         className={cn(className)}
-                        aria-label={t('Language')}
+                        aria-label={__('Language')}
                         data-test="locale-switcher"
                     />
                 }
@@ -87,7 +85,7 @@ export function LocaleSwitcher({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="min-w-40">
                 <DropdownMenuGroup>
-                    <DropdownMenuLabel>{t('Language')}</DropdownMenuLabel>
+                    <DropdownMenuLabel>{__('Language')}</DropdownMenuLabel>
                     <DropdownMenuRadioGroup
                         value={saved}
                         onValueChange={change}

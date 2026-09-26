@@ -3,7 +3,6 @@
 use App\Models\Card;
 use App\Models\Organization;
 use App\Models\Program;
-use App\Support\Translations;
 use Illuminate\Support\Facades\File;
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -32,8 +31,9 @@ test('locale cookie switches the language and persists', function () {
         ->assertHeader('X-Inertia-Location', route('login'));
     $this->flushHeaders();
 
-    // The next requests carry the cookie: pages, shared strings, and
-    // server messages are Spanish.
+    // The next requests carry the cookie: the page renders in Spanish (the
+    // browser loads the es catalog for `locale.current`), and so do server
+    // messages.
     $this->withUnencryptedCookie('locale', 'es')
         ->get(route('login'))
         ->assertOk()
@@ -41,10 +41,7 @@ test('locale cookie switches the language and persists', function () {
             ->component('auth/login')
             ->where('locale.current', 'es')
             ->where('locale.available', ['en', 'es'])
-            ->where('locale.intl', 'es-MX')
-            ->where('translations', fn ($lines) => $lines['Log in'] === 'Iniciar sesión'
-                && $lines['This business is suspended. Contact support.'] === 'Este negocio está suspendido. Contacta a soporte.'
-                && $lines['type.spend'] === 'Cobro'));
+            ->where('locale.intl', 'es-MX'));
 
     $this->withUnencryptedCookie('locale', 'es')
         ->from(route('login'))
@@ -57,18 +54,22 @@ test('locale cookie switches the language and persists', function () {
         ->assertInertia(fn (Assert $page) => $page->where('locale.current', 'en')->where('locale.intl', 'en-US'));
 });
 
-test('english sends no translations and spanish sends every line', function () {
-    $this->get(route('login'))
-        ->assertInertia(fn (Assert $page) => $page
-            ->where('locale.current', 'en')
-            // English keys are the text itself, except the type names.
-            ->where('translations', ['type.adjustment' => 'Adjustment', 'type.load' => 'Load', 'type.refund' => 'Refund', 'type.spend' => 'Charge']));
+test('the browser gets its words from the catalog, not a translations prop', function () {
+    // Phase 9: React translates with __() from resources/js/locales, loaded
+    // for `locale.current` before the first paint. No lines are shared.
+    foreach (['en', 'es'] as $locale) {
+        $this->withUnencryptedCookie('locale', $locale)
+            ->get(route('login'))
+            ->assertInertia(fn (Assert $page) => $page
+                ->where('locale.current', $locale)
+                ->missing('translations'));
+    }
 
-    // Lines whose Spanish text equals the key (such as "Plan") are not sent:
-    // the key already is the text.
-    $different = array_filter(langFile('es'), fn (string $value, string $key) => $value !== $key, ARRAY_FILTER_USE_BOTH);
-
-    expect(Translations::for('es'))->toBe($different);
+    // The Spanish catalog has what the Phase 8 lines said.
+    expect(catalogLine('es', 'Log in'))->toBe('Iniciar sesión')
+        ->and(catalogLine('es', 'This business is suspended. Contact support.'))->toBe('Este negocio está suspendido. Contacta a soporte.')
+        ->and(catalogLine('es', 'Charge', 'transaction type'))->toBe('Cobro')
+        ->and(catalogLine('es', 'Charge', 'verb: charge a card'))->toBe('Cobrar');
 });
 
 test('missing spanish key falls back to english', function () {
@@ -87,13 +88,6 @@ test('missing spanish key falls back to english', function () {
             ->and(__('test.translated'))->toBe('Traducido')
             // A key missing everywhere is shown as written (English).
             ->and(__('Nowhere at all'))->toBe('Nowhere at all');
-
-        // React gets the English line for the missing Spanish key.
-        $this->withUnencryptedCookie('locale', 'es')
-            ->get(route('login'))
-            ->assertInertia(fn (Assert $page) => $page
-                ->where('translations', fn ($lines) => $lines['test.only_in_english'] === 'Only in English'
-                    && $lines['test.translated'] === 'Traducido'));
     } finally {
         File::deleteDirectory($path);
     }
@@ -157,37 +151,15 @@ test('every key in en.json exists in es.json', function () {
 });
 
 test('every translation key used in the code exists in en.json', function () {
+    // PHP only: React uses __() and the duckalization catalog (checked by
+    // resources/js/locales/catalog.test.ts). Phase 9.3 moves these PHP strings
+    // into the same catalog.
     $en = langFile('en');
     $keys = [];
 
-    $files = [
-        ...File::allFiles(app_path()),
-        ...File::allFiles(resource_path('views')),
-        ...array_filter(
-            File::allFiles(resource_path('js')),
-            fn ($file) => ! str_contains($file->getPathname(), '/components/ui/')
-                && ! str_contains($file->getPathname(), '/routes/')
-                && ! str_contains($file->getPathname(), '/actions/'),
-        ),
-    ];
-
-    foreach ($files as $file) {
-        $source = $file->getContents();
-        $pattern = str_ends_with($file->getFilename(), '.php')
-            ? '/\b__\(\s*\'((?:[^\'\\\\]|\\\\.)+)\'\s*[,)]/'
-            : '/\btc?\(\s*(?:\'((?:[^\'\\\\]|\\\\.)+)\'|"((?:[^"\\\\]|\\\\.)+)")\s*[,)]/';
-
-        preg_match_all($pattern, $source, $matches, PREG_SET_ORDER);
-
-        foreach ($matches as $match) {
-            $keys[] = stripslashes($match[2] ?? '' ?: $match[1]);
-        }
-
-        // Breadcrumb labels marked as translation keys.
-        if (! str_ends_with($file->getFilename(), '.php')) {
-            preg_match_all('/\btitleKey:\s*\'((?:[^\'\\\\]|\\\\.)+)\'/', $source, $titleKeys);
-            array_push($keys, ...array_map('stripslashes', $titleKeys[1]));
-        }
+    foreach ([...File::allFiles(app_path()), ...File::allFiles(resource_path('views'))] as $file) {
+        preg_match_all('/\b__\(\s*\'((?:[^\'\\\\]|\\\\.)+)\'\s*[,)]/', $file->getContents(), $matches);
+        array_push($keys, ...array_map('stripslashes', $matches[1]));
     }
 
     $missing = array_values(array_unique(array_diff($keys, array_keys($en))));

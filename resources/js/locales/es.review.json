@@ -1,7 +1,111 @@
 {
+  "10667a8aajb": {
+    "status": "machine",
+    "translatedHash": "1m63qtxz9bf",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "106tpfv0mks": {
+    "status": "machine",
+    "translatedHash": "vabpjm5l5r",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "10axxge8i8h": {
+    "status": "machine",
+    "translatedHash": "forfsgo1qf",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "10f3jl55aqr": {
+    "status": "machine",
+    "translatedHash": "d59ssgyher",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "10nfdbj7lob": {
+    "status": "machine",
+    "translatedHash": "2cux15lbvx6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "10pdu7nmpj4": {
+    "status": "machine",
+    "translatedHash": "1mi0wzfxeff",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "10r1ie41le2": {
+    "status": "machine",
+    "translatedHash": "1hz1f93rahx",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "10rdx7z6m6w": {
+    "status": "machine",
+    "translatedHash": "1xkr4ozrld3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "11cwj6fprvc": {
     "status": "machine",
     "translatedHash": "13pvjoy75x",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "11d5m996df2": {
+    "status": "machine",
+    "translatedHash": "bmoq20u8w1",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "11np5ld27l": {
+    "status": "machine",
+    "translatedHash": "2btecb6o67b",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "11vkhfkpaew": {
+    "status": "machine",
+    "translatedHash": "1smyrsejeo7",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "11yhvloej9w": {
+    "status": "machine",
+    "translatedHash": "18bcil4y6pp",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "128g53l4k91": {
+    "status": "machine",
+    "translatedHash": "r7zqkftk7f",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -15,9 +119,169 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "12aqrfl0ffg": {
+    "status": "machine",
+    "translatedHash": "11z8op5dv5m",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "12kzmikx1x3": {
+    "status": "machine",
+    "translatedHash": "1r91k8859qa",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "12nk2hhieye": {
+    "status": "machine",
+    "translatedHash": "2668vb8dimw",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "12prw1e9rug": {
+    "status": "machine",
+    "translatedHash": "14lqytaqp0u",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "12uz3hhrqbv": {
+    "status": "machine",
+    "translatedHash": "u00arf4czk",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "12veafpg3t6": {
+    "status": "machine",
+    "translatedHash": "tma25szoig",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "133jkpnp2n0": {
+    "status": "machine",
+    "translatedHash": "2fklao0ilw5",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1343mtlhfxv": {
+    "status": "machine",
+    "translatedHash": "k95z0sdcwp",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "139hd5cuuxb": {
+    "status": "machine",
+    "translatedHash": "1utnis3a5ad",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "13uodsi9t97": {
+    "status": "machine",
+    "translatedHash": "288vliuvjgr",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "13w10qqmr70": {
+    "status": "machine",
+    "translatedHash": "3nzjdyz3cw",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "141xsxugpnx": {
+    "status": "machine",
+    "translatedHash": "j60n4rjs9b",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "14jlwq04qlu": {
+    "status": "machine",
+    "translatedHash": "21etjiyg3dl",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "153loh1e91v": {
+    "status": "machine",
+    "translatedHash": "2a6wzdep8aa",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1579zdpbmb4": {
+    "status": "machine",
+    "translatedHash": "8s2vbr9vj",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "15fre7yepuw": {
+    "status": "machine",
+    "translatedHash": "1vhgi18drer",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "15j2syq20cb": {
+    "status": "machine",
+    "translatedHash": "1qf1p5e5mlt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "A program (el programa) is masculine, matching 'Inactivo'. Phase 8 had 'Activa' here because the key was shared with card status."
+  },
+  "15uvoculuj1": {
+    "status": "machine",
+    "translatedHash": "2c41ohiykg3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "164d0i89snr": {
     "status": "machine",
     "translatedHash": "1374jnm4sx0",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "167vf3bxief": {
+    "status": "machine",
+    "translatedHash": "1uu212sj880",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "16idtegk09p": {
+    "status": "machine",
+    "translatedHash": "11v2gf452s",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -31,9 +295,41 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "16zmzw0m70p": {
+    "status": "machine",
+    "translatedHash": "1modn1cbi6w",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1752q9xm7wf": {
+    "status": "machine",
+    "translatedHash": "4zf3p0m4lh",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "1779l401as3": {
     "status": "machine",
     "translatedHash": "o9pezz76js",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "17qmn6mc51f": {
+    "status": "machine",
+    "translatedHash": "2cnt19kflaq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "181gcyu0dax": {
+    "status": "machine",
+    "translatedHash": "e89dcyn5qc",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -47,9 +343,505 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "18h8yxok6lj": {
+    "status": "machine",
+    "translatedHash": "317katv40m",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "18rhzgrlshl": {
+    "status": "machine",
+    "translatedHash": "17hpnmdz6dd",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "18yd92ykhig": {
+    "status": "machine",
+    "translatedHash": "p6d4k8xqir",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "19aj2jxlgsd": {
+    "status": "machine",
+    "translatedHash": "8dbfxvhudu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ajuoro6znp": {
+    "status": "machine",
+    "translatedHash": "19bhn9cayx1",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ajy2490000": {
+    "status": "machine",
+    "translatedHash": "1mezuafnkxv",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1aktyzsph79": {
+    "status": "machine",
+    "translatedHash": "1cyx9dn4di2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1b0vfdd8su8": {
+    "status": "machine",
+    "translatedHash": "uqktt0h82i",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1b8g8mavvcd": {
+    "status": "machine",
+    "translatedHash": "rlaa5gk1i7",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1bahks3o107": {
+    "status": "machine",
+    "translatedHash": "169m9usmb7e",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1bjn3xjv3c": {
+    "status": "machine",
+    "translatedHash": "21e8b8vcsru",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1bkoz4zfetd": {
+    "status": "machine",
+    "translatedHash": "20x9dll48v4",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "1bm5zscauco": {
+    "status": "machine",
+    "translatedHash": "9j0waoul7o",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1butt4gcv4v": {
+    "status": "machine",
+    "translatedHash": "734s35igc5",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1bwq2u60e23": {
+    "status": "machine",
+    "translatedHash": "23h7w19ilzf",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1c0z635zrp1": {
+    "status": "machine",
+    "translatedHash": "t8vlbmbxl7",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1cdcaodbbnr": {
+    "status": "machine",
+    "translatedHash": "9w9t3hj6uf",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "'password manager' is 'gestor de contraseñas', not the membership role. The glossary-term warning is a substring false positive."
+  },
   "1d5l0x57k2m": {
     "status": "machine",
     "translatedHash": "2f4f6wp51h4",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1di0yyp09wj": {
+    "status": "machine",
+    "translatedHash": "1di0yyp09wj",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1dlq0slo14b": {
+    "status": "machine",
+    "translatedHash": "1ck9kkw7te6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1dm8s19afug": {
+    "status": "machine",
+    "translatedHash": "1hlz5f1xdg1",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1dxe1odbw39": {
+    "status": "machine",
+    "translatedHash": "k5792nkwed",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1e04lsqmih": {
+    "status": "machine",
+    "translatedHash": "12g4hfwnskn",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1e0w4vf2eog": {
+    "status": "machine",
+    "translatedHash": "er7xhe9tmp",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1e2oj7ufdbg": {
+    "status": "machine",
+    "translatedHash": "201iwjplk2i",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1eatevx7xs2": {
+    "status": "machine",
+    "translatedHash": "2crm5xkdnyp",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ecdlb1cdnb": {
+    "status": "machine",
+    "translatedHash": "1ymmjb49v1",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ehboq0b5ag": {
+    "status": "machine",
+    "translatedHash": "1a2pj8lwk3l",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1epujjaqd0u": {
+    "status": "machine",
+    "translatedHash": "21f9t9cvfgv",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1esddlkv0s9": {
+    "status": "machine",
+    "translatedHash": "1uzcf2ldii",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1f1a2a3h8xj": {
+    "status": "machine",
+    "translatedHash": "1mk7zkx4r6i",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1f69ehq4fo0": {
+    "status": "machine",
+    "translatedHash": "1s84juoi0w9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1f6i9vmya68": {
+    "status": "machine",
+    "translatedHash": "1g3x4lr2ji4",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1fiqoxd9jzg": {
+    "status": "machine",
+    "translatedHash": "21g19wi0266",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1fn6xmcwhb6": {
+    "status": "machine",
+    "translatedHash": "1uukdtcwni7",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1fuve46z8l4": {
+    "status": "machine",
+    "translatedHash": "1ehzfh65s6a",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1fxacdtnafx": {
+    "status": "machine",
+    "translatedHash": "u669goxiru",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1fyhvqrfonc": {
+    "status": "machine",
+    "translatedHash": "zgp922widl",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1gd60fi0k0g": {
+    "status": "machine",
+    "translatedHash": "msf69ngvo5",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1gdf2a4ymp1": {
+    "status": "machine",
+    "translatedHash": "161bxvfg6v1",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ghjzz1gnle": {
+    "status": "machine",
+    "translatedHash": "24vyonjlumu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1gnqa75ncmd": {
+    "status": "machine",
+    "translatedHash": "12eetq65ekr",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1gqujgo1p3j": {
+    "status": "machine",
+    "translatedHash": "20n0q5ur9gm",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1gsmnye8ypd": {
+    "status": "machine",
+    "translatedHash": "1x7c32c2998",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1gyt4suqoib": {
+    "status": "machine",
+    "translatedHash": "10dsljpl5n0",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1h22cey1h7i": {
+    "status": "machine",
+    "translatedHash": "71bzibxeyu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1h5fk5ihbc0": {
+    "status": "machine",
+    "translatedHash": "1jcjy8uhoc5",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ha4655d1x6": {
+    "status": "machine",
+    "translatedHash": "n6mk3jq9su",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1hnagoswr2z": {
+    "status": "machine",
+    "translatedHash": "214uocqaa1c",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1hq11jbyfw4": {
+    "status": "machine",
+    "translatedHash": "bkj0irf937",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1hre3eqky15": {
+    "status": "machine",
+    "translatedHash": "b0a4b5eipl",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1hx1csz3i1": {
+    "status": "machine",
+    "translatedHash": "24ic0prn1u4",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "1i8vn65wqg9": {
+    "status": "machine",
+    "translatedHash": "1w8kv4t5wzz",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1iem3nybitu": {
+    "status": "machine",
+    "translatedHash": "1iem3nybitu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ihblq0973h": {
+    "status": "machine",
+    "translatedHash": "1get99x4wfi",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ilkqwmxov4": {
+    "status": "machine",
+    "translatedHash": "x0dwfaxb86",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1im54r4wmfb": {
+    "status": "machine",
+    "translatedHash": "1ottwlm2hta",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1iq7j7eyzpt": {
+    "status": "machine",
+    "translatedHash": "2e6mlbzr7nu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ivn7mt517c": {
+    "status": "machine",
+    "translatedHash": "mm28a2v6lu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1j4e0ord66d": {
+    "status": "machine",
+    "translatedHash": "e26p0dl8bt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ja6j0q49ec": {
+    "status": "machine",
+    "translatedHash": "1842lazel5d",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1jj95z47mwo": {
+    "status": "machine",
+    "translatedHash": "18kc36t6rp2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1jot47aloch": {
+    "status": "machine",
+    "translatedHash": "281ex9e4c3x",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -63,9 +855,265 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "1jvcywlvhly": {
+    "status": "machine",
+    "translatedHash": "c04fzhyw2d",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1kskaqmm55e": {
+    "status": "machine",
+    "translatedHash": "1zakirzvac0",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1kxn1xfrz9": {
+    "status": "machine",
+    "translatedHash": "1vgekmw5cny",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1l2bm9pclr2": {
+    "status": "machine",
+    "translatedHash": "1u4cp7p1m9m",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1lac8iorsbk": {
+    "status": "machine",
+    "translatedHash": "d8ajod69kb",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1lkri6lxzh8": {
+    "status": "machine",
+    "translatedHash": "19zuzep5rff",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1llaomynj87": {
+    "status": "machine",
+    "translatedHash": "1h98o3fp66z",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1lnj2n6dine": {
+    "status": "machine",
+    "translatedHash": "zpkpvhuqbp",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "1luctkoay3a": {
+    "status": "machine",
+    "translatedHash": "c0yc246jem",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1m4ehf8golz": {
+    "status": "machine",
+    "translatedHash": "1e49ptiwfg7",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1mepgsfmabd": {
+    "status": "machine",
+    "translatedHash": "22c84m7uzzx",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1mge26ozluc": {
+    "status": "machine",
+    "translatedHash": "kw7xyqz6bj",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1mt1p1138bx": {
+    "status": "machine",
+    "translatedHash": "1nwzh8slj3b",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1n0sqqpp3o2": {
+    "status": "machine",
+    "translatedHash": "tosmqpo36l",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1n14j6gecbe": {
+    "status": "machine",
+    "translatedHash": "obzurp5wpi",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1n3ytr3dqa4": {
+    "status": "machine",
+    "translatedHash": "kjl4ta50al",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "'charge' is a noun here (a ledger entry): 'cobros', per the glossary note. The glossary-term warning is expected."
+  },
+  "1n653je5paa": {
+    "status": "machine",
+    "translatedHash": "23n9i96kf20",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1n7j2pocv27": {
+    "status": "machine",
+    "translatedHash": "1oqp2rddqhv",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1n906oaoop5": {
+    "status": "machine",
+    "translatedHash": "157zsifpi3e",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1od3ic7lxz8": {
+    "status": "machine",
+    "translatedHash": "247klqz58on",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ognjw99dvf": {
+    "status": "machine",
+    "translatedHash": "25cxj4uwf4q",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1on1f0vjbvp": {
+    "status": "machine",
+    "translatedHash": "1yr0c8nuzis",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1onlwkk2s4p": {
+    "status": "machine",
+    "translatedHash": "1gsndfzu5jr",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1onncatqks2": {
+    "status": "machine",
+    "translatedHash": "1upb5582jpu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ox0lo3s87a": {
+    "status": "machine",
+    "translatedHash": "1mkp36g5quq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1pfx99caqy7": {
+    "status": "machine",
+    "translatedHash": "38ucdf423d",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "1pk11ctiyxw": {
     "status": "machine",
     "translatedHash": "zwj4hrx32x",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1plyeqi5xj4": {
+    "status": "machine",
+    "translatedHash": "kq5kcnbmf9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1pvt7mfzmfn": {
+    "status": "machine",
+    "translatedHash": "2c18fue93ga",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1q2hr8ibgdv": {
+    "status": "machine",
+    "translatedHash": "1kdhn9t1qpv",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1qn5k6z8xr": {
+    "status": "machine",
+    "translatedHash": "rrpy8ghilj",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1qs5hc4bu19": {
+    "status": "machine",
+    "translatedHash": "xz6pbouebu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1qtiypgsaj5": {
+    "status": "machine",
+    "translatedHash": "11bs2rk38gi",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -79,9 +1127,177 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "1r5oki4grev": {
+    "status": "machine",
+    "translatedHash": "i7414p5lez",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1r8zizzfdmj": {
+    "status": "machine",
+    "translatedHash": "nzr8kywood",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ra31kb3tih": {
+    "status": "machine",
+    "translatedHash": "24qhucaf0yu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "medium",
+    "note": "Replaces Phase 8's 'o también puedes' + 'inicia sesión con…' fragments with one whole button label (infinitive)."
+  },
+  "1rirklzm0o8": {
+    "status": "machine",
+    "translatedHash": "rm18h4i4g6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1rj859nmbst": {
+    "status": "machine",
+    "translatedHash": "17qxk39j7ya",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1rkjey2rxpd": {
+    "status": "machine",
+    "translatedHash": "120yznyzs0w",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1rncc50vod0": {
+    "status": "machine",
+    "translatedHash": "1zx0u09ltra",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1rwil0o3zkk": {
+    "status": "machine",
+    "translatedHash": "yrlwvropql",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1ry9kc89u3j": {
+    "status": "machine",
+    "translatedHash": "1vadjjha19k",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1s2o5z7k8bb": {
+    "status": "machine",
+    "translatedHash": "2fuknhtwzlq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1s31b2wvvpv": {
+    "status": "machine",
+    "translatedHash": "gd87opw1xz",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1s5ifn1j9ko": {
+    "status": "machine",
+    "translatedHash": "1fof94aa4xf",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1s82z761igh": {
+    "status": "machine",
+    "translatedHash": "j5vwx7f6uv",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1sibrgtrjen": {
+    "status": "machine",
+    "translatedHash": "1sibrgtrjen",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1sr0y4gdhk0": {
+    "status": "machine",
+    "translatedHash": "1v6adohcsoe",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1sr3kb79e0o": {
+    "status": "machine",
+    "translatedHash": "14qjq98v9nq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "1tlt3qrgqsx": {
     "status": "machine",
     "translatedHash": "1pep6ml08jd",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1tomwowemb": {
+    "status": "machine",
+    "translatedHash": "268oz4n1yee",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1u6eldxzxiw": {
+    "status": "machine",
+    "translatedHash": "ztvoam3jml",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1uisypgik": {
+    "status": "machine",
+    "translatedHash": "27ch9hw2rdz",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1upbsv2agu0": {
+    "status": "machine",
+    "translatedHash": "1b38e7adj7i",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "1uzciftg2qv": {
+    "status": "machine",
+    "translatedHash": "28antky7ezh",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -95,9 +1311,393 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "1v7qa6jw615": {
+    "status": "machine",
+    "translatedHash": "95674gqyni",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "1v9oyjvzd9t": {
     "status": "machine",
     "translatedHash": "czm4ahl6d8",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1vhgtfibnud": {
+    "status": "machine",
+    "translatedHash": "1z5d1m14yf1",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1vjn8kt648j": {
+    "status": "machine",
+    "translatedHash": "21fiy7vry7e",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1vqugrvir99": {
+    "status": "machine",
+    "translatedHash": "mdcoh0pm3c",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1vt2qztixfh": {
+    "status": "machine",
+    "translatedHash": "28z1bzo4bpv",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1w41hd19mti": {
+    "status": "machine",
+    "translatedHash": "ibk6jjiuaf",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1wndfg44twv": {
+    "status": "machine",
+    "translatedHash": "vzn3hhr4u",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "1wv8z2yvi5c": {
+    "status": "machine",
+    "translatedHash": "rhlgdjnrp2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1wwaqy7lgcr": {
+    "status": "machine",
+    "translatedHash": "25eehhs0m0",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1x0nu35r42d": {
+    "status": "machine",
+    "translatedHash": "jgqg7m60ko",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1x1dscjganl": {
+    "status": "machine",
+    "translatedHash": "1pic39vvm3w",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1x2um48y627": {
+    "status": "machine",
+    "translatedHash": "l5oww5r3ji",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1x6on0jacs9": {
+    "status": "machine",
+    "translatedHash": "1yxx0lou15s",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1xepvuia13": {
+    "status": "machine",
+    "translatedHash": "sl8j0r2w6o",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1xf9z26jg3m": {
+    "status": "machine",
+    "translatedHash": "2eiyfyirez7",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1xinc6h3p2": {
+    "status": "machine",
+    "translatedHash": "gkiuccy8r6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1xj5d6loufn": {
+    "status": "machine",
+    "translatedHash": "2e3o8ny1msb",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1xra15xfgov": {
+    "status": "machine",
+    "translatedHash": "1iusy5hlpud",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1xtcmhrwe9c": {
+    "status": "machine",
+    "translatedHash": "27wm2v8ykz",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1xu6al3whba": {
+    "status": "machine",
+    "translatedHash": "1vy48h6wdm3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1y2x0qb79im": {
+    "status": "machine",
+    "translatedHash": "2alyr3u6dtj",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1y9x115k4mt": {
+    "status": "machine",
+    "translatedHash": "ifzjbw4o2v",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1yi1eprb816": {
+    "status": "machine",
+    "translatedHash": "175xs8nasg6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1yitf0mxjda": {
+    "status": "machine",
+    "translatedHash": "2fcsb27oais",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1yucd5ks9yf": {
+    "status": "machine",
+    "translatedHash": "1y890mp1bb3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1yxnu4m1dvv": {
+    "status": "machine",
+    "translatedHash": "21b4bn654uq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1z57eyi5dfo": {
+    "status": "machine",
+    "translatedHash": "11xcycduv7s",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1z9p1zz8v05": {
+    "status": "machine",
+    "translatedHash": "205x2x868ne",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1zj65nkezki": {
+    "status": "machine",
+    "translatedHash": "r3eeu68pso",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1zlopzysjem": {
+    "status": "machine",
+    "translatedHash": "1fgolqiztul",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1zn4apu15xn": {
+    "status": "machine",
+    "translatedHash": "1w8iiy5pd3j",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1zpe6veo7s9": {
+    "status": "machine",
+    "translatedHash": "s56mpobl0f",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "1zsap8x3yrr": {
+    "status": "machine",
+    "translatedHash": "26m4it1mwc9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "203sud5qrz4": {
+    "status": "machine",
+    "translatedHash": "36thxr7cg3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "203uu0x0rue": {
+    "status": "machine",
+    "translatedHash": "au3jziv5lt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "20cmm9ewpd": {
+    "status": "machine",
+    "translatedHash": "1ncc6gj0lq8",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "20e22lsd4zw": {
+    "status": "machine",
+    "translatedHash": "3igyofulo6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "20gbx6noxvu": {
+    "status": "machine",
+    "translatedHash": "1dow3f9i3rn",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "20i2iv4rel2": {
+    "status": "machine",
+    "translatedHash": "1hnk0z8vk9i",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "20mclgrkbsj": {
+    "status": "machine",
+    "translatedHash": "uh6k5ryyw5",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "20necazrl3k": {
+    "status": "machine",
+    "translatedHash": "x09opfexnp",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "20pm528itr2": {
+    "status": "machine",
+    "translatedHash": "1llluo5oj79",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "20xixacat15": {
+    "status": "machine",
+    "translatedHash": "1iyhk7m7xr2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "20z4vu3hcwz": {
+    "status": "machine",
+    "translatedHash": "285n4oysc4e",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "219yu99blsi": {
+    "status": "machine",
+    "translatedHash": "1z92qj5wd69",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "21ety3yqhji": {
+    "status": "machine",
+    "translatedHash": "1cgjz735m2e",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "21io3w69ufl": {
+    "status": "machine",
+    "translatedHash": "lrdmq112qd",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "21l5rpcq28w": {
+    "status": "machine",
+    "translatedHash": "1cdolg3op2k",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -111,9 +1711,201 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "21poeejymlw": {
+    "status": "machine",
+    "translatedHash": "272qkmmq8qy",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "21rjkq8k9uj": {
+    "status": "machine",
+    "translatedHash": "raew4z3v2t",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "221ct4go232": {
+    "status": "machine",
+    "translatedHash": "btj2vwip0s",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "226w7dmwmr6": {
+    "status": "machine",
+    "translatedHash": "1qbs2i1v0lq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "22fp3gthum9": {
+    "status": "machine",
+    "translatedHash": "27q7rgifyc3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "22hj385419y": {
+    "status": "machine",
+    "translatedHash": "1y0gr53myjp",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "22n6j3g4p3s": {
+    "status": "machine",
+    "translatedHash": "12rfks47ds3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "22tau8thrt1": {
+    "status": "machine",
+    "translatedHash": "2aeyx4c1nol",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "22vsazqg7pk": {
+    "status": "machine",
+    "translatedHash": "1ue4md8qg6m",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "22wi4adg3sl": {
+    "status": "machine",
+    "translatedHash": "af5dbvvx03",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "23cd2xl2vk5": {
+    "status": "machine",
+    "translatedHash": "a3suu1xob6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "23ecl7xf4m6": {
+    "status": "machine",
+    "translatedHash": "1l8129q8d8k",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "23rp7apg37x": {
+    "status": "machine",
+    "translatedHash": "2073j9onmhs",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2402r5hg07d": {
+    "status": "machine",
+    "translatedHash": "1gyldzjlti1",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2410ux64h44": {
+    "status": "machine",
+    "translatedHash": "19zpay7c094",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "248xs7h38vj": {
+    "status": "machine",
+    "translatedHash": "2bs0k74j5rz",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "24jbe4xkyk4": {
+    "status": "machine",
+    "translatedHash": "4f5mbqyhb1",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "24olxse3xsp": {
+    "status": "machine",
+    "translatedHash": "1y4h0zgceaw",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "251zk5eqsoo": {
+    "status": "machine",
+    "translatedHash": "1vtc0jksl7f",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "25pf2spfmo0": {
     "status": "machine",
     "translatedHash": "14kl674sk01",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "25u0ozz9jho": {
+    "status": "machine",
+    "translatedHash": "166xmegdxvb",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "25xq3c5mafa": {
+    "status": "machine",
+    "translatedHash": "4f6mlm9kxq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "26ciz7ptwcg": {
+    "status": "machine",
+    "translatedHash": "jf3t4g7u7e",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "26w16tn7pzp": {
+    "status": "machine",
+    "translatedHash": "1vu43jklww9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "26xm7tg0ukm": {
+    "status": "machine",
+    "translatedHash": "5jtgmvzamp",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -127,9 +1919,177 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "27nxsynl10g": {
+    "status": "machine",
+    "translatedHash": "n27ehz9g5t",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "27sli8bhc0z": {
+    "status": "machine",
+    "translatedHash": "23r2o5i07c6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "27tdlr0ne3b": {
     "status": "machine",
     "translatedHash": "1z5g6esecwy",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "27uz1w1s5y2": {
+    "status": "machine",
+    "translatedHash": "l3qng404yz",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "28uv801464p": {
+    "status": "machine",
+    "translatedHash": "25rqztegbnm",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "28v721n7uwx": {
+    "status": "machine",
+    "translatedHash": "gyvsxy7e7n",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "28z09hoarac": {
+    "status": "machine",
+    "translatedHash": "pumhlovvil",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "29kstd4aeqt": {
+    "status": "machine",
+    "translatedHash": "kys4xb4ei6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "29m1ho25xzl": {
+    "status": "machine",
+    "translatedHash": "88vb37ekom",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "29s7yt15s4z": {
+    "status": "machine",
+    "translatedHash": "podju2trtc",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "29soi5j2rkr": {
+    "status": "machine",
+    "translatedHash": "17gj76z0gnh",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "29y6aac5m7m": {
+    "status": "machine",
+    "translatedHash": "dnim6yqb4q",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2a5d0xtb3sd": {
+    "status": "machine",
+    "translatedHash": "1h3u0kv1ces",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2al5zzdzlkk": {
+    "status": "machine",
+    "translatedHash": "1q13u35k62l",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2b2rtm33el7": {
+    "status": "machine",
+    "translatedHash": "29js2gmreg0",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2bgb2gj6wv1": {
+    "status": "machine",
+    "translatedHash": "1i23jk40r5r",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2bgqosys14q": {
+    "status": "machine",
+    "translatedHash": "ccyk2z6cnz",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Phase 8 said 'dueño'; changed to the glossary's 'propietario'."
+  },
+  "2bis8txdorq": {
+    "status": "machine",
+    "translatedHash": "1l723gj0pxm",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2bqf6vaf7d4": {
+    "status": "machine",
+    "translatedHash": "w4s8x2ap57",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2btir0jw4ut": {
+    "status": "machine",
+    "translatedHash": "26jss6nfhgj",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2bzcj52sg9z": {
+    "status": "machine",
+    "translatedHash": "v49qv9owf6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2c8dq5qsvdm": {
+    "status": "machine",
+    "translatedHash": "1fwe5hl9kn2",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -143,9 +2103,41 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "2cs7jmm5jjj": {
+    "status": "machine",
+    "translatedHash": "c3zvxfga4j",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2cwdszru8kc": {
+    "status": "machine",
+    "translatedHash": "20na5oozv28",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2d31hgbagla": {
+    "status": "machine",
+    "translatedHash": "17041xv0zcs",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "2d4kn4u1206": {
     "status": "machine",
     "translatedHash": "qrj11u7l4w",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2do3ct8a0nt": {
+    "status": "machine",
+    "translatedHash": "gpcjlo5smr",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -159,9 +2151,121 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "2e7jtod20fa": {
+    "status": "machine",
+    "translatedHash": "9ur6ibk7u2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2evszjj6fsj": {
+    "status": "machine",
+    "translatedHash": "nfyhokcwec",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2eypeq0dc8o": {
+    "status": "machine",
+    "translatedHash": "1g0h5wvx58w",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2f238tcgfz1": {
+    "status": "machine",
+    "translatedHash": "2e8midtr9a2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2f5ffyza511": {
+    "status": "machine",
+    "translatedHash": "1vxel539yzt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2faits7kn8u": {
+    "status": "machine",
+    "translatedHash": "1l0g0y66cyo",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2fgad1n7srq": {
+    "status": "machine",
+    "translatedHash": "1wd44gnf9ky",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2frz42wpc5k": {
+    "status": "machine",
+    "translatedHash": "1n401b1r4qi",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2ge53khjp3c": {
+    "status": "machine",
+    "translatedHash": "n4p8pct3nq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2gjdo7eexco": {
+    "status": "machine",
+    "translatedHash": "163styohgob",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "2khkneof19": {
     "status": "machine",
     "translatedHash": "uny6xt67ve",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2vihj1w1z0": {
+    "status": "machine",
+    "translatedHash": "o5ucpj71mh",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "2zbxweorn2": {
+    "status": "machine",
+    "translatedHash": "1bnzfuyc09b",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "30kzn56ltd": {
+    "status": "machine",
+    "translatedHash": "12md5y3bh3f",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "319pnaoaed": {
+    "status": "machine",
+    "translatedHash": "1zwjcgvn1p2",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -175,9 +2279,89 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "3az60now0p": {
+    "status": "machine",
+    "translatedHash": "1cd19jwu325",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "40lyxipgf8": {
+    "status": "machine",
+    "translatedHash": "19ziyspruar",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "43sqe7fnyk": {
     "status": "machine",
     "translatedHash": "kxfto6yap8",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "4lakk5u7l7": {
+    "status": "machine",
+    "translatedHash": "1q2jitqu7ur",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "4nbvt0bx39": {
+    "status": "machine",
+    "translatedHash": "h1xj9xx0af",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "4oakw0vmdt": {
+    "status": "machine",
+    "translatedHash": "eswlw1jxbu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "4uqk4t9ol9": {
+    "status": "machine",
+    "translatedHash": "1uw7beecu70",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "53ekp6oa6s": {
+    "status": "machine",
+    "translatedHash": "22h0wxtnyg2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "54rzqn5nuf": {
+    "status": "machine",
+    "translatedHash": "x5qwly4tm7",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "5fb8o7pr7t": {
+    "status": "machine",
+    "translatedHash": "23elcbkjkzg",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "5mpfz3olim": {
+    "status": "machine",
+    "translatedHash": "1adfq70wx3m",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -191,9 +2375,225 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "62tbkall94": {
+    "status": "machine",
+    "translatedHash": "10t4fvx47h3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "6ba06wwnpj": {
+    "status": "machine",
+    "translatedHash": "1ftvf6g0bom",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "6fknrggo2i": {
+    "status": "machine",
+    "translatedHash": "1qxqdnmqkdt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "6jehwoavqq": {
+    "status": "machine",
+    "translatedHash": "1d7rrulgbzt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "6zokvvlav4": {
+    "status": "machine",
+    "translatedHash": "15rfqbqhpiq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "740dfbxccn": {
     "status": "machine",
     "translatedHash": "1z6py0d5o23",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "75a28xasw6": {
+    "status": "machine",
+    "translatedHash": "mycy9kx200",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "760pyp2fod": {
+    "status": "machine",
+    "translatedHash": "1hhlov73v3w",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "7e1s9qn4gb": {
+    "status": "machine",
+    "translatedHash": "kblgsxobr2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "7gqysfvinh": {
+    "status": "machine",
+    "translatedHash": "15ldzvbyd8b",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "7guj9yqzud": {
+    "status": "machine",
+    "translatedHash": "1k68724j72o",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "7kxut9wjci": {
+    "status": "machine",
+    "translatedHash": "1kse8spgugv",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "7orwtyllcs": {
+    "status": "machine",
+    "translatedHash": "jyqvj22su9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "7p8z05g2bo": {
+    "status": "machine",
+    "translatedHash": "16ddqen830h",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "7v3s45hhdz": {
+    "status": "machine",
+    "translatedHash": "1ro05ksp976",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "81wem04jqz": {
+    "status": "machine",
+    "translatedHash": "16kl8bg7ha9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "841u6ezovk": {
+    "status": "machine",
+    "translatedHash": "n8jo6mu041",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "8a5iq7b0bu": {
+    "status": "machine",
+    "translatedHash": "2b13vojs0c9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "8e7ivhjarg": {
+    "status": "machine",
+    "translatedHash": "885dwq3h6u",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "8nhmqil6xb": {
+    "status": "machine",
+    "translatedHash": "14fo2qul00s",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "8q0cv30ppn": {
+    "status": "machine",
+    "translatedHash": "1wyv348i2jp",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "8tpbh727ny": {
+    "status": "machine",
+    "translatedHash": "19ulavh3ej6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "93varfklsb": {
+    "status": "machine",
+    "translatedHash": "1u6z3vrevhi",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "9i5141oshs": {
+    "status": "machine",
+    "translatedHash": "1hnwu9yzz49",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "a1v894oevw": {
+    "status": "machine",
+    "translatedHash": "sz7ahxg5me",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "a3frag2787": {
+    "status": "machine",
+    "translatedHash": "1dp37z30jtn",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "a5h4wj9ump": {
+    "status": "machine",
+    "translatedHash": "qdmgww0x00",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "a5t143j7kl": {
+    "status": "machine",
+    "translatedHash": "23co8wr2ylv",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -215,9 +2615,209 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "aai87ncak7": {
+    "status": "machine",
+    "translatedHash": "rqsn01fd9n",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "axif9jcda4": {
+    "status": "machine",
+    "translatedHash": "zbrghqiqx4",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "be97194fqg": {
+    "status": "machine",
+    "translatedHash": "1kzgonfd9p9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "bn4fv7eipw": {
+    "status": "machine",
+    "translatedHash": "z2cqpsptc5",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "bnq3beamw3": {
+    "status": "machine",
+    "translatedHash": "1fq4kfvu9ps",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "cd8zplgkn6": {
+    "status": "machine",
+    "translatedHash": "23hyacvhzgd",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ch0iwcbi5y": {
+    "status": "machine",
+    "translatedHash": "qmlpie6aji",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "cht6jp4gtd": {
+    "status": "machine",
+    "translatedHash": "1102in38zxo",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ciupz1z8pm": {
+    "status": "machine",
+    "translatedHash": "1xzo4ewwdlg",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "ciy321kmmx": {
     "status": "machine",
     "translatedHash": "1dxy3aku6pg",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "cw1grf7hmr": {
+    "status": "machine",
+    "translatedHash": "1udhk6rvsg6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "d67rltdih0": {
+    "status": "machine",
+    "translatedHash": "5run8fwc12",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "d8uwxid69d": {
+    "status": "machine",
+    "translatedHash": "1rzyjob4qa0",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "dmjydccuxx": {
+    "status": "machine",
+    "translatedHash": "60axzmd4x3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "dyxte40li2": {
+    "status": "machine",
+    "translatedHash": "4q4xxb35jx",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "e75q93a3f9": {
+    "status": "machine",
+    "translatedHash": "t0de8dnduc",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "eqg9wi2usk": {
+    "status": "machine",
+    "translatedHash": "225k4kgwlp0",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "euf7o3nze7": {
+    "status": "machine",
+    "translatedHash": "2b4l7ppe4zh",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "exzzc81bc6": {
+    "status": "machine",
+    "translatedHash": "sn5pe8golq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "f2v9rtmf85": {
+    "status": "machine",
+    "translatedHash": "1ebpi0mz9ad",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "fck8u3o77b": {
+    "status": "machine",
+    "translatedHash": "1a8i89hpff4",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "fi1aj4103u": {
+    "status": "machine",
+    "translatedHash": "qha4y6gc47",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "frjj2motly": {
+    "status": "machine",
+    "translatedHash": "y4jtr8vvor",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "gbq6pkhmy1": {
+    "status": "machine",
+    "translatedHash": "1h7fx0ovodt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "gexz7lm4ol": {
+    "status": "machine",
+    "translatedHash": "dfsucn4xse",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "gklvo3l49v": {
+    "status": "machine",
+    "translatedHash": "8zpy0vsk04",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -231,9 +2831,33 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "gmznfc5eow": {
+    "status": "machine",
+    "translatedHash": "2160lw2e3wz",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "gnihj2ptn6": {
+    "status": "machine",
+    "translatedHash": "upc0o6mwlu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "go9h267ewj": {
     "status": "machine",
     "translatedHash": "w04968wgy6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "gqulylnlei": {
+    "status": "machine",
+    "translatedHash": "ozvf625kqq",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -247,9 +2871,73 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "h0pblyyblb": {
+    "status": "machine",
+    "translatedHash": "fhrk0huewv",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "h8pe5i2ub7": {
+    "status": "machine",
+    "translatedHash": "2ee0p918sgf",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "hdcjznzjw6": {
+    "status": "machine",
+    "translatedHash": "1bjki3bvfgd",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "hj1o1glkxj": {
+    "status": "machine",
+    "translatedHash": "24qwiv0devr",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "hmy7mdqd4u": {
+    "status": "machine",
+    "translatedHash": "1pnzqpseadi",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ii2e798x54": {
+    "status": "machine",
+    "translatedHash": "linzft8orq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ixv1ushc1y": {
+    "status": "machine",
+    "translatedHash": "289ls7ortd3",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "jez1pi8470": {
     "status": "machine",
     "translatedHash": "ud6wc4zz2k",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "jgw4scgx5": {
+    "status": "machine",
+    "translatedHash": "st8t4xdfw0",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -263,9 +2951,337 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "jkkszphs0d": {
+    "status": "machine",
+    "translatedHash": "28po256qs39",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "jmp5nke2fe": {
+    "status": "machine",
+    "translatedHash": "17bldzurwuk",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "k1sucxnuss": {
+    "status": "machine",
+    "translatedHash": "2960gvb8jqb",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "k7wfdtk1dy": {
+    "status": "machine",
+    "translatedHash": "17q0okxlqkh",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "kkt03irvjv": {
+    "status": "machine",
+    "translatedHash": "15stm8ihul2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "kt7qki96oz": {
+    "status": "machine",
+    "translatedHash": "1xt22ypacu2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "kthiux3p": {
+    "status": "machine",
+    "translatedHash": "1i3si2flmev",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "kw9qzkwp2a": {
+    "status": "machine",
+    "translatedHash": "194ppr5iryg",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "l7ctvsopzx": {
+    "status": "machine",
+    "translatedHash": "2cbspl67vqc",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "lcunbglek6": {
+    "status": "machine",
+    "translatedHash": "glh2f18hni",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "lu1luc3mdp": {
+    "status": "machine",
+    "translatedHash": "18hc3ylcz2z",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "lux3evo6j3": {
+    "status": "machine",
+    "translatedHash": "85aeawk12g",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "lx7e250k0": {
+    "status": "machine",
+    "translatedHash": "1nj4eflt49n",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "m997hoz843": {
+    "status": "machine",
+    "translatedHash": "12zhuqu5xdt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "me33ea3jpr": {
+    "status": "machine",
+    "translatedHash": "utnbt07tvt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "mtb516uze5": {
+    "status": "machine",
+    "translatedHash": "ixi7drlnqt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "mu8wdz9k9n": {
+    "status": "machine",
+    "translatedHash": "zx07ilyxdr",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "n5chxaq0b4": {
+    "status": "machine",
+    "translatedHash": "1bahvusj50n",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "n6rto3r6ys": {
     "status": "machine",
     "translatedHash": "11rgiojbfdy",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ne7vuo58sz": {
+    "status": "machine",
+    "translatedHash": "1o50gx80dru",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "nij1kqyxc0": {
+    "status": "machine",
+    "translatedHash": "3v6zbwt7x8",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "nn1ei3v45t": {
+    "status": "machine",
+    "translatedHash": "rtkgfkjy51",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "nox4lci43x": {
+    "status": "machine",
+    "translatedHash": "4eepk9cffq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "nubpaahyd": {
+    "status": "machine",
+    "translatedHash": "23efystuqwl",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "nv1rx7xnth": {
+    "status": "machine",
+    "translatedHash": "cbs020ucyh",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "nvvy1enreg": {
+    "status": "machine",
+    "translatedHash": "rkrhnxajya",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "nw56c02n7y": {
+    "status": "machine",
+    "translatedHash": "r6o5joip0r",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "o41g0gbbvj": {
+    "status": "machine",
+    "translatedHash": "ppmr6axeu6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "o54cnfr1fb": {
+    "status": "machine",
+    "translatedHash": "1d7k1txlwap",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "o97nk6gkei": {
+    "status": "machine",
+    "translatedHash": "mdio5qy1mf",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ofjrfpifyl": {
+    "status": "machine",
+    "translatedHash": "fbyq9ostz5",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ogjy610dmo": {
+    "status": "machine",
+    "translatedHash": "28zwps8zq51",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "om8zktc7qk": {
+    "status": "machine",
+    "translatedHash": "24c5gmmrq55",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ozmuiaudad": {
+    "status": "machine",
+    "translatedHash": "2p6eqhessf",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "pqbk79k7rs": {
+    "status": "machine",
+    "translatedHash": "i3fnunx8q2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "q7gx504kvd": {
+    "status": "machine",
+    "translatedHash": "2f2nj3mile2",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "qejz9sldll": {
+    "status": "machine",
+    "translatedHash": "1b3qspj7udj",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "qneubavfcw": {
+    "status": "machine",
+    "translatedHash": "1fq4kfvu9ps",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "r0q72y2gqq": {
+    "status": "machine",
+    "translatedHash": "1an1axxi3nn",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "r53uwfa9ui": {
+    "status": "machine",
+    "translatedHash": "21vr3i47i4j",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "rcck306908": {
+    "status": "machine",
+    "translatedHash": "t837oj398s",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "rdkz0fx6pw": {
+    "status": "machine",
+    "translatedHash": "2f14avgekjk",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -279,9 +3295,129 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "rj1ngyto0o": {
+    "status": "machine",
+    "translatedHash": "1sxs2gzbxa1",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "rtr3cdg3m6": {
+    "status": "machine",
+    "translatedHash": "vqfm8me6s0",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ryo3bxpr4k": {
+    "status": "machine",
+    "translatedHash": "24creb1rh95",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "rzbxhud6e6": {
+    "status": "machine",
+    "translatedHash": "gw5r4r3w1c",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "swsn5779ql": {
+    "status": "machine",
+    "translatedHash": "mnvyhqkkzx",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "t2l9grzkme": {
+    "status": "machine",
+    "translatedHash": "eduj7qokbl",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "t3a315u4p2": {
+    "status": "machine",
+    "translatedHash": "239bsqhbxfn",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "t5pzxeo2v2": {
+    "status": "machine",
+    "translatedHash": "1nodrqggtjt",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "tdh7o7182x": {
+    "status": "machine",
+    "translatedHash": "13v584hsrc5",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "th9i5lga44": {
+    "status": "machine",
+    "translatedHash": "1on2fru9ag4",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "tvx9d7ixhz": {
+    "status": "machine",
+    "translatedHash": "8i0sffl9sb",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "tzpouapk0w": {
+    "status": "machine",
+    "translatedHash": "1fr89wq2ih4",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "uawxgub8b4": {
+    "status": "machine",
+    "translatedHash": "re8q2jxoan",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "udpb2fauly": {
+    "status": "machine",
+    "translatedHash": "1q9tjwza0yi",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "ul2xjyd8pi": {
     "status": "machine",
     "translatedHash": "12ixmvpys77",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "utuf67f9qs": {
+    "status": "machine",
+    "translatedHash": "1k3ux3ur112",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -299,9 +3435,233 @@
     ],
     "note": "A language menu option meaning: follow the browser language. Infinitive, like other menu actions."
   },
+  "v9vyt3hane": {
+    "status": "machine",
+    "translatedHash": "1eaq3xb5yoa",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "vaiwmi147i": {
+    "status": "machine",
+    "translatedHash": "23ig418pwkk",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "vctgr5r3d9": {
+    "status": "machine",
+    "translatedHash": "vctgr5r3d9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "vehukx254v": {
+    "status": "machine",
+    "translatedHash": "1h002bsj03j",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "vh88ypv7zp": {
+    "status": "machine",
+    "translatedHash": "c5sgjr937t",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "vjxiut1gq9": {
+    "status": "machine",
+    "translatedHash": "zj652mozmp",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "vkh3lt6sja": {
+    "status": "machine",
+    "translatedHash": "1tagi3rpn0h",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "vxgf42ygvf": {
+    "status": "machine",
+    "translatedHash": "yts6ks0u8g",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "w6ysoj0kj4": {
+    "status": "machine",
+    "translatedHash": "1xlfg6gekbq",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "w8xiuxis0d": {
+    "status": "machine",
+    "translatedHash": "1ul640szjmg",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "wlwxg6d4mw": {
+    "status": "machine",
+    "translatedHash": "llywtikwyy",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "wnhmh5yz21": {
+    "status": "machine",
+    "translatedHash": "1semdwf9usy",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "wytlvq49bv": {
+    "status": "machine",
+    "translatedHash": "1xog996i5fj",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "x0y8f7em65": {
+    "status": "machine",
+    "translatedHash": "1c2eivsavi6",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
   "x6wool4650": {
     "status": "machine",
     "translatedHash": "itj9zy8ly4",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "xbbo222rz7": {
+    "status": "machine",
+    "translatedHash": "38h7lyjmez",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "medium",
+    "note": "Replaces Phase 8's 'o también puedes' + 'inicia sesión con…' fragments with one whole button label (infinitive)."
+  },
+  "xel0tpqlux": {
+    "status": "machine",
+    "translatedHash": "wkfpl5v8pu",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "xjqourfchj": {
+    "status": "machine",
+    "translatedHash": "cmidpyz272",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "xn9tsopmsi": {
+    "status": "machine",
+    "translatedHash": "52qgmv98e9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "xw90vci12y": {
+    "status": "machine",
+    "translatedHash": "22w0rxumxo5",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "xwwbikmmob": {
+    "status": "machine",
+    "translatedHash": "2d8dsbk2opk",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "xylq48h0w8": {
+    "status": "machine",
+    "translatedHash": "jsrvhtvsh7",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "yh6yjfndj9": {
+    "status": "machine",
+    "translatedHash": "yh6yjfndj9",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "yl7w3jte8m": {
+    "status": "machine",
+    "translatedHash": "19o1c9q9arg",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "ymwpff1mxc": {
+    "status": "machine",
+    "translatedHash": "186anjyvinm",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "z6az0ecjzu": {
+    "status": "machine",
+    "translatedHash": "10sylude2r",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "zfg5718dbw": {
+    "status": "machine",
+    "translatedHash": "192ze64btb",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "zgf5b3csc7": {
+    "status": "machine",
+    "translatedHash": "1jjtze58ac7",
+    "at": "2026-09-26",
+    "by": "agent",
+    "confidence": "high",
+    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "zrb43vmdtr": {
+    "status": "machine",
+    "translatedHash": "29gepykvsh5",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",

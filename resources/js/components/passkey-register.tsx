@@ -4,14 +4,13 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     onSuccess: () => void;
 };
 
 export default function PasskeyRegistration({ onSuccess }: Props) {
-    const { t } = useTranslation();
     const [name, setName] = useState(() => {
         const ua = navigator.userAgent;
 
@@ -61,7 +60,7 @@ export default function PasskeyRegistration({ onSuccess }: Props) {
     if (!isSupported) {
         return (
             <div className="text-sm text-muted-foreground">
-                {t('Passkeys are not supported in this browser.')}
+                {__('Passkeys are not supported in this browser.')}
             </div>
         );
     }
@@ -69,7 +68,7 @@ export default function PasskeyRegistration({ onSuccess }: Props) {
     if (!showForm) {
         return (
             <Button variant="outline" onClick={() => setShowForm(true)}>
-                {t('Add passkey')}
+                {__('Add passkey')}
             </Button>
         );
     }
@@ -80,18 +79,18 @@ export default function PasskeyRegistration({ onSuccess }: Props) {
             className="space-y-4 rounded-lg border border-border bg-muted/50 p-4"
         >
             <div className="grid gap-2">
-                <Label htmlFor="passkey-name">{t('Passkey name')}</Label>
+                <Label htmlFor="passkey-name">{__('Passkey name')}</Label>
                 <Input
                     id="passkey-name"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder={t('e.g., MacBook Pro, iPhone')}
+                    placeholder={__('e.g., MacBook Pro, iPhone')}
                     className="mt-1 block w-full border-foreground/20"
                     autoFocus
                 />
                 <p className="text-xs text-muted-foreground">
-                    {t('A name helps you identify this passkey later.')}
+                    {__('A name helps you identify this passkey later.')}
                 </p>
             </div>
 
@@ -99,10 +98,10 @@ export default function PasskeyRegistration({ onSuccess }: Props) {
 
             <div className="flex gap-2">
                 <Button type="submit" disabled={isLoading || !name.trim()}>
-                    {isLoading ? t('Registering...') : t('Register passkey')}
+                    {isLoading ? __('Registering...') : __('Register passkey')}
                 </Button>
                 <Button type="button" variant="ghost" onClick={handleCancel}>
-                    {t('Cancel')}
+                    {__('Cancel')}
                 </Button>
             </div>
         </form>

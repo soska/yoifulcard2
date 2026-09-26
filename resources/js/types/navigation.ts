@@ -2,15 +2,18 @@ import type { InertiaLinkProps } from '@inertiajs/react';
 import type { LucideIcon } from 'lucide-react';
 
 /**
- * A breadcrumb label is either a static label or data, and says which:
- * - `titleKey`: a translation key (`'Cards'`), shown through `t()`.
- * - `title`: data (an organization name, a card code), shown as is, so a
- *   business called "Admin" is not turned into "Administración".
+ * `title` is the text shown, already in the reader's language: a static label
+ * is written as `__('Cards')` where the page builds its breadcrumbs (inside a
+ * layout FUNCTION, so it runs at render time, after the catalog loads), and
+ * data (an organization name, a card code) is passed as is. Nothing
+ * translates it later, so a business called "Admin" stays "Admin".
  */
 export type BreadcrumbItem = {
+    title: string;
     href: NonNullable<InertiaLinkProps['href']>;
-} & ({ titleKey: string; title?: never } | { title: string; titleKey?: never });
+};
 
+/** `title` is already translated (built with `__()` at render time). */
 export type NavItem = {
     title: string;
     href: NonNullable<InertiaLinkProps['href']>;

@@ -2,7 +2,7 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import AppLogoIcon from '@/components/app-logo-icon';
 import { PreferenceSwitchers } from '@/components/preferences/preference-switchers';
 import { Button } from '@/components/ui/button';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 import { dashboard, login, register } from '@/routes';
 
 /**
@@ -11,11 +11,9 @@ import { dashboard, login, register } from '@/routes';
  */
 export default function Welcome() {
     const { auth } = usePage().props;
-    const { t } = useTranslation();
-
     return (
         <>
-            <Head title={t('Prepaid cards for small businesses')} />
+            <Head title={__('Prepaid cards for small businesses')} />
             <main className="relative flex min-h-svh flex-col items-center justify-center gap-8 bg-background p-6 text-center text-foreground">
                 <PreferenceSwitchers className="absolute top-4 right-4" />
 
@@ -25,7 +23,7 @@ export default function Welcome() {
                         Yoiful
                     </h1>
                     <p className="max-w-md text-xl text-muted-foreground">
-                        {t('Prepaid cards for small businesses')}
+                        {__('Prepaid cards for small businesses')}
                     </p>
                 </div>
 
@@ -36,7 +34,7 @@ export default function Welcome() {
                             nativeButton={false}
                             render={<Link href={dashboard()} />}
                         >
-                            {t('Dashboard')}
+                            {__('Dashboard')}
                         </Button>
                     ) : (
                         <>
@@ -45,7 +43,7 @@ export default function Welcome() {
                                 nativeButton={false}
                                 render={<Link href={register()} />}
                             >
-                                {t('Get started')}
+                                {__('Get started')}
                             </Button>
                             <Button
                                 size="lg"
@@ -53,7 +51,7 @@ export default function Welcome() {
                                 nativeButton={false}
                                 render={<Link href={login()} />}
                             >
-                                {t('Log in')}
+                                {__('Log in')}
                             </Button>
                         </>
                     )}

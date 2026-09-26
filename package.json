@@ -7,7 +7,10 @@
         "dev": "vp dev",
         "check": "vp check",
         "check:fix": "vp check --fix",
-        "types:check": "tsc --noEmit"
+        "types:check": "tsc --noEmit",
+        "test:js": "vitest run",
+        "i18n:extract": "duckalize extract",
+        "i18n:status": "duckalize translate status"
     },
     "dependencies": {
         "@base-ui/react": "^1.8.0",
@@ -45,7 +48,8 @@
         "@rolldown/plugin-babel": "^0.2.3",
         "@types/node": "^22.13.5",
         "babel-plugin-react-compiler": "^1.0.0",
-        "vite-plus": "0.3.0"
+        "vite-plus": "0.3.0",
+        "vitest": "^4.1.11"
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1",

@@ -7,7 +7,7 @@ import { WalletButtons } from '@/components/public-card/wallet-buttons';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import type { PublicCard, PublicOrganization } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     card: PublicCard;
@@ -27,8 +27,6 @@ function tokenFromUrl(url: string): string {
 export default function PublicCardShow({ card, organization }: Props) {
     const { url } = usePage();
     const initial = organization.name.trim().charAt(0).toUpperCase();
-    const { t } = useTranslation();
-
     return (
         <>
             <Head title={organization.name}>
@@ -58,10 +56,10 @@ export default function PublicCardShow({ card, organization }: Props) {
                     {card.status === 'frozen' && (
                         <Alert variant="destructive">
                             <AlertCircle />
-                            <AlertTitle>{t('Card frozen')}</AlertTitle>
+                            <AlertTitle>{__('Card frozen')}</AlertTitle>
                             <AlertDescription>
-                                {t(
-                                    'This card is currently frozen and cannot be used. Please contact :business for assistance.',
+                                {__(
+                                    'This card is currently frozen and cannot be used. Please contact {business} for assistance.',
                                     { business: organization.name },
                                 )}
                             </AlertDescription>
@@ -70,10 +68,10 @@ export default function PublicCardShow({ card, organization }: Props) {
                     {card.status === 'cancelled' && (
                         <Alert variant="destructive">
                             <AlertCircle />
-                            <AlertTitle>{t('Card cancelled')}</AlertTitle>
+                            <AlertTitle>{__('Card cancelled')}</AlertTitle>
                             <AlertDescription>
-                                {t(
-                                    'This card can no longer be used. Please contact :business for assistance.',
+                                {__(
+                                    'This card can no longer be used. Please contact {business} for assistance.',
                                     { business: organization.name },
                                 )}
                             </AlertDescription>
@@ -87,7 +85,7 @@ export default function PublicCardShow({ card, organization }: Props) {
                     <EmailCapture token={tokenFromUrl(url)} />
 
                     <p className="text-center text-sm text-muted-foreground">
-                        {t('Powered by Yoiful')}
+                        {__('Powered by Yoiful')}
                     </p>
                 </div>
             </main>

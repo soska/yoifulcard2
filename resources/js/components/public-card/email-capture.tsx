@@ -13,7 +13,7 @@ import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { email as saveEmail } from '@/routes/public-card';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 /**
  * The optional "get balance updates" form. v1 stores the email on the card
@@ -22,8 +22,6 @@ import { useTranslation } from '@/hooks/use-translation';
 export function EmailCapture({ token }: { token: string }) {
     const form = useForm({ email: '' });
     const [saved, setSaved] = useState(false);
-    const { t } = useTranslation();
-
     function submit(event: React.FormEvent) {
         event.preventDefault();
 
@@ -41,10 +39,10 @@ export function EmailCapture({ token }: { token: string }) {
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                     <Mail className="size-4" />
-                    {t('Get balance updates')}
+                    {__('Get balance updates')}
                 </CardTitle>
                 <CardDescription>
-                    {t(
+                    {__(
                         "Leave your email and we'll let you know about your balance.",
                     )}
                 </CardDescription>
@@ -53,20 +51,20 @@ export function EmailCapture({ token }: { token: string }) {
                 {saved ? (
                     <p className="flex items-center gap-2 text-sm text-muted-foreground">
                         <CheckCircle2 className="size-4 text-emerald-600" />
-                        {t('Thanks! Your email is saved.')}
+                        {__('Thanks! Your email is saved.')}
                     </p>
                 ) : (
                     <form onSubmit={submit} className="flex flex-col gap-3">
                         <Field data-invalid={!!form.errors.email}>
                             <FieldLabel htmlFor="public-card-email">
-                                {t('Email')}
+                                {__('Email')}
                             </FieldLabel>
                             <Input
                                 id="public-card-email"
                                 type="email"
                                 name="email"
                                 autoComplete="email"
-                                placeholder={t('you@example.com')}
+                                placeholder={__('you@example.com')}
                                 value={form.data.email}
                                 onChange={(event) =>
                                     form.setData('email', event.target.value)
@@ -79,7 +77,7 @@ export function EmailCapture({ token }: { token: string }) {
                         </Field>
                         <Button type="submit" disabled={form.processing}>
                             {form.processing && <Spinner />}
-                            {t('Save email')}
+                            {__('Save email')}
                         </Button>
                     </form>
                 )}

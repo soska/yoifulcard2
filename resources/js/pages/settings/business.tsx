@@ -28,7 +28,7 @@ import { edit } from '@/routes/settings';
 import { update as updateOrganization } from '@/routes/settings/organization';
 import { update as updateProgram } from '@/routes/settings/program';
 import type { CardUsage, OrganizationSettings, ProgramSettings } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     organization: OrganizationSettings;
@@ -42,16 +42,14 @@ type Props = {
 function ReadOnlyNotice() {
     const { currentOrganization } = usePage().props;
     const suspended = currentOrganization?.status !== 'active';
-    const { t } = useTranslation();
-
     return (
         <Alert>
             <Lock />
-            <AlertTitle>{t('These settings are read-only')}</AlertTitle>
+            <AlertTitle>{__('These settings are read-only')}</AlertTitle>
             <AlertDescription>
                 {suspended
-                    ? t('This business is suspended. Contact support.')
-                    : t(
+                    ? __('This business is suspended. Contact support.')
+                    : __(
                           'Only owners and managers can change business settings.',
                       )}
             </AlertDescription>
@@ -60,19 +58,17 @@ function ReadOnlyNotice() {
 }
 
 function PlanUsage({ usage }: { usage: CardUsage }) {
-    const { t } = useTranslation();
-
     return (
         <div className="space-y-4">
             <Heading
                 variant="small"
-                title={t('Plan')}
-                description={t("Cards used against your plan's limit.")}
+                title={__('Plan')}
+                description={__("Cards used against your plan's limit.")}
             />
             <div className="flex items-end justify-between gap-4">
                 <div>
                     <p className="text-sm text-muted-foreground">
-                        {t('Cards used')}
+                        {__('Cards used')}
                     </p>
                     <p className="text-2xl font-semibold tabular-nums">
                         {usage.used}
@@ -86,14 +82,16 @@ function PlanUsage({ usage }: { usage: CardUsage }) {
                 </div>
                 <p className="text-sm text-muted-foreground">
                     {usage.limit === null
-                        ? t('Unlimited')
-                        : t(':percent% used', { percent: usage.percent ?? 0 })}
+                        ? __('Unlimited')
+                        : __('{percent}% used', {
+                              percent: usage.percent ?? 0,
+                          })}
                 </p>
             </div>
             {usage.limit !== null && (
                 <Progress
                     value={Math.min(usage.percent ?? 0, 100)}
-                    aria-label={t('Cards used')}
+                    aria-label={__('Cards used')}
                 />
             )}
             <CardUsageNotice usage={usage} />
@@ -107,7 +105,6 @@ function OrganizationForm({
     currencies,
     timezones,
 }: Pick<Props, 'organization' | 'canEdit' | 'currencies' | 'timezones'>) {
-    const { t } = useTranslation();
     const currencyItems = currencies.map((code) => ({
         value: code,
         label: code,
@@ -121,8 +118,8 @@ function OrganizationForm({
         <div className="space-y-6">
             <Heading
                 variant="small"
-                title={t('Business')}
-                description={t(
+                title={__('Business')}
+                description={__(
                     'Your name, logo, and color appear on the public card page.',
                 )}
             />
@@ -145,7 +142,7 @@ function OrganizationForm({
 
                             <Field data-invalid={!!errors.name}>
                                 <FieldLabel htmlFor="name">
-                                    {t('Business name')}
+                                    {__('Business name')}
                                 </FieldLabel>
                                 <Input
                                     id="name"
@@ -160,7 +157,7 @@ function OrganizationForm({
 
                             <Field data-invalid={!!errors.logo}>
                                 <FieldLabel htmlFor="logo">
-                                    {t('Logo')}
+                                    {__('Logo')}
                                 </FieldLabel>
                                 <div className="flex items-center gap-4">
                                     <Avatar className="size-14 rounded-lg">
@@ -186,7 +183,7 @@ function OrganizationForm({
                                     />
                                 </div>
                                 <FieldDescription>
-                                    {t('PNG, JPG, or WebP, up to 2 MB.')}
+                                    {__('PNG, JPG, or WebP, up to 2 MB.')}
                                 </FieldDescription>
                                 <FieldError>{errors.logo}</FieldError>
                             </Field>
@@ -203,14 +200,14 @@ function OrganizationForm({
                                         htmlFor="remove_logo"
                                         className="font-normal"
                                     >
-                                        {t('Remove the current logo')}
+                                        {__('Remove the current logo')}
                                     </FieldLabel>
                                 </Field>
                             )}
 
                             <Field data-invalid={!!errors.primary_color}>
                                 <FieldLabel htmlFor="primary_color">
-                                    {t('Brand color')}
+                                    {__('Brand color')}
                                 </FieldLabel>
                                 <Input
                                     id="primary_color"
@@ -221,14 +218,14 @@ function OrganizationForm({
                                     aria-invalid={!!errors.primary_color}
                                 />
                                 <FieldDescription>
-                                    {t('Used on the public card page.')}
+                                    {__('Used on the public card page.')}
                                 </FieldDescription>
                                 <FieldError>{errors.primary_color}</FieldError>
                             </Field>
 
                             <Field data-invalid={!!errors.currency}>
                                 <FieldLabel htmlFor="currency">
-                                    {t('Currency')}
+                                    {__('Currency')}
                                 </FieldLabel>
                                 <Select
                                     name="currency"
@@ -255,7 +252,7 @@ function OrganizationForm({
                                     </SelectContent>
                                 </Select>
                                 <FieldDescription>
-                                    {t(
+                                    {__(
                                         'Balances and transactions are shown in this currency.',
                                     )}
                                 </FieldDescription>
@@ -264,7 +261,7 @@ function OrganizationForm({
 
                             <Field data-invalid={!!errors.timezone}>
                                 <FieldLabel htmlFor="timezone">
-                                    {t('Timezone')}
+                                    {__('Timezone')}
                                 </FieldLabel>
                                 <Select
                                     name="timezone"
@@ -291,7 +288,7 @@ function OrganizationForm({
                                     </SelectContent>
                                 </Select>
                                 <FieldDescription>
-                                    {t(
+                                    {__(
                                         'Days in reports, filters, and analytics start at midnight here.',
                                     )}
                                 </FieldDescription>
@@ -304,7 +301,7 @@ function OrganizationForm({
                                     disabled={processing || !canEdit}
                                 >
                                     {processing && <Spinner />}
-                                    {t('Save business')}
+                                    {__('Save business')}
                                 </Button>
                             </div>
                         </FieldGroup>
@@ -322,14 +319,12 @@ function ProgramForm({
     program: ProgramSettings;
     canEdit: boolean;
 }) {
-    const { t } = useTranslation();
-
     return (
         <div className="space-y-6">
             <Heading
                 variant="small"
-                title={t('Program')}
-                description={t('The card program your cards are issued from.')}
+                title={__('Program')}
+                description={__('The card program your cards are issued from.')}
             />
             <Form
                 {...updateProgram.form()}
@@ -349,7 +344,7 @@ function ProgramForm({
 
                             <Field data-invalid={!!errors.name}>
                                 <FieldLabel htmlFor="program_name">
-                                    {t('Program name')}
+                                    {__('Program name')}
                                 </FieldLabel>
                                 <Input
                                     id="program_name"
@@ -360,27 +355,27 @@ function ProgramForm({
                                     aria-invalid={!!errors.name}
                                 />
                                 <FieldDescription>
-                                    {t('For example “Gift Card”.')}
+                                    {__('For example “Gift Card”.')}
                                 </FieldDescription>
                                 <FieldError>{errors.name}</FieldError>
                             </Field>
 
                             <Field data-invalid={!!errors.terms_url}>
                                 <FieldLabel htmlFor="terms_url">
-                                    {t('Terms URL (optional)')}
+                                    {__('Terms URL (optional)')}
                                 </FieldLabel>
                                 <Input
                                     id="terms_url"
                                     name="terms_url"
                                     type="url"
                                     defaultValue={program.terms_url ?? ''}
-                                    placeholder={t(
+                                    placeholder={__(
                                         'https://yourbusiness.com/terms',
                                     )}
                                     aria-invalid={!!errors.terms_url}
                                 />
                                 <FieldDescription>
-                                    {t('A link to your terms and conditions.')}
+                                    {__('A link to your terms and conditions.')}
                                 </FieldDescription>
                                 <FieldError>{errors.terms_url}</FieldError>
                             </Field>
@@ -391,7 +386,7 @@ function ProgramForm({
                                     disabled={processing || !canEdit}
                                 >
                                     {processing && <Spinner />}
-                                    {t('Save program')}
+                                    {__('Save program')}
                                 </Button>
                             </div>
                         </FieldGroup>
@@ -410,13 +405,11 @@ export default function BusinessSettings({
     currencies,
     timezones,
 }: Props) {
-    const { t } = useTranslation();
-
     return (
         <>
-            <Head title={t('Business settings')} />
+            <Head title={__('Business settings')} />
 
-            <h1 className="sr-only">{t('Business settings')}</h1>
+            <h1 className="sr-only">{__('Business settings')}</h1>
 
             {!canEdit && <ReadOnlyNotice />}
 
@@ -434,11 +427,11 @@ export default function BusinessSettings({
     );
 }
 
-BusinessSettings.layout = {
+BusinessSettings.layout = () => ({
     breadcrumbs: [
         {
-            titleKey: 'Business settings',
+            title: __('Business settings'),
             href: edit(),
         },
     ],
-};
+});

@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/sidebar';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import type { NavItem } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 export function NavMain({
     items,
@@ -18,8 +18,6 @@ export function NavMain({
     label?: string;
 }) {
     const { isCurrentUrl } = useCurrentUrl();
-    const { t } = useTranslation();
-
     return (
         <SidebarGroup className="px-2 py-0">
             {label && <SidebarGroupLabel>{label}</SidebarGroupLabel>}
@@ -28,11 +26,11 @@ export function NavMain({
                     <SidebarMenuItem key={item.title}>
                         <SidebarMenuButton
                             isActive={isCurrentUrl(item.href)}
-                            tooltip={{ children: t(item.title) }}
+                            tooltip={{ children: item.title }}
                             render={<Link href={item.href} prefetch />}
                         >
                             {item.icon && <item.icon />}
-                            <span>{t(item.title)}</span>
+                            <span>{item.title}</span>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 ))}

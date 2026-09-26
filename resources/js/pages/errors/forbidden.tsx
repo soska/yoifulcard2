@@ -13,7 +13,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { PreferenceSwitchers } from '@/components/preferences/preference-switchers';
 import { dashboard, home } from '@/routes';
 import { claim } from '@/routes/admin';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 export default function Forbidden({
     canClaimSuperadmin = false,
@@ -21,11 +21,9 @@ export default function Forbidden({
     canClaimSuperadmin?: boolean;
 }) {
     const { auth } = usePage().props;
-    const { t } = useTranslation();
-
     return (
         <>
-            <Head title={t('Access denied')} />
+            <Head title={__('Access denied')} />
             <div className="relative flex min-h-svh items-center justify-center bg-background p-6">
                 <PreferenceSwitchers className="absolute top-4 right-4" />
                 <Empty className="max-w-md">
@@ -36,9 +34,9 @@ export default function Forbidden({
                         <p className="text-5xl font-bold text-destructive">
                             403
                         </p>
-                        <EmptyTitle>{t('Access denied')}</EmptyTitle>
+                        <EmptyTitle>{__('Access denied')}</EmptyTitle>
                         <EmptyDescription>
-                            {t(
+                            {__(
                                 'You do not have permission to access this page.',
                             )}
                         </EmptyDescription>
@@ -50,7 +48,7 @@ export default function Forbidden({
                                 <Link href={auth.user ? dashboard() : home()} />
                             }
                         >
-                            {auth.user ? t('Go to dashboard') : t('Go home')}
+                            {auth.user ? __('Go to dashboard') : __('Go home')}
                         </Button>
                         {canClaimSuperadmin && (
                             <Form {...claim.form()}>
@@ -62,7 +60,7 @@ export default function Forbidden({
                                         data-test="claim-superadmin-button"
                                     >
                                         {processing && <Spinner />}
-                                        {t('Claim superadmin')}
+                                        {__('Claim superadmin')}
                                     </Button>
                                 )}
                             </Form>

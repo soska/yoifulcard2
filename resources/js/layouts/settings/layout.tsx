@@ -10,35 +10,36 @@ import { edit } from '@/routes/profile';
 import { edit as editSecurity } from '@/routes/security';
 import { edit as editBusiness } from '@/routes/settings';
 import type { NavItem } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
-const sidebarNavItems: NavItem[] = [
-    {
-        title: 'Business',
-        href: editBusiness(),
-        icon: null,
-    },
-    {
-        title: 'Profile',
-        href: edit(),
-        icon: null,
-    },
-    {
-        title: 'Security',
-        href: editSecurity(),
-        icon: null,
-    },
-    {
-        title: 'Appearance',
-        href: editAppearance(),
-        icon: null,
-    },
-];
+/** Built per render: `__()` at module scope would freeze English. */
+function sidebarNavItems(): NavItem[] {
+    return [
+        {
+            title: __('Business'),
+            href: editBusiness(),
+            icon: null,
+        },
+        {
+            title: __('Profile'),
+            href: edit(),
+            icon: null,
+        },
+        {
+            title: __('Security'),
+            href: editSecurity(),
+            icon: null,
+        },
+        {
+            title: __('Appearance'),
+            href: editAppearance(),
+            icon: null,
+        },
+    ];
+}
 
 export default function SettingsLayout({ children }: PropsWithChildren) {
     const { isCurrentUrl, isCurrentOrParentUrl } = useCurrentUrl();
-    const { t } = useTranslation();
-
     // `/settings` is the parent of every settings page, so the business
     // item only matches exactly.
     const isActive = (item: NavItem) =>
@@ -49,8 +50,8 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
     return (
         <div className="px-4 py-6">
             <Heading
-                title={t('Settings')}
-                description={t(
+                title={__('Settings')}
+                description={__(
                     'Manage your business, profile, and account settings',
                 )}
             />
@@ -59,9 +60,9 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                 <aside className="w-full max-w-xl lg:w-48">
                     <nav
                         className="flex flex-col space-y-1 space-x-0"
-                        aria-label={t('Settings')}
+                        aria-label={__('Settings')}
                     >
-                        {sidebarNavItems.map((item, index) => (
+                        {sidebarNavItems().map((item, index) => (
                             <Button
                                 key={`${toUrl(item.href)}-${index}`}
                                 size="sm"
@@ -73,7 +74,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                                 render={<Link href={item.href} />}
                             >
                                 {item.icon && <item.icon className="h-4 w-4" />}
-                                {t(item.title)}
+                                {item.title}
                             </Button>
                         ))}
                     </nav>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useClipboard } from '@/hooks/use-clipboard';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 /**
  * Shows a generated password that the server flashed for this one
@@ -16,31 +16,33 @@ export function OneTimeCredentials() {
     const credentials = flash.credentials;
     const [dismissed, setDismissed] = useState<string | null>(null);
     const [copied, copy] = useClipboard();
-    const { t } = useTranslation();
-
     if (!credentials || dismissed === credentials.password) {
         return null;
     }
 
-    const text = `${t('Email')}: ${credentials.email}\n${t('Password')}: ${credentials.password}`;
+    // One whole line per field, so a translation can reorder label and value.
+    const text = [
+        __('Email: {email}', { email: credentials.email }),
+        __('Password: {password}', { password: credentials.password }),
+    ].join('\n');
 
     return (
         <Alert>
             <KeyRound />
-            <AlertTitle>{t('Save this password now')}</AlertTitle>
+            <AlertTitle>{__('Save this password now')}</AlertTitle>
             <AlertDescription className="flex flex-col gap-3">
                 <p>
-                    {t(
+                    {__(
                         'It is shown only once. Share it with the user over a safe channel and ask them to change it in their settings after signing in.',
                     )}
                 </p>
                 <dl className="grid gap-2 sm:grid-cols-[auto_1fr] sm:gap-x-4">
-                    <dt className="text-muted-foreground">{t('Email')}</dt>
+                    <dt className="text-muted-foreground">{__('Email')}</dt>
                     <dd className="font-mono break-all text-foreground">
                         {credentials.email}
                     </dd>
                     <dt className="text-muted-foreground">
-                        {t('Temporary password')}
+                        {__('Temporary password')}
                     </dt>
                     <dd
                         className="font-mono break-all text-foreground"
@@ -60,14 +62,16 @@ export function OneTimeCredentials() {
                         ) : (
                             <Copy data-icon="inline-start" />
                         )}
-                        {copied === text ? t('Copied') : t('Copy credentials')}
+                        {copied === text
+                            ? __('Copied')
+                            : __('Copy credentials')}
                     </Button>
                     <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => setDismissed(credentials.password)}
                     >
-                        {t('Done')}
+                        {__('Done')}
                     </Button>
                 </div>
             </AlertDescription>

@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { edit } from '@/routes/profile';
 import type { Auth } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type PageProps = {
     auth: Auth;
@@ -16,19 +16,17 @@ type PageProps = {
 
 export default function Profile() {
     const { auth } = usePage<PageProps>().props;
-    const { t } = useTranslation();
-
     return (
         <>
-            <Head title={t('Profile settings')} />
+            <Head title={__('Profile settings')} />
 
-            <h1 className="sr-only">{t('Profile settings')}</h1>
+            <h1 className="sr-only">{__('Profile settings')}</h1>
 
             <div className="space-y-6">
                 <Heading
                     variant="small"
-                    title={t('Profile')}
-                    description={t('Update your name and email address')}
+                    title={__('Profile')}
+                    description={__('Update your name and email address')}
                 />
 
                 <Form
@@ -41,7 +39,7 @@ export default function Profile() {
                     {({ processing, errors }) => (
                         <>
                             <div className="grid gap-2">
-                                <Label htmlFor="name">{t('Name')}</Label>
+                                <Label htmlFor="name">{__('Name')}</Label>
 
                                 <Input
                                     id="name"
@@ -50,7 +48,7 @@ export default function Profile() {
                                     name="name"
                                     required
                                     autoComplete="name"
-                                    placeholder={t('Full name')}
+                                    placeholder={__('Full name')}
                                 />
 
                                 <InputError
@@ -61,7 +59,7 @@ export default function Profile() {
 
                             <div className="grid gap-2">
                                 <Label htmlFor="email">
-                                    {t('Email address')}
+                                    {__('Email address')}
                                 </Label>
 
                                 <Input
@@ -72,7 +70,7 @@ export default function Profile() {
                                     name="email"
                                     required
                                     autoComplete="username"
-                                    placeholder={t('Email address')}
+                                    placeholder={__('Email address')}
                                 />
 
                                 <InputError
@@ -86,7 +84,7 @@ export default function Profile() {
                                     disabled={processing}
                                     data-test="update-profile-button"
                                 >
-                                    {t('Save')}
+                                    {__('Save')}
                                 </Button>
                             </div>
                         </>
@@ -99,11 +97,11 @@ export default function Profile() {
     );
 }
 
-Profile.layout = {
+Profile.layout = () => ({
     breadcrumbs: [
         {
-            titleKey: 'Profile settings',
+            title: __('Profile settings'),
             href: edit(),
         },
     ],
-};
+});

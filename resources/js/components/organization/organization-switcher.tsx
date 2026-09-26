@@ -15,7 +15,7 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from '@/components/ui/sidebar';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 import { switchMethod } from '@/routes/organizations';
 import type { SwitchableOrganization } from '@/types';
 import { roleLabel } from '@/lib/labels';
@@ -46,12 +46,10 @@ function SwitcherItems({
     currentId: string | null;
     reader: boolean;
 }) {
-    const { t } = useTranslation();
-
     return (
         <DropdownMenuGroup>
             <DropdownMenuLabel className="text-xs text-muted-foreground">
-                {t('Businesses')}
+                {__('Businesses')}
             </DropdownMenuLabel>
             {organizations.map((organization) => (
                 <DropdownMenuItem
@@ -90,8 +88,6 @@ function SwitcherItems({
 export function SidebarOrganizationSwitcher() {
     const { organizations, current, visible } = useSwitcher();
     const { isMobile } = useSidebar();
-    const { t } = useTranslation();
-
     if (!visible) {
         return null;
     }
@@ -105,7 +101,7 @@ export function SidebarOrganizationSwitcher() {
                             <SidebarMenuButton
                                 size="lg"
                                 className="data-open:bg-sidebar-accent data-open:text-sidebar-accent-foreground"
-                                aria-label={t('Switch business')}
+                                aria-label={__('Switch business')}
                                 data-test="organization-switcher"
                             />
                         }
@@ -149,8 +145,6 @@ export function SidebarOrganizationSwitcher() {
  */
 export function ReaderOrganizationSwitcher() {
     const { organizations, current, visible } = useSwitcher();
-    const { t } = useTranslation();
-
     if (!visible) {
         return null;
     }
@@ -163,7 +157,7 @@ export function ReaderOrganizationSwitcher() {
                         variant="ghost"
                         size="xs"
                         className="-ml-2 max-w-full min-w-0 font-normal text-muted-foreground"
-                        aria-label={t('Switch business')}
+                        aria-label={__('Switch business')}
                         data-test="organization-switcher"
                     />
                 }

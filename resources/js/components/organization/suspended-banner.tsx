@@ -2,9 +2,12 @@ import { usePage } from '@inertiajs/react';
 import { Ban } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { cn } from '@/lib/utils';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
-export const SUSPENDED_MESSAGE = 'This business is suspended. Contact support.';
+/** The suspended notice, shared by the banner and the disabled write forms. */
+export function suspendedMessage(): string {
+    return __('This business is suspended. Contact support.');
+}
 
 /**
  * Shown on every page while the current organization is not active. It
@@ -12,8 +15,6 @@ export const SUSPENDED_MESSAGE = 'This business is suspended. Contact support.';
  */
 export function SuspendedBanner({ className }: { className?: string }) {
     const { currentOrganization } = usePage().props;
-    const { t } = useTranslation();
-
     if (!currentOrganization || currentOrganization.status === 'active') {
         return null;
     }
@@ -22,7 +23,7 @@ export function SuspendedBanner({ className }: { className?: string }) {
         <Alert variant="destructive" role="alert" className={className}>
             <Ban />
             <AlertDescription className={cn('font-medium')}>
-                {t(SUSPENDED_MESSAGE)}
+                {suspendedMessage()}
             </AlertDescription>
         </Alert>
     );

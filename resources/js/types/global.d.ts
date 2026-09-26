@@ -4,7 +4,6 @@ import type {
     CurrentOrganization,
     SwitchableOrganization,
 } from '@/types/organization';
-import type { Translations } from '@/lib/i18n';
 import type { FlashToast } from '@/lib/flash';
 
 declare module 'react' {
@@ -34,8 +33,6 @@ declare module '@inertiajs/core' {
             };
             /** The `theme` cookie. */
             theme: 'light' | 'dark' | 'system';
-            /** JSON lines for `locale` whose text differs from the key. */
-            translations: Translations;
             [key: string]: unknown;
         };
         flashDataType: {

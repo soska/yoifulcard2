@@ -11,7 +11,7 @@ import {
     EmptyMedia,
     EmptyTitle,
 } from '@/components/ui/empty';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 import { dashboard, home } from '@/routes';
 
 type Status = 404 | 419 | 500 | 503;
@@ -22,37 +22,35 @@ type Status = 404 | 419 | 500 | 503;
  */
 export default function ErrorPage({ status }: { status: Status }) {
     const { auth } = usePage().props;
-    const { t } = useTranslation();
-
     const copy: Record<
         Status,
         { icon: LucideIcon; title: string; description: string }
     > = {
         404: {
             icon: FileQuestion,
-            title: t('Page not found'),
-            description: t(
+            title: __('Page not found'),
+            description: __(
                 'The page you are looking for does not exist or was moved.',
             ),
         },
         419: {
             icon: Clock,
-            title: t('Page expired'),
-            description: t(
+            title: __('Page expired'),
+            description: __(
                 'Your session expired. Reload the page and try again.',
             ),
         },
         500: {
             icon: ServerCrash,
-            title: t('Something went wrong'),
-            description: t(
+            title: __('Something went wrong'),
+            description: __(
                 'An unexpected error happened on our side. Try again in a moment.',
             ),
         },
         503: {
             icon: Wrench,
-            title: t('Down for maintenance'),
-            description: t(
+            title: __('Down for maintenance'),
+            description: __(
                 'We are making some improvements. Check back in a few minutes.',
             ),
         },
@@ -83,7 +81,7 @@ export default function ErrorPage({ status }: { status: Status }) {
                                 <Link href={auth.user ? dashboard() : home()} />
                             }
                         >
-                            {auth.user ? t('Go to dashboard') : t('Go home')}
+                            {auth.user ? __('Go to dashboard') : __('Go home')}
                         </Button>
                     </EmptyContent>
                 </Empty>

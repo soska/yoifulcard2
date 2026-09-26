@@ -2,11 +2,10 @@ import { Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useReaderSound } from '@/hooks/use-reader-storage';
 import { playReaderSound, unlockReaderSound } from '@/lib/reader-sound';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 /** Turns reader beeps on or off for this device. Off by default. */
 export function SoundToggle() {
-    const { t } = useTranslation();
     const { enabled, setEnabled } = useReaderSound();
 
     return (
@@ -32,7 +31,7 @@ export function SoundToggle() {
             ) : (
                 <VolumeX data-icon="inline-start" />
             )}
-            {enabled ? t('Sound on') : t('Sound off')}
+            {enabled ? __('Sound on') : __('Sound off')}
         </Button>
     );
 }

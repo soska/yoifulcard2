@@ -30,58 +30,61 @@ import { index as cardsIndex } from '@/routes/cards';
 import { edit as settingsEdit } from '@/routes/settings';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { NavItem } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Cards',
-        href: cardsIndex(),
-        icon: CreditCard,
-    },
-    {
-        title: 'Transactions',
-        href: transactionsIndex(),
-        icon: ReceiptText,
-    },
-    {
-        title: 'Analytics',
-        href: analytics(),
-        icon: ChartColumn,
-    },
-    {
-        title: 'Settings',
-        href: settingsEdit(),
-        icon: Settings,
-    },
-];
+/** Built per render: `__()` at module scope would freeze English. */
+function mainNavItems(): NavItem[] {
+    return [
+        {
+            title: __('Dashboard'),
+            href: dashboard(),
+            icon: LayoutGrid,
+        },
+        {
+            title: __('Cards'),
+            href: cardsIndex(),
+            icon: CreditCard,
+        },
+        {
+            title: __('Transactions'),
+            href: transactionsIndex(),
+            icon: ReceiptText,
+        },
+        {
+            title: __('Analytics'),
+            href: analytics(),
+            icon: ChartColumn,
+        },
+        {
+            title: __('Settings'),
+            href: settingsEdit(),
+            icon: Settings,
+        },
+    ];
+}
 
-const adminNavItems: NavItem[] = [
-    {
-        title: 'Admin',
-        href: adminIndex(),
-        icon: ShieldCheck,
-    },
-    {
-        title: 'Organizations',
-        href: adminOrganizationsIndex(),
-        icon: Building2,
-    },
-    {
-        title: 'Users',
-        href: adminUsersIndex(),
-        icon: Users,
-    },
-];
+function adminNavItems(): NavItem[] {
+    return [
+        {
+            title: __('Admin'),
+            href: adminIndex(),
+            icon: ShieldCheck,
+        },
+        {
+            title: __('Organizations'),
+            href: adminOrganizationsIndex(),
+            icon: Building2,
+        },
+        {
+            title: __('Users'),
+            href: adminUsersIndex(),
+            icon: Users,
+        },
+    ];
+}
 
 export function AppSidebar() {
     const { auth } = usePage().props;
-    const { t } = useTranslation();
-
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -99,9 +102,9 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} label={t('Business')} />
+                <NavMain items={mainNavItems()} label={__('Business')} />
                 {auth.isSuperadmin && (
-                    <NavMain items={adminNavItems} label={t('Superadmin')} />
+                    <NavMain items={adminNavItems()} label={__('Superadmin')} />
                 )}
             </SidebarContent>
 

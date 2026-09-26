@@ -40,39 +40,42 @@ import { index as cardsIndex } from '@/routes/cards';
 import { edit as settingsEdit } from '@/routes/settings';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { BreadcrumbItem, NavItem } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     breadcrumbs?: BreadcrumbItem[];
 };
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Cards',
-        href: cardsIndex(),
-        icon: CreditCard,
-    },
-    {
-        title: 'Transactions',
-        href: transactionsIndex(),
-        icon: ReceiptText,
-    },
-    {
-        title: 'Analytics',
-        href: analytics(),
-        icon: ChartColumn,
-    },
-    {
-        title: 'Settings',
-        href: settingsEdit(),
-        icon: Settings,
-    },
-];
+/** Built per render: `__()` at module scope would freeze English. */
+function mainNavItems(): NavItem[] {
+    return [
+        {
+            title: __('Dashboard'),
+            href: dashboard(),
+            icon: LayoutGrid,
+        },
+        {
+            title: __('Cards'),
+            href: cardsIndex(),
+            icon: CreditCard,
+        },
+        {
+            title: __('Transactions'),
+            href: transactionsIndex(),
+            icon: ReceiptText,
+        },
+        {
+            title: __('Analytics'),
+            href: analytics(),
+            icon: ChartColumn,
+        },
+        {
+            title: __('Settings'),
+            href: settingsEdit(),
+            icon: Settings,
+        },
+    ];
+}
 
 const activeItemStyles =
     'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100';
@@ -82,8 +85,6 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
     const { auth } = page.props;
     const getInitials = useInitials();
     const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl();
-    const { t } = useTranslation();
-
     return (
         <>
             <div className="border-b border-sidebar-border/80">
@@ -107,7 +108,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                 className="flex h-full w-64 flex-col items-stretch justify-between bg-sidebar"
                             >
                                 <SheetTitle className="sr-only">
-                                    {t('Navigation menu')}
+                                    {__('Navigation menu')}
                                 </SheetTitle>
                                 <SheetHeader className="flex justify-start text-left">
                                     <AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white" />
@@ -115,7 +116,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                 <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                                     <div className="flex h-full flex-col justify-between text-sm">
                                         <div className="flex flex-col space-y-4">
-                                            {mainNavItems.map((item) => (
+                                            {mainNavItems().map((item) => (
                                                 <Link
                                                     key={item.title}
                                                     href={item.href}
@@ -124,7 +125,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                                     {item.icon && (
                                                         <item.icon className="h-5 w-5" />
                                                     )}
-                                                    <span>{t(item.title)}</span>
+                                                    <span>{item.title}</span>
                                                 </Link>
                                             ))}
                                         </div>
@@ -146,7 +147,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                     <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
                         <NavigationMenu className="flex h-full items-stretch">
                             <NavigationMenuList className="flex h-full items-stretch space-x-2">
-                                {mainNavItems.map((item, index) => (
+                                {mainNavItems().map((item, index) => (
                                     <NavigationMenuItem
                                         key={index}
                                         className="relative flex h-full items-center"
@@ -165,7 +166,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                             {item.icon && (
                                                 <item.icon className="mr-2 h-4 w-4" />
                                             )}
-                                            {t(item.title)}
+                                            {item.title}
                                         </Link>
                                         {isCurrentUrl(item.href) && (
                                             <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>

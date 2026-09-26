@@ -25,7 +25,7 @@ import {
 } from '@/routes/admin/organizations';
 import { index as usersIndex } from '@/routes/admin/users';
 import type { AdminOrganizationSummary, AdminStats } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     stats: AdminStats;
@@ -34,52 +34,50 @@ type Props = {
 
 export default function AdminIndex({ stats, recentOrganizations }: Props) {
     const { formatDate } = useDateFormat();
-    const { t } = useTranslation();
-
     const tiles = [
         {
-            label: t('Organizations'),
+            label: __('Organizations'),
             value: stats.organizations,
-            detail: t(':active active, :suspended suspended', {
+            detail: __('{active} active, {suspended} suspended', {
                 active: stats.activeOrganizations,
                 suspended: stats.suspendedOrganizations,
             }),
             icon: Building2,
         },
         {
-            label: t('Cards'),
+            label: __('Cards'),
             value: stats.cards,
-            detail: t('Across all organizations'),
+            detail: __('Across all organizations'),
             icon: CreditCard,
         },
         {
-            label: t('Users'),
+            label: __('Users'),
             value: stats.users,
-            detail: t('Registered accounts'),
+            detail: __('Registered accounts'),
             icon: Users,
         },
         {
-            label: t('Superadmins'),
+            label: __('Superadmins'),
             value: stats.superadmins,
-            detail: t('Can open this area'),
+            detail: __('Can open this area'),
             icon: ShieldCheck,
         },
     ];
 
     return (
         <>
-            <Head title={t('Admin')} />
+            <Head title={__('Admin')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                     <Heading
-                        title={t('Admin')}
-                        description={t(
+                        title={__('Admin')}
+                        description={__(
                             'Manage organizations, plans, and users.',
                         )}
                     />
                     <Button render={<Link href={createOrganization()} />}>
                         <Plus data-icon="inline-start" />
-                        {t('Create organization')}
+                        {__('Create organization')}
                     </Button>
                 </div>
 
@@ -105,9 +103,9 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between gap-4">
                         <div className="flex flex-col gap-1">
-                            <CardTitle>{t('Recent organizations')}</CardTitle>
+                            <CardTitle>{__('Recent organizations')}</CardTitle>
                             <CardDescription>
-                                {t('The newest businesses on Yoiful.')}
+                                {__('The newest businesses on Yoiful.')}
                             </CardDescription>
                         </div>
                         <div className="flex gap-2">
@@ -116,14 +114,14 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
                                 size="sm"
                                 render={<Link href={usersIndex()} />}
                             >
-                                {t('Users')}
+                                {__('Users')}
                             </Button>
                             <Button
                                 variant="outline"
                                 size="sm"
                                 render={<Link href={organizationsIndex()} />}
                             >
-                                {t('View all')}
+                                {__('View all')}
                             </Button>
                         </div>
                     </CardHeader>
@@ -132,10 +130,12 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
                             <Empty className="border">
                                 <EmptyHeader>
                                     <EmptyTitle>
-                                        {t('No organizations yet')}
+                                        {__('No organizations yet')}
                                     </EmptyTitle>
                                     <EmptyDescription>
-                                        {t('Create one to onboard a business.')}
+                                        {__(
+                                            'Create one to onboard a business.',
+                                        )}
                                     </EmptyDescription>
                                 </EmptyHeader>
                             </Empty>
@@ -157,7 +157,7 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
                                             </Link>
                                             <p className="truncate text-sm text-muted-foreground">
                                                 /{organization.slug} ·{' '}
-                                                {t('Created :date', {
+                                                {__('Created {date}', {
                                                     date: formatDate(
                                                         organization.created_at,
                                                     ),
@@ -178,6 +178,6 @@ export default function AdminIndex({ stats, recentOrganizations }: Props) {
     );
 }
 
-AdminIndex.layout = {
-    breadcrumbs: [{ titleKey: 'Admin', href: index() }],
-};
+AdminIndex.layout = () => ({
+    breadcrumbs: [{ title: __('Admin'), href: index() }],
+});

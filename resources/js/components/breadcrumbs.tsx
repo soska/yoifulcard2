@@ -9,16 +9,12 @@ import {
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import type { BreadcrumbItem as BreadcrumbItemType } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
-import { breadcrumbLabel } from '@/lib/breadcrumbs';
 
 export function Breadcrumbs({
     breadcrumbs,
 }: {
     breadcrumbs: BreadcrumbItemType[];
 }) {
-    const { t } = useTranslation();
-
     return (
         <>
             {breadcrumbs.length > 0 && (
@@ -32,7 +28,7 @@ export function Breadcrumbs({
                                     <BreadcrumbItem>
                                         {isLast ? (
                                             <BreadcrumbPage>
-                                                {breadcrumbLabel(item, t)}
+                                                {item.title}
                                             </BreadcrumbPage>
                                         ) : (
                                             <BreadcrumbLink
@@ -40,7 +36,7 @@ export function Breadcrumbs({
                                                     <Link href={item.href} />
                                                 }
                                             >
-                                                {breadcrumbLabel(item, t)}
+                                                {item.title}
                                             </BreadcrumbLink>
                                         )}
                                     </BreadcrumbItem>

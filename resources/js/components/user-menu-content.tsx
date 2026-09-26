@@ -11,7 +11,7 @@ import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { logout } from '@/routes';
 import { edit } from '@/routes/profile';
 import type { User } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     user: User;
@@ -19,8 +19,6 @@ type Props = {
 
 export function UserMenuContent({ user }: Props) {
     const cleanup = useMobileNavigation();
-    const { t } = useTranslation();
-
     const handleLogout = () => {
         cleanup();
         router.flushAll();
@@ -48,7 +46,7 @@ export function UserMenuContent({ user }: Props) {
                     }
                 >
                     <Settings className="mr-2" />
-                    {t('Settings')}
+                    {__('Settings')}
                 </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -64,7 +62,7 @@ export function UserMenuContent({ user }: Props) {
                 }
             >
                 <LogOut className="mr-2" />
-                {t('Log out')}
+                {__('Log out')}
             </DropdownMenuItem>
         </>
     );

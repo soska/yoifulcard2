@@ -2,7 +2,8 @@ import type { CSSProperties } from 'react';
 import { useMoneyFormat } from '@/hooks/use-money-format';
 import { cn } from '@/lib/utils';
 import type { PublicCard, PublicOrganization } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
+import { cardStatusLabel } from '@/lib/labels';
 
 /**
  * Relative luminance of a `#rgb` or `#rrggbb` color, from 0 (black) to 1
@@ -41,7 +42,6 @@ export function CardFace({
     organization: PublicOrganization;
 }) {
     const light = luminance(organization.primary_color) > 0.5;
-    const { t } = useTranslation();
     const { formatMoney } = useMoneyFormat();
 
     return (
@@ -58,13 +58,13 @@ export function CardFace({
                 </span>
                 {card.status === 'frozen' && (
                     <span className="rounded-full bg-current/15 px-3 py-1 text-xs font-semibold tracking-wide uppercase">
-                        {t('Frozen')}
+                        {cardStatusLabel('frozen')}
                     </span>
                 )}
             </div>
             <div className="flex flex-col gap-1">
                 <span className="text-sm opacity-90">
-                    {t('Current balance')}
+                    {__('Current balance')}
                 </span>
                 <p className="text-5xl font-bold tracking-tight tabular-nums">
                     {formatMoney(card.balance, organization.currency)}

@@ -1,15 +1,211 @@
 {
+  "10667a8aajb": {
+    "message": "No camera available",
+    "refs": [
+      "resources/js/components/reader/qr-scanner.tsx:112:20"
+    ]
+  },
+  "106tpfv0mks": {
+    "message": "Last used",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:76:39",
+      "resources/js/pages/cards/show.tsx:127:46"
+    ]
+  },
+  "10axxge8i8h": {
+    "message": "Charge card",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:64:25"
+    ]
+  },
+  "10f3jl55aqr": {
+    "message": "No members.",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:353:42"
+    ]
+  },
+  "10nfdbj7lob": {
+    "message": "No users found",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:107:42"
+    ]
+  },
+  "10pdu7nmpj4": {
+    "message": "A link to your terms and conditions.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:378:38"
+    ]
+  },
+  "10r1ie41le2": {
+    "message": {
+      "one": "{count} active",
+      "other": "{count} active"
+    },
+    "context": "cards",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:85:9"
+    ]
+  },
+  "10rdx7z6m6w": {
+    "message": "Balance after",
+    "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:48:26"
+    ]
+  },
   "11cwj6fprvc": {
     "message": "Card {code} created.",
     "refs": [
       "resources/js/lib/flash.ts:29:13"
     ]
   },
+  "11d5m996df2": {
+    "message": "Passkeys are not supported in this browser.",
+    "refs": [
+      "resources/js/components/passkey-register.tsx:63:18"
+    ]
+  },
+  "11np5ld27l": {
+    "message": "Done",
+    "refs": [
+      "resources/js/components/admin/one-time-credentials.tsx:74:26"
+    ]
+  },
+  "11vkhfkpaew": {
+    "message": "Each recovery code can be used once to access your account and will be removed after use. If you need more, click Regenerate codes above.",
+    "refs": [
+      "resources/js/components/two-factor-recovery-codes.tsx:154:42"
+    ]
+  },
+  "11yhvloej9w": {
+    "message": "owner@example.com",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:144:66"
+    ]
+  },
+  "128g53l4k91": {
+    "message": "Update your name and email address",
+    "refs": [
+      "resources/js/pages/settings/profile.tsx:29:34"
+    ]
+  },
   "12aiv6yg7xr": {
     "message": "Owner",
     "context": "membership role",
     "refs": [
-      "resources/js/lib/labels.ts:52:16"
+      "resources/js/lib/labels.ts:53:16"
+    ]
+  },
+  "12aqrfl0ffg": {
+    "message": "Delete your account and all of its resources",
+    "refs": [
+      "resources/js/components/delete-user.tsx:27:30"
+    ]
+  },
+  "12kzmikx1x3": {
+    "message": "Copy credentials",
+    "refs": [
+      "resources/js/components/admin/one-time-credentials.tsx:67:31"
+    ]
+  },
+  "12nk2hhieye": {
+    "message": "Program",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:326:24"
+    ]
+  },
+  "12prw1e9rug": {
+    "message": "Current balance",
+    "refs": [
+      "resources/js/components/public-card/card-face.tsx:67:22"
+    ]
+  },
+  "12uz3hhrqbv": {
+    "message": "Log out",
+    "refs": [
+      "resources/js/components/user-menu-content.tsx:65:18"
+    ]
+  },
+  "12veafpg3t6": {
+    "message": "Go home",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:84:66",
+      "resources/js/pages/errors/forbidden.tsx:51:66"
+    ]
+  },
+  "133jkpnp2n0": {
+    "message": "Every change is recorded in the card history.",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:100:22"
+    ]
+  },
+  "1343mtlhfxv": {
+    "message": "This card is currently frozen and cannot be used. Please contact {business} for assistance.",
+    "refs": [
+      "resources/js/pages/public-card/show.tsx:61:34"
+    ]
+  },
+  "139hd5cuuxb": {
+    "message": "Hold the card's QR code inside the frame.",
+    "refs": [
+      "resources/js/pages/reader/scan.tsx:56:26"
+    ]
+  },
+  "13uodsi9t97": {
+    "message": "Grant superadmin",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:310:79"
+    ]
+  },
+  "13w10qqmr70": {
+    "message": "{from} to {to}, in your business's timezone.",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:102:38"
+    ]
+  },
+  "141xsxugpnx": {
+    "message": "Back to scanner",
+    "refs": [
+      "resources/js/pages/reader/card.tsx:96:22"
+    ]
+  },
+  "14jlwq04qlu": {
+    "message": "To",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:189:38"
+    ]
+  },
+  "153loh1e91v": {
+    "message": "Search by name or slug",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:126:50",
+      "resources/js/pages/admin/organizations/index.tsx:127:49"
+    ]
+  },
+  "1579zdpbmb4": {
+    "message": "Removing...",
+    "refs": [
+      "resources/js/components/passkey-item.tsx:92:35"
+    ]
+  },
+  "15fre7yepuw": {
+    "message": "Members",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:198:46",
+      "resources/js/pages/admin/organizations/show.tsx:334:49",
+      "resources/js/pages/admin/organizations/show.tsx:69:20"
+    ]
+  },
+  "15j2syq20cb": {
+    "message": "Active",
+    "context": "program status",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:421:59"
+    ]
+  },
+  "15uvoculuj1": {
+    "message": "Note (optional)",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:193:63"
     ]
   },
   "164d0i89snr": {
@@ -18,38 +214,678 @@
       "resources/js/lib/flash.ts:40:43"
     ]
   },
+  "167vf3bxief": {
+    "message": "Continue",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:278:29",
+      "resources/js/components/two-factor-setup-modal.tsx:287:25",
+      "resources/js/pages/auth/two-factor-challenge.tsx:115:34"
+    ]
+  },
+  "16idtegk09p": {
+    "message": "Manage organizations, plans, and users.",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:74:38"
+    ]
+  },
   "16vz52anzdz": {
     "message": "Organization created and linked to {email}.",
     "refs": [
       "resources/js/lib/flash.ts:50:13"
     ]
   },
+  "16zmzw0m70p": {
+    "message": "An existing user with this email becomes the owner. Otherwise a new account is created.",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:152:54"
+    ]
+  },
+  "1752q9xm7wf": {
+    "message": "{amount} loaded",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:99:21"
+    ]
+  },
   "1779l401as3": {
     "message": "Frozen",
     "context": "card status",
     "refs": [
-      "resources/js/lib/labels.ts:29:17"
+      "resources/js/lib/labels.ts:30:17"
+    ]
+  },
+  "17qmn6mc51f": {
+    "message": "Filter by status",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:148:49",
+      "resources/js/pages/cards/index.tsx:255:49"
+    ]
+  },
+  "181gcyu0dax": {
+    "message": "Card code",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:206:38"
     ]
   },
   "18f16q5jxo2": {
     "message": "Charge",
     "context": "transaction type",
     "refs": [
-      "resources/js/lib/labels.ts:41:16"
+      "resources/js/lib/labels.ts:42:16"
+    ]
+  },
+  "18h8yxok6lj": {
+    "message": "Security settings",
+    "refs": [
+      "resources/js/pages/settings/security.tsx:148:20",
+      "resources/js/pages/settings/security.tsx:27:26",
+      "resources/js/pages/settings/security.tsx:29:38"
+    ]
+  },
+  "18rhzgrlshl": {
+    "message": "Passkey name",
+    "refs": [
+      "resources/js/components/passkey-register.tsx:82:48"
+    ]
+  },
+  "18yd92ykhig": {
+    "message": "Members can still sign in and read their cards, transactions, and settings, but they cannot create cards, change balances, or edit anything. The public card page keeps showing balances.",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:150:42"
+    ]
+  },
+  "19aj2jxlgsd": {
+    "message": "Two-factor authentication",
+    "refs": [
+      "resources/js/components/manage-two-factor.tsx:51:24",
+      "resources/js/pages/auth/two-factor-challenge.tsx:57:26"
+    ]
+  },
+  "1ajuoro6znp": {
+    "message": "Created",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:203:53",
+      "resources/js/pages/admin/organizations/show.tsx:468:38",
+      "resources/js/pages/cards/index.tsx:75:37",
+      "resources/js/pages/cards/show.tsx:119:46"
+    ]
+  },
+  "1ajy2490000": {
+    "message": "Admin",
+    "refs": [
+      "resources/js/components/app-sidebar.tsx:69:20",
+      "resources/js/pages/admin/index.tsx:182:28",
+      "resources/js/pages/admin/index.tsx:69:26",
+      "resources/js/pages/admin/index.tsx:73:32",
+      "resources/js/pages/admin/organizations/create.tsx:281:18",
+      "resources/js/pages/admin/organizations/index.tsx:278:18",
+      "resources/js/pages/admin/organizations/show.tsx:498:18",
+      "resources/js/pages/admin/users/index.tsx:353:18"
+    ]
+  },
+  "1aktyzsph79": {
+    "message": "All statuses",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:83:30",
+      "resources/js/pages/cards/index.tsx:246:58",
+      "resources/js/pages/cards/index.tsx:261:42"
+    ]
+  },
+  "1b0vfdd8su8": {
+    "message": "The latest transactions across all cards.",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:224:30"
+    ]
+  },
+  "1b8g8mavvcd": {
+    "message": "Initial balance ({currency})",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:93:54"
+    ]
+  },
+  "1bahks3o107": {
+    "message": "https://yourbusiness.com/terms",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:372:50"
+    ]
+  },
+  "1bjn3xjv3c": {
+    "message": "Log in",
+    "refs": [
+      "resources/js/pages/auth/login.tsx:22:26",
+      "resources/js/pages/auth/login.tsx:85:34",
+      "resources/js/pages/auth/register.tsx:112:34",
+      "resources/js/pages/welcome.tsx:54:34"
+    ]
+  },
+  "1bkoz4zfetd": {
+    "message": {
+      "one": "{count} organization",
+      "other": "{count} organizations"
+    },
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:97:38"
+    ]
+  },
+  "1bm5zscauco": {
+    "message": "Cancel",
+    "refs": [
+      "resources/js/components/admin/confirm-action.tsx:61:34",
+      "resources/js/components/delete-user.tsx:103:46",
+      "resources/js/components/passkey-item.tsx:84:30",
+      "resources/js/components/passkey-register.tsx:104:22"
+    ]
+  },
+  "1butt4gcv4v": {
+    "message": "Loading recovery codes",
+    "refs": [
+      "resources/js/components/two-factor-recovery-codes.tsx:134:57"
+    ]
+  },
+  "1bwq2u60e23": {
+    "message": "Recent organizations",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:106:41"
+    ]
+  },
+  "1c0z635zrp1": {
+    "message": "This month",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:211:32"
+    ]
+  },
+  "1cdcaodbbnr": {
+    "message": "Recovery codes let you regain access if you lose your 2FA device. Store them in a secure password manager.",
+    "refs": [
+      "resources/js/components/two-factor-recovery-codes.tsx:64:22"
     ]
   },
   "1d5l0x57k2m": {
     "message": "Employee",
     "context": "membership role",
     "refs": [
-      "resources/js/lib/labels.ts:54:19"
+      "resources/js/lib/labels.ts:55:19"
+    ]
+  },
+  "1di0yyp09wj": {
+    "message": "Superadmins",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:60:20"
+    ]
+  },
+  "1dlq0slo14b": {
+    "message": "By",
+    "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:51:33"
+    ]
+  },
+  "1dm8s19afug": {
+    "message": "Create your first card to get started.",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:288:47"
+    ]
+  },
+  "1dxe1odbw39": {
+    "message": "Scan a card",
+    "refs": [
+      "resources/js/pages/reader/scan.tsx:53:26"
+    ]
+  },
+  "1e04lsqmih": {
+    "message": "That did not work",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:85:38"
+    ]
+  },
+  "1e0w4vf2eog": {
+    "message": "Across all organizations",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:50:21"
+    ]
+  },
+  "1e2oj7ufdbg": {
+    "message": "(you)",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:143:66"
+    ]
+  },
+  "1eatevx7xs2": {
+    "message": "Add a passkey to sign in without a password",
+    "refs": [
+      "resources/js/components/manage-passkeys.tsx:23:18"
+    ]
+  },
+  "1ecdlb1cdnb": {
+    "message": "Security",
+    "refs": [
+      "resources/js/layouts/settings/layout.tsx:29:20"
+    ]
+  },
+  "1ehboq0b5ag": {
+    "message": "You are not part of a business yet",
+    "refs": [
+      "resources/js/pages/organizations/empty.tsx:23:30"
+    ]
+  },
+  "1epujjaqd0u": {
+    "message": "Create a card and add funds to get started.",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:251:42"
+    ]
+  },
+  "1esddlkv0s9": {
+    "message": "Card limit",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:201:54",
+      "resources/js/pages/admin/organizations/show.tsx:261:50"
+    ]
+  },
+  "1f1a2a3h8xj": {
+    "message": "Switch business",
+    "refs": [
+      "resources/js/components/organization/organization-switcher.tsx:104:45",
+      "resources/js/components/organization/organization-switcher.tsx:160:37"
+    ]
+  },
+  "1f69ehq4fo0": {
+    "message": "View recovery codes",
+    "refs": [
+      "resources/js/components/two-factor-recovery-codes.tsx:83:31"
+    ]
+  },
+  "1f6i9vmya68": {
+    "message": "Owner name (optional)",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:167:54"
+    ]
+  },
+  "1fiqoxd9jzg": {
+    "message": "Disable 2FA",
+    "refs": [
+      "resources/js/components/manage-two-factor.tsx:72:38"
+    ]
+  },
+  "1fn6xmcwhb6": {
+    "message": "Download PNG",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:318:34"
+    ]
+  },
+  "1fuve46z8l4": {
+    "message": "Recent scans",
+    "refs": [
+      "resources/js/components/reader/recent-scans.tsx:37:18",
+      "resources/js/components/reader/recent-scans.tsx:46:34"
+    ]
+  },
+  "1fxacdtnafx": {
+    "message": "You are using {used} of {limit} cards and cannot create more. Contact support to raise the limit.",
+    "refs": [
+      "resources/js/components/cards/card-usage-notice.tsx:31:26"
+    ]
+  },
+  "1fyhvqrfonc": {
+    "message": "Prepaid cards for small businesses",
+    "refs": [
+      "resources/js/pages/welcome.tsx:16:26",
+      "resources/js/pages/welcome.tsx:26:26"
+    ]
+  },
+  "1gd60fi0k0g": {
+    "message": "Camera access is blocked",
+    "refs": [
+      "resources/js/components/reader/qr-scanner.tsx:106:20"
+    ]
+  },
+  "1gdf2a4ymp1": {
+    "message": "Page expired",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:38:20"
+    ]
+  },
+  "1ghjzz1gnle": {
+    "message": "This device or browser has no camera the reader can use. The reader needs a secure (HTTPS) connection.",
+    "refs": [
+      "resources/js/components/reader/qr-scanner.tsx:113:26"
+    ]
+  },
+  "1gnqa75ncmd": {
+    "message": "Loaded",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:54:26",
+      "resources/js/pages/analytics/index.tsx:165:32",
+      "resources/js/pages/analytics/index.tsx:207:42"
+    ]
+  },
+  "1gqujgo1p3j": {
+    "message": "Filter transactions",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:133:41"
+    ]
+  },
+  "1gsmnye8ypd": {
+    "message": "Please confirm access to your account by entering one of your emergency recovery codes.",
+    "refs": [
+      "resources/js/pages/auth/two-factor-challenge.tsx:28:30"
+    ]
+  },
+  "1gyt4suqoib": {
+    "message": "Add to Apple Wallet",
+    "refs": [
+      "resources/js/components/public-card/wallet-buttons.tsx:13:15"
+    ]
+  },
+  "1h22cey1h7i": {
+    "message": "Users",
+    "refs": [
+      "resources/js/components/app-sidebar.tsx:79:20",
+      "resources/js/pages/admin/index.tsx:117:34",
+      "resources/js/pages/admin/index.tsx:54:20",
+      "resources/js/pages/admin/organizations/show.tsx:346:38",
+      "resources/js/pages/admin/users/index.tsx:354:18",
+      "resources/js/pages/admin/users/index.tsx:60:26",
+      "resources/js/pages/admin/users/index.tsx:63:28"
+    ]
+  },
+  "1h5fk5ihbc0": {
+    "message": "Go to dashboard",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:84:42",
+      "resources/js/pages/errors/forbidden.tsx:51:42"
+    ]
+  },
+  "1ha4655d1x6": {
+    "message": "Dark",
+    "context": "theme",
+    "refs": [
+      "resources/js/lib/labels.ts:76:15"
+    ]
+  },
+  "1hnagoswr2z": {
+    "message": "You are offline. Scans and charges need a connection.",
+    "refs": [
+      "resources/js/layouts/reader-layout.tsx:70:30"
+    ]
+  },
+  "1hq11jbyfw4": {
+    "message": "Cardholder email",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:218:45",
+      "resources/js/pages/cards/show.tsx:238:50"
+    ]
+  },
+  "1hre3eqky15": {
+    "message": "No organization",
+    "refs": [
+      "resources/js/pages/organizations/empty.tsx:15:26"
+    ]
+  },
+  "1hx1csz3i1": {
+    "message": "Password: {password}",
+    "refs": [
+      "resources/js/components/admin/one-time-credentials.tsx:26:9"
+    ]
+  },
+  "1i8vn65wqg9": {
+    "message": "Create organization",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:80:26",
+      "resources/js/pages/admin/organizations/create.tsx:266:46",
+      "resources/js/pages/admin/organizations/create.tsx:39:26",
+      "resources/js/pages/admin/organizations/create.tsx:42:28",
+      "resources/js/pages/admin/organizations/index.tsx:107:26"
+    ]
+  },
+  "1iem3nybitu": {
+    "message": "Superadmin",
+    "refs": [
+      "resources/js/components/app-sidebar.tsx:107:61",
+      "resources/js/pages/admin/users/index.tsx:124:46",
+      "resources/js/pages/admin/users/index.tsx:199:62"
+    ]
+  },
+  "1ihblq0973h": {
+    "message": "They can manage every organization, plan, and user.",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:307:78"
+    ]
+  },
+  "1ilkqwmxov4": {
+    "message": "It is shown only once. Share it with the user over a safe channel and ask them to change it in their settings after signing in.",
+    "refs": [
+      "resources/js/components/admin/one-time-credentials.tsx:35:22"
+    ]
+  },
+  "1im54r4wmfb": {
+    "message": "Close other apps that use the camera and try again.",
+    "refs": [
+      "resources/js/components/reader/qr-scanner.tsx:119:26"
+    ]
+  },
+  "1iq7j7eyzpt": {
+    "message": "Confirm with passkey",
+    "refs": [
+      "resources/js/pages/auth/confirm-password.tsx:25:24"
+    ]
+  },
+  "1ivn7mt517c": {
+    "message": "Cards used",
+    "refs": [
+      "resources/js/components/cards/card-usage-notice.tsx:20:25",
+      "resources/js/pages/admin/organizations/show.tsx:244:53",
+      "resources/js/pages/settings/business.tsx:71:26",
+      "resources/js/pages/settings/business.tsx:94:33"
+    ]
+  },
+  "1j4e0ord66d": {
+    "message": "Charges",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:48:25",
+      "resources/js/pages/analytics/index.tsx:201:42"
+    ]
+  },
+  "1ja6j0q49ec": {
+    "message": "Down for maintenance",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:52:20"
+    ]
+  },
+  "1jj95z47mwo": {
+    "message": "Create a card",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:56:41"
+    ]
+  },
+  "1jot47aloch": {
+    "message": "Search",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:131:38",
+      "resources/js/pages/admin/users/index.tsx:96:34",
+      "resources/js/pages/cards/index.tsx:232:38"
     ]
   },
   "1jubhoknu0l": {
     "message": "Load",
     "context": "transaction type",
     "refs": [
-      "resources/js/lib/labels.ts:40:15"
+      "resources/js/lib/labels.ts:41:15"
+    ]
+  },
+  "1jvcywlvhly": {
+    "message": "Create card",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:165:50",
+      "resources/js/pages/cards/create.tsx:182:18",
+      "resources/js/pages/cards/create.tsx:38:26",
+      "resources/js/pages/cards/index.tsx:191:30",
+      "resources/js/pages/cards/index.tsx:205:30",
+      "resources/js/pages/dashboard.tsx:141:30",
+      "resources/js/pages/dashboard.tsx:150:30"
+    ]
+  },
+  "1kskaqmm55e": {
+    "message": "The card program your cards are issued from.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:327:30"
+    ]
+  },
+  "1kxn1xfrz9": {
+    "message": "Set a temporary password for {email}?",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:224:68"
+    ]
+  },
+  "1l2bm9pclr2": {
+    "message": "The numbers behind the charts, newest first.",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:186:30"
+    ]
+  },
+  "1lac8iorsbk": {
+    "message": "Search by name or email",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:91:46",
+      "resources/js/pages/admin/users/index.tsx:92:45"
+    ]
+  },
+  "1lkri6lxzh8": {
+    "message": "Export CSV",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:148:30",
+      "resources/js/pages/transactions/index.tsx:123:26"
+    ]
+  },
+  "1llaomynj87": {
+    "message": "Timezone",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:264:38"
+    ]
+  },
+  "1lnj2n6dine": {
+    "message": "Email: {email}",
+    "refs": [
+      "resources/js/components/admin/one-time-credentials.tsx:25:9"
+    ]
+  },
+  "1luctkoay3a": {
+    "message": "New password",
+    "refs": [
+      "resources/js/pages/settings/security.tsx:83:38",
+      "resources/js/pages/settings/security.tsx:92:50"
+    ]
+  },
+  "1m4ehf8golz": {
+    "message": "For example: Starter plan, billed annually",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:241:66",
+      "resources/js/pages/admin/organizations/show.tsx:304:62"
+    ]
+  },
+  "1mepgsfmabd": {
+    "message": "Cardholder email (optional)",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:127:54"
+    ]
+  },
+  "1mge26ozluc": {
+    "message": "Settings",
+    "refs": [
+      "resources/js/components/app-header.tsx:73:20",
+      "resources/js/components/app-sidebar.tsx:59:20",
+      "resources/js/components/user-menu-content.tsx:49:22",
+      "resources/js/layouts/settings/layout.tsx:53:24",
+      "resources/js/layouts/settings/layout.tsx:63:37"
+    ]
+  },
+  "1mt1p1138bx": {
+    "message": "Suspend organization",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:153:43"
+    ]
+  },
+  "1n0sqqpp3o2": {
+    "message": "Outstanding balance",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:92:20",
+      "resources/js/pages/dashboard.tsx:205:32"
+    ]
+  },
+  "1n14j6gecbe": {
+    "message": "From",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:172:38"
+    ]
+  },
+  "1n3ytr3dqa4": {
+    "message": "Every load, charge, and adjustment on your cards.",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:107:38"
+    ]
+  },
+  "1n653je5paa": {
+    "message": "Sound off",
+    "refs": [
+      "resources/js/components/reader/sound-toggle.tsx:34:41"
+    ]
+  },
+  "1n7j2pocv27": {
+    "message": "Password",
+    "refs": [
+      "resources/js/components/delete-user.tsx:78:46",
+      "resources/js/components/delete-user.tsx:85:58",
+      "resources/js/pages/auth/confirm-password.tsx:34:56",
+      "resources/js/pages/auth/confirm-password.tsx:38:46",
+      "resources/js/pages/auth/login.tsx:53:38",
+      "resources/js/pages/auth/login.tsx:61:50",
+      "resources/js/pages/auth/register.tsx:66:38",
+      "resources/js/pages/auth/register.tsx:74:50"
+    ]
+  },
+  "1n906oaoop5": {
+    "message": "Details",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:443:36"
+    ]
+  },
+  "1od3ic7lxz8": {
+    "message": "This organization is cancelled. Cancelled status is not managed from the admin area yet.",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:184:30"
+    ]
+  },
+  "1ognjw99dvf": {
+    "message": "Kept on this device only.",
+    "refs": [
+      "resources/js/components/reader/recent-scans.tsx:48:26"
+    ]
+  },
+  "1on1f0vjbvp": {
+    "message": "Don't have an account?",
+    "refs": [
+      "resources/js/pages/auth/login.tsx:90:30"
+    ]
+  },
+  "1onlwkk2s4p": {
+    "message": "Enable two-factor authentication",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:283:20"
+    ]
+  },
+  "1onncatqks2": {
+    "message": "Suspend {name}?",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:147:36"
+    ]
+  },
+  "1ox0lo3s87a": {
+    "message": "Required. Say why the balance is being corrected.",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:212:62"
+    ]
+  },
+  "1pfx99caqy7": {
+    "message": "Transaction volume",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:153:20"
     ]
   },
   "1pk11ctiyxw": {
@@ -58,11 +894,161 @@
       "resources/js/lib/flash.ts:60:43"
     ]
   },
+  "1plyeqi5xj4": {
+    "message": "{active} active, {suspended} suspended",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:41:21"
+    ]
+  },
+  "1pvt7mfzmfn": {
+    "message": "The page you are looking for does not exist or was moved.",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:32:26"
+    ]
+  },
+  "1q2hr8ibgdv": {
+    "message": "Cards you scan will show up here.",
+    "refs": [
+      "resources/js/components/reader/recent-scans.tsx:60:38"
+    ]
+  },
+  "1qn5k6z8xr": {
+    "message": "Email",
+    "refs": [
+      "resources/js/components/admin/one-time-credentials.tsx:40:60",
+      "resources/js/components/public-card/email-capture.tsx:60:34"
+    ]
+  },
+  "1qs5hc4bu19": {
+    "message": "Authentication code",
+    "refs": [
+      "resources/js/pages/auth/two-factor-challenge.tsx:36:20"
+    ]
+  },
+  "1qtiypgsaj5": {
+    "message": "Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
+    "refs": [
+      "resources/js/components/delete-user.tsx:57:30"
+    ]
+  },
   "1r0fwkhl12x": {
     "message": "Refund",
     "context": "transaction type",
     "refs": [
-      "resources/js/lib/labels.ts:43:17"
+      "resources/js/lib/labels.ts:44:17"
+    ]
+  },
+  "1r5oki4grev": {
+    "message": "Up to the available {balance}.",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:66:29"
+    ]
+  },
+  "1r8zizzfdmj": {
+    "message": "Note",
+    "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:50:33"
+    ]
+  },
+  "1ra31kb3tih": {
+    "message": "Log in with a recovery code instead",
+    "refs": [
+      "resources/js/pages/auth/two-factor-challenge.tsx:40:25"
+    ]
+  },
+  "1rirklzm0o8": {
+    "message": "Email address",
+    "refs": [
+      "resources/js/pages/auth/login.tsx:36:38",
+      "resources/js/pages/auth/register.tsx:50:38",
+      "resources/js/pages/settings/profile.tsx:62:38",
+      "resources/js/pages/settings/profile.tsx:73:50"
+    ]
+  },
+  "1rj859nmbst": {
+    "message": "Hide password",
+    "refs": [
+      "resources/js/components/password-input.tsx:28:36"
+    ]
+  },
+  "1rkjey2rxpd": {
+    "message": "{percent}% used",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:232:46",
+      "resources/js/pages/settings/business.tsx:86:27"
+    ]
+  },
+  "1rncc50vod0": {
+    "message": "Get started",
+    "refs": [
+      "resources/js/pages/welcome.tsx:46:34"
+    ]
+  },
+  "1rwil0o3zkk": {
+    "message": "Cards",
+    "refs": [
+      "resources/js/components/app-header.tsx:58:20",
+      "resources/js/components/app-sidebar.tsx:44:20",
+      "resources/js/pages/admin/index.tsx:48:20",
+      "resources/js/pages/admin/organizations/index.tsx:201:46",
+      "resources/js/pages/admin/organizations/show.tsx:80:20",
+      "resources/js/pages/analytics/index.tsx:195:42",
+      "resources/js/pages/cards/create.tsx:181:18",
+      "resources/js/pages/cards/index.tsx:168:26",
+      "resources/js/pages/cards/index.tsx:172:32",
+      "resources/js/pages/cards/index.tsx:381:28",
+      "resources/js/pages/cards/show.tsx:394:18",
+      "resources/js/pages/dashboard.tsx:195:32"
+    ]
+  },
+  "1ry9kc89u3j": {
+    "message": "Manage your passkeys for passwordless sign-in",
+    "refs": [
+      "resources/js/components/manage-passkeys.tsx:51:30"
+    ]
+  },
+  "1s2o5z7k8bb": {
+    "message": "No organizations match your search",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:173:47"
+    ]
+  },
+  "1s31b2wvvpv": {
+    "message": "Approaching your card limit",
+    "refs": [
+      "resources/js/components/cards/card-usage-notice.tsx:45:26"
+    ]
+  },
+  "1s5ifn1j9ko": {
+    "message": "All cards",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:169:26"
+    ]
+  },
+  "1s82z761igh": {
+    "message": "Are you sure you want to delete your account?",
+    "refs": [
+      "resources/js/components/delete-user.tsx:52:30"
+    ]
+  },
+  "1sibrgtrjen": {
+    "message": "ID",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:454:38"
+    ]
+  },
+  "1sr0y4gdhk0": {
+    "message": "Prepaid",
+    "context": "program type",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:48:18"
+    ]
+  },
+  "1sr3kb79e0o": {
+    "message": "Light",
+    "context": "theme",
+    "refs": [
+      "resources/js/lib/labels.ts:75:16"
     ]
   },
   "1tlt3qrgqsx": {
@@ -71,17 +1057,368 @@
       "resources/js/lib/flash.ts:34:13"
     ]
   },
+  "1tomwowemb": {
+    "message": "Balance",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:98:29",
+      "resources/js/pages/cards/index.tsx:69:34",
+      "resources/js/pages/cards/show.tsx:108:46",
+      "resources/js/pages/reader/card.tsx:108:30"
+    ]
+  },
+  "1u6eldxzxiw": {
+    "message": "Navigation menu",
+    "refs": [
+      "resources/js/components/app-header.tsx:111:38"
+    ]
+  },
+  "1uisypgik": {
+    "message": "Appearance settings",
+    "refs": [
+      "resources/js/pages/settings/appearance.tsx:10:26",
+      "resources/js/pages/settings/appearance.tsx:12:38",
+      "resources/js/pages/settings/appearance.tsx:17:28",
+      "resources/js/pages/settings/appearance.tsx:31:20"
+    ]
+  },
+  "1upbsv2agu0": {
+    "message": "Amount to charge ({currency})",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:65:30"
+    ]
+  },
+  "1uzciftg2qv": {
+    "message": "All types",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:93:30"
+    ]
+  },
   "1v1qyt6cszf": {
     "message": "Organization created with a new owner account.",
     "refs": [
       "resources/js/lib/flash.ts:48:13"
     ]
   },
+  "1v7qa6jw615": {
+    "message": "Organizations",
+    "refs": [
+      "resources/js/components/app-sidebar.tsx:74:20",
+      "resources/js/pages/admin/index.tsx:39:20",
+      "resources/js/pages/admin/organizations/create.tsx:282:18",
+      "resources/js/pages/admin/organizations/index.tsx:279:18",
+      "resources/js/pages/admin/organizations/index.tsx:92:26",
+      "resources/js/pages/admin/organizations/index.tsx:96:32",
+      "resources/js/pages/admin/organizations/show.tsx:499:18",
+      "resources/js/pages/admin/users/index.tsx:120:46"
+    ]
+  },
   "1v9oyjvzd9t": {
     "message": "Suspended",
     "context": "organization status",
     "refs": [
-      "resources/js/lib/labels.ts:64:20"
+      "resources/js/lib/labels.ts:65:20"
+    ]
+  },
+  "1vhgtfibnud": {
+    "message": "{used} of {limit} cards used",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:182:35"
+    ]
+  },
+  "1vjn8kt648j": {
+    "message": "You do not have permission to access this page.",
+    "refs": [
+      "resources/js/pages/errors/forbidden.tsx:39:30"
+    ]
+  },
+  "1vqugrvir99": {
+    "message": "Revoke",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:251:74"
+    ]
+  },
+  "1vt2qztixfh": {
+    "message": "We are making some improvements. Check back in a few minutes.",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:53:26"
+    ]
+  },
+  "1w41hd19mti": {
+    "message": "Log in to your account",
+    "refs": [
+      "resources/js/pages/auth/login.tsx:109:12"
+    ]
+  },
+  "1wndfg44twv": {
+    "message": "Amount to add ({currency})",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:59:30"
+    ]
+  },
+  "1wv8z2yvi5c": {
+    "message": "Unfreeze card",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:179:50"
+    ]
+  },
+  "1wwaqy7lgcr": {
+    "message": "Try another name or email.",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:110:42"
+    ]
+  },
+  "1x0nu35r42d": {
+    "message": "Grant",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:296:74"
+    ]
+  },
+  "1x1dscjganl": {
+    "message": "This is a secure area of the application. Please confirm your password before continuing.",
+    "refs": [
+      "resources/js/pages/auth/confirm-password.tsx:65:18"
+    ]
+  },
+  "1x2um48y627": {
+    "message": "Please proceed with caution, this cannot be undone.",
+    "refs": [
+      "resources/js/components/delete-user.tsx:33:26"
+    ]
+  },
+  "1x6on0jacs9": {
+    "message": "Analytics",
+    "refs": [
+      "resources/js/components/app-header.tsx:68:20",
+      "resources/js/components/app-sidebar.tsx:54:20",
+      "resources/js/pages/analytics/index.tsx:101:32",
+      "resources/js/pages/analytics/index.tsx:256:28",
+      "resources/js/pages/analytics/index.tsx:97:26",
+      "resources/js/pages/dashboard.tsx:187:26"
+    ]
+  },
+  "1xepvuia13": {
+    "message": "Showing {from} to {to} of {total} users",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:330:38"
+    ]
+  },
+  "1xf9z26jg3m": {
+    "message": "When you enable two-factor authentication, you will be prompted for a secure pin during login. This pin can be retrieved from a TOTP-supported application on your phone.",
+    "refs": [
+      "resources/js/components/manage-two-factor.tsx:87:26"
+    ]
+  },
+  "1xinc6h3p2": {
+    "message": "QR code for card {code}",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:298:42"
+    ]
+  },
+  "1xj5d6loufn": {
+    "message": "Registering...",
+    "refs": [
+      "resources/js/components/passkey-register.tsx:101:34"
+    ]
+  },
+  "1xra15xfgov": {
+    "message": "Adjust balance",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:70:25"
+    ]
+  },
+  "1xtcmhrwe9c": {
+    "message": "Powered by Yoiful",
+    "refs": [
+      "resources/js/pages/public-card/show.tsx:88:26"
+    ]
+  },
+  "1xu6al3whba": {
+    "message": "Remove passkey",
+    "refs": [
+      "resources/js/components/passkey-item.tsx:75:35",
+      "resources/js/components/passkey-item.tsx:93:35"
+    ]
+  },
+  "1y2x0qb79im": {
+    "message": "Program name",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:347:38"
+    ]
+  },
+  "1y9x115k4mt": {
+    "message": "Continue setup",
+    "refs": [
+      "resources/js/components/manage-two-factor.tsx:96:34"
+    ]
+  },
+  "1yi1eprb816": {
+    "message": "Theme",
+    "refs": [
+      "resources/js/components/preferences/theme-switcher.tsx:44:37",
+      "resources/js/components/preferences/theme-switcher.tsx:53:41"
+    ]
+  },
+  "1yitf0mxjda": {
+    "message": "Only owners and managers can change business settings.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:52:23"
+    ]
+  },
+  "1yucd5ks9yf": {
+    "message": "Try another name, slug, or status.",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:180:47"
+    ]
+  },
+  "1yxnu4m1dvv": {
+    "message": "Revoke your own superadmin role?",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:258:75"
+    ]
+  },
+  "1z57eyi5dfo": {
+    "message": "Close",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:268:29"
+    ]
+  },
+  "1z9p1zz8v05": {
+    "message": "New cards per day in your timezone.",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:110:26"
+    ]
+  },
+  "1zj65nkezki": {
+    "message": "Acme Coffee Shop",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:82:66"
+    ]
+  },
+  "1zlopzysjem": {
+    "message": "Leave empty to remove it.",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:273:50"
+    ]
+  },
+  "1zn4apu15xn": {
+    "message": "Every balance change on this card.",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:338:43"
+    ]
+  },
+  "1zpe6veo7s9": {
+    "message": "Freeze card",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:208:50"
+    ]
+  },
+  "1zsap8x3yrr": {
+    "message": "Save",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:269:54",
+      "resources/js/pages/settings/profile.tsx:87:38",
+      "resources/js/pages/settings/security.tsx:123:38"
+    ]
+  },
+  "203sud5qrz4": {
+    "message": "Balances and transactions are shown in this currency.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:255:38"
+    ]
+  },
+  "203uu0x0rue": {
+    "message": "Suspend",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:144:38"
+    ]
+  },
+  "20cmm9ewpd": {
+    "message": "Joined",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:122:53"
+    ]
+  },
+  "20e22lsd4zw": {
+    "message": "The card gets a code and a QR code right away.",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:58:34"
+    ]
+  },
+  "20gbx6noxvu": {
+    "message": "0 or more. An amount above 0 is recorded as a load.",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:114:54"
+    ]
+  },
+  "20i2iv4rel2": {
+    "message": "Greater than 0, up to two decimals.",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:60:29"
+    ]
+  },
+  "20mclgrkbsj": {
+    "message": "Transactions",
+    "refs": [
+      "resources/js/components/app-header.tsx:63:20",
+      "resources/js/components/app-sidebar.tsx:49:20",
+      "resources/js/pages/admin/organizations/show.tsx:97:20",
+      "resources/js/pages/analytics/index.tsx:160:32",
+      "resources/js/pages/dashboard.tsx:178:26",
+      "resources/js/pages/transactions/index.tsx:102:26",
+      "resources/js/pages/transactions/index.tsx:106:32",
+      "resources/js/pages/transactions/index.tsx:295:28"
+    ]
+  },
+  "20necazrl3k": {
+    "message": "You will lose access to the admin area right away. The last superadmin cannot be revoked.",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:270:75"
+    ]
+  },
+  "20pm528itr2": {
+    "message": "Across all cards",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:207:33"
+    ]
+  },
+  "20xixacat15": {
+    "message": "Recovery codes",
+    "refs": [
+      "resources/js/components/two-factor-recovery-codes.tsx:119:49"
+    ]
+  },
+  "20z4vu3hcwz": {
+    "message": "Save this password now",
+    "refs": [
+      "resources/js/components/admin/one-time-credentials.tsx:32:26"
+    ]
+  },
+  "219yu99blsi": {
+    "message": "Plan notes",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:234:54",
+      "resources/js/pages/admin/organizations/show.tsx:293:50"
+    ]
+  },
+  "21ety3yqhji": {
+    "message": "Back",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:212:34"
+    ]
+  },
+  "21io3w69ufl": {
+    "message": "Ensure your account is using a long, random password to stay secure",
+    "refs": [
+      "resources/js/pages/settings/security.tsx:35:34"
+    ]
+  },
+  "21l5rpcq28w": {
+    "message": "Unlimited",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:210:66",
+      "resources/js/pages/admin/organizations/show.tsx:226:51",
+      "resources/js/pages/admin/organizations/show.tsx:274:62",
+      "resources/js/pages/settings/business.tsx:85:27"
     ]
   },
   "21nwd6dniz": {
@@ -90,11 +1427,160 @@
       "resources/js/lib/flash.ts:57:13"
     ]
   },
+  "21poeejymlw": {
+    "message": "Revoke superadmin",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:277:79"
+    ]
+  },
+  "21rjkq8k9uj": {
+    "message": "Remove",
+    "refs": [
+      "resources/js/components/passkey-item.tsx:72:48"
+    ]
+  },
+  "221ct4go232": {
+    "message": "Never",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:347:53",
+      "resources/js/pages/cards/show.tsx:132:49"
+    ]
+  },
+  "226w7dmwmr6": {
+    "message": "Card frozen",
+    "refs": [
+      "resources/js/pages/public-card/show.tsx:59:42"
+    ]
+  },
+  "22fp3gthum9": {
+    "message": "No transactions match these filters",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:247:47"
+    ]
+  },
+  "22hj385419y": {
+    "message": "Days in reports, filters, and analytics start at midnight here.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:291:38"
+    ]
+  },
+  "22n6j3g4p3s": {
+    "message": "Open reader",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:160:26"
+    ]
+  },
+  "22tau8thrt1": {
+    "message": "you@example.com",
+    "refs": [
+      "resources/js/components/public-card/email-capture.tsx:67:46"
+    ]
+  },
+  "22vsazqg7pk": {
+    "message": "The card was not created",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:77:58"
+    ]
+  },
+  "22wi4adg3sl": {
+    "message": "History",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:328:45"
+    ]
+  },
+  "23cd2xl2vk5": {
+    "message": "Added {time}",
+    "refs": [
+      "resources/js/components/passkey-item.tsx:46:26"
+    ]
+  },
+  "23ecl7xf4m6": {
+    "message": "Business",
+    "refs": [
+      "resources/js/components/app-sidebar.tsx:105:56",
+      "resources/js/layouts/settings/layout.tsx:19:20",
+      "resources/js/pages/admin/organizations/create.tsx:55:46",
+      "resources/js/pages/settings/business.tsx:121:24"
+    ]
+  },
+  "23rp7apg37x": {
+    "message": "Recovery code",
+    "refs": [
+      "resources/js/pages/auth/two-factor-challenge.tsx:27:24"
+    ]
+  },
+  "2402r5hg07d": {
+    "message": "Sign in with a passkey",
+    "refs": [
+      "resources/js/components/passkey-verify.tsx:56:37"
+    ]
+  },
+  "2410ux64h44": {
+    "message": "No cards yet",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:281:47"
+    ]
+  },
+  "248xs7h38vj": {
+    "message": "Card",
+    "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:44:46"
+    ]
+  },
+  "24jbe4xkyk4": {
+    "message": "Lowercase letters, numbers, and hyphens. Must be unique.",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:115:54"
+    ]
+  },
+  "24olxse3xsp": {
+    "message": "Update the appearance settings for your account",
+    "refs": [
+      "resources/js/pages/settings/appearance.tsx:18:34"
+    ]
+  },
+  "251zk5eqsoo": {
+    "message": "Go to previous page",
+    "refs": [
+      "resources/js/components/cards/list-pagination.tsx:40:37"
+    ]
+  },
   "25pf2spfmo0": {
     "message": "Depleted",
     "context": "card status",
     "refs": [
-      "resources/js/lib/labels.ts:30:19"
+      "resources/js/lib/labels.ts:31:19"
+    ]
+  },
+  "25u0ozz9jho": {
+    "message": "Showing {from} to {to} of {total} transactions",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:273:38"
+    ]
+  },
+  "25xq3c5mafa": {
+    "message": "Failed to fetch QR code",
+    "refs": [
+      "resources/js/hooks/use-two-factor-auth.ts:59:43"
+    ]
+  },
+  "26ciz7ptwcg": {
+    "message": "Update password",
+    "refs": [
+      "resources/js/pages/settings/security.tsx:34:28"
+    ]
+  },
+  "26w16tn7pzp": {
+    "message": "No organizations yet",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:133:42",
+      "resources/js/pages/admin/organizations/index.tsx:176:47"
+    ]
+  },
+  "26xm7tg0ukm": {
+    "message": "Terms URL (optional)",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:365:38"
     ]
   },
   "27a7k4osvpt": {
@@ -103,10 +1589,138 @@
       "resources/js/lib/flash.ts:30:30"
     ]
   },
+  "27nxsynl10g": {
+    "message": "Recent activity",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:222:37"
+    ]
+  },
+  "27sli8bhc0z": {
+    "message": "You will be prompted for a secure, random pin during login, which you can retrieve from the TOTP-supported application on your phone.",
+    "refs": [
+      "resources/js/components/manage-two-factor.tsx:59:26"
+    ]
+  },
   "27tdlr0ne3b": {
     "message": "Card unfrozen.",
     "refs": [
       "resources/js/lib/flash.ts:31:32"
+    ]
+  },
+  "27uz1w1s5y2": {
+    "message": "Reason",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:192:63"
+    ]
+  },
+  "28uv801464p": {
+    "message": "Everyone with an account. Set a temporary password when someone is locked out, and manage superadmins.",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:64:34"
+    ]
+  },
+  "28v721n7uwx": {
+    "message": "A name helps you identify this passkey later.",
+    "refs": [
+      "resources/js/components/passkey-register.tsx:93:22"
+    ]
+  },
+  "28z09hoarac": {
+    "message": "Get balance updates",
+    "refs": [
+      "resources/js/components/public-card/email-capture.tsx:42:22"
+    ]
+  },
+  "29kstd4aeqt": {
+    "message": "Remove the current logo",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:203:42"
+    ]
+  },
+  "29m1ho25xzl": {
+    "message": "Enter the authentication code provided by your authenticator application.",
+    "refs": [
+      "resources/js/pages/auth/two-factor-challenge.tsx:37:26"
+    ]
+  },
+  "29s7yt15s4z": {
+    "message": "Create one to onboard a business.",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:136:42",
+      "resources/js/pages/admin/organizations/index.tsx:183:47"
+    ]
+  },
+  "29soi5j2rkr": {
+    "message": "Enter your details below to create your account",
+    "refs": [
+      "resources/js/pages/auth/register.tsx:124:18"
+    ]
+  },
+  "29y6aac5m7m": {
+    "message": "acme-coffee",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:109:66"
+    ]
+  },
+  "2a5d0xtb3sd": {
+    "message": "Revoke superadmin from {email}?",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:261:75"
+    ]
+  },
+  "2al5zzdzlkk": {
+    "message": "Card limit and internal notes. Only superadmins see the notes.",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:212:34"
+    ]
+  },
+  "2b2rtm33el7": {
+    "message": "You are using {used} of {limit} cards ({percent}%). Contact support to raise the limit.",
+    "refs": [
+      "resources/js/components/cards/card-usage-notice.tsx:48:22"
+    ]
+  },
+  "2bgb2gj6wv1": {
+    "message": "Brand color",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:210:38"
+    ]
+  },
+  "2bgqosys14q": {
+    "message": "Your account is not linked to any organization. Contact support or the business owner to get access.",
+    "refs": [
+      "resources/js/pages/organizations/empty.tsx:26:30"
+    ]
+  },
+  "2bis8txdorq": {
+    "message": "Page not found",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:31:20"
+    ]
+  },
+  "2bqf6vaf7d4": {
+    "message": "Business name",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:60:54",
+      "resources/js/pages/settings/business.tsx:145:38"
+    ]
+  },
+  "2btir0jw4ut": {
+    "message": "This card link is invalid or has expired. Please check the QR code or contact the business.",
+    "refs": [
+      "resources/js/pages/public-card/not-found.tsx:32:30"
+    ]
+  },
+  "2bzcj52sg9z": {
+    "message": "Clear",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:233:42"
+    ]
+  },
+  "2c8dq5qsvdm": {
+    "message": "To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:284:26"
     ]
   },
   "2chcc47wtt5": {
@@ -115,18 +1729,104 @@
       "resources/js/lib/flash.ts:39:41"
     ]
   },
+  "2cs7jmm5jjj": {
+    "message": "Transactions per day, by type.",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:154:26"
+    ]
+  },
+  "2cwdszru8kc": {
+    "message": "Appearance",
+    "refs": [
+      "resources/js/layouts/settings/layout.tsx:34:20"
+    ]
+  },
+  "2d31hgbagla": {
+    "message": "Two-factor authentication enabled",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:264:24"
+    ]
+  },
   "2d4kn4u1206": {
     "message": "Manager",
     "context": "membership role",
     "refs": [
-      "resources/js/lib/labels.ts:53:18"
+      "resources/js/lib/labels.ts:54:18"
+    ]
+  },
+  "2do3ct8a0nt": {
+    "message": "Temporary password",
+    "refs": [
+      "resources/js/components/admin/one-time-credentials.tsx:45:26",
+      "resources/js/pages/admin/users/index.tsx:219:70"
     ]
   },
   "2e5dk8q3r6a": {
     "message": "Cancelled",
     "context": "organization status",
     "refs": [
-      "resources/js/lib/labels.ts:65:20"
+      "resources/js/lib/labels.ts:66:20"
+    ]
+  },
+  "2e7jtod20fa": {
+    "message": "Members can create cards and post transactions again.",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:170:42"
+    ]
+  },
+  "2evszjj6fsj": {
+    "message": "An unexpected error happened on our side. Try again in a moment.",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:46:26"
+    ]
+  },
+  "2eypeq0dc8o": {
+    "message": "Showing {from} to {to} of {total} cards",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:359:38"
+    ]
+  },
+  "2f238tcgfz1": {
+    "message": "The latest {count} of {total} transactions.",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:331:43"
+    ]
+  },
+  "2f5ffyza511": {
+    "message": "No passkeys yet",
+    "refs": [
+      "resources/js/components/manage-passkeys.tsx:21:41"
+    ]
+  },
+  "2faits7kn8u": {
+    "message": "Try another type, date range, or card code.",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:254:47"
+    ]
+  },
+  "2fgad1n7srq": {
+    "message": "Back to cards",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:47:26",
+      "resources/js/pages/cards/show.tsx:78:26"
+    ]
+  },
+  "2frz42wpc5k": {
+    "message": "Save program",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:389:38"
+    ]
+  },
+  "2ge53khjp3c": {
+    "message": "No programs.",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:394:42"
+    ]
+  },
+  "2gjdo7eexco": {
+    "message": "Times are in the organization's timezone, {timezone}.",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:444:42"
     ]
   },
   "2khkneof19": {
@@ -135,10 +1835,46 @@
       "resources/js/lib/flash.ts:37:13"
     ]
   },
+  "2vihj1w1z0": {
+    "message": "Confirming...",
+    "refs": [
+      "resources/js/pages/auth/confirm-password.tsx:26:31"
+    ]
+  },
+  "2zbxweorn2": {
+    "message": "Businesses",
+    "refs": [
+      "resources/js/components/organization/organization-switcher.tsx:52:18"
+    ]
+  },
+  "30kzn56ltd": {
+    "message": "Set password",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:233:75"
+    ]
+  },
+  "319pnaoaed": {
+    "message": "Apply",
+    "refs": [
+      "resources/js/pages/transactions/index.tsx:224:38"
+    ]
+  },
   "36o0x9wkg4": {
     "message": "Superadmin granted to {email}.",
     "refs": [
       "resources/js/lib/flash.ts:62:13"
+    ]
+  },
+  "3az60now0p": {
+    "message": "Camera view",
+    "refs": [
+      "resources/js/components/reader/qr-scanner.tsx:282:29"
+    ]
+  },
+  "40lyxipgf8": {
+    "message": "Create",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:283:18"
     ]
   },
   "43sqe7fnyk": {
@@ -147,10 +1883,92 @@
       "resources/js/lib/flash.ts:64:13"
     ]
   },
+  "4lakk5u7l7": {
+    "message": "Adjust",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:122:30"
+    ]
+  },
+  "4nbvt0bx39": {
+    "message": "The camera did not start",
+    "refs": [
+      "resources/js/components/reader/qr-scanner.tsx:118:20"
+    ]
+  },
+  "4oakw0vmdt": {
+    "message": "Manage your business, profile, and account settings",
+    "refs": [
+      "resources/js/layouts/settings/layout.tsx:54:30"
+    ]
+  },
+  "4uqk4t9ol9": {
+    "message": "This card is cancelled.",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:90:15",
+      "resources/js/pages/reader/card.tsx:62:15"
+    ]
+  },
+  "53ekp6oa6s": {
+    "message": "Last used {time}",
+    "refs": [
+      "resources/js/components/passkey-item.tsx:52:34"
+    ]
+  },
+  "54rzqn5nuf": {
+    "message": "Last updated",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:479:38"
+    ]
+  },
+  "5fb8o7pr7t": {
+    "message": "Pagination",
+    "refs": [
+      "resources/js/components/cards/list-pagination.tsx:35:33"
+    ]
+  },
+  "5mpfz3olim": {
+    "message": "Inactive",
+    "context": "program status",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:425:59"
+    ]
+  },
   "5n0n0gv9gu": {
     "message": "Switched to {name}.",
     "refs": [
       "resources/js/lib/flash.ts:44:13"
+    ]
+  },
+  "62tbkall94": {
+    "message": "QR code",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:289:41"
+    ]
+  },
+  "6ba06wwnpj": {
+    "message": "Can open this area",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:62:21"
+    ]
+  },
+  "6fknrggo2i": {
+    "message": "Charged",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:55:25",
+      "resources/js/pages/analytics/index.tsx:170:32",
+      "resources/js/pages/analytics/index.tsx:210:42"
+    ]
+  },
+  "6jehwoavqq": {
+    "message": "Clear history",
+    "refs": [
+      "resources/js/components/reader/recent-scans.tsx:86:30"
+    ]
+  },
+  "6zokvvlav4": {
+    "message": "Date",
+    "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:43:33"
     ]
   },
   "740dfbxccn": {
@@ -159,17 +1977,210 @@
       "resources/js/lib/flash.ts:53:35"
     ]
   },
+  "75a28xasw6": {
+    "message": "Try again",
+    "refs": [
+      "resources/js/components/reader/qr-scanner.tsx:319:34"
+    ]
+  },
+  "760pyp2fod": {
+    "message": "Save plan",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:321:50"
+    ]
+  },
+  "7e1s9qn4gb": {
+    "message": "Confirm",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:221:34"
+    ]
+  },
+  "7gqysfvinh": {
+    "message": "Name",
+    "refs": [
+      "resources/js/pages/auth/register.tsx:31:56",
+      "resources/js/pages/settings/profile.tsx:42:56"
+    ]
+  },
+  "7guj9yqzud": {
+    "message": "Loads, charges, and adjustments show up here.",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:372:42",
+      "resources/js/pages/transactions/index.tsx:257:47"
+    ]
+  },
+  "7kxut9wjci": {
+    "message": "Verify authentication code",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:274:24"
+    ]
+  },
+  "7orwtyllcs": {
+    "message": "Are you sure you want to remove the \"{name}\" passkey? You will no longer be able to use it to sign in.",
+    "refs": [
+      "resources/js/components/passkey-item.tsx:77:26"
+    ]
+  },
+  "7p8z05g2bo": {
+    "message": "Logo",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:160:38"
+    ]
+  },
+  "7v3s45hhdz": {
+    "message": "Reactivate {name}?",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:167:36"
+    ]
+  },
+  "81wem04jqz": {
+    "message": "Register",
+    "refs": [
+      "resources/js/pages/auth/register.tsx:20:26"
+    ]
+  },
+  "841u6ezovk": {
+    "message": "Profile settings",
+    "refs": [
+      "resources/js/pages/settings/profile.tsx:103:20",
+      "resources/js/pages/settings/profile.tsx:21:26",
+      "resources/js/pages/settings/profile.tsx:23:38"
+    ]
+  },
+  "8a5iq7b0bu": {
+    "message": "Add to Google Wallet",
+    "refs": [
+      "resources/js/components/public-card/wallet-buttons.tsx:13:42"
+    ]
+  },
+  "8e7ivhjarg": {
+    "message": "Save business",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:304:38"
+    ]
+  },
+  "8nhmqil6xb": {
+    "message": "customer@example.com",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:136:66",
+      "resources/js/pages/cards/show.tsx:249:66"
+    ]
+  },
+  "8q0cv30ppn": {
+    "message": "Used on the public card page.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:221:38"
+    ]
+  },
+  "8tpbh727ny": {
+    "message": "Leave your email and we'll let you know about your balance.",
+    "refs": [
+      "resources/js/components/public-card/email-capture.tsx:45:22"
+    ]
+  },
+  "93varfklsb": {
+    "message": "Only superadmins see these.",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:249:54"
+    ]
+  },
+  "9i5141oshs": {
+    "message": "Something went wrong",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:45:20"
+    ]
+  },
+  "a1v894oevw": {
+    "message": "Enter recovery code",
+    "refs": [
+      "resources/js/pages/auth/two-factor-challenge.tsx:73:54"
+    ]
+  },
+  "a3frag2787": {
+    "message": "Hide recovery codes",
+    "refs": [
+      "resources/js/components/two-factor-recovery-codes.tsx:82:31"
+    ]
+  },
+  "a5h4wj9ump": {
+    "message": "Last {days} days",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:92:16"
+    ]
+  },
+  "a5t143j7kl": {
+    "message": "e.g., MacBook Pro, iPhone",
+    "refs": [
+      "resources/js/components/passkey-register.tsx:88:34"
+    ]
+  },
   "a8p5m3vimm": {
     "message": "Active",
     "context": "organization status",
     "refs": [
-      "resources/js/lib/labels.ts:63:17"
+      "resources/js/lib/labels.ts:64:17"
     ]
   },
   "a9iatti38r": {
     "message": "Thanks! Your email is saved.",
     "refs": [
+      "resources/js/components/public-card/email-capture.tsx:54:26",
       "resources/js/lib/flash.ts:42:42"
+    ]
+  },
+  "aai87ncak7": {
+    "message": "{active} active, {frozen} frozen, {depleted} depleted",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:82:21"
+    ]
+  },
+  "axif9jcda4": {
+    "message": "Make {email} a superadmin?",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:301:72"
+    ]
+  },
+  "be97194fqg": {
+    "message": "Create an account",
+    "refs": [
+      "resources/js/pages/auth/register.tsx:123:12"
+    ]
+  },
+  "bn4fv7eipw": {
+    "message": "Date range",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:121:45"
+    ]
+  },
+  "bnq3beamw3": {
+    "message": "See all",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:356:38"
+    ]
+  },
+  "cd8zplgkn6": {
+    "message": "Reactivate",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:164:38"
+    ]
+  },
+  "ch0iwcbi5y": {
+    "message": "The newest businesses on Yoiful.",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:108:34"
+    ]
+  },
+  "cht6jp4gtd": {
+    "message": "2FA recovery codes",
+    "refs": [
+      "resources/js/components/two-factor-recovery-codes.tsx:61:22"
+    ]
+  },
+  "ciupz1z8pm": {
+    "message": "Current password",
+    "refs": [
+      "resources/js/pages/settings/security.tsx:66:38",
+      "resources/js/pages/settings/security.tsx:75:50"
     ]
   },
   "ciy321kmmx": {
@@ -178,10 +2189,138 @@
       "resources/js/lib/flash.ts:35:34"
     ]
   },
+  "cw1grf7hmr": {
+    "message": "This card is frozen. It cannot be charged or loaded.",
+    "refs": [
+      "resources/js/pages/reader/card.tsx:60:13"
+    ]
+  },
+  "d67rltdih0": {
+    "message": "Looking up card…",
+    "refs": [
+      "resources/js/pages/reader/scan.tsx:70:34"
+    ]
+  },
+  "d8uwxid69d": {
+    "message": "Create account",
+    "refs": [
+      "resources/js/pages/auth/register.tsx:105:34"
+    ]
+  },
+  "dmjydccuxx": {
+    "message": "Manage your two-factor authentication settings",
+    "refs": [
+      "resources/js/components/manage-two-factor.tsx:52:30"
+    ]
+  },
+  "dyxte40li2": {
+    "message": "Passkeys",
+    "refs": [
+      "resources/js/components/manage-passkeys.tsx:50:24"
+    ]
+  },
+  "e75q93a3f9": {
+    "message": "Confirm password",
+    "refs": [
+      "resources/js/pages/auth/confirm-password.tsx:18:26",
+      "resources/js/pages/auth/confirm-password.tsx:53:34",
+      "resources/js/pages/auth/confirm-password.tsx:64:12",
+      "resources/js/pages/auth/register.tsx:82:38",
+      "resources/js/pages/auth/register.tsx:90:50",
+      "resources/js/pages/settings/security.tsx:101:38",
+      "resources/js/pages/settings/security.tsx:109:50"
+    ]
+  },
+  "eqg9wi2usk": {
+    "message": "Showing {from} to {to} of {total} organizations",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:255:38"
+    ]
+  },
+  "euf7o3nze7": {
+    "message": "Something went wrong.",
+    "refs": [
+      "resources/js/components/alert-error.tsx:15:35"
+    ]
+  },
+  "exzzc81bc6": {
+    "message": "By day",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:184:37"
+    ]
+  },
+  "f2v9rtmf85": {
+    "message": "Code",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:68:31"
+    ]
+  },
+  "fck8u3o77b": {
+    "message": {
+      "one": "{count} frozen",
+      "other": "{count} frozen"
+    },
+    "context": "cards",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:90:15"
+    ]
+  },
+  "fi1aj4103u": {
+    "message": {
+      "one": "{count} cancelled",
+      "other": "{count} cancelled"
+    },
+    "context": "cards",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:102:15"
+    ]
+  },
+  "frjj2motly": {
+    "message": "Sound on",
+    "refs": [
+      "resources/js/components/reader/sound-toggle.tsx:34:24"
+    ]
+  },
+  "gbq6pkhmy1": {
+    "message": "Save email",
+    "refs": [
+      "resources/js/components/public-card/email-capture.tsx:80:30"
+    ]
+  },
+  "gexz7lm4ol": {
+    "message": {
+      "one": "{count} depleted",
+      "other": "{count} depleted"
+    },
+    "context": "cards",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:96:15"
+    ]
+  },
+  "gklvo3l49v": {
+    "message": "Failed to fetch recovery codes",
+    "refs": [
+      "resources/js/hooks/use-two-factor-auth.ts:85:17"
+    ]
+  },
   "gktxymbq14": {
     "message": "Organization reactivated.",
     "refs": [
       "resources/js/lib/flash.ts:55:49"
+    ]
+  },
+  "gmznfc5eow": {
+    "message": "Add funds",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:114:30",
+      "resources/js/components/cards/card-balance-actions.tsx:58:25",
+      "resources/js/pages/reader/card.tsx:137:30"
+    ]
+  },
+  "gnihj2ptn6": {
+    "message": "Cards used against your plan's limit.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:66:30"
     ]
   },
   "go9h267ewj": {
@@ -190,17 +2329,72 @@
       "resources/js/lib/flash.ts:32:35"
     ]
   },
+  "gqulylnlei": {
+    "message": "Optional. Saved for balance updates later.",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:220:38"
+    ]
+  },
   "grngmmjbyn": {
     "message": "Password updated.",
     "refs": [
       "resources/js/lib/flash.ts:41:44"
     ]
   },
+  "h0pblyyblb": {
+    "message": "Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:265:30"
+    ]
+  },
+  "h8pe5i2ub7": {
+    "message": "Warning",
+    "refs": [
+      "resources/js/components/delete-user.tsx:31:49"
+    ]
+  },
+  "hdcjznzjw6": {
+    "message": "No cards match your search",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:280:47"
+    ]
+  },
+  "hj1o1glkxj": {
+    "message": "Remember me",
+    "refs": [
+      "resources/js/pages/auth/login.tsx:73:38"
+    ]
+  },
+  "hmy7mdqd4u": {
+    "message": "Use a negative amount to lower the balance, for example -5.00.",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:72:29"
+    ]
+  },
+  "ii2e798x54": {
+    "message": "Add",
+    "context": "verb: add funds to a card",
+    "refs": [
+      "resources/js/pages/reader/card.tsx:39:11"
+    ]
+  },
+  "ixv1ushc1y": {
+    "message": "Sign up",
+    "refs": [
+      "resources/js/pages/auth/login.tsx:92:34"
+    ]
+  },
   "jez1pi8470": {
     "message": "Cancelled",
     "context": "card status",
     "refs": [
-      "resources/js/lib/labels.ts:31:20"
+      "resources/js/lib/labels.ts:32:20"
+    ]
+  },
+  "jgw4scgx5": {
+    "message": "Saved on the card for balance updates later.",
+    "refs": [
+      "resources/js/pages/cards/create.tsx:144:54"
     ]
   },
   "ji96g5zh8j": {
@@ -209,36 +2403,586 @@
       "resources/js/lib/flash.ts:38:42"
     ]
   },
+  "jkkszphs0d": {
+    "message": "Try another code, email, or status.",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:285:47"
+    ]
+  },
+  "jmp5nke2fe": {
+    "message": "Their current password stops working and they are signed out on other devices. The new password is shown once.",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:230:74"
+    ]
+  },
+  "k1sucxnuss": {
+    "message": "This card is frozen. Unfreeze it to add funds or charge it.",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:88:13"
+    ]
+  },
+  "k7wfdtk1dy": {
+    "message": "Type",
+    "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:45:33",
+      "resources/js/pages/transactions/index.tsx:137:38"
+    ]
+  },
+  "kkt03irvjv": {
+    "message": "Amounts loaded and charged per day ({currency}).",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:225:26"
+    ]
+  },
+  "kt7qki96oz": {
+    "message": "Card not found",
+    "refs": [
+      "resources/js/pages/public-card/not-found.tsx:20:26",
+      "resources/js/pages/public-card/not-found.tsx:30:38"
+    ]
+  },
+  "kthiux3p": {
+    "message": "Show password",
+    "refs": [
+      "resources/js/components/password-input.tsx:28:58"
+    ]
+  },
+  "kw9qzkwp2a": {
+    "message": "Reactivate organization",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:173:43"
+    ]
+  },
+  "l7ctvsopzx": {
+    "message": "Coming soon",
+    "refs": [
+      "resources/js/components/public-card/wallet-buttons.tsx:27:53"
+    ]
+  },
+  "lcunbglek6": {
+    "message": "Add passkey",
+    "refs": [
+      "resources/js/components/passkey-register.tsx:71:18"
+    ]
+  },
+  "lu1luc3mdp": {
+    "message": "Created {date}",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:160:50"
+    ]
+  },
+  "lux3evo6j3": {
+    "message": "No activity yet",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:248:42"
+    ]
+  },
+  "lx7e250k0": {
+    "message": "Authenticating...",
+    "refs": [
+      "resources/js/components/passkey-verify.tsx:55:44"
+    ]
+  },
+  "m997hoz843": {
+    "message": "They lose access to the admin area. The last superadmin cannot be revoked.",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:273:75"
+    ]
+  },
+  "me33ea3jpr": {
+    "message": "Access denied",
+    "refs": [
+      "resources/js/pages/errors/forbidden.tsx:26:26",
+      "resources/js/pages/errors/forbidden.tsx:37:38"
+    ]
+  },
+  "mtb516uze5": {
+    "message": "This card can no longer be used. Please contact {business} for assistance.",
+    "refs": [
+      "resources/js/pages/public-card/show.tsx:73:34"
+    ]
+  },
+  "mu8wdz9k9n": {
+    "message": {
+      "one": "{count} card",
+      "other": "{count} cards"
+    },
+    "refs": [
+      "resources/js/pages/cards/index.tsx:175:35"
+    ]
+  },
+  "n5chxaq0b4": {
+    "message": "Amount ({currency})",
+    "refs": [
+      "resources/js/pages/reader/card.tsx:169:30"
+    ]
+  },
   "n6rto3r6ys": {
     "message": "Organization suspended.",
     "refs": [
       "resources/js/lib/flash.ts:54:47"
     ]
   },
+  "ne7vuo58sz": {
+    "message": {
+      "one": "{count} owner",
+      "other": "{count} owners"
+    },
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:71:21"
+    ]
+  },
+  "nij1kqyxc0": {
+    "message": "Profile",
+    "refs": [
+      "resources/js/layouts/settings/layout.tsx:24:20",
+      "resources/js/pages/settings/profile.tsx:28:28"
+    ]
+  },
+  "nn1ei3v45t": {
+    "message": "Onboard a business and its owner. A new owner email creates an account with a temporary password, shown once.",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:43:34"
+    ]
+  },
+  "nox4lci43x": {
+    "message": "Card not found.",
+    "refs": [
+      "resources/js/pages/reader/scan.tsx:39:48"
+    ]
+  },
+  "nubpaahyd": {
+    "message": "Money in and out",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:224:20"
+    ]
+  },
+  "nv1rx7xnth": {
+    "message": "Organization",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:194:46"
+    ]
+  },
+  "nvvy1enreg": {
+    "message": "Leave empty for unlimited. Creation is refused at the limit.",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:281:50"
+    ]
+  },
+  "nw56c02n7y": {
+    "message": "Loads",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:47:24",
+      "resources/js/pages/analytics/index.tsx:198:42"
+    ]
+  },
+  "o41g0gbbvj": {
+    "message": "Owner email",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:135:54"
+    ]
+  },
+  "o54cnfr1fb": {
+    "message": "Next",
+    "refs": [
+      "resources/js/components/cards/list-pagination.tsx:70:31"
+    ]
+  },
+  "o97nk6gkei": {
+    "message": "Leave empty for unlimited.",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:219:54"
+    ]
+  },
+  "ofjrfpifyl": {
+    "message": "No recent scans",
+    "refs": [
+      "resources/js/components/reader/recent-scans.tsx:58:46"
+    ]
+  },
+  "ogjy610dmo": {
+    "message": "No transactions yet",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:369:42",
+      "resources/js/pages/transactions/index.tsx:250:47"
+    ]
+  },
+  "om8zktc7qk": {
+    "message": "Business settings",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:410:26",
+      "resources/js/pages/settings/business.tsx:412:38",
+      "resources/js/pages/settings/business.tsx:433:20"
+    ]
+  },
+  "ozmuiaudad": {
+    "message": "These settings are read-only",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:48:26"
+    ]
+  },
+  "pqbk79k7rs": {
+    "message": "Dashboard",
+    "refs": [
+      "resources/js/components/app-header.tsx:53:20",
+      "resources/js/components/app-sidebar.tsx:39:20",
+      "resources/js/layouts/reader-layout.tsx:59:26",
+      "resources/js/pages/dashboard.tsx:125:26",
+      "resources/js/pages/dashboard.tsx:273:20",
+      "resources/js/pages/welcome.tsx:37:30"
+    ]
+  },
+  "q7gx504kvd": {
+    "message": "Day",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:193:49"
+    ]
+  },
+  "qejz9sldll": {
+    "message": "PNG, JPG, or WebP, up to 2 MB.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:186:38"
+    ]
+  },
+  "qneubavfcw": {
+    "message": "View all",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:124:34",
+      "resources/js/pages/dashboard.tsx:234:38"
+    ]
+  },
+  "r0q72y2gqq": {
+    "message": "Scan it to open the card.",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:291:34"
+    ]
+  },
+  "r53uwfa9ui": {
+    "message": "Or confirm with password",
+    "refs": [
+      "resources/js/pages/auth/confirm-password.tsx:27:28"
+    ]
+  },
+  "rcck306908": {
+    "message": "Used only for a new account. Defaults to the part of the email before the @.",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:181:54"
+    ]
+  },
+  "rdkz0fx6pw": {
+    "message": "Owner",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:127:55"
+    ]
+  },
   "rihfbbqbh1": {
     "message": "Active",
     "context": "card status",
     "refs": [
-      "resources/js/lib/labels.ts:28:17"
+      "resources/js/lib/labels.ts:29:17"
+    ]
+  },
+  "rj1ngyto0o": {
+    "message": "Language",
+    "refs": [
+      "resources/js/components/preferences/locale-switcher.tsx:78:37",
+      "resources/js/components/preferences/locale-switcher.tsx:88:41"
+    ]
+  },
+  "rtr3cdg3m6": {
+    "message": "Already have an account?",
+    "refs": [
+      "resources/js/pages/auth/register.tsx:110:30"
+    ]
+  },
+  "ryo3bxpr4k": {
+    "message": "Amount",
+    "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:46:56"
+    ]
+  },
+  "rzbxhud6e6": {
+    "message": "Starting camera…",
+    "refs": [
+      "resources/js/components/reader/qr-scanner.tsx:302:45"
+    ]
+  },
+  "swsn5779ql": {
+    "message": "Failed to fetch a setup key",
+    "refs": [
+      "resources/js/hooks/use-two-factor-auth.ts:72:43"
+    ]
+  },
+  "t2l9grzkme": {
+    "message": "or, enter the code manually",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:107:30"
+    ]
+  },
+  "t3a315u4p2": {
+    "message": "Actions",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:127:46"
+    ]
+  },
+  "t5pzxeo2v2": {
+    "message": "For example “Gift Card”.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:358:38"
+    ]
+  },
+  "tdh7o7182x": {
+    "message": "Your session expired. Reload the page and try again.",
+    "refs": [
+      "resources/js/pages/errors/error.tsx:39:26"
+    ]
+  },
+  "th9i5lga44": {
+    "message": "System",
+    "context": "theme",
+    "refs": [
+      "resources/js/lib/labels.ts:77:17"
+    ]
+  },
+  "tvx9d7ixhz": {
+    "message": "Regenerate codes",
+    "refs": [
+      "resources/js/components/two-factor-recovery-codes.tsx:99:52"
+    ]
+  },
+  "tzpouapk0w": {
+    "message": "Registered accounts",
+    "refs": [
+      "resources/js/pages/admin/index.tsx:56:21"
+    ]
+  },
+  "uawxgub8b4": {
+    "message": "Delete account",
+    "refs": [
+      "resources/js/components/delete-user.tsx:112:46",
+      "resources/js/components/delete-user.tsx:26:24",
+      "resources/js/components/delete-user.tsx:48:26"
+    ]
+  },
+  "udpb2fauly": {
+    "message": "Allow camera access for this site in your browser settings, then try again.",
+    "refs": [
+      "resources/js/components/reader/qr-scanner.tsx:107:26"
     ]
   },
   "ul2xjyd8pi": {
     "message": "This business is suspended. Contact support.",
     "refs": [
-      "resources/js/lib/flash.ts:46:13"
+      "resources/js/components/organization/suspended-banner.tsx:9:12",
+      "resources/js/lib/flash.ts:46:13",
+      "resources/js/pages/cards/create.tsx:159:59",
+      "resources/js/pages/cards/index.tsx:199:39",
+      "resources/js/pages/dashboard.tsx:135:39",
+      "resources/js/pages/settings/business.tsx:51:23"
+    ]
+  },
+  "utuf67f9qs": {
+    "message": "Enable 2FA",
+    "refs": [
+      "resources/js/components/manage-two-factor.tsx:105:42"
     ]
   },
   "ux34lm8sqs": {
     "message": "Match my browser",
     "refs": [
-      "resources/js/components/preferences/locale-switcher.tsx:108:38"
+      "resources/js/components/preferences/locale-switcher.tsx:106:38"
+    ]
+  },
+  "v9vyt3hane": {
+    "message": "Currency",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:462:38",
+      "resources/js/pages/settings/business.tsx:228:38"
+    ]
+  },
+  "vaiwmi147i": {
+    "message": "Or continue with email",
+    "refs": [
+      "resources/js/components/passkey-verify.tsx:69:39"
+    ]
+  },
+  "vctgr5r3d9": {
+    "message": "Plan",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:193:55",
+      "resources/js/pages/admin/organizations/show.tsx:210:41",
+      "resources/js/pages/settings/business.tsx:65:24"
+    ]
+  },
+  "vehukx254v": {
+    "message": "Card cancelled",
+    "refs": [
+      "resources/js/pages/public-card/show.tsx:71:42"
+    ]
+  },
+  "vh88ypv7zp": {
+    "message": "Copied",
+    "refs": [
+      "resources/js/components/admin/one-time-credentials.tsx:66:31"
+    ]
+  },
+  "vjxiut1gq9": {
+    "message": "Previous",
+    "refs": [
+      "resources/js/components/cards/list-pagination.tsx:39:31"
+    ]
+  },
+  "vkh3lt6sja": {
+    "message": "Adjustments",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:49:30",
+      "resources/js/pages/analytics/index.tsx:204:42"
+    ]
+  },
+  "vxgf42ygvf": {
+    "message": "Full name",
+    "refs": [
+      "resources/js/pages/auth/register.tsx:40:50",
+      "resources/js/pages/settings/profile.tsx:51:50"
+    ]
+  },
+  "w6ysoj0kj4": {
+    "message": "Status",
+    "refs": [
+      "resources/js/pages/admin/organizations/index.tsx:196:53",
+      "resources/js/pages/cards/index.tsx:305:53",
+      "resources/js/pages/cards/show.tsx:148:45"
+    ]
+  },
+  "w8xiuxis0d": {
+    "message": "Claim superadmin",
+    "refs": [
+      "resources/js/pages/errors/forbidden.tsx:63:42"
+    ]
+  },
+  "wlwxg6d4mw": {
+    "message": "User",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:118:53"
+    ]
+  },
+  "wnhmh5yz21": {
+    "message": "Card limit reached",
+    "refs": [
+      "resources/js/components/cards/card-usage-notice.tsx:28:30",
+      "resources/js/pages/cards/index.tsx:198:39",
+      "resources/js/pages/dashboard.tsx:134:39"
+    ]
+  },
+  "wytlvq49bv": {
+    "message": "Reader",
+    "refs": [
+      "resources/js/layouts/reader-layout.tsx:37:30",
+      "resources/js/pages/reader/card.tsx:86:29",
+      "resources/js/pages/reader/scan.tsx:49:26"
+    ]
+  },
+  "x0y8f7em65": {
+    "message": "Enter your email and password below to log in",
+    "refs": [
+      "resources/js/pages/auth/login.tsx:110:18"
     ]
   },
   "x6wool4650": {
     "message": "Adjustment",
     "context": "transaction type",
     "refs": [
-      "resources/js/lib/labels.ts:42:21"
+      "resources/js/lib/labels.ts:43:21"
+    ]
+  },
+  "xbbo222rz7": {
+    "message": "Log in with an authentication code instead",
+    "refs": [
+      "resources/js/pages/auth/two-factor-challenge.tsx:31:29"
+    ]
+  },
+  "xel0tpqlux": {
+    "message": "Charge",
+    "context": "verb: charge a card",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:118:30",
+      "resources/js/pages/reader/card.tsx:133:30",
+      "resources/js/pages/reader/card.tsx:38:11"
+    ]
+  },
+  "xjqourfchj": {
+    "message": "Set a temporary password from the users page.",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:336:42"
+    ]
+  },
+  "xn9tsopmsi": {
+    "message": "A frozen card cannot be charged or loaded.",
+    "refs": [
+      "resources/js/pages/cards/show.tsx:150:38"
+    ]
+  },
+  "xw90vci12y": {
+    "message": "Search by code or email",
+    "refs": [
+      "resources/js/pages/cards/index.tsx:227:50",
+      "resources/js/pages/cards/index.tsx:228:49"
+    ]
+  },
+  "xwwbikmmob": {
+    "message": "Enter the 6-digit code from your authenticator app",
+    "refs": [
+      "resources/js/components/two-factor-setup-modal.tsx:275:30"
+    ]
+  },
+  "xylq48h0w8": {
+    "message": "Adjustment ({currency})",
+    "refs": [
+      "resources/js/components/cards/card-balance-actions.tsx:71:30"
+    ]
+  },
+  "yh6yjfndj9": {
+    "message": "Slug",
+    "refs": [
+      "resources/js/pages/admin/organizations/create.tsx:94:54"
+    ]
+  },
+  "yl7w3jte8m": {
+    "message": "Cards created",
+    "refs": [
+      "resources/js/components/analytics/analytics-charts.tsx:109:20",
+      "resources/js/components/analytics/analytics-charts.tsx:42:25",
+      "resources/js/pages/analytics/index.tsx:155:32"
+    ]
+  },
+  "ymwpff1mxc": {
+    "message": "Your name, logo, and color appear on the public card page.",
+    "refs": [
+      "resources/js/pages/settings/business.tsx:122:30"
+    ]
+  },
+  "z6az0ecjzu": {
+    "message": "Transactions in {month}",
+    "refs": [
+      "resources/js/pages/dashboard.tsx:213:33"
+    ]
+  },
+  "zfg5718dbw": {
+    "message": "Programs",
+    "refs": [
+      "resources/js/pages/admin/organizations/show.tsx:389:45"
+    ]
+  },
+  "zgf5b3csc7": {
+    "message": "Register passkey",
+    "refs": [
+      "resources/js/components/passkey-register.tsx:101:57"
+    ]
+  },
+  "zrb43vmdtr": {
+    "message": "Go to next page",
+    "refs": [
+      "resources/js/components/cards/list-pagination.tsx:71:37"
     ]
   }
 }

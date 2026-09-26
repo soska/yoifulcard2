@@ -7,6 +7,7 @@ import {
     Snowflake,
     Sun,
 } from 'lucide-react';
+import { suspendedMessage } from '@/components/organization/suspended-banner';
 import { CardBalanceActions } from '@/components/cards/card-balance-actions';
 import { CardStatusBadge } from '@/components/cards/card-status-badge';
 import { TransactionsTable } from '@/components/transactions/transactions-table';
@@ -40,7 +41,7 @@ import { email, freeze, index, show, unfreeze } from '@/routes/cards';
 import { png, svg } from '@/routes/cards/qr';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { CardDetail, TransactionRow } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     card: CardDetail;
@@ -48,8 +49,6 @@ type Props = {
     transactions: TransactionRow[];
     transactionCount: number;
 };
-
-const SUSPENDED = 'This business is suspended. Contact support.';
 
 export default function ShowCard({
     card,
@@ -60,7 +59,6 @@ export default function ShowCard({
     const { currentOrganization, errors } = usePage().props;
     const { formatDateTime } = useDateFormat();
     const { formatMoney } = useMoneyFormat();
-    const { t } = useTranslation();
     const writable = currentOrganization?.status === 'active';
     const pageError =
         (errors as Record<string, string | undefined>).organization ??
@@ -77,14 +75,14 @@ export default function ShowCard({
                         render={<Link href={index()} />}
                     >
                         <ArrowLeft data-icon="inline-start" />
-                        {t('Back to cards')}
+                        {__('Back to cards')}
                     </Button>
                 </div>
 
                 {pageError && (
                     <Alert variant="destructive">
                         <AlertCircle />
-                        <AlertTitle>{t('That did not work')}</AlertTitle>
+                        <AlertTitle>{__('That did not work')}</AlertTitle>
                         <AlertDescription>{pageError}</AlertDescription>
                     </Alert>
                 )}
@@ -107,7 +105,7 @@ export default function ShowCard({
                                 <dl className="grid grid-cols-2 gap-4">
                                     <div className="col-span-2">
                                         <dt className="text-sm text-muted-foreground">
-                                            {t('Balance')}
+                                            {__('Balance')}
                                         </dt>
                                         <dd className="text-3xl font-semibold tabular-nums">
                                             {formatMoney(
@@ -118,7 +116,7 @@ export default function ShowCard({
                                     </div>
                                     <div>
                                         <dt className="text-sm text-muted-foreground">
-                                            {t('Created')}
+                                            {__('Created')}
                                         </dt>
                                         <dd>
                                             {formatDateTime(card.created_at)}
@@ -126,12 +124,12 @@ export default function ShowCard({
                                     </div>
                                     <div>
                                         <dt className="text-sm text-muted-foreground">
-                                            {t('Last used')}
+                                            {__('Last used')}
                                         </dt>
                                         <dd>
                                             {formatDateTime(
                                                 card.last_used_at,
-                                                t('Never'),
+                                                __('Never'),
                                             )}
                                         </dd>
                                     </div>
@@ -147,9 +145,9 @@ export default function ShowCard({
 
                         <Card>
                             <CardHeader>
-                                <CardTitle>{t('Status')}</CardTitle>
+                                <CardTitle>{__('Status')}</CardTitle>
                                 <CardDescription>
-                                    {t(
+                                    {__(
                                         'A frozen card cannot be charged or loaded.',
                                     )}
                                 </CardDescription>
@@ -170,7 +168,7 @@ export default function ShowCard({
                                                 title={
                                                     writable
                                                         ? undefined
-                                                        : t(SUSPENDED)
+                                                        : suspendedMessage()
                                                 }
                                             >
                                                 {processing ? (
@@ -178,7 +176,7 @@ export default function ShowCard({
                                                 ) : (
                                                     <Sun data-icon="inline-start" />
                                                 )}
-                                                {t('Unfreeze card')}
+                                                {__('Unfreeze card')}
                                             </Button>
                                         )}
                                     </Form>
@@ -199,7 +197,7 @@ export default function ShowCard({
                                                 title={
                                                     writable
                                                         ? undefined
-                                                        : t(SUSPENDED)
+                                                        : suspendedMessage()
                                                 }
                                             >
                                                 {processing ? (
@@ -207,7 +205,7 @@ export default function ShowCard({
                                                 ) : (
                                                     <Snowflake data-icon="inline-start" />
                                                 )}
-                                                {t('Freeze card')}
+                                                {__('Freeze card')}
                                             </Button>
                                         )}
                                     </Form>
@@ -217,9 +215,9 @@ export default function ShowCard({
 
                         <Card>
                             <CardHeader>
-                                <CardTitle>{t('Cardholder email')}</CardTitle>
+                                <CardTitle>{__('Cardholder email')}</CardTitle>
                                 <CardDescription>
-                                    {t(
+                                    {__(
                                         'Optional. Saved for balance updates later.',
                                     )}
                                 </CardDescription>
@@ -237,7 +235,7 @@ export default function ShowCard({
                                                 htmlFor="email"
                                                 className="sr-only"
                                             >
-                                                {t('Cardholder email')}
+                                                {__('Cardholder email')}
                                             </FieldLabel>
                                             <div className="flex gap-2">
                                                 <Input
@@ -248,7 +246,7 @@ export default function ShowCard({
                                                     defaultValue={
                                                         card.email ?? ''
                                                     }
-                                                    placeholder={t(
+                                                    placeholder={__(
                                                         'customer@example.com',
                                                     )}
                                                     disabled={!writable}
@@ -264,15 +262,17 @@ export default function ShowCard({
                                                     title={
                                                         writable
                                                             ? undefined
-                                                            : t(SUSPENDED)
+                                                            : suspendedMessage()
                                                     }
                                                 >
                                                     {processing && <Spinner />}
-                                                    {t('Save')}
+                                                    {__('Save')}
                                                 </Button>
                                             </div>
                                             <FieldDescription>
-                                                {t('Leave empty to remove it.')}
+                                                {__(
+                                                    'Leave empty to remove it.',
+                                                )}
                                             </FieldDescription>
                                             <FieldError>
                                                 {formErrors.email}
@@ -286,16 +286,16 @@ export default function ShowCard({
 
                     <Card className="h-fit">
                         <CardHeader>
-                            <CardTitle>{t('QR code')}</CardTitle>
+                            <CardTitle>{__('QR code')}</CardTitle>
                             <CardDescription>
-                                {t('Scan it to open the card.')}
+                                {__('Scan it to open the card.')}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="flex flex-col items-center gap-4">
                             <div className="rounded-lg border bg-white p-2">
                                 <img
                                     src={svg.url(card)}
-                                    alt={t('QR code for card :code', {
+                                    alt={__('QR code for card {code}', {
                                         code: card.code,
                                     })}
                                     width={240}
@@ -315,7 +315,7 @@ export default function ShowCard({
                                 }
                             >
                                 <Download data-icon="inline-start" />
-                                {t('Download PNG')}
+                                {__('Download PNG')}
                             </Button>
                         </CardContent>
                     </Card>
@@ -325,17 +325,17 @@ export default function ShowCard({
                     <CardHeader>
                         <div className="flex flex-wrap items-center justify-between gap-3">
                             <div className="flex flex-col gap-1">
-                                <CardTitle>{t('History')}</CardTitle>
+                                <CardTitle>{__('History')}</CardTitle>
                                 <CardDescription>
                                     {transactionCount > transactions.length
-                                        ? t(
-                                              'The latest :count of :total transactions.',
+                                        ? __(
+                                              'The latest {count} of {total} transactions.',
                                               {
                                                   count: transactions.length,
                                                   total: transactionCount,
                                               },
                                           )
-                                        : t(
+                                        : __(
                                               'Every balance change on this card.',
                                           )}
                                 </CardDescription>
@@ -353,7 +353,7 @@ export default function ShowCard({
                                     }
                                 >
                                     <History data-icon="inline-start" />
-                                    {t('See all')}
+                                    {__('See all')}
                                 </Button>
                             )}
                         </div>
@@ -366,10 +366,10 @@ export default function ShowCard({
                                         <History />
                                     </EmptyMedia>
                                     <EmptyTitle>
-                                        {t('No transactions yet')}
+                                        {__('No transactions yet')}
                                     </EmptyTitle>
                                     <EmptyDescription>
-                                        {t(
+                                        {__(
                                             'Loads, charges, and adjustments show up here.',
                                         )}
                                     </EmptyDescription>
@@ -391,7 +391,7 @@ export default function ShowCard({
 
 ShowCard.layout = (props: Props) => ({
     breadcrumbs: [
-        { titleKey: 'Cards', href: index() },
+        { title: __('Cards'), href: index() },
         { title: props.card.code, href: show(props.card) },
     ],
 });

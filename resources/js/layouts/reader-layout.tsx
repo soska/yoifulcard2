@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useOnline } from '@/hooks/use-online';
 import { registerServiceWorker } from '@/lib/service-worker';
 import { dashboard } from '@/routes';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 /**
  * Full-screen, phone-first layout for the reader. No sidebar: large
@@ -23,8 +23,6 @@ export default function ReaderLayout({
 }) {
     const { currentOrganization, organizations } = usePage().props;
     const online = useOnline();
-    const { t } = useTranslation();
-
     useEffect(() => {
         registerServiceWorker();
     }, []);
@@ -36,7 +34,7 @@ export default function ReaderLayout({
                     <AppLogoIcon className="size-7 shrink-0 fill-current" />
                     <div className="min-w-0">
                         <p className="text-sm leading-tight font-semibold">
-                            {t('Reader')}
+                            {__('Reader')}
                         </p>
                         {organizations.length >= 2 ? (
                             <ReaderOrganizationSwitcher />
@@ -58,7 +56,7 @@ export default function ReaderLayout({
                         render={<Link href={dashboard()} />}
                     >
                         <LayoutDashboard data-icon="inline-start" />
-                        {t('Dashboard')}
+                        {__('Dashboard')}
                     </Button>
                 </div>
             </header>
@@ -69,7 +67,7 @@ export default function ReaderLayout({
                     <Alert>
                         <WifiOff />
                         <AlertDescription>
-                            {t(
+                            {__(
                                 'You are offline. Scans and charges need a connection.',
                             )}
                         </AlertDescription>

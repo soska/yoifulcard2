@@ -3,14 +3,13 @@ import type { ComponentProps, Ref } from 'react';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 export default function PasswordInput({
     className,
     ref,
     ...props
 }: Omit<ComponentProps<'input'>, 'type'> & { ref?: Ref<HTMLInputElement> }) {
-    const { t } = useTranslation();
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -26,7 +25,7 @@ export default function PasswordInput({
                 onClick={() => setShowPassword((prev) => !prev)}
                 className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-3 text-muted-foreground hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring focus-visible:outline-none"
                 aria-label={
-                    showPassword ? t('Hide password') : t('Show password')
+                    showPassword ? __('Hide password') : __('Show password')
                 }
                 tabIndex={-1}
             >

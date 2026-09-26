@@ -39,9 +39,7 @@ test("signed-in user's saved locale wins over cookie and browser", function () {
         ->assertInertia(fn (Assert $page) => $page
             ->where('auth.user.id', $user->id)
             ->where('locale.current', 'es')
-            ->where('locale.intl', 'es-MX')
-            // Server strings (the shared Phase 8 lines) follow the same decision.
-            ->where('translations.Log out', 'Cerrar sesión'));
+            ->where('locale.intl', 'es-MX'));
 
     // And the preference is what mail would use (HasLocalePreference).
     expect($user->preferredLocale())->toBe('es');

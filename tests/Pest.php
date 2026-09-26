@@ -73,3 +73,28 @@ function superadmin(): User
 
     return $user;
 }
+
+/**
+ * What the browser shows for an English UI message in `$locale`, looked up
+ * the way the duckalization runtime does it: `en.meta.json` gives the id of
+ * the message (with its context), and the locale's catalog holds the text.
+ * Null when the catalog has no entry (the browser would show the English).
+ */
+function catalogLine(string $locale, string $message, ?string $context = null): ?string
+{
+    $read = fn (string $file): array => json_decode(
+        file_get_contents(resource_path('js/locales/'.$file)),
+        true,
+        flags: JSON_THROW_ON_ERROR,
+    );
+
+    $catalog = $read($locale.'.json');
+
+    foreach ($read('en.meta.json') as $id => $entry) {
+        if ($entry['message'] === $message && ($entry['context'] ?? null) === $context) {
+            return $catalog[$id] ?? null;
+        }
+    }
+
+    return null;
+}

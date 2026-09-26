@@ -82,7 +82,6 @@ class ErrorPage
             'organizations' => [],
             'locale' => Locales::prop($locale),
             'theme' => Theme::fromRequest($request),
-            'translations' => Translations::for($locale),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }

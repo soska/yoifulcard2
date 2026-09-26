@@ -10,17 +10,16 @@ import { Spinner } from '@/components/ui/spinner';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import PasskeyVerify from '@/components/passkey-verify';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     status?: string;
 };
 
 export default function Login({ status }: Props) {
-    const { t } = useTranslation();
     return (
         <>
-            <Head title={t('Log in')} />
+            <Head title={__('Log in')} />
 
             <PasskeyVerify />
 
@@ -34,7 +33,7 @@ export default function Login({ status }: Props) {
                         <div className="grid gap-6">
                             <div className="grid gap-2">
                                 <Label htmlFor="email">
-                                    {t('Email address')}
+                                    {__('Email address')}
                                 </Label>
                                 <Input
                                     id="email"
@@ -51,7 +50,7 @@ export default function Login({ status }: Props) {
 
                             <div className="grid gap-2">
                                 <Label htmlFor="password">
-                                    {t('Password')}
+                                    {__('Password')}
                                 </Label>
                                 <PasswordInput
                                     id="password"
@@ -59,7 +58,7 @@ export default function Login({ status }: Props) {
                                     required
                                     tabIndex={2}
                                     autoComplete="current-password"
-                                    placeholder={t('Password')}
+                                    placeholder={__('Password')}
                                 />
                                 <InputError message={errors.password} />
                             </div>
@@ -71,7 +70,7 @@ export default function Login({ status }: Props) {
                                     tabIndex={3}
                                 />
                                 <Label htmlFor="remember">
-                                    {t('Remember me')}
+                                    {__('Remember me')}
                                 </Label>
                             </div>
 
@@ -83,14 +82,14 @@ export default function Login({ status }: Props) {
                                 data-test="login-button"
                             >
                                 {processing && <Spinner />}
-                                {t('Log in')}
+                                {__('Log in')}
                             </Button>
                         </div>
 
                         <div className="text-center text-sm text-muted-foreground">
-                            {t("Don't have an account?")}{' '}
+                            {__("Don't have an account?")}{' '}
                             <TextLink href={register()} tabIndex={5}>
-                                {t('Sign up')}
+                                {__('Sign up')}
                             </TextLink>
                         </div>
                     </>
@@ -106,7 +105,7 @@ export default function Login({ status }: Props) {
     );
 }
 
-Login.layout = {
-    title: 'Log in to your account',
-    description: 'Enter your email and password below to log in',
-};
+Login.layout = () => ({
+    title: __('Log in to your account'),
+    description: __('Enter your email and password below to log in'),
+});

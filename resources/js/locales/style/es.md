@@ -16,7 +16,7 @@ Address the reader as **tú**, never **usted**.
 
 Use **ustedes**, never **vosotros**, for a plural you.
 
-## Mexican Spanish, understandable everywhere
+## Mexican-neutral vocabulary, understandable everywhere
 
 Write for Mexico first (`Agregar fondos`, `Cobrar`, `correo`), avoiding
 Iberian words (`vale`, `ordenador`, `móvil`, `vosotros`). Prefer `correo`

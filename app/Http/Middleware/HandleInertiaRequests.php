@@ -5,9 +5,7 @@ namespace App\Http\Middleware;
 use App\Support\CurrentOrganization;
 use App\Support\Locales;
 use App\Support\Theme;
-use App\Support\Translations;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -53,10 +51,6 @@ class HandleInertiaRequests extends Middleware
             'organizations' => fn () => CurrentOrganization::switchable($request),
             'locale' => Locales::prop($locale),
             'theme' => Theme::fromRequest($request),
-            // Sent once per language (and per change to the files); the
-            // browser keeps it across visits.
-            'translations' => Inertia::once(fn () => Translations::for($locale))
-                ->as('translations:'.$locale.':'.Translations::version($locale)),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }

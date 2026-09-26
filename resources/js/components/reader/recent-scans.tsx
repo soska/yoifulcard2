@@ -18,14 +18,13 @@ import {
 } from '@/components/ui/sheet';
 import { useDateFormat } from '@/hooks/use-date-format';
 import { useRecentScans } from '@/hooks/use-reader-storage';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 /**
  * The cards scanned on this device, newest first. Only the code and the
  * time are stored (localStorage), never the QR token.
  */
 export function RecentScans() {
-    const { t } = useTranslation();
     const { scans, clear } = useRecentScans();
     const { formatDateTime } = useDateFormat();
 
@@ -35,7 +34,7 @@ export function RecentScans() {
                 render={<Button variant="outline" size="lg" className="h-12" />}
             >
                 <History data-icon="inline-start" />
-                {t('Recent scans')}
+                {__('Recent scans')}
                 {scans.length > 0 && (
                     <span className="text-muted-foreground">
                         ({scans.length})
@@ -44,9 +43,9 @@ export function RecentScans() {
             </SheetTrigger>
             <SheetContent side="bottom" className="max-h-[80svh]">
                 <SheetHeader>
-                    <SheetTitle>{t('Recent scans')}</SheetTitle>
+                    <SheetTitle>{__('Recent scans')}</SheetTitle>
                     <SheetDescription>
-                        {t('Kept on this device only.')}
+                        {__('Kept on this device only.')}
                     </SheetDescription>
                 </SheetHeader>
                 <div className="overflow-y-auto px-4">
@@ -56,9 +55,9 @@ export function RecentScans() {
                                 <EmptyMedia variant="icon">
                                     <History />
                                 </EmptyMedia>
-                                <EmptyTitle>{t('No recent scans')}</EmptyTitle>
+                                <EmptyTitle>{__('No recent scans')}</EmptyTitle>
                                 <EmptyDescription>
-                                    {t('Cards you scan will show up here.')}
+                                    {__('Cards you scan will show up here.')}
                                 </EmptyDescription>
                             </EmptyHeader>
                         </Empty>
@@ -84,7 +83,7 @@ export function RecentScans() {
                     <SheetFooter>
                         <Button variant="outline" size="lg" onClick={clear}>
                             <Trash2 data-icon="inline-start" />
-                            {t('Clear history')}
+                            {__('Clear history')}
                         </Button>
                     </SheetFooter>
                 )}

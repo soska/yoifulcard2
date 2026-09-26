@@ -24,9 +24,8 @@ import {
 import type { ChartConfig } from '@/components/ui/chart';
 import { useDateFormat } from '@/hooks/use-date-format';
 import { useMoneyFormat } from '@/hooks/use-money-format';
-import type { Translate } from '@/lib/i18n';
 import type { AnalyticsDay } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 /*
  * Series colors follow the entity, in a fixed order, the same in every chart:
@@ -38,22 +37,22 @@ const SLOT_2 = { light: '#eb6834', dark: '#d95926' };
 const SLOT_3 = { light: '#1baf7a', dark: '#199e70' };
 
 // Series labels are translated when the chart renders.
-const cardsConfig = (t: Translate) =>
+const cardsConfig = () =>
     ({
-        cards: { label: t('Cards created'), theme: SLOT_1 },
+        cards: { label: __('Cards created'), theme: SLOT_1 },
     }) satisfies ChartConfig;
 
-const transactionsConfig = (t: Translate) =>
+const transactionsConfig = () =>
     ({
-        load: { label: t('Loads'), theme: SLOT_1 },
-        spend: { label: t('Charges'), theme: SLOT_2 },
-        adjustment: { label: t('Adjustments'), theme: SLOT_3 },
+        load: { label: __('Loads'), theme: SLOT_1 },
+        spend: { label: __('Charges'), theme: SLOT_2 },
+        adjustment: { label: __('Adjustments'), theme: SLOT_3 },
     }) satisfies ChartConfig;
 
-const moneyConfig = (t: Translate) =>
+const moneyConfig = () =>
     ({
-        loaded: { label: t('Loaded'), theme: SLOT_1 },
-        spent: { label: t('Charged'), theme: SLOT_2 },
+        loaded: { label: __('Loaded'), theme: SLOT_1 },
+        spent: { label: __('Charged'), theme: SLOT_2 },
     }) satisfies ChartConfig;
 
 /** Axis and tooltip day labels in the interface language. */
@@ -103,16 +102,15 @@ function ChartCard({
 
 /** New cards per local day. */
 export function CardsCreatedChart({ series }: { series: AnalyticsDay[] }) {
-    const { t } = useTranslation();
     const { dayLabel, tooltipDay } = useDayLabels();
 
     return (
         <ChartCard
-            title={t('Cards created')}
-            description={t('New cards per day in your timezone.')}
+            title={__('Cards created')}
+            description={__('New cards per day in your timezone.')}
         >
             <ChartContainer
-                config={cardsConfig(t)}
+                config={cardsConfig()}
                 className="aspect-auto h-64 w-full"
             >
                 <AreaChart data={series} accessibilityLayer>
@@ -148,16 +146,15 @@ export function CardsCreatedChart({ series }: { series: AnalyticsDay[] }) {
 
 /** Transactions per local day, stacked by type. */
 export function TransactionVolumeChart({ series }: { series: AnalyticsDay[] }) {
-    const { t } = useTranslation();
     const { dayLabel, tooltipDay } = useDayLabels();
 
     return (
         <ChartCard
-            title={t('Transaction volume')}
-            description={t('Transactions per day, by type.')}
+            title={__('Transaction volume')}
+            description={__('Transactions per day, by type.')}
         >
             <ChartContainer
-                config={transactionsConfig(t)}
+                config={transactionsConfig()}
                 className="aspect-auto h-64 w-full"
             >
                 <BarChart data={series} accessibilityLayer>
@@ -211,10 +208,9 @@ export function MoneyFlowChart({
     series: AnalyticsDay[];
     currency: string;
 }) {
-    const { t } = useTranslation();
     const { formatMoney } = useMoneyFormat();
     const { dayLabel, formatDay } = useDayLabels();
-    const config = moneyConfig(t);
+    const config = moneyConfig();
 
     // Numbers for drawing only; labels use the decimal strings' values.
     const data = series.map((day) => ({
@@ -225,10 +221,13 @@ export function MoneyFlowChart({
 
     return (
         <ChartCard
-            title={t('Money in and out')}
-            description={t('Amounts loaded and charged per day (:currency).', {
-                currency,
-            })}
+            title={__('Money in and out')}
+            description={__(
+                'Amounts loaded and charged per day ({currency}).',
+                {
+                    currency,
+                },
+            )}
         >
             <ChartContainer config={config} className="aspect-auto h-64 w-full">
                 <BarChart data={data} accessibilityLayer barGap={2}>

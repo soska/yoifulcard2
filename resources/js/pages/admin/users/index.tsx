@@ -33,7 +33,7 @@ import { show as showOrganization } from '@/routes/admin/organizations';
 import { index, password } from '@/routes/admin/users';
 import { destroy, store } from '@/routes/admin/users/superadmin';
 import type { AdminUserRow, Paginated } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     users: Paginated<AdminUserRow>;
@@ -43,7 +43,6 @@ type Props = {
 export default function AdminUsersIndex({ users, filters }: Props) {
     const { auth, errors } = usePage().props;
     const { formatDate } = useDateFormat();
-    const { t } = useTranslation();
     const [search, setSearch] = useState(filters.q);
 
     const submitSearch = (event: FormEvent) => {
@@ -58,11 +57,11 @@ export default function AdminUsersIndex({ users, filters }: Props) {
 
     return (
         <>
-            <Head title={t('Users')} />
+            <Head title={__('Users')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <Heading
-                    title={t('Users')}
-                    description={t(
+                    title={__('Users')}
+                    description={__(
                         'Everyone with an account. Set a temporary password when someone is locked out, and manage superadmins.',
                     )}
                 />
@@ -89,12 +88,12 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                 onChange={(event) =>
                                     setSearch(event.target.value)
                                 }
-                                placeholder={t('Search by name or email')}
-                                aria-label={t('Search by name or email')}
+                                placeholder={__('Search by name or email')}
+                                aria-label={__('Search by name or email')}
                             />
                             <Button type="submit" variant="secondary">
                                 <Search data-icon="inline-start" />
-                                {t('Search')}
+                                {__('Search')}
                             </Button>
                         </form>
 
@@ -105,10 +104,10 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                         <Users />
                                     </EmptyMedia>
                                     <EmptyTitle>
-                                        {t('No users found')}
+                                        {__('No users found')}
                                     </EmptyTitle>
                                     <EmptyDescription>
-                                        {t('Try another name or email.')}
+                                        {__('Try another name or email.')}
                                     </EmptyDescription>
                                 </EmptyHeader>
                             </Empty>
@@ -116,14 +115,16 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                             <Table>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead>{t('User')}</TableHead>
+                                        <TableHead>{__('User')}</TableHead>
                                         <TableHead>
-                                            {t('Organizations')}
+                                            {__('Organizations')}
                                         </TableHead>
-                                        <TableHead>{t('Joined')}</TableHead>
-                                        <TableHead>{t('Superadmin')}</TableHead>
+                                        <TableHead>{__('Joined')}</TableHead>
+                                        <TableHead>
+                                            {__('Superadmin')}
+                                        </TableHead>
                                         <TableHead className="text-right">
-                                            {t('Actions')}
+                                            {__('Actions')}
                                         </TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -139,7 +140,7 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                                         {isYou && (
                                                             <span className="text-muted-foreground">
                                                                 {' '}
-                                                                {t('(you)')}
+                                                                {__('(you)')}
                                                             </span>
                                                         )}
                                                     </div>
@@ -195,7 +196,7 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                                     {user.is_superadmin ? (
                                                         <Badge>
                                                             <ShieldCheck data-icon="inline-start" />
-                                                            {t('Superadmin')}
+                                                            {__('Superadmin')}
                                                         </Badge>
                                                     ) : (
                                                         <span className="text-muted-foreground">
@@ -215,21 +216,21 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                                             triggerLabel={
                                                                 <>
                                                                     <KeyRound data-icon="inline-start" />
-                                                                    {t(
+                                                                    {__(
                                                                         'Temporary password',
                                                                     )}
                                                                 </>
                                                             }
-                                                            title={t(
-                                                                'Set a temporary password for :email?',
+                                                            title={__(
+                                                                'Set a temporary password for {email}?',
                                                                 {
                                                                     email: user.email,
                                                                 },
                                                             )}
-                                                            description={t(
+                                                            description={__(
                                                                 'Their current password stops working and they are signed out on other devices. The new password is shown once.',
                                                             )}
-                                                            confirmLabel={t(
+                                                            confirmLabel={__(
                                                                 'Set password',
                                                             )}
                                                             form={password.form(
@@ -247,18 +248,18 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                                                 triggerLabel={
                                                                     <>
                                                                         <ShieldOff data-icon="inline-start" />
-                                                                        {t(
+                                                                        {__(
                                                                             'Revoke',
                                                                         )}
                                                                     </>
                                                                 }
                                                                 title={
                                                                     isYou
-                                                                        ? t(
+                                                                        ? __(
                                                                               'Revoke your own superadmin role?',
                                                                           )
-                                                                        : t(
-                                                                              'Revoke superadmin from :email?',
+                                                                        : __(
+                                                                              'Revoke superadmin from {email}?',
                                                                               {
                                                                                   email: user.email,
                                                                               },
@@ -266,14 +267,14 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                                                 }
                                                                 description={
                                                                     isYou
-                                                                        ? t(
+                                                                        ? __(
                                                                               'You will lose access to the admin area right away. The last superadmin cannot be revoked.',
                                                                           )
-                                                                        : t(
+                                                                        : __(
                                                                               'They lose access to the admin area. The last superadmin cannot be revoked.',
                                                                           )
                                                                 }
-                                                                confirmLabel={t(
+                                                                confirmLabel={__(
                                                                     'Revoke superadmin',
                                                                 )}
                                                                 form={destroy.form(
@@ -292,21 +293,21 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                                                 triggerLabel={
                                                                     <>
                                                                         <ShieldCheck data-icon="inline-start" />
-                                                                        {t(
+                                                                        {__(
                                                                             'Grant',
                                                                         )}
                                                                     </>
                                                                 }
-                                                                title={t(
-                                                                    'Make :email a superadmin?',
+                                                                title={__(
+                                                                    'Make {email} a superadmin?',
                                                                     {
                                                                         email: user.email,
                                                                     },
                                                                 )}
-                                                                description={t(
+                                                                description={__(
                                                                     'They can manage every organization, plan, and user.',
                                                                 )}
-                                                                confirmLabel={t(
+                                                                confirmLabel={__(
                                                                     'Grant superadmin',
                                                                 )}
                                                                 form={store.form(
@@ -326,11 +327,14 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                         {users.total > 0 && (
                             <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
                                 <p className="text-sm text-muted-foreground">
-                                    {t('Showing :from to :to of :total users', {
-                                        from: users.from ?? 0,
-                                        to: users.to ?? 0,
-                                        total: users.total,
-                                    })}
+                                    {__(
+                                        'Showing {from} to {to} of {total} users',
+                                        {
+                                            from: users.from ?? 0,
+                                            to: users.to ?? 0,
+                                            total: users.total,
+                                        },
+                                    )}
                                 </p>
                                 <div>
                                     <ListPagination paginator={users} />
@@ -344,9 +348,9 @@ export default function AdminUsersIndex({ users, filters }: Props) {
     );
 }
 
-AdminUsersIndex.layout = {
+AdminUsersIndex.layout = () => ({
     breadcrumbs: [
-        { titleKey: 'Admin', href: adminIndex() },
-        { titleKey: 'Users', href: index() },
+        { title: __('Admin'), href: adminIndex() },
+        { title: __('Users'), href: index() },
     ],
-};
+});

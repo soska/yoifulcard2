@@ -21,7 +21,7 @@ import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { create, index, store } from '@/routes/cards';
 import type { CardUsage } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     currency: string;
@@ -30,13 +30,12 @@ type Props = {
 
 export default function CreateCard({ currency, usage }: Props) {
     const { currentOrganization } = usePage().props;
-    const { t } = useTranslation();
     const writable = currentOrganization?.status === 'active';
     const blocked = !writable || usage.atLimit;
 
     return (
         <>
-            <Head title={t('Create card')} />
+            <Head title={__('Create card')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div>
                     <Button
@@ -45,7 +44,7 @@ export default function CreateCard({ currency, usage }: Props) {
                         render={<Link href={index()} />}
                     >
                         <ArrowLeft data-icon="inline-start" />
-                        {t('Back to cards')}
+                        {__('Back to cards')}
                     </Button>
                 </div>
 
@@ -54,9 +53,9 @@ export default function CreateCard({ currency, usage }: Props) {
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>{t('Create a card')}</CardTitle>
+                            <CardTitle>{__('Create a card')}</CardTitle>
                             <CardDescription>
-                                {t(
+                                {__(
                                     'The card gets a code and a QR code right away.',
                                 )}
                             </CardDescription>
@@ -75,7 +74,7 @@ export default function CreateCard({ currency, usage }: Props) {
                                                 <Alert variant="destructive">
                                                     <AlertCircle />
                                                     <AlertTitle>
-                                                        {t(
+                                                        {__(
                                                             'The card was not created',
                                                         )}
                                                     </AlertTitle>
@@ -91,8 +90,8 @@ export default function CreateCard({ currency, usage }: Props) {
                                                 }
                                             >
                                                 <FieldLabel htmlFor="initial_balance">
-                                                    {t(
-                                                        'Initial balance (:currency)',
+                                                    {__(
+                                                        'Initial balance ({currency})',
                                                         {
                                                             currency,
                                                         },
@@ -112,7 +111,7 @@ export default function CreateCard({ currency, usage }: Props) {
                                                     }
                                                 />
                                                 <FieldDescription>
-                                                    {t(
+                                                    {__(
                                                         '0 or more. An amount above 0 is recorded as a load.',
                                                     )}
                                                 </FieldDescription>
@@ -125,7 +124,7 @@ export default function CreateCard({ currency, usage }: Props) {
                                                 data-invalid={!!errors.email}
                                             >
                                                 <FieldLabel htmlFor="email">
-                                                    {t(
+                                                    {__(
                                                         'Cardholder email (optional)',
                                                     )}
                                                 </FieldLabel>
@@ -134,7 +133,7 @@ export default function CreateCard({ currency, usage }: Props) {
                                                     name="email"
                                                     type="email"
                                                     autoComplete="off"
-                                                    placeholder={t(
+                                                    placeholder={__(
                                                         'customer@example.com',
                                                     )}
                                                     aria-invalid={
@@ -142,7 +141,7 @@ export default function CreateCard({ currency, usage }: Props) {
                                                     }
                                                 />
                                                 <FieldDescription>
-                                                    {t(
+                                                    {__(
                                                         'Saved on the card for balance updates later.',
                                                     )}
                                                 </FieldDescription>
@@ -157,13 +156,13 @@ export default function CreateCard({ currency, usage }: Props) {
                                                 title={
                                                     writable
                                                         ? undefined
-                                                        : t(
+                                                        : __(
                                                               'This business is suspended. Contact support.',
                                                           )
                                                 }
                                             >
                                                 {processing && <Spinner />}
-                                                {t('Create card')}
+                                                {__('Create card')}
                                             </Button>
                                         </FieldGroup>
                                     );
@@ -177,9 +176,9 @@ export default function CreateCard({ currency, usage }: Props) {
     );
 }
 
-CreateCard.layout = {
+CreateCard.layout = () => ({
     breadcrumbs: [
-        { titleKey: 'Cards', href: index() },
-        { titleKey: 'Create card', href: create() },
+        { title: __('Cards'), href: index() },
+        { title: __('Create card'), href: create() },
     ],
-};
+});

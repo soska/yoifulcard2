@@ -30,8 +30,11 @@ test('missing page renders the translated 404 in spanish', function () {
             ->where('locale.current', 'es')
             ->where('locale.intl', 'es-MX')
             ->where('auth.user', null)
-            ->where('translations', fn ($lines) => $lines['Page not found'] === 'Página no encontrada'
-                && $lines['Go home'] === 'Ir al inicio'));
+            ->missing('translations'));
+
+    // The page's words come from the browser catalog, which has them in Spanish.
+    expect(catalogLine('es', 'Page not found'))->toBe('Página no encontrada')
+        ->and(catalogLine('es', 'Go home'))->toBe('Ir al inicio');
 
     // A missing model inside a signed-in route gets the same page.
     [$user] = cardOwner();
@@ -57,8 +60,9 @@ test('419, 500 and 503 render translated error pages', function (int $status, st
         ->assertInertia(fn (Assert $page) => $page
             ->component('errors/error')
             ->where('status', $status)
-            ->where('locale.current', 'es')
-            ->where('translations.'.$title, $spanish));
+            ->where('locale.current', 'es'));
+
+    expect(catalogLine('es', $title))->toBe($spanish);
 })->with([
     'page expired' => [419, 'Page expired', 'La página expiró'],
     'server error' => [500, 'Something went wrong', 'Algo salió mal'],

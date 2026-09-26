@@ -7,14 +7,12 @@ import {
     EmptyMedia,
     EmptyTitle,
 } from '@/components/ui/empty';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 export default function NoOrganization() {
-    const { t } = useTranslation();
-
     return (
         <>
-            <Head title={t('No organization')} />
+            <Head title={__('No organization')} />
             <div className="flex h-full flex-1 flex-col p-4">
                 <Empty className="border">
                     <EmptyHeader>
@@ -22,10 +20,10 @@ export default function NoOrganization() {
                             <Building2 />
                         </EmptyMedia>
                         <EmptyTitle>
-                            {t('You are not part of a business yet')}
+                            {__('You are not part of a business yet')}
                         </EmptyTitle>
                         <EmptyDescription>
-                            {t(
+                            {__(
                                 'Your account is not linked to any organization. Contact support or the business owner to get access.',
                             )}
                         </EmptyDescription>

@@ -2,7 +2,7 @@ import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { AlertCircle, ArrowLeft, Minus, Plus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CardStatusBadge } from '@/components/cards/card-status-badge';
-import { SUSPENDED_MESSAGE } from '@/components/organization/suspended-banner';
+import { suspendedMessage } from '@/components/organization/suspended-banner';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,7 +16,7 @@ import { playReaderSound } from '@/lib/reader-sound';
 import { scan } from '@/routes';
 import { load, spend } from '@/routes/cards';
 import type { CardStatus } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Props = {
     card: {
@@ -32,10 +32,12 @@ type Action = 'spend' | 'load';
 
 const PRESETS = ['10', '20', '50', '100'];
 
-const labels: Record<Action, { tab: string; submit: string }> = {
-    spend: { tab: 'Charge', submit: 'Charge' },
-    load: { tab: 'Add funds', submit: 'Add' },
-};
+/** The submit button's word for each action, built at render time. */
+function submitLabel(action: Action): string {
+    return action === 'spend'
+        ? __('Charge', { context: 'verb: charge a card' })
+        : __('Add', { context: 'verb: add funds to a card' });
+}
 
 /**
  * A scanned card: charge it or add funds. Posts to the same ledger routes as
@@ -43,7 +45,6 @@ const labels: Record<Action, { tab: string; submit: string }> = {
  */
 export default function ReaderCard({ card, currency }: Props) {
     const { currentOrganization } = usePage().props;
-    const { t } = useTranslation();
     const { formatMoney } = useMoneyFormat();
     const [action, setAction] = useState<Action>('spend');
     const form = useForm({ amount: '', reader: true });
@@ -54,11 +55,11 @@ export default function ReaderCard({ card, currency }: Props) {
 
     const writable = currentOrganization?.status === 'active';
     const blockedReason = !writable
-        ? t(SUSPENDED_MESSAGE)
+        ? suspendedMessage()
         : card.status === 'frozen'
-          ? t('This card is frozen. It cannot be charged or loaded.')
+          ? __('This card is frozen. It cannot be charged or loaded.')
           : card.status === 'cancelled'
-            ? t('This card is cancelled.')
+            ? __('This card is cancelled.')
             : null;
     const disabled = blockedReason !== null;
     // CardLedger refusals come back on `card` or `organization`.
@@ -82,7 +83,7 @@ export default function ReaderCard({ card, currency }: Props) {
 
     return (
         <>
-            <Head title={`${t('Reader')} · ${card.code}`} />
+            <Head title={`${__('Reader')} · ${card.code}`} />
             <div className="flex flex-1 flex-col gap-4">
                 <Button
                     variant="ghost"
@@ -92,7 +93,7 @@ export default function ReaderCard({ card, currency }: Props) {
                     render={<Link href={scan()} />}
                 >
                     <ArrowLeft data-icon="inline-start" />
-                    {t('Back to scanner')}
+                    {__('Back to scanner')}
                 </Button>
 
                 <Card>
@@ -104,7 +105,7 @@ export default function ReaderCard({ card, currency }: Props) {
                             <CardStatusBadge status={card.status} />
                         </div>
                         <p className="text-sm text-muted-foreground">
-                            {t('Balance')}
+                            {__('Balance')}
                         </p>
                         <p className="text-4xl font-semibold tabular-nums">
                             {formatMoney(card.balance, currency)}
@@ -129,11 +130,11 @@ export default function ReaderCard({ card, currency }: Props) {
                     <TabsList className="h-12 w-full">
                         <TabsTrigger value="spend" className="text-base">
                             <Minus data-icon="inline-start" />
-                            {t(labels.spend.tab)}
+                            {__('Charge', { context: 'verb: charge a card' })}
                         </TabsTrigger>
                         <TabsTrigger value="load" className="text-base">
                             <Plus data-icon="inline-start" />
-                            {t(labels.load.tab)}
+                            {__('Add funds')}
                         </TabsTrigger>
                     </TabsList>
                 </Tabs>
@@ -165,7 +166,7 @@ export default function ReaderCard({ card, currency }: Props) {
 
                     <Field data-invalid={!!form.errors.amount}>
                         <FieldLabel htmlFor="reader-amount">
-                            {t('Amount (:currency)', { currency })}
+                            {__('Amount ({currency})', { currency })}
                         </FieldLabel>
                         <Input
                             id="reader-amount"
@@ -193,7 +194,7 @@ export default function ReaderCard({ card, currency }: Props) {
                         title={blockedReason ?? undefined}
                     >
                         {form.processing && <Spinner />}
-                        {t(labels[action].submit)}
+                        {submitLabel(action)}
                         {amount !== '' &&
                             !Number.isNaN(Number(amount)) &&
                             ` ${formatMoney(amount, currency)}`}

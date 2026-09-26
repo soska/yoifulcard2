@@ -11,13 +11,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import type { Appearance } from '@/hooks/use-appearance';
 import { useAppearance } from '@/hooks/use-appearance';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
+import { appearanceLabel } from '@/lib/labels';
 import { cn } from '@/lib/utils';
 
 const OPTIONS = [
-    { value: 'light', label: 'Light', icon: Sun },
-    { value: 'dark', label: 'Dark', icon: Moon },
-    { value: 'system', label: 'System', icon: Monitor },
+    { value: 'light', icon: Sun },
+    { value: 'dark', icon: Moon },
+    { value: 'system', icon: Monitor },
 ] as const;
 
 const isAppearance = (value: unknown): value is Appearance =>
@@ -28,7 +29,6 @@ const isAppearance = (value: unknown): value is Appearance =>
  * settings page (see useAppearance).
  */
 export function ThemeSwitcher({ className }: { className?: string }) {
-    const { t } = useTranslation();
     const { appearance, resolvedAppearance, updateAppearance } =
         useAppearance();
     const Icon = resolvedAppearance === 'dark' ? Moon : Sun;
@@ -41,7 +41,7 @@ export function ThemeSwitcher({ className }: { className?: string }) {
                         variant="ghost"
                         size="icon"
                         className={cn(className)}
-                        aria-label={t('Theme')}
+                        aria-label={__('Theme')}
                         data-test="theme-switcher"
                     />
                 }
@@ -50,7 +50,7 @@ export function ThemeSwitcher({ className }: { className?: string }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="min-w-40">
                 <DropdownMenuGroup>
-                    <DropdownMenuLabel>{t('Theme')}</DropdownMenuLabel>
+                    <DropdownMenuLabel>{__('Theme')}</DropdownMenuLabel>
                     <DropdownMenuRadioGroup
                         value={appearance}
                         onValueChange={(value) => {
@@ -59,10 +59,10 @@ export function ThemeSwitcher({ className }: { className?: string }) {
                             }
                         }}
                     >
-                        {OPTIONS.map(({ value, label, icon: OptionIcon }) => (
+                        {OPTIONS.map(({ value, icon: OptionIcon }) => (
                             <DropdownMenuRadioItem key={value} value={value}>
                                 <OptionIcon />
-                                {t(label)}
+                                {appearanceLabel(value)}
                             </DropdownMenuRadioItem>
                         ))}
                     </DropdownMenuRadioGroup>

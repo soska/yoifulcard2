@@ -10,15 +10,13 @@ import {
     PaginationPrevious,
 } from '@/components/ui/pagination';
 import type { Paginated } from '@/types';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 /**
  * shadcn pagination driven by a Laravel paginator. Links keep the query
  * string and visit through Inertia instead of reloading the page.
  */
 export function ListPagination<T>({ paginator }: { paginator: Paginated<T> }) {
-    const { t } = useTranslation();
-
     if (paginator.last_page <= 1) {
         return null;
     }
@@ -34,12 +32,12 @@ export function ListPagination<T>({ paginator }: { paginator: Paginated<T> }) {
     const pages = paginator.links.slice(1, -1);
 
     return (
-        <Pagination aria-label={t('Pagination')}>
+        <Pagination aria-label={__('Pagination')}>
             <PaginationContent>
                 <PaginationItem>
                     <PaginationPrevious
-                        text={t('Previous')}
-                        aria-label={t('Go to previous page')}
+                        text={__('Previous')}
+                        aria-label={__('Go to previous page')}
                         href={paginator.prev_page_url ?? undefined}
                         aria-disabled={!paginator.prev_page_url}
                         className={
@@ -69,8 +67,8 @@ export function ListPagination<T>({ paginator }: { paginator: Paginated<T> }) {
                 )}
                 <PaginationItem>
                     <PaginationNext
-                        text={t('Next')}
-                        aria-label={t('Go to next page')}
+                        text={__('Next')}
+                        aria-label={__('Go to next page')}
                         href={paginator.next_page_url ?? undefined}
                         aria-disabled={!paginator.next_page_url}
                         className={

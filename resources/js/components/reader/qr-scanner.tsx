@@ -4,7 +4,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { cn } from '@/lib/utils';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 type Detector = {
     detect(source: HTMLVideoElement): Promise<{ rawValue: string }[]>;
@@ -93,25 +93,37 @@ function cameraStatus(error: unknown): Status {
     return 'error';
 }
 
-const messages: Record<
-    Exclude<Status, 'starting' | 'scanning'>,
-    { title: string; description: string }
-> = {
-    denied: {
-        title: 'Camera access is blocked',
-        description:
-            'Allow camera access for this site in your browser settings, then try again.',
-    },
-    unsupported: {
-        title: 'No camera available',
-        description:
-            'This device or browser has no camera the reader can use. The reader needs a secure (HTTPS) connection.',
-    },
-    error: {
-        title: 'The camera did not start',
-        description: 'Close other apps that use the camera and try again.',
-    },
-};
+/** What went wrong, in words. Built at render time, never at module scope. */
+function problemMessage(status: Exclude<Status, 'starting' | 'scanning'>): {
+    title: string;
+    description: string;
+} {
+    const messages: Record<
+        Exclude<Status, 'starting' | 'scanning'>,
+        { title: string; description: string }
+    > = {
+        denied: {
+            title: __('Camera access is blocked'),
+            description: __(
+                'Allow camera access for this site in your browser settings, then try again.',
+            ),
+        },
+        unsupported: {
+            title: __('No camera available'),
+            description: __(
+                'This device or browser has no camera the reader can use. The reader needs a secure (HTTPS) connection.',
+            ),
+        },
+        error: {
+            title: __('The camera did not start'),
+            description: __(
+                'Close other apps that use the camera and try again.',
+            ),
+        },
+    };
+
+    return messages[status];
+}
 
 type Props = {
     /** Called with the raw text of each QR code read. */
@@ -130,8 +142,6 @@ export function QrScanner({ onDetect, paused = false, className }: Props) {
     const detectorRef = useRef<Detector | null>(null);
     const [status, setStatus] = useState<Status>('starting');
     const [attempt, setAttempt] = useState(0);
-    const { t } = useTranslation();
-
     const handleDetect = useEffectEvent((value: string) => onDetect(value));
 
     // Start the camera and the detector together.
@@ -254,7 +264,7 @@ export function QrScanner({ onDetect, paused = false, className }: Props) {
     const problem =
         status === 'starting' || status === 'scanning'
             ? null
-            : messages[status];
+            : problemMessage(status);
 
     return (
         <div
@@ -269,7 +279,7 @@ export function QrScanner({ onDetect, paused = false, className }: Props) {
                 playsInline
                 muted
                 autoPlay
-                aria-label={t('Camera view')}
+                aria-label={__('Camera view')}
             />
 
             {status === 'scanning' && (
@@ -289,7 +299,7 @@ export function QrScanner({ onDetect, paused = false, className }: Props) {
             {status === 'starting' && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-white">
                     <Spinner className="size-8" />
-                    <p className="text-sm">{t('Starting camera…')}</p>
+                    <p className="text-sm">{__('Starting camera…')}</p>
                 </div>
             )}
 
@@ -297,16 +307,16 @@ export function QrScanner({ onDetect, paused = false, className }: Props) {
                 <div className="absolute inset-0 flex items-center justify-center bg-background p-4">
                     <Alert className="max-w-sm">
                         {status === 'denied' ? <CameraOff /> : <Camera />}
-                        <AlertTitle>{t(problem.title)}</AlertTitle>
+                        <AlertTitle>{problem.title}</AlertTitle>
                         <AlertDescription className="flex flex-col gap-3">
-                            <p>{t(problem.description)}</p>
+                            <p>{problem.description}</p>
                             <Button
                                 variant="outline"
                                 size="lg"
                                 onClick={() => setAttempt((value) => value + 1)}
                             >
                                 <RotateCcw data-icon="inline-start" />
-                                {t('Try again')}
+                                {__('Try again')}
                             </Button>
                         </AlertDescription>
                     </Alert>

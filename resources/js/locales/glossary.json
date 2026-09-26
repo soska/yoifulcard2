@@ -78,5 +78,13 @@
     "employee": {
         "note": "A membership role: staff who scan and charge cards.",
         "translations": { "es": "empleado" }
+    },
+    "passkey": {
+        "note": "A sign-in credential stored on the user's device (WebAuthn).",
+        "translations": { "es": "llave de acceso" }
+    },
+    "two-factor authentication": {
+        "note": "The second sign-in step with a code from an authenticator app. '2FA' stays as is.",
+        "translations": { "es": "verificación en dos pasos" }
     }
 }

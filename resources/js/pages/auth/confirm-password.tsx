@@ -10,33 +10,32 @@ import {
     store as confirmStore,
 } from '@/actions/Laravel/Passkeys/Http/Controllers/PasskeyConfirmationController';
 import PasskeyVerify from '@/components/passkey-verify';
-import { useTranslation } from '@/hooks/use-translation';
+import { __ } from '@/i18n';
 
 export default function ConfirmPassword() {
-    const { t } = useTranslation();
     return (
         <>
-            <Head title={t('Confirm password')} />
+            <Head title={__('Confirm password')} />
 
             <PasskeyVerify
                 routes={{
                     options: confirmOptions(),
                     submit: confirmStore(),
                 }}
-                label={t('Confirm with passkey')}
-                loadingLabel={t('Confirming...')}
-                separator={t('Or confirm with password')}
+                label={__('Confirm with passkey')}
+                loadingLabel={__('Confirming...')}
+                separator={__('Or confirm with password')}
             />
 
             <Form {...store.form()} resetOnSuccess={['password']}>
                 {({ processing, errors }) => (
                     <div className="space-y-6">
                         <div className="grid gap-2">
-                            <Label htmlFor="password">{t('Password')}</Label>
+                            <Label htmlFor="password">{__('Password')}</Label>
                             <PasswordInput
                                 id="password"
                                 name="password"
-                                placeholder={t('Password')}
+                                placeholder={__('Password')}
                                 autoComplete="current-password"
                                 autoFocus
                             />
@@ -51,7 +50,7 @@ export default function ConfirmPassword() {
                                 data-test="confirm-password-button"
                             >
                                 {processing && <Spinner />}
-                                {t('Confirm password')}
+                                {__('Confirm password')}
                             </Button>
                         </div>
                     </div>
@@ -61,8 +60,9 @@ export default function ConfirmPassword() {
     );
 }
 
-ConfirmPassword.layout = {
-    title: 'Confirm password',
-    description:
+ConfirmPassword.layout = () => ({
+    title: __('Confirm password'),
+    description: __(
         'This is a secure area of the application. Please confirm your password before continuing.',
-};
+    ),
+});
