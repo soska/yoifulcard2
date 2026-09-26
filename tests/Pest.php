@@ -2,6 +2,7 @@
 
 use App\Models\Organization;
 use App\Models\Program;
+use App\Models\Superadmin;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -60,4 +61,15 @@ function cardOwner(array $organization = []): array
     $program = Program::factory()->for($organization)->create();
 
     return [$user, $organization, $program];
+}
+
+/**
+ * A signed-up user with the superadmin role.
+ */
+function superadmin(): User
+{
+    $user = User::factory()->create();
+    Superadmin::factory()->for($user)->create();
+
+    return $user;
 }

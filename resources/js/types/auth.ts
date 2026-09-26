@@ -12,6 +12,8 @@ export type User = {
 
 export type Auth = {
     user: User;
+    /** Whether the signed-in user can open the admin area. */
+    isSuperadmin: boolean;
 };
 
 export type Passkey = {

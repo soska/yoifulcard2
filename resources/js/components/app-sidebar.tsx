@@ -1,7 +1,10 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import {
     BookOpen,
+    Building2,
     ChartColumn,
+    ShieldCheck,
+    Users,
     Settings,
     CreditCard,
     FolderGit2,
@@ -22,6 +25,9 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { analytics, dashboard } from '@/routes';
+import { index as adminIndex } from '@/routes/admin';
+import { index as adminOrganizationsIndex } from '@/routes/admin/organizations';
+import { index as adminUsersIndex } from '@/routes/admin/users';
 import { index as cardsIndex } from '@/routes/cards';
 import { edit as settingsEdit } from '@/routes/settings';
 import { index as transactionsIndex } from '@/routes/transactions';
@@ -55,6 +61,24 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
+const adminNavItems: NavItem[] = [
+    {
+        title: 'Admin',
+        href: adminIndex(),
+        icon: ShieldCheck,
+    },
+    {
+        title: 'Organizations',
+        href: adminOrganizationsIndex(),
+        icon: Building2,
+    },
+    {
+        title: 'Users',
+        href: adminUsersIndex(),
+        icon: Users,
+    },
+];
+
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
@@ -69,6 +93,8 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function AppSidebar() {
+    const { auth } = usePage().props;
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -86,6 +112,9 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain items={mainNavItems} />
+                {auth.isSuperadmin && (
+                    <NavMain items={adminNavItems} label="Superadmin" />
+                )}
             </SidebarContent>
 
             <SidebarFooter>

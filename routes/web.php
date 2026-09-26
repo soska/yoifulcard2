@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\ClaimSuperadminController;
+use App\Http\Controllers\Admin\OrganizationController as AdminOrganizationController;
+use App\Http\Controllers\Admin\OverviewController;
+use App\Http\Controllers\Admin\SuperadminController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\UserPasswordController;
 use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\CardController;
 use App\Http\Controllers\Dashboard\CardEmailController;
@@ -75,7 +80,20 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('claim', ClaimSuperadminController::class)->name('claim');
 
     Route::middleware('superadmin')->group(function () {
-        Route::inertia('/', 'admin/index')->name('index');
+        Route::get('/', OverviewController::class)->name('index');
+
+        Route::get('organizations', [AdminOrganizationController::class, 'index'])->name('organizations.index');
+        Route::get('organizations/create', [AdminOrganizationController::class, 'create'])->name('organizations.create');
+        Route::post('organizations', [AdminOrganizationController::class, 'store'])->name('organizations.store');
+        Route::get('organizations/{organization}', [AdminOrganizationController::class, 'show'])->whereUuid('organization')->name('organizations.show');
+        Route::patch('organizations/{organization}', [AdminOrganizationController::class, 'update'])->whereUuid('organization')->name('organizations.update');
+        Route::post('organizations/{organization}/suspend', [AdminOrganizationController::class, 'suspend'])->whereUuid('organization')->name('organizations.suspend');
+        Route::post('organizations/{organization}/reactivate', [AdminOrganizationController::class, 'reactivate'])->whereUuid('organization')->name('organizations.reactivate');
+
+        Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::post('users/{user}/password', UserPasswordController::class)->whereNumber('user')->name('users.password');
+        Route::post('users/{user}/superadmin', [SuperadminController::class, 'store'])->whereNumber('user')->name('users.superadmin.store');
+        Route::delete('users/{user}/superadmin', [SuperadminController::class, 'destroy'])->whereNumber('user')->name('users.superadmin.destroy');
     });
 });
 

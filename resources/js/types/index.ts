@@ -6,3 +6,4 @@ export type * from './card';
 export type * from './transaction';
 export type * from './public-card';
 export type * from './dashboard';
+export type * from './admin';
