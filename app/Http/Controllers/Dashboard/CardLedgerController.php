@@ -14,7 +14,8 @@ use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 /**
- * Add funds, charge, and adjust. The form requests authorize the member
+ * Add funds, charge, and adjust, from the card page and (load and spend
+ * only) from the reader. The form requests authorize the member
  * (CardPolicy::transact). Every balance change goes through
  * CardLedger; its refusals come back as validation errors.
  */
@@ -27,6 +28,7 @@ class CardLedgerController extends Controller
         return $this->post(
             fn () => $this->ledger->load($card, $request->amount(), $request->user(), $request->note()),
             __('Funds added to :code.', ['code' => $card->code]),
+            $request->boolean('reader'),
         );
     }
 
@@ -35,6 +37,7 @@ class CardLedgerController extends Controller
         return $this->post(
             fn () => $this->ledger->spend($card, $request->amount(), $request->user(), $request->note()),
             __('Charged :code.', ['code' => $card->code]),
+            $request->boolean('reader'),
         );
     }
 
@@ -46,7 +49,12 @@ class CardLedgerController extends Controller
         );
     }
 
-    private function post(Closure $action, string $message): RedirectResponse
+    /**
+     * On success, go back to the page that posted, or to the scanner when the
+     * reader posted (`reader=1`), so it is ready for the next card. Errors
+     * always go back to the page that posted.
+     */
+    private function post(Closure $action, string $message, bool $toScanner = false): RedirectResponse
     {
         try {
             $action();
@@ -58,6 +66,6 @@ class CardLedgerController extends Controller
 
         Inertia::flash('toast', ['type' => 'success', 'message' => $message]);
 
-        return back();
+        return $toScanner ? to_route('scan') : back();
     }
 }

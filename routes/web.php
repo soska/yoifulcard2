@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\CardEmailController;
 use App\Http\Controllers\Dashboard\CardLedgerController;
 use App\Http\Controllers\Dashboard\CardQrController;
 use App\Http\Controllers\Dashboard\TransactionController;
+use App\Http\Controllers\Reader\ScanController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'welcome')->name('home');
@@ -37,10 +38,16 @@ Route::middleware(['auth', 'organization'])->group(function () {
     });
 });
 
-// Reader: members of an organization. The scanner itself arrives in Phase 4.
+// Reader: members of an organization. Charge and add funds post to the
+// ledger routes above (cards.spend, cards.load).
 Route::middleware(['auth', 'organization'])->group(function () {
-    Route::inertia('scan', 'reader/scan')->name('scan');
+    Route::get('scan', [ScanController::class, 'index'])->name('scan');
+    Route::post('scan/lookup', [ScanController::class, 'lookup'])->name('scan.lookup');
+    Route::get('scan/cards/{card}', [ScanController::class, 'show'])->whereUuid('card')->name('scan.cards.show');
 });
+
+// The reader's offline fallback. The service worker caches it at install.
+Route::view('offline', 'offline')->name('offline');
 
 // Admin: superadmins only, except the one-time claim.
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {

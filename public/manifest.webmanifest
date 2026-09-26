@@ -1,0 +1,35 @@
+{
+    "name": "Yoiful Reader",
+    "short_name": "Yoiful",
+    "description": "Scan Yoiful cards to charge or add funds.",
+    "id": "/scan",
+    "start_url": "/scan",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#0a0a0a",
+    "theme_color": "#0a0a0a",
+    "icons": [
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "categories": ["business", "finance"],
+    "shortcuts": [
+        {
+            "name": "Scan a card",
+            "short_name": "Scan",
+            "url": "/scan",
+            "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+        }
+    ]
+}
