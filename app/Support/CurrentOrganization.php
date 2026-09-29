@@ -96,14 +96,13 @@ class CurrentOrganization
             return [];
         }
 
-        return $memberships
+        return array_values($memberships
             ->map(fn (Membership $membership): array => [
                 'id' => $membership->organization_id,
                 'name' => $membership->organization->name,
                 'role' => $membership->role->value,
             ])
-            ->values()
-            ->all();
+            ->all());
     }
 
     public static function membership(Request $request): ?Membership

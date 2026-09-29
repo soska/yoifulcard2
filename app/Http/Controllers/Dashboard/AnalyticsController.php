@@ -8,6 +8,7 @@ use App\Models\Card;
 use App\Models\Organization;
 use App\Models\Transaction;
 use App\Support\CurrentOrganization;
+use App\Support\Decimal;
 use App\Support\TransactionFilters;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -110,18 +111,33 @@ class AnalyticsController extends Controller
             $bucket = (int) $row->bucket;
             $type = TransactionType::tryFrom((string) $row->type);
 
-            if (! isset($series[$bucket]) || $type === null || ! in_array($type->value, TransactionType::visibleValues(), true)) {
+            if (! isset($series[$bucket])) {
                 continue;
             }
 
-            $series[$bucket][$type->value] += (int) $row->total;
-            $summary['transactions'] += (int) $row->total;
+            $count = (int) $row->total;
+            $amount = Decimal::of($row->amount);
 
-            if ($type === TransactionType::Load || $type === TransactionType::Spend) {
-                $key = $type->value.'Amount';
-                $series[$bucket][$key] = bcadd($series[$bucket][$key], (string) $row->amount, 2);
-                $summary[$key] = bcadd($summary[$key], (string) $row->amount, 2);
+            // Refunds are not exposed in v1.
+            switch ($type) {
+                case TransactionType::Load:
+                    $series[$bucket]['load'] += $count;
+                    $series[$bucket]['loadAmount'] = bcadd($series[$bucket]['loadAmount'], $amount, 2);
+                    $summary['loadAmount'] = bcadd($summary['loadAmount'], $amount, 2);
+                    break;
+                case TransactionType::Spend:
+                    $series[$bucket]['spend'] += $count;
+                    $series[$bucket]['spendAmount'] = bcadd($series[$bucket]['spendAmount'], $amount, 2);
+                    $summary['spendAmount'] = bcadd($summary['spendAmount'], $amount, 2);
+                    break;
+                case TransactionType::Adjustment:
+                    $series[$bucket]['adjustment'] += $count;
+                    break;
+                default:
+                    continue 2;
             }
+
+            $summary['transactions'] += $count;
         }
 
         return [

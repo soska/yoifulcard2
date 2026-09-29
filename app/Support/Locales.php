@@ -54,6 +54,9 @@ final class Locales
         return self::SUPPORTED;
     }
 
+    /**
+     * @phpstan-assert-if-true string $locale
+     */
     public static function isSupported(mixed $locale): bool
     {
         return is_string($locale) && in_array($locale, self::SUPPORTED, true);

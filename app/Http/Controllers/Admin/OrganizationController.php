@@ -17,6 +17,7 @@ use App\Models\Organization;
 use App\Models\Program;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Support\Decimal;
 use App\Support\Flash;
 use App\Support\OneTimeCredentials;
 use Illuminate\Database\Eloquent\Builder;
@@ -179,9 +180,9 @@ class OrganizationController extends Controller
                 'frozen' => (int) $cards->frozen,
                 'depleted' => (int) $cards->depleted,
                 'cancelled' => (int) $cards->cancelled,
-                'outstandingBalance' => self::decimal($cards->balance),
+                'outstandingBalance' => Decimal::of($cards->balance),
                 'transactions' => (int) $transactions->total,
-                'loaded' => self::decimal($transactions->loaded),
+                'loaded' => Decimal::of($transactions->loaded),
             ],
             'members' => $organization->memberships()
                 ->with('user:id,name,email')
@@ -265,13 +266,5 @@ class OrganizationController extends Controller
         Flash::success($message);
 
         return to_route('admin.organizations.show', $organization);
-    }
-
-    /**
-     * A database decimal as a two-place string, without going through float.
-     */
-    private static function decimal(mixed $value): string
-    {
-        return bcadd((string) $value, '0', 2);
     }
 }

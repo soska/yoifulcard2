@@ -45,6 +45,9 @@ use RuntimeException;
  * to the time of each operation, so balances always match the transaction
  * history. Cards are frozen or cancelled after their transactions, and the
  * suspended business is suspended after its activity.
+ *
+ * @phpstan-type CardOp array{0: 'load'|'spend'|'adjust', 1: string, 2: int, 3?: string}
+ * @phpstan-type CardSpec array{email?: string, opened: int, ops?: list<CardOp>, status?: CardStatus, showcase?: string}
  */
 class DemoSeeder extends Seeder
 {
@@ -204,7 +207,7 @@ class DemoSeeder extends Seeder
      * already. Operations are performed by the given people in turn.
      *
      * @param  list<User>  $people
-     * @param  list<array{email?: string, opened: int, ops?: list<array{0: string, 1: string, 2: int, 3?: string}>, status?: CardStatus, showcase?: string}>  $specs
+     * @param  list<CardSpec>  $specs
      */
     private function cards(Organization $organization, array $people, array $specs): void
     {
@@ -296,7 +299,7 @@ class DemoSeeder extends Seeder
     }
 
     /**
-     * @return list<array<string, mixed>>
+     * @return list<CardSpec>
      */
     private function cafeCards(): array
     {
@@ -367,7 +370,7 @@ class DemoSeeder extends Seeder
     /**
      * Twelve cards against a limit of 14: 85% usage.
      *
-     * @return list<array<string, mixed>>
+     * @return list<CardSpec>
      */
     private function panaderiaCards(): array
     {
@@ -427,7 +430,7 @@ class DemoSeeder extends Seeder
     }
 
     /**
-     * @return list<array<string, mixed>>
+     * @return list<CardSpec>
      */
     private function bicisCards(): array
     {

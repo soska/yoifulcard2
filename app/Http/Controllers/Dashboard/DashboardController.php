@@ -8,6 +8,7 @@ use App\Models\Card;
 use App\Models\Organization;
 use App\Models\Transaction;
 use App\Support\CurrentOrganization;
+use App\Support\Decimal;
 use App\Support\TransactionFilters;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -80,7 +81,7 @@ class DashboardController extends Controller
             'frozen' => (int) $totals->frozen,
             'depleted' => (int) $totals->depleted,
             'cancelled' => (int) $totals->cancelled,
-            'outstandingBalance' => bcadd((string) $totals->balance, '0', 2),
+            'outstandingBalance' => Decimal::of($totals->balance),
             'month' => $month,
             'monthTransactions' => $monthTransactions,
         ];
