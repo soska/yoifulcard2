@@ -18,7 +18,7 @@ export default function Welcome() {
                 <PreferenceSwitchers className="absolute top-4 right-4" />
 
                 <div className="flex flex-col items-center gap-4">
-                    <AppLogoIcon className="size-12 fill-current" />
+                    <AppLogoIcon className="h-12 w-auto" />
                     <h1 className="text-4xl font-bold tracking-tight">
                         Yoiful
                     </h1>

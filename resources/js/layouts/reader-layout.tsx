@@ -31,7 +31,7 @@ export default function ReaderLayout({
         <div className="flex min-h-svh flex-col bg-background text-foreground">
             <header className="flex items-center justify-between gap-3 border-b px-4 pt-[max(env(safe-area-inset-top),0.75rem)] pb-3">
                 <div className="flex min-w-0 items-center gap-2">
-                    <AppLogoIcon className="size-7 shrink-0 fill-current" />
+                    <AppLogoIcon className="h-7 w-auto shrink-0" />
                     <div className="min-w-0">
                         <p className="text-sm leading-tight font-semibold">
                             {__('Reader')}

@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
 import {
     Building2,
     ChartColumn,
@@ -9,7 +9,6 @@ import {
     LayoutGrid,
     ReceiptText,
 } from 'lucide-react';
-import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { SidebarOrganizationSwitcher } from '@/components/organization/organization-switcher';
@@ -18,9 +17,6 @@ import {
     SidebarContent,
     SidebarFooter,
     SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { analytics, dashboard } from '@/routes';
 import { index as adminIndex } from '@/routes/admin';
@@ -88,16 +84,6 @@ export function AppSidebar() {
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                        <SidebarMenuButton
-                            size="lg"
-                            render={<Link href={dashboard()} prefetch />}
-                        >
-                            <AppLogo />
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                </SidebarMenu>
                 <SidebarOrganizationSwitcher />
             </SidebarHeader>
 
