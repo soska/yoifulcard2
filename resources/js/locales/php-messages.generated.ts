@@ -26,21 +26,21 @@ export function phpMessages(): string[] {
         __('A note is required for adjustments.'),
         // app/Enums/TransactionType.php:33
         __('Adjustment'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:65
+        // app/Http/Controllers/Dashboard/TransactionController.php:70
         __('Amount'),
         // app/Http/Controllers/PublicCardController.php:66
         __('An email is already saved for this card.'),
         // app/Http/Requests/Admin/StoreOrganizationRequest.php:56
         __('An organization with this slug already exists.'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:66
+        // app/Http/Controllers/Dashboard/TransactionController.php:71
         __('Balance after'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:63
+        // app/Http/Controllers/Dashboard/TransactionController.php:68
         __('Card'),
         // app/Http/Controllers/Reader/ScanController.php:45
         __('Card not found.'),
         // app/Enums/TransactionType.php:32
         __('Charge'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:62
+        // app/Http/Controllers/Dashboard/TransactionController.php:67
         __('Date'),
         // app/Exceptions/LedgerException.php:29
         __('Enter an amount with up to two decimals.'),
@@ -52,7 +52,7 @@ export function phpMessages(): string[] {
         __('Invalid credential format.'),
         // app/Enums/TransactionType.php:31
         __('Load'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:67
+        // app/Http/Controllers/Dashboard/TransactionController.php:72
         __('Note'),
         // app/Http/Controllers/Dashboard/CardController.php:205
         __('Only a frozen card can be unfrozen.'),
@@ -62,7 +62,7 @@ export function phpMessages(): string[] {
         __('Passkey registration session expired. Please try again.'),
         // app/Support/PackageMessages.php:44
         __('Passkey verification session expired. Please try again.'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:68
+        // app/Http/Controllers/Dashboard/TransactionController.php:73
         __('Performed by'),
         // app/Enums/TransactionType.php:34
         __('Refund'),
@@ -96,17 +96,17 @@ export function phpMessages(): string[] {
         __('This card is cancelled.'),
         // app/Exceptions/LedgerException.php:64
         __('This card is frozen.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:255
-        __('This organization is already active.'),
         // app/Http/Controllers/Admin/OrganizationController.php:256
-        __('This organization is already suspended.'),
+        __('This organization is already active.'),
         // app/Http/Controllers/Admin/OrganizationController.php:257
+        __('This organization is already suspended.'),
+        // app/Http/Controllers/Admin/OrganizationController.php:258
         __('This organization is cancelled.'),
         // app/Providers/AppServiceProvider.php:52
         __('Too many attempts. Please try again in a minute.'),
         // resources/views/offline.blade.php:50
         __('Try again'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:64
+        // app/Http/Controllers/Dashboard/TransactionController.php:69
         __('Type'),
         // app/Http/Requests/Admin/StoreOrganizationRequest.php:55
         __('Use only lowercase letters, numbers, and single hyphens.'),

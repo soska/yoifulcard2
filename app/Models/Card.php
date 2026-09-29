@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\CardStatus;
+use Carbon\CarbonImmutable;
 use Database\Factories\CardFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,7 +13,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
@@ -22,9 +22,9 @@ use Illuminate\Support\Carbon;
  * @property string $balance
  * @property CardStatus $status
  * @property string|null $email
- * @property Carbon|null $last_used_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $last_used_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read Program $program
  * @property-read Collection<int, Transaction> $transactions
  */

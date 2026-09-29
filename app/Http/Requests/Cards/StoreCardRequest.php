@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Cards;
 
 use App\Services\CardLedger;
+use App\Support\Decimal;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCardRequest extends FormRequest
@@ -27,9 +28,11 @@ class StoreCardRequest extends FormRequest
 
     /**
      * The initial balance as a decimal string.
+     *
+     * @return numeric-string
      */
     public function initialBalance(): string
     {
-        return trim((string) $this->validated('initial_balance'));
+        return Decimal::of($this->validated('initial_balance'));
     }
 }

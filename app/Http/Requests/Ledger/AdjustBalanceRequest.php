@@ -38,7 +38,9 @@ class AdjustBalanceRequest extends FormRequest
                 'gte:-'.CardLedger::MAX_BALANCE,
                 'lte:'.CardLedger::MAX_BALANCE,
                 function (string $attribute, mixed $value, Closure $fail): void {
-                    if (is_numeric($value) && bccomp(trim((string) $value), '0', 2) === 0) {
+                    $amount = trim((string) $value);
+
+                    if (is_numeric($amount) && bccomp($amount, '0', 2) === 0) {
                         $fail(__('The adjustment cannot be 0.'));
                     }
                 },

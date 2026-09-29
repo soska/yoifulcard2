@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OrganizationStatus;
+use Carbon\CarbonImmutable;
 use Database\Factories\OrganizationFactory;
 use DateTimeZone;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -12,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use RuntimeException;
@@ -28,8 +28,8 @@ use RuntimeException;
  * @property OrganizationStatus $status
  * @property int|null $card_limit
  * @property string|null $plan_notes
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  */
 #[Fillable(['name', 'slug', 'logo_url', 'primary_color', 'currency', 'timezone', 'status', 'card_limit', 'plan_notes'])]
 class Organization extends Model

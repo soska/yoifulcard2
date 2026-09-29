@@ -11,6 +11,7 @@ use App\Support\TransactionFilters;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class TransactionController extends Controller
@@ -56,6 +57,10 @@ class TransactionController extends Controller
         return response()->streamDownload(function () use ($query, $timezone): void {
             $out = fopen('php://output', 'w');
 
+            if ($out === false) {
+                throw new RuntimeException('Could not open the output stream.');
+            }
+
             // Headers and type names follow the interface language; dates and
             // amounts stay machine-readable (ISO 8601, plain decimals).
             fputcsv($out, [
@@ -97,7 +102,7 @@ class TransactionController extends Controller
             'amount' => $transaction->amount,
             'balance_after' => $transaction->balance_after,
             'note' => $transaction->note,
-            'performed_by' => $transaction->performer?->name,
+            'performed_by' => $transaction->performer->name,
             'created_at' => $transaction->created_at?->toIso8601String(),
         ];
     }

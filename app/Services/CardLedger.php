@@ -85,7 +85,8 @@ class CardLedger
     }
 
     /**
-     * @param  callable(string): string  $apply  Receives the locked balance and returns the new one, or throws.
+     * @param  callable(numeric-string): numeric-string  $apply  Receives the locked balance and returns the new one, or throws.
+     * @param  numeric-string  $amount
      */
     private function post(Card $card, TransactionType $type, User $user, ?string $note, callable $apply, string $amount): Transaction
     {
@@ -148,6 +149,8 @@ class CardLedger
     /**
      * An active card that reaches zero is depleted; a depleted card that
      * gets funds is active again. Other statuses never reach here.
+     *
+     * @param  numeric-string  $balance
      */
     private function statusAfter(CardStatus $status, string $balance): CardStatus
     {
@@ -160,6 +163,9 @@ class CardLedger
         };
     }
 
+    /**
+     * @return numeric-string
+     */
     private function positive(string $amount): string
     {
         $amount = $this->normalize($amount);
@@ -175,6 +181,8 @@ class CardLedger
      * Accept a plain decimal string with at most two decimals and return it
      * with exactly two. Anything else, such as "0.30000000000000004" from a
      * float, "1e3", or "", is refused.
+     *
+     * @return numeric-string
      */
     private function normalize(string $amount): string
     {
@@ -184,6 +192,13 @@ class CardLedger
             throw LedgerException::invalidAmount();
         }
 
-        return bcadd(ltrim($amount, '+'), '0', self::SCALE);
+        $amount = ltrim($amount, '+');
+
+        // Always numeric after the pattern; this tells bcmath's types so.
+        if (! is_numeric($amount)) {
+            throw LedgerException::invalidAmount();
+        }
+
+        return bcadd($amount, '0', self::SCALE);
     }
 }

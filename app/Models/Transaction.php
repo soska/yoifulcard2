@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\TransactionType;
+use Carbon\CarbonImmutable;
 use Database\Factories\TransactionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,7 +11,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 
 /**
  * A ledger entry. Only App\Services\CardLedger writes these.
@@ -22,7 +22,7 @@ use Illuminate\Support\Carbon;
  * @property string $balance_after
  * @property string|null $note
  * @property int $performed_by
- * @property Carbon|null $created_at
+ * @property CarbonImmutable|null $created_at
  * @property-read Card $card
  * @property-read User $performer
  */
