@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ledger\AdjustBalanceRequest;
 use App\Http\Requests\Ledger\LedgerAmountRequest;
 use App\Models\Card;
+use App\Models\Transaction;
 use App\Services\CardLedger;
 use App\Support\Flash;
 use Closure;
@@ -57,18 +58,28 @@ class CardLedgerController extends Controller
      * On success, go back to the page that posted, or to the scanner when the
      * reader posted (`reader=1`), so it is ready for the next card. Errors
      * always go back to the page that posted.
+     *
+     * The toast carries the amount and the new balance: on the reader it is
+     * the only place staff see what is left before the next scan.
+     *
+     * @param  Closure(): Transaction  $action
      */
     private function post(Closure $action, Card $card, FlashMessage $message, bool $toScanner = false): RedirectResponse
     {
         try {
-            $action();
+            $transaction = $action();
         } catch (LedgerException $exception) {
             throw ValidationException::withMessages([
                 $exception->field => $exception->translated(),
             ]);
         }
 
-        Flash::success($message, ['code' => $card->code]);
+        Flash::success($message, [
+            'code' => $card->code,
+            'amount' => $transaction->amount,
+            'balance' => $transaction->balance_after,
+            'currency' => $card->organization()->currency,
+        ]);
 
         return $toScanner ? to_route('scan') : back();
     }

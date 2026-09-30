@@ -1,4 +1,5 @@
-import { __ } from '@/i18n';
+import { __, activeLocale } from '@/i18n';
+import { formatMoney } from '@/lib/format';
 import type { FlashMessage } from '@/types/enums.generated';
 
 /**
@@ -23,6 +24,25 @@ export type FlashToast = {
     params: FlashParams;
 };
 
+/**
+ * The amount and new balance of a ledger toast, formatted, or null when the
+ * params are missing (a toast flashed by a build that did not send them).
+ */
+function ledgerAmounts(
+    p: FlashParams,
+): { amount: string; balance: string } | null {
+    if (!p.amount || !p.balance || !p.currency) {
+        return null;
+    }
+
+    const locale = activeLocale();
+
+    return {
+        amount: formatMoney(p.amount, p.currency, locale),
+        balance: formatMoney(p.balance, p.currency, locale),
+    };
+}
+
 function messages(): Record<FlashMessage, (params: FlashParams) => string> {
     return {
         'card.created': (p) =>
@@ -30,9 +50,26 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
         'card.frozen': () => __('Card frozen.'),
         'card.unfrozen': () => __('Card unfrozen.'),
         'card.email_saved': () => __('Cardholder email saved.'),
-        'ledger.loaded': (p) =>
-            __('Funds added to {code}.', { code: p.code ?? '' }),
-        'ledger.charged': (p) => __('Charged {code}.', { code: p.code ?? '' }),
+        'ledger.loaded': (p) => {
+            const money = ledgerAmounts(p);
+
+            return money
+                ? __('Added {amount} to {code}. Balance: {balance}.', {
+                      ...money,
+                      code: p.code ?? '',
+                  })
+                : __('Funds added to {code}.', { code: p.code ?? '' });
+        },
+        'ledger.charged': (p) => {
+            const money = ledgerAmounts(p);
+
+            return money
+                ? __('Charged {amount} to {code}. Balance: {balance}.', {
+                      ...money,
+                      code: p.code ?? '',
+                  })
+                : __('Charged {code}.', { code: p.code ?? '' });
+        },
         'ledger.adjusted': (p) =>
             __('Balance of {code} adjusted.', { code: p.code ?? '' }),
         'settings.business_saved': () => __('Business settings saved.'),

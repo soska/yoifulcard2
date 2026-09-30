@@ -62,7 +62,7 @@
   "11cwj6fprvc": {
     "message": "Card {code} created.",
     "refs": [
-      "resources/js/lib/flash.ts:29:13"
+      "resources/js/lib/flash.ts:49:13"
     ]
   },
   "11d5m996df2": {
@@ -230,7 +230,7 @@
   "164d0i89snr": {
     "message": "Profile updated.",
     "refs": [
-      "resources/js/lib/flash.ts:40:43"
+      "resources/js/lib/flash.ts:77:43"
     ]
   },
   "167vf3bxief": {
@@ -250,7 +250,7 @@
   "16vz52anzdz": {
     "message": "Organization created and linked to {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:50:13"
+      "resources/js/lib/flash.ts:87:13"
     ]
   },
   "16zmzw0m70p": {
@@ -283,6 +283,12 @@
     "message": "Card code",
     "refs": [
       "resources/js/pages/transactions/index.tsx:206:38"
+    ]
+  },
+  "181htsajksu": {
+    "message": "Charged {amount} to {code}. Balance: {balance}.",
+    "refs": [
+      "resources/js/lib/flash.ts:67:19"
     ]
   },
   "181wia46bw0": {
@@ -686,6 +692,12 @@
       "resources/js/components/admin/one-time-credentials.tsx:26:9"
     ]
   },
+  "1i8l8npmp3": {
+    "message": "Added {amount} to {code}. Balance: {balance}.",
+    "refs": [
+      "resources/js/lib/flash.ts:57:19"
+    ]
+  },
   "1i8vn65wqg9": {
     "message": "Create organization",
     "refs": [
@@ -970,7 +982,7 @@
   "1pk11ctiyxw": {
     "message": "Superadmin privileges granted.",
     "refs": [
-      "resources/js/lib/flash.ts:60:43"
+      "resources/js/lib/flash.ts:97:43"
     ]
   },
   "1plyeqi5xj4": {
@@ -1134,7 +1146,7 @@
   "1tlt3qrgqsx": {
     "message": "Funds added to {code}.",
     "refs": [
-      "resources/js/lib/flash.ts:34:13"
+      "resources/js/lib/flash.ts:61:19"
     ]
   },
   "1tomwowemb": {
@@ -1176,7 +1188,7 @@
   "1v1qyt6cszf": {
     "message": "Organization created with a new owner account.",
     "refs": [
-      "resources/js/lib/flash.ts:48:13"
+      "resources/js/lib/flash.ts:85:13"
     ]
   },
   "1v7qa6jw615": {
@@ -1508,7 +1520,7 @@
   "21nwd6dniz": {
     "message": "Temporary password set for {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:57:13"
+      "resources/js/lib/flash.ts:94:13"
     ]
   },
   "21poeejymlw": {
@@ -1689,7 +1701,7 @@
   "27a7k4osvpt": {
     "message": "Card frozen.",
     "refs": [
-      "resources/js/lib/flash.ts:30:30"
+      "resources/js/lib/flash.ts:50:30"
     ]
   },
   "27nxsynl10g": {
@@ -1707,7 +1719,7 @@
   "27tdlr0ne3b": {
     "message": "Card unfrozen.",
     "refs": [
-      "resources/js/lib/flash.ts:31:32"
+      "resources/js/lib/flash.ts:51:32"
     ]
   },
   "27uz1w1s5y2": {
@@ -1835,7 +1847,7 @@
   "2chcc47wtt5": {
     "message": "Program settings saved.",
     "refs": [
-      "resources/js/lib/flash.ts:39:41"
+      "resources/js/lib/flash.ts:76:41"
     ]
   },
   "2cs7jmm5jjj": {
@@ -1947,7 +1959,7 @@
   "2khkneof19": {
     "message": "Balance of {code} adjusted.",
     "refs": [
-      "resources/js/lib/flash.ts:37:13"
+      "resources/js/lib/flash.ts:74:13"
     ]
   },
   "2vihj1w1z0": {
@@ -1977,7 +1989,7 @@
   "36o0x9wkg4": {
     "message": "Superadmin granted to {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:62:13"
+      "resources/js/lib/flash.ts:99:13"
     ]
   },
   "38vnsidlu": {
@@ -2001,7 +2013,7 @@
   "43sqe7fnyk": {
     "message": "Superadmin revoked from {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:64:13"
+      "resources/js/lib/flash.ts:101:13"
     ]
   },
   "4lakk5u7l7": {
@@ -2064,7 +2076,7 @@
   "5n0n0gv9gu": {
     "message": "Switched to {name}.",
     "refs": [
-      "resources/js/lib/flash.ts:44:13"
+      "resources/js/lib/flash.ts:81:13"
     ]
   },
   "62tbkall94": {
@@ -2103,7 +2115,7 @@
   "740dfbxccn": {
     "message": "Plan saved.",
     "refs": [
-      "resources/js/lib/flash.ts:53:35"
+      "resources/js/lib/flash.ts:90:35"
     ]
   },
   "75a28xasw6": {
@@ -2261,7 +2273,7 @@
     "message": "Thanks! Your email is saved.",
     "refs": [
       "resources/js/components/public-card/email-capture.tsx:62:31",
-      "resources/js/lib/flash.ts:42:42"
+      "resources/js/lib/flash.ts:79:42"
     ]
   },
   "aai87ncak7": {
@@ -2328,7 +2340,7 @@
   "ciy321kmmx": {
     "message": "Charged {code}.",
     "refs": [
-      "resources/js/lib/flash.ts:35:34"
+      "resources/js/lib/flash.ts:71:19"
     ]
   },
   "cw1grf7hmr": {
@@ -2463,7 +2475,7 @@
   "gktxymbq14": {
     "message": "Organization reactivated.",
     "refs": [
-      "resources/js/lib/flash.ts:55:49"
+      "resources/js/lib/flash.ts:92:49"
     ]
   },
   "gmznfc5eow": {
@@ -2483,7 +2495,7 @@
   "go9h267ewj": {
     "message": "Cardholder email saved.",
     "refs": [
-      "resources/js/lib/flash.ts:32:35"
+      "resources/js/lib/flash.ts:52:35"
     ]
   },
   "gqulylnlei": {
@@ -2495,7 +2507,7 @@
   "grngmmjbyn": {
     "message": "Password updated.",
     "refs": [
-      "resources/js/lib/flash.ts:41:44"
+      "resources/js/lib/flash.ts:78:44"
     ]
   },
   "h0pblyyblb": {
@@ -2563,7 +2575,7 @@
   "ji96g5zh8j": {
     "message": "Business settings saved.",
     "refs": [
-      "resources/js/lib/flash.ts:38:42"
+      "resources/js/lib/flash.ts:75:42"
     ]
   },
   "jkkszphs0d": {
@@ -2708,7 +2720,7 @@
   "n6rto3r6ys": {
     "message": "Organization suspended.",
     "refs": [
-      "resources/js/lib/flash.ts:54:47"
+      "resources/js/lib/flash.ts:91:47"
     ]
   },
   "ne7vuo58sz": {
@@ -2982,7 +2994,7 @@
     "message": "This business is suspended. Contact support.",
     "refs": [
       "resources/js/components/organization/suspended-banner.tsx:9:12",
-      "resources/js/lib/flash.ts:46:13",
+      "resources/js/lib/flash.ts:83:13",
       "resources/js/locales/php-messages.generated.ts:94:9",
       "resources/js/pages/cards/create.tsx:159:59",
       "resources/js/pages/cards/index.tsx:199:39",

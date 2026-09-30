@@ -29,13 +29,13 @@ enum FlashMessage: string
     /** "Cardholder email saved." */
     case CardEmailSaved = 'card.email_saved';
 
-    /** "Funds added to {code}." — params: code */
+    /** "Added {amount} to {code}. Balance: {balance}." — params: code, amount, balance, currency */
     case FundsAdded = 'ledger.loaded';
 
-    /** "Charged {code}." — params: code */
+    /** "Charged {amount} to {code}. Balance: {balance}." — params: code, amount, balance, currency */
     case CardCharged = 'ledger.charged';
 
-    /** "Balance of {code} adjusted." — params: code */
+    /** "Balance of {code} adjusted." — params: code (also sent: amount, balance, currency) */
     case BalanceAdjusted = 'ledger.adjusted';
 
     /** "Business settings saved." */
