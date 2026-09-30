@@ -129,7 +129,7 @@
   "12uz3hhrqbv": {
     "message": "Log out",
     "refs": [
-      "resources/js/components/user-menu-content.tsx:65:18"
+      "resources/js/components/user-menu-content.tsx:67:18"
     ]
   },
   "12veafpg3t6": {
@@ -337,7 +337,7 @@
   "1ajy2490000": {
     "message": "Admin",
     "refs": [
-      "resources/js/components/app-sidebar.tsx:69:20",
+      "resources/js/components/app-sidebar.tsx:63:20",
       "resources/js/pages/admin/index.tsx:182:28",
       "resources/js/pages/admin/index.tsx:69:26",
       "resources/js/pages/admin/index.tsx:73:32",
@@ -525,8 +525,8 @@
   "1f1a2a3h8xj": {
     "message": "Switch business",
     "refs": [
-      "resources/js/components/organization/organization-switcher.tsx:104:45",
-      "resources/js/components/organization/organization-switcher.tsx:160:37"
+      "resources/js/components/organization/organization-switcher.tsx:136:37",
+      "resources/js/components/organization/organization-switcher.tsx:98:37"
     ]
   },
   "1f69ehq4fo0": {
@@ -632,7 +632,7 @@
   "1h22cey1h7i": {
     "message": "Users",
     "refs": [
-      "resources/js/components/app-sidebar.tsx:79:20",
+      "resources/js/components/app-sidebar.tsx:73:20",
       "resources/js/pages/admin/index.tsx:117:34",
       "resources/js/pages/admin/index.tsx:54:20",
       "resources/js/pages/admin/organizations/show.tsx:346:38",
@@ -705,7 +705,7 @@
   "1iem3nybitu": {
     "message": "Superadmin",
     "refs": [
-      "resources/js/components/app-sidebar.tsx:107:61",
+      "resources/js/components/app-sidebar.tsx:91:61",
       "resources/js/pages/admin/users/index.tsx:124:46",
       "resources/js/pages/admin/users/index.tsx:199:62"
     ]
@@ -869,8 +869,8 @@
     "message": "Settings",
     "refs": [
       "resources/js/components/app-header.tsx:73:20",
-      "resources/js/components/app-sidebar.tsx:59:20",
-      "resources/js/components/user-menu-content.tsx:49:22",
+      "resources/js/components/app-sidebar.tsx:53:20",
+      "resources/js/components/user-menu-content.tsx:51:22",
       "resources/js/layouts/settings/layout.tsx:53:24",
       "resources/js/layouts/settings/layout.tsx:63:37"
     ]
@@ -1080,7 +1080,7 @@
     "message": "Cards",
     "refs": [
       "resources/js/components/app-header.tsx:58:20",
-      "resources/js/components/app-sidebar.tsx:44:20",
+      "resources/js/components/app-sidebar.tsx:38:20",
       "resources/js/pages/admin/index.tsx:48:20",
       "resources/js/pages/admin/organizations/index.tsx:201:46",
       "resources/js/pages/admin/organizations/show.tsx:80:20",
@@ -1194,7 +1194,7 @@
   "1v7qa6jw615": {
     "message": "Organizations",
     "refs": [
-      "resources/js/components/app-sidebar.tsx:74:20",
+      "resources/js/components/app-sidebar.tsx:68:20",
       "resources/js/pages/admin/index.tsx:39:20",
       "resources/js/pages/admin/organizations/create.tsx:282:18",
       "resources/js/pages/admin/organizations/index.tsx:279:18",
@@ -1287,7 +1287,7 @@
     "message": "Analytics",
     "refs": [
       "resources/js/components/app-header.tsx:68:20",
-      "resources/js/components/app-sidebar.tsx:54:20",
+      "resources/js/components/app-sidebar.tsx:48:20",
       "resources/js/pages/analytics/index.tsx:101:32",
       "resources/js/pages/analytics/index.tsx:256:28",
       "resources/js/pages/analytics/index.tsx:97:26",
@@ -1464,7 +1464,7 @@
     "message": "Transactions",
     "refs": [
       "resources/js/components/app-header.tsx:63:20",
-      "resources/js/components/app-sidebar.tsx:49:20",
+      "resources/js/components/app-sidebar.tsx:43:20",
       "resources/js/pages/admin/organizations/show.tsx:97:20",
       "resources/js/pages/analytics/index.tsx:160:32",
       "resources/js/pages/dashboard.tsx:178:26",
@@ -1601,7 +1601,7 @@
   "23ecl7xf4m6": {
     "message": "Business",
     "refs": [
-      "resources/js/components/app-sidebar.tsx:105:56",
+      "resources/js/components/app-sidebar.tsx:89:56",
       "resources/js/layouts/settings/layout.tsx:19:20",
       "resources/js/pages/admin/organizations/create.tsx:55:46",
       "resources/js/pages/settings/business.tsx:121:24"
@@ -1973,7 +1973,7 @@
   "2zbxweorn2": {
     "message": "Businesses",
     "refs": [
-      "resources/js/components/organization/organization-switcher.tsx:52:18"
+      "resources/js/components/organization/organization-switcher.tsx:50:18"
     ]
   },
   "30kzn56ltd": {
@@ -2819,7 +2819,7 @@
     "message": "Dashboard",
     "refs": [
       "resources/js/components/app-header.tsx:53:20",
-      "resources/js/components/app-sidebar.tsx:39:20",
+      "resources/js/components/app-sidebar.tsx:33:20",
       "resources/js/layouts/reader-layout.tsx:59:26",
       "resources/js/pages/dashboard.tsx:125:26",
       "resources/js/pages/dashboard.tsx:273:20",

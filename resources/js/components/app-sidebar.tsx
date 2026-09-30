@@ -11,11 +11,9 @@ import {
 } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
-import { SidebarOrganizationSwitcher } from '@/components/organization/organization-switcher';
 import {
     Sidebar,
     SidebarContent,
-    SidebarFooter,
     SidebarHeader,
 } from '@/components/ui/sidebar';
 import { analytics, dashboard } from '@/routes';
@@ -84,7 +82,7 @@ export function AppSidebar() {
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
-                <SidebarOrganizationSwitcher />
+                <NavUser />
             </SidebarHeader>
 
             <SidebarContent>
@@ -93,10 +91,6 @@ export function AppSidebar() {
                     <NavMain items={adminNavItems()} label={__('Superadmin')} />
                 )}
             </SidebarContent>
-
-            <SidebarFooter>
-                <NavUser />
-            </SidebarFooter>
         </Sidebar>
     );
 }

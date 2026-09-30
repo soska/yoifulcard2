@@ -129,8 +129,8 @@ test('switcher is hidden with a single membership', function () {
     expect($switcher)->toContain('organizations.length >= 2')
         ->and(substr_count($switcher, 'if (!visible)'))->toBe(2);
 
-    expect(file_get_contents(resource_path('js/components/app-sidebar.tsx')))
-        ->toContain('<SidebarOrganizationSwitcher />');
+    expect(file_get_contents(resource_path('js/components/user-menu-content.tsx')))
+        ->toContain('<UserMenuOrganizationSwitcher />');
     expect(file_get_contents(resource_path('js/layouts/reader-layout.tsx')))
         ->toContain('organizations.length >= 2 ? (')
         ->toContain('<ReaderOrganizationSwitcher />');

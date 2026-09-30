@@ -6,6 +6,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { UserMenuOrganizationSwitcher } from '@/components/organization/organization-switcher';
 import { UserInfo } from '@/components/user-info';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { logout } from '@/routes';
@@ -34,6 +35,7 @@ export function UserMenuContent({ user }: Props) {
                 </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
+            <UserMenuOrganizationSwitcher />
             <DropdownMenuGroup>
                 <DropdownMenuItem
                     render={
