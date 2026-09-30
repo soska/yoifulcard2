@@ -42,13 +42,11 @@ export function NavUser() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                         className="w-(--anchor-width) min-w-56 rounded-lg"
-                        align="end"
+                        align="start"
                         side={
-                            isMobile
-                                ? 'bottom'
-                                : state === 'collapsed'
-                                  ? 'left'
-                                  : 'bottom'
+                            !isMobile && state === 'collapsed'
+                                ? 'right'
+                                : 'bottom'
                         }
                     >
                         <UserMenuContent user={auth.user} />

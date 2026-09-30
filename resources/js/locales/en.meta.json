@@ -705,7 +705,7 @@
   "1iem3nybitu": {
     "message": "Superadmin",
     "refs": [
-      "resources/js/components/app-sidebar.tsx:87:61",
+      "resources/js/components/app-sidebar.tsx:91:61",
       "resources/js/pages/admin/users/index.tsx:124:46",
       "resources/js/pages/admin/users/index.tsx:199:62"
     ]
@@ -1601,7 +1601,7 @@
   "23ecl7xf4m6": {
     "message": "Business",
     "refs": [
-      "resources/js/components/app-sidebar.tsx:85:56",
+      "resources/js/components/app-sidebar.tsx:89:56",
       "resources/js/layouts/settings/layout.tsx:19:20",
       "resources/js/pages/admin/organizations/create.tsx:55:46",
       "resources/js/pages/settings/business.tsx:121:24"

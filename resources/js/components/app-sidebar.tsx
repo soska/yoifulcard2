@@ -14,7 +14,7 @@ import { NavUser } from '@/components/nav-user';
 import {
     Sidebar,
     SidebarContent,
-    SidebarFooter,
+    SidebarHeader,
 } from '@/components/ui/sidebar';
 import { analytics, dashboard } from '@/routes';
 import { index as adminIndex } from '@/routes/admin';
@@ -81,16 +81,16 @@ export function AppSidebar() {
     const { auth } = usePage().props;
     return (
         <Sidebar collapsible="icon" variant="inset">
+            <SidebarHeader>
+                <NavUser />
+            </SidebarHeader>
+
             <SidebarContent>
                 <NavMain items={mainNavItems()} label={__('Business')} />
                 {auth.isSuperadmin && (
                     <NavMain items={adminNavItems()} label={__('Superadmin')} />
                 )}
             </SidebarContent>
-
-            <SidebarFooter>
-                <NavUser />
-            </SidebarFooter>
         </Sidebar>
     );
 }
