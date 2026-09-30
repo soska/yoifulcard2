@@ -1007,7 +1007,7 @@
     "message": "Email",
     "refs": [
       "resources/js/components/admin/one-time-credentials.tsx:40:60",
-      "resources/js/components/public-card/email-capture.tsx:60:34"
+      "resources/js/components/public-card/email-capture.tsx:69:34"
     ]
   },
   "1qs5hc4bu19": {
@@ -1327,7 +1327,7 @@
   "1xtcmhrwe9c": {
     "message": "Powered by Yoiful",
     "refs": [
-      "resources/js/pages/public-card/show.tsx:88:26"
+      "resources/js/pages/public-card/show.tsx:91:26"
     ]
   },
   "1xu6al3whba": {
@@ -1577,7 +1577,7 @@
   "22tau8thrt1": {
     "message": "you@example.com",
     "refs": [
-      "resources/js/components/public-card/email-capture.tsx:67:46"
+      "resources/js/components/public-card/email-capture.tsx:76:46"
     ]
   },
   "22vsazqg7pk": {
@@ -1757,7 +1757,7 @@
   "28z09hoarac": {
     "message": "Get balance updates",
     "refs": [
-      "resources/js/components/public-card/email-capture.tsx:42:22"
+      "resources/js/components/public-card/email-capture.tsx:49:22"
     ]
   },
   "29kstd4aeqt": {
@@ -1888,6 +1888,12 @@
     "refs": [
       "resources/js/components/admin/one-time-credentials.tsx:45:26",
       "resources/js/pages/admin/users/index.tsx:219:70"
+    ]
+  },
+  "2dure704ydq": {
+    "message": "Your email is saved.",
+    "refs": [
+      "resources/js/components/public-card/email-capture.tsx:63:31"
     ]
   },
   "2e5dk8q3r6a": {
@@ -2225,7 +2231,7 @@
   "8tpbh727ny": {
     "message": "Leave your email and we'll let you know about your balance.",
     "refs": [
-      "resources/js/components/public-card/email-capture.tsx:45:22"
+      "resources/js/components/public-card/email-capture.tsx:52:22"
     ]
   },
   "93varfklsb": {
@@ -2274,7 +2280,7 @@
   "a9iatti38r": {
     "message": "Thanks! Your email is saved.",
     "refs": [
-      "resources/js/components/public-card/email-capture.tsx:54:26",
+      "resources/js/components/public-card/email-capture.tsx:62:31",
       "resources/js/lib/flash.ts:42:42"
     ]
   },
@@ -2446,7 +2452,7 @@
   "gbq6pkhmy1": {
     "message": "Save email",
     "refs": [
-      "resources/js/components/public-card/email-capture.tsx:80:30"
+      "resources/js/components/public-card/email-capture.tsx:89:30"
     ]
   },
   "gexz7lm4ol": {

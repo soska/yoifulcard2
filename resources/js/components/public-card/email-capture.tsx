@@ -17,18 +17,25 @@ import { __ } from '@/i18n';
 
 /**
  * The optional "get balance updates" form. v1 stores the email on the card
- * and sends nothing.
+ * and sends nothing. Once the card has an email the form is replaced by a
+ * note, on this visit and every later one.
  */
-export function EmailCapture({ token }: { token: string }) {
+export function EmailCapture({
+    token,
+    hasEmail,
+}: {
+    token: string;
+    hasEmail: boolean;
+}) {
     const form = useForm({ email: '' });
-    const [saved, setSaved] = useState(false);
+    const [justSaved, setJustSaved] = useState(false);
     function submit(event: React.FormEvent) {
         event.preventDefault();
 
         form.post(saveEmail.url(token), {
             preserveScroll: true,
             onSuccess: () => {
-                setSaved(true);
+                setJustSaved(true);
                 form.reset();
             },
         });
@@ -48,10 +55,12 @@ export function EmailCapture({ token }: { token: string }) {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                {saved ? (
+                {hasEmail || justSaved ? (
                     <p className="flex items-center gap-2 text-sm text-muted-foreground">
                         <CheckCircle2 className="size-4 text-emerald-600" />
-                        {__('Thanks! Your email is saved.')}
+                        {justSaved
+                            ? __('Thanks! Your email is saved.')
+                            : __('Your email is saved.')}
                     </p>
                 ) : (
                     <form onSubmit={submit} className="flex flex-col gap-3">

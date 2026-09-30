@@ -69,6 +69,31 @@ test('public card works for a logged-in user of another organization', function 
             ->where('card.balance', '250.50'));
 });
 
+test('public card says whether an email is saved, without the address', function (?string $email, bool $hasEmail) {
+    $card = publicCard(card: ['email' => $email]);
+
+    $this->get(route('public-card.show', ['token' => $card->qr_token]))
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('card.has_email', $hasEmail))
+        ->assertDontSee('holder@example.com', false);
+})->with([
+    'with email' => ['holder@example.com', true],
+    'without email' => [null, false],
+]);
+
+test('a saved email shows as saved on the next visit', function () {
+    $card = publicCard(card: ['email' => null]);
+    $url = route('public-card.show', ['token' => $card->qr_token]);
+
+    $this->from($url)
+        ->post(route('public-card.email', ['token' => $card->qr_token]), ['email' => 'holder@example.com'])
+        ->assertRedirect($url);
+
+    $this->get($url)
+        ->assertInertia(fn (Assert $page) => $page->where('card.has_email', true));
+});
+
 test('unknown and malformed tokens return the same page and status', function () {
     publicCard();
 
@@ -106,7 +131,7 @@ test('public card props contain only the allowed fields', function () {
         ->assertInertia(fn (Assert $page) => $page
             ->component('public-card/show')
             ->has('card', fn (Assert $props) => $props
-                ->hasAll(['balance', 'status'])
+                ->hasAll(['balance', 'status', 'has_email'])
                 ->etc(false))
             ->has('organization', fn (Assert $props) => $props
                 ->hasAll(['name', 'logo_url', 'primary_color', 'currency'])));
@@ -114,7 +139,7 @@ test('public card props contain only the allowed fields', function () {
     $props = $response->viewData('page')['props'];
 
     expect(array_keys($props))->toEqualCanonicalizing([...$shared, 'card', 'organization'])
-        ->and(array_keys($props['card']))->toEqualCanonicalizing(['balance', 'status'])
+        ->and(array_keys($props['card']))->toEqualCanonicalizing(['balance', 'status', 'has_email'])
         ->and(array_keys($props['organization']))->toEqualCanonicalizing(['name', 'logo_url', 'primary_color', 'currency']);
 
     // Nothing else about the card, program, or organization leaks.

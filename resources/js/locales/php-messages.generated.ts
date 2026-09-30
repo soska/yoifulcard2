@@ -28,7 +28,7 @@ export function phpMessages(): string[] {
         __('Adjustment'),
         // app/Http/Controllers/Dashboard/TransactionController.php:70
         __('Amount'),
-        // app/Http/Controllers/PublicCardController.php:66
+        // app/Http/Controllers/PublicCardController.php:69
         __('An email is already saved for this card.'),
         // app/Http/Requests/Admin/StoreOrganizationRequest.php:56
         __('An organization with this slug already exists.'),
