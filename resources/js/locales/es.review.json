@@ -499,14 +499,6 @@
     "at": "2026-09-26",
     "by": "agent"
   },
-  "1c0z635zrp1": {
-    "status": "machine",
-    "translatedHash": "t8vlbmbxl7",
-    "at": "2026-09-26",
-    "by": "agent",
-    "confidence": "high",
-    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
-  },
   "1cdcaodbbnr": {
     "status": "machine",
     "translatedHash": "9w9t3hj6uf",
@@ -1305,14 +1297,6 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
-  "1s5ifn1j9ko": {
-    "status": "machine",
-    "translatedHash": "1fof94aa4xf",
-    "at": "2026-09-26",
-    "by": "agent",
-    "confidence": "high",
-    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
-  },
   "1s82z761igh": {
     "status": "machine",
     "translatedHash": "j5vwx7f6uv",
@@ -1744,14 +1728,6 @@
   "20necazrl3k": {
     "status": "machine",
     "translatedHash": "x09opfexnp",
-    "at": "2026-09-26",
-    "by": "agent",
-    "confidence": "high",
-    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
-  },
-  "20pm528itr2": {
-    "status": "machine",
-    "translatedHash": "1llluo5oj79",
     "at": "2026-09-26",
     "by": "agent",
     "confidence": "high",
@@ -2869,6 +2845,13 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "deut0dsn3k": {
+    "status": "machine",
+    "translatedHash": "2fb4pfkli2m",
+    "at": "2026-09-30",
+    "confidence": "high",
+    "note": "Matches the previous 'Transacciones en {month}'."
+  },
   "dmjydccuxx": {
     "status": "machine",
     "translatedHash": "60axzmd4x3",
@@ -3850,14 +3833,6 @@
     "translatedHash": "bdke9zsde0",
     "at": "2026-09-26",
     "by": "agent"
-  },
-  "z6az0ecjzu": {
-    "status": "machine",
-    "translatedHash": "10sylude2r",
-    "at": "2026-09-26",
-    "by": "agent",
-    "confidence": "high",
-    "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
   "zfg5718dbw": {
     "status": "machine",
