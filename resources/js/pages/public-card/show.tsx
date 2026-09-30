@@ -82,7 +82,10 @@ export default function PublicCardShow({ card, organization }: Props) {
 
                     <WalletButtons />
 
-                    <EmailCapture token={tokenFromUrl(url)} />
+                    <EmailCapture
+                        token={tokenFromUrl(url)}
+                        hasEmail={card.has_email}
+                    />
 
                     <p className="text-center text-sm text-muted-foreground">
                         {__('Powered by Yoiful')}

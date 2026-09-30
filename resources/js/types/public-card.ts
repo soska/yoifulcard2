@@ -7,6 +7,7 @@ import type { CardStatus } from './card';
 export type PublicCard = {
     balance: string;
     status: CardStatus;
+    has_email: boolean;
 };
 
 export type PublicOrganization = {

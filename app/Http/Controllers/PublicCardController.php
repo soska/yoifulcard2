@@ -9,6 +9,7 @@ use App\Services\CardCodeGenerator;
 use App\Support\Flash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,8 @@ class PublicCardController extends Controller
             'card' => [
                 'balance' => $card->balance,
                 'status' => $card->status->value,
+                // Whether an email is saved, never the address itself.
+                'has_email' => (bool) $card->getAttribute('has_email'),
             ],
             'organization' => [
                 'name' => $card->getAttribute('organization_name'),
@@ -76,7 +79,8 @@ class PublicCardController extends Controller
 
     /**
      * The card with only the fields the public page may show: business name,
-     * logo, color and currency, plus the card's balance and status.
+     * logo, color and currency, plus the card's balance, status, and whether
+     * it has an email.
      */
     private function findByToken(string $token): ?Card
     {
@@ -91,6 +95,7 @@ class PublicCardController extends Controller
             ->first([
                 'cards.balance',
                 'cards.status',
+                DB::raw('cards.email is not null as has_email'),
                 'organizations.name as organization_name',
                 'organizations.logo_url as organization_logo_url',
                 'organizations.primary_color as organization_primary_color',

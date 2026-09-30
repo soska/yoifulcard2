@@ -2245,6 +2245,14 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "2dure704ydq": {
+    "status": "machine",
+    "translatedHash": "1grp65t7cwa",
+    "at": "2026-09-30",
+    "by": "claude",
+    "confidence": "high",
+    "note": "Returning visit; matches '¡Gracias! Guardamos tu correo.'"
+  },
   "2e5dk8q3r6a": {
     "status": "machine",
     "translatedHash": "ud6wc4zz2k",
