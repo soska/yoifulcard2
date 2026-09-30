@@ -7,14 +7,12 @@ import {
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    useSidebar,
-} from '@/components/ui/sidebar';
 import { __ } from '@/i18n';
 import { switchMethod } from '@/routes/organizations';
 import type { SwitchableOrganization } from '@/types';
@@ -83,59 +81,37 @@ function SwitcherItems({
 }
 
 /**
- * Sidebar version, after shadcn's team switcher block.
+ * User menu version: a submenu under the current business, placed in the
+ * user menu so it doesn't take a row of sidebar space.
  */
-export function SidebarOrganizationSwitcher() {
+export function UserMenuOrganizationSwitcher() {
     const { organizations, current, visible } = useSwitcher();
-    const { isMobile } = useSidebar();
     if (!visible) {
         return null;
     }
 
     return (
-        <SidebarMenu>
-            <SidebarMenuItem>
-                <DropdownMenu>
-                    <DropdownMenuTrigger
-                        render={
-                            <SidebarMenuButton
-                                size="lg"
-                                className="data-open:bg-sidebar-accent data-open:text-sidebar-accent-foreground"
-                                aria-label={__('Switch business')}
-                                data-test="organization-switcher"
-                            />
-                        }
+        <>
+            <DropdownMenuGroup>
+                <DropdownMenuSub>
+                    <DropdownMenuSubTrigger
+                        aria-label={__('Switch business')}
+                        data-test="organization-switcher"
                     >
-                        <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                            <Store className="size-4" />
-                        </div>
-                        <div className="grid flex-1 text-left text-sm leading-tight">
-                            <span className="truncate font-medium">
-                                {current?.name}
-                            </span>
-                            {current && (
-                                <span className="truncate text-xs">
-                                    {roleLabel(current.role)}
-                                </span>
-                            )}
-                        </div>
-                        <ChevronsUpDown className="ml-auto size-4" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                        className="w-(--anchor-width) min-w-56 rounded-lg"
-                        align="start"
-                        side={isMobile ? 'bottom' : 'right'}
-                        sideOffset={4}
-                    >
+                        <Store className="mr-2" />
+                        <span className="truncate">{current?.name}</span>
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuSubContent className="min-w-56 rounded-lg">
                         <SwitcherItems
                             organizations={organizations}
                             currentId={current?.id ?? null}
                             reader={false}
                         />
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            </SidebarMenuItem>
-        </SidebarMenu>
+                    </DropdownMenuSubContent>
+                </DropdownMenuSub>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+        </>
     );
 }
 
