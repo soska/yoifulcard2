@@ -43,7 +43,7 @@
     },
     "context": "cards",
     "refs": [
-      "resources/js/pages/dashboard.tsx:85:9"
+      "resources/js/pages/dashboard.tsx:96:9"
     ]
   },
   "10rdx7z6m6w": {
@@ -358,7 +358,7 @@
   "1b0vfdd8su8": {
     "message": "The latest transactions across all cards.",
     "refs": [
-      "resources/js/pages/dashboard.tsx:224:30"
+      "resources/js/pages/dashboard.tsx:214:30"
     ]
   },
   "1b8g8mavvcd": {
@@ -422,12 +422,6 @@
     "message": "This organization is already active.",
     "refs": [
       "resources/js/locales/php-messages.generated.ts:100:9"
-    ]
-  },
-  "1c0z635zrp1": {
-    "message": "This month",
-    "refs": [
-      "resources/js/pages/dashboard.tsx:211:32"
     ]
   },
   "1cdcaodbbnr": {
@@ -512,7 +506,7 @@
   "1epujjaqd0u": {
     "message": "Create a card and add funds to get started.",
     "refs": [
-      "resources/js/pages/dashboard.tsx:251:42"
+      "resources/js/pages/dashboard.tsx:241:42"
     ]
   },
   "1esddlkv0s9": {
@@ -797,8 +791,8 @@
       "resources/js/pages/cards/create.tsx:38:26",
       "resources/js/pages/cards/index.tsx:191:30",
       "resources/js/pages/cards/index.tsx:205:30",
-      "resources/js/pages/dashboard.tsx:141:30",
-      "resources/js/pages/dashboard.tsx:150:30"
+      "resources/js/pages/dashboard.tsx:153:30",
+      "resources/js/pages/dashboard.tsx:163:30"
     ]
   },
   "1kskaqmm55e": {
@@ -885,7 +879,7 @@
     "message": "Outstanding balance",
     "refs": [
       "resources/js/pages/admin/organizations/show.tsx:92:20",
-      "resources/js/pages/dashboard.tsx:205:32"
+      "resources/js/pages/dashboard.tsx:193:32"
     ]
   },
   "1n14j6gecbe": {
@@ -1090,7 +1084,7 @@
       "resources/js/pages/cards/index.tsx:172:32",
       "resources/js/pages/cards/index.tsx:381:28",
       "resources/js/pages/cards/show.tsx:394:18",
-      "resources/js/pages/dashboard.tsx:195:32"
+      "resources/js/pages/dashboard.tsx:182:32"
     ]
   },
   "1ry9kc89u3j": {
@@ -1109,12 +1103,6 @@
     "message": "Approaching your card limit",
     "refs": [
       "resources/js/components/cards/card-usage-notice.tsx:45:26"
-    ]
-  },
-  "1s5ifn1j9ko": {
-    "message": "All cards",
-    "refs": [
-      "resources/js/pages/dashboard.tsx:169:26"
     ]
   },
   "1s82z761igh": {
@@ -1290,8 +1278,7 @@
       "resources/js/components/app-sidebar.tsx:48:20",
       "resources/js/pages/analytics/index.tsx:101:32",
       "resources/js/pages/analytics/index.tsx:256:28",
-      "resources/js/pages/analytics/index.tsx:97:26",
-      "resources/js/pages/dashboard.tsx:187:26"
+      "resources/js/pages/analytics/index.tsx:97:26"
     ]
   },
   "1xepvuia13": {
@@ -1467,7 +1454,6 @@
       "resources/js/components/app-sidebar.tsx:43:20",
       "resources/js/pages/admin/organizations/show.tsx:97:20",
       "resources/js/pages/analytics/index.tsx:160:32",
-      "resources/js/pages/dashboard.tsx:178:26",
       "resources/js/pages/transactions/index.tsx:102:26",
       "resources/js/pages/transactions/index.tsx:106:32",
       "resources/js/pages/transactions/index.tsx:295:28"
@@ -1477,12 +1463,6 @@
     "message": "You will lose access to the admin area right away. The last superadmin cannot be revoked.",
     "refs": [
       "resources/js/pages/admin/users/index.tsx:270:75"
-    ]
-  },
-  "20pm528itr2": {
-    "message": "Across all cards",
-    "refs": [
-      "resources/js/pages/dashboard.tsx:207:33"
     ]
   },
   "20xixacat15": {
@@ -1571,7 +1551,7 @@
   "22n6j3g4p3s": {
     "message": "Open reader",
     "refs": [
-      "resources/js/pages/dashboard.tsx:160:26"
+      "resources/js/pages/dashboard.tsx:174:26"
     ]
   },
   "22tau8thrt1": {
@@ -1715,7 +1695,7 @@
   "27nxsynl10g": {
     "message": "Recent activity",
     "refs": [
-      "resources/js/pages/dashboard.tsx:222:37"
+      "resources/js/pages/dashboard.tsx:212:37"
     ]
   },
   "27sli8bhc0z": {
@@ -2363,6 +2343,15 @@
       "resources/js/pages/auth/register.tsx:105:34"
     ]
   },
+  "deut0dsn3k": {
+    "message": {
+      "one": "{count} transaction in {month}",
+      "other": "{count} transactions in {month}"
+    },
+    "refs": [
+      "resources/js/pages/dashboard.tsx:195:33"
+    ]
+  },
   "dmjydccuxx": {
     "message": "Manage your two-factor authentication settings",
     "refs": [
@@ -2424,7 +2413,7 @@
     },
     "context": "cards",
     "refs": [
-      "resources/js/pages/dashboard.tsx:90:15"
+      "resources/js/pages/dashboard.tsx:101:15"
     ]
   },
   "fi1aj4103u": {
@@ -2434,7 +2423,7 @@
     },
     "context": "cards",
     "refs": [
-      "resources/js/pages/dashboard.tsx:102:15"
+      "resources/js/pages/dashboard.tsx:113:15"
     ]
   },
   "frjj2motly": {
@@ -2456,7 +2445,7 @@
     },
     "context": "cards",
     "refs": [
-      "resources/js/pages/dashboard.tsx:96:15"
+      "resources/js/pages/dashboard.tsx:107:15"
     ]
   },
   "gklvo3l49v": {
@@ -2655,7 +2644,7 @@
   "lux3evo6j3": {
     "message": "No activity yet",
     "refs": [
-      "resources/js/pages/dashboard.tsx:248:42"
+      "resources/js/pages/dashboard.tsx:238:42"
     ]
   },
   "lx7e250k0": {
@@ -2821,8 +2810,8 @@
       "resources/js/components/app-header.tsx:53:20",
       "resources/js/components/app-sidebar.tsx:33:20",
       "resources/js/layouts/reader-layout.tsx:59:26",
-      "resources/js/pages/dashboard.tsx:125:26",
-      "resources/js/pages/dashboard.tsx:273:20",
+      "resources/js/pages/dashboard.tsx:136:26",
+      "resources/js/pages/dashboard.tsx:263:20",
       "resources/js/pages/welcome.tsx:37:30"
     ]
   },
@@ -2842,7 +2831,7 @@
     "message": "View all",
     "refs": [
       "resources/js/pages/admin/index.tsx:124:34",
-      "resources/js/pages/dashboard.tsx:234:38"
+      "resources/js/pages/dashboard.tsx:224:38"
     ]
   },
   "qxtifz0t7m": {
@@ -2991,7 +2980,7 @@
       "resources/js/locales/php-messages.generated.ts:94:9",
       "resources/js/pages/cards/create.tsx:159:59",
       "resources/js/pages/cards/index.tsx:199:39",
-      "resources/js/pages/dashboard.tsx:135:39",
+      "resources/js/pages/dashboard.tsx:147:39",
       "resources/js/pages/settings/business.tsx:51:23"
     ]
   },
@@ -3091,7 +3080,7 @@
     "refs": [
       "resources/js/components/cards/card-usage-notice.tsx:28:30",
       "resources/js/pages/cards/index.tsx:198:39",
-      "resources/js/pages/dashboard.tsx:134:39"
+      "resources/js/pages/dashboard.tsx:146:39"
     ]
   },
   "wytlvq49bv": {
@@ -3185,12 +3174,6 @@
     "message": "This organization is cancelled.",
     "refs": [
       "resources/js/locales/php-messages.generated.ts:104:9"
-    ]
-  },
-  "z6az0ecjzu": {
-    "message": "Transactions in {month}",
-    "refs": [
-      "resources/js/pages/dashboard.tsx:213:33"
     ]
   },
   "zfg5718dbw": {

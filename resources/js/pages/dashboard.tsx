@@ -1,10 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import {
-    Activity,
     ArrowRight,
-    ChartColumn,
     CreditCard,
-    List,
     Plus,
     ReceiptText,
     ScanLine,
@@ -35,6 +32,7 @@ import { analytics, dashboard, scan } from '@/routes';
 import { create, index as cardsIndex } from '@/routes/cards';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { CardUsage, DashboardStats, TransactionRow } from '@/types';
+import type { RouteDefinition } from '@/wayfinder';
 import { __ } from '@/i18n';
 
 type Props = {
@@ -45,34 +43,47 @@ type Props = {
     canCreateCards: boolean;
 };
 
+// The two things people come to the dashboard to do.
+const primaryAction = 'h-16 gap-3 text-base sm:h-20 sm:text-lg [&_svg]:size-6!';
+
 function StatCard({
     title,
     value,
     detail,
     icon,
+    href,
 }: {
     title: string;
     value: ReactNode;
     detail?: ReactNode;
     icon: ReactNode;
+    href: RouteDefinition<'get'>;
 }) {
     return (
-        <Card size="sm">
-            <CardHeader>
-                <CardDescription>{title}</CardDescription>
-                <CardTitle className="text-2xl font-semibold tabular-nums">
-                    {value}
-                </CardTitle>
-                <CardAction className="text-muted-foreground [&_svg]:size-4">
-                    {icon}
-                </CardAction>
-            </CardHeader>
-            {detail && (
-                <CardContent className="text-sm text-muted-foreground">
-                    {detail}
-                </CardContent>
-            )}
-        </Card>
+        <Link
+            href={href}
+            className="rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+        >
+            <Card
+                size="sm"
+                className="h-full transition-colors hover:bg-muted/50"
+            >
+                <CardHeader>
+                    <CardDescription>{title}</CardDescription>
+                    <CardTitle className="text-2xl font-semibold tabular-nums">
+                        {value}
+                    </CardTitle>
+                    <CardAction className="text-muted-foreground [&_svg]:size-4">
+                        {icon}
+                    </CardAction>
+                </CardHeader>
+                {detail && (
+                    <CardContent className="text-sm text-muted-foreground">
+                        {detail}
+                    </CardContent>
+                )}
+            </Card>
+        </Link>
     );
 }
 
@@ -124,10 +135,11 @@ export default function Dashboard({
         <>
             <Head title={__('Dashboard')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
-                <div className="flex flex-wrap gap-2">
+                <div className="grid gap-4 sm:grid-cols-2">
                     {createBlocked ? (
                         <Button
                             size="lg"
+                            className={primaryAction}
                             disabled
                             title={
                                 canCreateCards
@@ -143,6 +155,7 @@ export default function Dashboard({
                     ) : (
                         <Button
                             size="lg"
+                            className={primaryAction}
                             nativeButton={false}
                             render={<Link href={create()} />}
                         >
@@ -153,44 +166,18 @@ export default function Dashboard({
                     <Button
                         size="lg"
                         variant="outline"
+                        className={primaryAction}
                         nativeButton={false}
                         render={<Link href={scan()} />}
                     >
                         <ScanLine data-icon="inline-start" />
                         {__('Open reader')}
                     </Button>
-                    <Button
-                        size="lg"
-                        variant="outline"
-                        nativeButton={false}
-                        render={<Link href={cardsIndex()} />}
-                    >
-                        <List data-icon="inline-start" />
-                        {__('All cards')}
-                    </Button>
-                    <Button
-                        size="lg"
-                        variant="outline"
-                        nativeButton={false}
-                        render={<Link href={transactionsIndex()} />}
-                    >
-                        <ReceiptText data-icon="inline-start" />
-                        {__('Transactions')}
-                    </Button>
-                    <Button
-                        size="lg"
-                        variant="outline"
-                        nativeButton={false}
-                        render={<Link href={analytics()} />}
-                    >
-                        <ChartColumn data-icon="inline-start" />
-                        {__('Analytics')}
-                    </Button>
                 </div>
 
                 <CardUsageNotice usage={usage} />
 
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-4 sm:grid-cols-2">
                     <StatCard
                         title={__('Cards')}
                         value={
@@ -200,20 +187,23 @@ export default function Dashboard({
                         }
                         detail={cardBreakdown(stats)}
                         icon={<CreditCard />}
+                        href={cardsIndex()}
                     />
                     <StatCard
                         title={__('Outstanding balance')}
                         value={formatMoney(stats.outstandingBalance, currency)}
-                        detail={__('Across all cards')}
+                        detail={__(
+                            {
+                                one: '{count} transaction in {month}',
+                                other: '{count} transactions in {month}',
+                            },
+                            {
+                                count: stats.monthTransactions,
+                                month: formatMonth(stats.month),
+                            },
+                        )}
                         icon={<Wallet />}
-                    />
-                    <StatCard
-                        title={__('This month')}
-                        value={stats.monthTransactions}
-                        detail={__('Transactions in {month}', {
-                            month: formatMonth(stats.month),
-                        })}
-                        icon={<Activity />}
+                        href={analytics()}
                     />
                 </div>
 
