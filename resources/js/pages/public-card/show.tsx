@@ -1,6 +1,7 @@
 import { Head, usePage } from '@inertiajs/react';
 import { AlertCircle } from 'lucide-react';
 import { CardFace } from '@/components/public-card/card-face';
+import { CounterQr } from '@/components/public-card/counter-qr';
 import { PreferenceSwitchers } from '@/components/preferences/preference-switchers';
 import { EmailCapture } from '@/components/public-card/email-capture';
 import { WalletButtons } from '@/components/public-card/wallet-buttons';
@@ -21,7 +22,8 @@ function tokenFromUrl(url: string): string {
 
 /**
  * The cardholder's page. No login, no app layout. Shows the business
- * branding and the balance. A suspended business's card looks the same:
+ * branding, the balance, and (while the card can be used) the QR to show at
+ * the counter. A suspended business's card looks the same:
  * the balance belongs to the cardholder.
  */
 export default function PublicCardShow({ card, organization }: Props) {
@@ -79,6 +81,11 @@ export default function PublicCardShow({ card, organization }: Props) {
                     )}
 
                     <CardFace card={card} organization={organization} />
+
+                    {(card.status === 'active' ||
+                        card.status === 'depleted') && (
+                        <CounterQr token={tokenFromUrl(url)} />
+                    )}
 
                     <WalletButtons />
 

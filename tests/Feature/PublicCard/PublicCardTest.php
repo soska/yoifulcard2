@@ -3,6 +3,8 @@
 use App\Enums\OrganizationStatus;
 use App\Models\Card;
 use App\Providers\AppServiceProvider;
+use App\Services\CardQrCode;
+use App\Support\QrPayload;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -93,6 +95,33 @@ test('a saved email shows as saved on the next visit', function () {
     $this->get($url)
         ->assertInertia(fn (Assert $page) => $page->where('card.has_email', true));
 });
+
+test('the card QR is public and encodes the card URL the reader accepts', function () {
+    $card = publicCard();
+
+    $this->assertGuest();
+
+    $response = $this->get(route('public-card.qr', ['token' => $card->qr_token]))
+        ->assertOk()
+        ->assertHeader('Content-Type', 'image/svg+xml')
+        ->assertHeader('X-Robots-Tag', 'noindex, nofollow')
+        ->assertHeader('Referrer-Policy', 'no-referrer');
+
+    // Same image as the dashboard's, which encodes Card::qrPayload().
+    expect($response->getContent())->toBe(app(CardQrCode::class)->svg($card))
+        ->and(QrPayload::token($card->qrPayload()))->toBe($card->qr_token);
+});
+
+test('the card QR of an unknown or malformed token is not found', function (string $token) {
+    publicCard();
+
+    $this->get('/c/'.$token.'/qr.svg')
+        ->assertNotFound()
+        ->assertInertia(fn (Assert $page) => $page->component('public-card/not-found'));
+})->with([
+    'unknown' => [str_repeat('x', 64)],
+    'malformed' => ['nope'],
+]);
 
 test('unknown and malformed tokens return the same page and status', function () {
     publicCard();

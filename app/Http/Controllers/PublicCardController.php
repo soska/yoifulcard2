@@ -6,6 +6,7 @@ use App\Enums\FlashMessage;
 use App\Http\Requests\PublicCard\SaveCardEmailRequest;
 use App\Models\Card;
 use App\Services\CardCodeGenerator;
+use App\Services\CardQrCode;
 use App\Support\Flash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * The cardholder's page at `/c/{token}`. No login. It shows the business
- * branding and the balance, and nothing else about the card. A suspended
+ * branding and the balance, and nothing else about the card. Its QR
+ * (`/c/{token}/qr.svg`) encodes the page's own URL. A suspended
  * organization's card still shows its balance: that money belongs to the
  * cardholder.
  */
@@ -47,6 +49,28 @@ class PublicCardController extends Controller
                 'currency' => $card->getAttribute('organization_currency'),
             ],
         ])->toResponse($request));
+    }
+
+    /**
+     * The card's QR, for the cardholder to show at the counter. It encodes
+     * this same page's URL, which the reader accepts. Unknown and malformed
+     * tokens get the not-found page, like the card page.
+     */
+    public function qr(Request $request, string $token, CardQrCode $qr): Response
+    {
+        $card = self::isWellFormed($token)
+            ? Card::query()->select(['qr_token'])->where('qr_token', $token)->first()
+            : null;
+
+        if ($card === null) {
+            return $this->notFound($request);
+        }
+
+        return $this->withPrivateHeaders(response($qr->svg($card), 200, [
+            'Content-Type' => 'image/svg+xml',
+            'Cache-Control' => 'private, no-store',
+            'X-Content-Type-Options' => 'nosniff',
+        ]));
     }
 
     /**
