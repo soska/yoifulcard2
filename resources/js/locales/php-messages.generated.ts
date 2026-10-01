@@ -54,9 +54,9 @@ export function phpMessages(): string[] {
         __('Load'),
         // app/Http/Controllers/Dashboard/TransactionController.php:72
         __('Note'),
-        // app/Http/Controllers/Dashboard/CardController.php:205
+        // app/Http/Controllers/Dashboard/CardController.php:206
         __('Only a frozen card can be unfrozen.'),
-        // app/Http/Controllers/Dashboard/CardController.php:188
+        // app/Http/Controllers/Dashboard/CardController.php:189
         __('Only an active card can be frozen.'),
         // app/Support/PackageMessages.php:43
         __('Passkey registration session expired. Please try again.'),
@@ -88,7 +88,7 @@ export function phpMessages(): string[] {
         __('The provided two factor recovery code was invalid.'),
         // resources/views/offline.blade.php:46
         __('The reader needs an internet connection to look up cards and post charges. Check your connection and try again.'),
-        // app/Http/Controllers/Dashboard/CardController.php:125
+        // app/Http/Controllers/Dashboard/CardController.php:126
         __('This business has no active program to issue cards from.'),
         // app/Exceptions/LedgerException.php:74
         __('This business is suspended. Contact support.'),
@@ -112,7 +112,7 @@ export function phpMessages(): string[] {
         __('Use only lowercase letters, numbers, and single hyphens.'),
         // resources/views/offline.blade.php:25
         __('You are offline'),
-        // app/Http/Controllers/Dashboard/CardController.php:115
+        // app/Http/Controllers/Dashboard/CardController.php:116
         __('You have reached your plan limit of :limit cards. Contact support to raise the limit.'),
     ];
 }

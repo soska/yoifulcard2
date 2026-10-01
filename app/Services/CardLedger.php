@@ -42,6 +42,19 @@ class CardLedger
     }
 
     /**
+     * Load a new card's initial balance. It is recorded as a load, but it is
+     * not a use: `last_used_at` stays as it was (null on a new card).
+     */
+    public function issue(Card $card, string $amount, User $user): Transaction
+    {
+        $amount = $this->positive($amount);
+
+        return $this->post($card, TransactionType::Load, $user, null, function (string $balance) use ($amount): string {
+            return bcadd($balance, $amount, self::SCALE);
+        }, $amount, marksUse: false);
+    }
+
+    /**
      * Charge a card. The amount may not be above the locked balance.
      */
     public function spend(Card $card, string $amount, User $user, ?string $note = null): Transaction
@@ -81,18 +94,19 @@ class CardLedger
             }
 
             return $after;
-        }, $amount);
+        }, $amount, marksUse: false);
     }
 
     /**
      * @param  callable(numeric-string): numeric-string  $apply  Receives the locked balance and returns the new one, or throws.
      * @param  numeric-string  $amount
+     * @param  bool  $marksUse  Whether the change sets `last_used_at`. Adjustments and the initial load do not.
      */
-    private function post(Card $card, TransactionType $type, User $user, ?string $note, callable $apply, string $amount): Transaction
+    private function post(Card $card, TransactionType $type, User $user, ?string $note, callable $apply, string $amount, bool $marksUse = true): Transaction
     {
         $note = $note === null || trim($note) === '' ? null : trim($note);
 
-        [$transaction, $locked] = DB::transaction(function () use ($card, $type, $user, $note, $apply, $amount): array {
+        [$transaction, $locked] = DB::transaction(function () use ($card, $type, $user, $note, $apply, $amount, $marksUse): array {
             /** @var Card $locked */
             $locked = Card::query()->whereKey($card->getKey())->lockForUpdate()->firstOrFail();
 
@@ -131,7 +145,7 @@ class CardLedger
             $locked->balance = $after;
             $locked->status = $this->statusAfter($locked->status, $after);
 
-            if ($type !== TransactionType::Adjustment) {
+            if ($marksUse) {
                 $locked->last_used_at = $transaction->created_at ?? now();
             }
 

@@ -92,7 +92,8 @@ class CardController extends Controller
     /**
      * Create a card in the organization's default program, unless the
      * organization has reached its card limit. A nonzero initial balance is
-     * posted as a load in the same database transaction as the card insert.
+     * posted as a load in the same database transaction as the card insert;
+     * it does not count as a use, so the card shows "Never" until it is used.
      */
     public function store(StoreCardRequest $request, CardCodeGenerator $generator, CardLedger $ledger): RedirectResponse
     {
@@ -136,7 +137,7 @@ class CardController extends Controller
 
             if (bccomp($request->initialBalance(), '0', 2) > 0) {
                 try {
-                    $ledger->load($card, $request->initialBalance(), $request->user());
+                    $ledger->issue($card, $request->initialBalance(), $request->user());
                 } catch (LedgerException $exception) {
                     throw ValidationException::withMessages([
                         $exception->field === 'amount' ? 'initial_balance' : $exception->field => $exception->translated(),
