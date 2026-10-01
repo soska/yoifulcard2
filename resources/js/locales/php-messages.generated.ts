@@ -2,7 +2,7 @@
 //
 // Laravel's translatable strings, declared to duckalization's extractor
 // so PHP and TypeScript share ONE catalog, one brief and one review. The
-// extractor parses TypeScript only; this is how the 47 messages
+// extractor parses TypeScript only; this is how the 55 messages
 // Laravel renders (validation refusals, ledger errors, the CSV header,
 // the offline page) get counted, briefed and translated with the UI.
 //
@@ -20,8 +20,12 @@ import { __ } from '@/i18n';
 
 export function phpMessages(): string[] {
     return [
+        // resources/views/mail/card-link.blade.php:11
+        __(':business sent you a gift card'),
         // app/Actions/Fortify/CreateNewUser.php:67
         __(':name\'s Business'),
+        // app/Http/Controllers/Dashboard/CardLinkController.php:51
+        __('A cancelled card cannot be sent.'),
         // app/Exceptions/LedgerException.php:44
         __('A note is required for adjustments.'),
         // app/Enums/TransactionType.php:33
@@ -58,6 +62,8 @@ export function phpMessages(): string[] {
         __('Only a frozen card can be unfrozen.'),
         // app/Http/Controllers/Dashboard/CardController.php:189
         __('Only an active card can be frozen.'),
+        // resources/views/mail/card-link.blade.php:27
+        __('Open your card'),
         // app/Support/PackageMessages.php:43
         __('Passkey registration session expired. Please try again.'),
         // app/Support/PackageMessages.php:44
@@ -66,6 +72,10 @@ export function phpMessages(): string[] {
         __('Performed by'),
         // app/Enums/TransactionType.php:34
         __('Refund'),
+        // app/Http/Controllers/Dashboard/CardLinkController.php:57
+        __('Save a cardholder email first.'),
+        // resources/views/mail/card-link.blade.php:40
+        __('Show the code on that page when you pay. Keep this email: anyone with the link can use the card.'),
         // app/Exceptions/LedgerException.php:39
         __('The adjustment cannot be 0.'),
         // app/Exceptions/LedgerException.php:54
@@ -96,13 +106,15 @@ export function phpMessages(): string[] {
         __('This card is cancelled.'),
         // app/Exceptions/LedgerException.php:64
         __('This card is frozen.'),
+        // app/Providers/AppServiceProvider.php:62
+        __('This card was emailed several times in the last hour. Try again later.'),
         // app/Http/Controllers/Admin/OrganizationController.php:256
         __('This organization is already active.'),
         // app/Http/Controllers/Admin/OrganizationController.php:257
         __('This organization is already suspended.'),
         // app/Http/Controllers/Admin/OrganizationController.php:258
         __('This organization is cancelled.'),
-        // app/Providers/AppServiceProvider.php:52
+        // app/Providers/AppServiceProvider.php:56
         __('Too many attempts. Please try again in a minute.'),
         // resources/views/offline.blade.php:50
         __('Try again'),
@@ -114,5 +126,9 @@ export function phpMessages(): string[] {
         __('You are offline'),
         // app/Http/Controllers/Dashboard/CardController.php:116
         __('You have reached your plan limit of :limit cards. Contact support to raise the limit.'),
+        // app/Mail/CardLinkMail.php:30
+        __('Your :business gift card'),
+        // resources/views/mail/card-link.blade.php:14
+        __('Your balance is :balance.'),
     ];
 }

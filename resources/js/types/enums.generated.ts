@@ -13,6 +13,7 @@ export type FlashMessage =
     | 'card.frozen'
     | 'card.unfrozen'
     | 'card.email_saved'
+    | 'card.link_sent'
     | 'ledger.loaded'
     | 'ledger.charged'
     | 'ledger.adjusted'

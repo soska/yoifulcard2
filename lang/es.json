@@ -1,5 +1,7 @@
 {
+    ":business sent you a gift card": ":business te envió una tarjeta de regalo",
     ":name's Business": "Negocio de :name",
+    "A cancelled card cannot be sent.": "No se puede enviar una tarjeta cancelada.",
     "A note is required for adjustments.": "La nota es obligatoria para los ajustes.",
     "Adjustment": "Ajuste",
     "Amount": "Monto",
@@ -18,10 +20,13 @@
     "Note": "Nota",
     "Only a frozen card can be unfrozen.": "Solo se puede descongelar una tarjeta congelada.",
     "Only an active card can be frozen.": "Solo se puede congelar una tarjeta activa.",
+    "Open your card": "Abrir tu tarjeta",
     "Passkey registration session expired. Please try again.": "La sesión para registrar la llave de acceso expiró. Vuelve a intentarlo.",
     "Passkey verification session expired. Please try again.": "La sesión para verificar la llave de acceso expiró. Vuelve a intentarlo.",
     "Performed by": "Realizada por",
     "Refund": "Reembolso",
+    "Save a cardholder email first.": "Primero guarda el correo del titular.",
+    "Show the code on that page when you pay. Keep this email: anyone with the link can use the card.": "Muestra el código de esa página cuando pagues. Guarda este correo: cualquiera con el enlace puede usar la tarjeta.",
     "The adjustment cannot be 0.": "El ajuste no puede ser 0.",
     "The adjustment would leave a negative balance.": "El ajuste dejaría el saldo en negativo.",
     "The amount must be greater than 0.": "El monto debe ser mayor a 0.",
@@ -37,6 +42,7 @@
     "This business is suspended. Contact support.": "Este negocio está suspendido. Contacta a soporte.",
     "This card is cancelled.": "Esta tarjeta está cancelada.",
     "This card is frozen.": "Esta tarjeta está congelada.",
+    "This card was emailed several times in the last hour. Try again later.": "Ya enviamos esta tarjeta varias veces en la última hora. Inténtalo más tarde.",
     "This organization is already active.": "Esta organización ya está activa.",
     "This organization is already suspended.": "Esta organización ya está suspendida.",
     "This organization is cancelled.": "Esta organización está cancelada.",
@@ -45,5 +51,7 @@
     "Type": "Tipo",
     "Use only lowercase letters, numbers, and single hyphens.": "Usa solo letras minúsculas, números y guiones sencillos.",
     "You are offline": "Estás sin conexión",
-    "You have reached your plan limit of :limit cards. Contact support to raise the limit.": "Llegaste al límite de :limit tarjetas de tu plan. Contacta a soporte para aumentar el límite."
+    "You have reached your plan limit of :limit cards. Contact support to raise the limit.": "Llegaste al límite de :limit tarjetas de tu plan. Contacta a soporte para aumentar el límite.",
+    "Your :business gift card": "Tu tarjeta de regalo de :business",
+    "Your balance is :balance.": "Tu saldo es de :balance."
 }
