@@ -353,6 +353,14 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "181htsajksu": {
+    "status": "machine",
+    "translatedHash": "27z2c1d91q9",
+    "at": "2026-09-30",
+    "by": "claude",
+    "confidence": "high",
+    "note": "Noun form matches the Cobro transaction type and avoids verb agreement with the amount."
+  },
   "181wia46bw0": {
     "status": "machine",
     "translatedHash": "c69wrhxipn",
@@ -816,6 +824,14 @@
     "by": "agent",
     "confidence": "high",
     "note": "From the Phase 8 Spanish for the same words (plural forms from its singular|plural line; card counts feminine)."
+  },
+  "1i8l8npmp3": {
+    "status": "machine",
+    "translatedHash": "1xwctjx6g6e",
+    "at": "2026-09-30",
+    "by": "claude",
+    "confidence": "high",
+    "note": "Noun form matches the Carga transaction type."
   },
   "1i8vn65wqg9": {
     "status": "machine",

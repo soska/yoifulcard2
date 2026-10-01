@@ -186,7 +186,11 @@ test('flash messages are sent as codes', function () {
     $this->actingAs($user)
         ->from(route('cards.show', $card))
         ->post(route('cards.spend', $card), ['amount' => '1.00'])
-        ->assertInertiaFlash('toast', ['type' => 'success', 'code' => 'ledger.charged', 'params' => ['code' => $card->code]]);
+        ->assertInertiaFlash('toast', [
+            'type' => 'success',
+            'code' => 'ledger.charged',
+            'params' => ['code' => $card->code, 'amount' => '1.00', 'balance' => '4.00', 'currency' => $organization->currency],
+        ]);
 
     // Refusals flash an error code (the field error stays a server sentence).
     $organization->update(['status' => 'suspended']);

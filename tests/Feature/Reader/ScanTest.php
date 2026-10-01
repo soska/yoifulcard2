@@ -155,6 +155,29 @@ test('reader charge and load go through CardLedger', function () {
         ->and(Transaction::count())->toBe(2);
 });
 
+test('reader charge and load toasts carry the amount and the new balance', function () {
+    [$user, $organization] = cardOwner(['currency' => 'MXN']);
+    $card = Card::factory()->forOrganization($organization)->create(['balance' => '500.00']);
+
+    $this->actingAs($user)->from(route('scan.cards.show', $card));
+
+    $this->post(route('cards.spend', $card), ['amount' => '85.50', 'reader' => true])
+        ->assertRedirect(route('scan'))
+        ->assertInertiaFlash('toast', [
+            'type' => 'success',
+            'code' => 'ledger.charged',
+            'params' => ['code' => $card->code, 'amount' => '85.50', 'balance' => '414.50', 'currency' => 'MXN'],
+        ]);
+
+    $this->post(route('cards.load', $card), ['amount' => '100', 'reader' => true])
+        ->assertRedirect(route('scan'))
+        ->assertInertiaFlash('toast', [
+            'type' => 'success',
+            'code' => 'ledger.loaded',
+            'params' => ['code' => $card->code, 'amount' => '100.00', 'balance' => '514.50', 'currency' => 'MXN'],
+        ]);
+});
+
 test('reader cannot charge a card of a suspended organization', function () {
     [$user, $organization] = cardOwner();
     $card = Card::factory()->forOrganization($organization)->create(['balance' => '20.00']);
