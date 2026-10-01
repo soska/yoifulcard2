@@ -21,7 +21,8 @@ test('initial balance creates a load transaction', function () {
     $transaction = Transaction::sole();
 
     expect($card->balance)->toBe('25.50')
-        ->and($card->last_used_at)->not->toBeNull()
+        // The issuing load is not a use: the card shows "Never".
+        ->and($card->last_used_at)->toBeNull()
         ->and($transaction->card_id)->toBe($card->id)
         ->and($transaction->type)->toBe(TransactionType::Load)
         ->and($transaction->amount)->toBe('25.50')
@@ -43,7 +44,7 @@ test('initial balance load rolls back the card when it fails', function () {
     // Force the ledger to refuse inside the same database transaction.
     app()->instance(CardLedger::class, new class extends CardLedger
     {
-        public function load(Card $card, string $amount, User $user, ?string $note = null): Transaction
+        public function issue(Card $card, string $amount, User $user): Transaction
         {
             throw LedgerException::organizationNotWritable();
         }

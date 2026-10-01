@@ -246,6 +246,25 @@ test('amounts are never floats', function () {
     expect($raw)->toBeString()->toBe('0.00');
 });
 
+test('issue records a load without marking the card used', function () {
+    [$user, $card] = ledgerCard();
+
+    Carbon::setTestNow('2026-09-01 10:00:00');
+    $transaction = ledger()->issue($card, '500', $user);
+
+    expect($transaction->type)->toBe(TransactionType::Load)
+        ->and($transaction->balance_after)->toBe('500.00')
+        ->and($card->fresh()->balance)->toBe('500.00')
+        ->and($card->fresh()->last_used_at)->toBeNull();
+
+    // The first real use sets it.
+    Carbon::setTestNow('2026-09-02 11:00:00');
+    ledger()->spend($card, '85.50', $user);
+    expect($card->fresh()->last_used_at->toDateTimeString())->toBe('2026-09-02 11:00:00');
+
+    Carbon::setTestNow();
+});
+
 test('last_used_at changes on load and spend but not on adjust', function () {
     [$user, $card] = ledgerCard('10.00');
 
