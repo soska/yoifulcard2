@@ -148,7 +148,7 @@
   "1343mtlhfxv": {
     "message": "This card is currently frozen and cannot be used. Please contact {business} for assistance.",
     "refs": [
-      "resources/js/pages/public-card/show.tsx:61:34"
+      "resources/js/pages/public-card/show.tsx:63:34"
     ]
   },
   "139hd5cuuxb": {
@@ -465,6 +465,12 @@
     "message": "Create your first card to get started.",
     "refs": [
       "resources/js/pages/cards/index.tsx:288:47"
+    ]
+  },
+  "1dqm85rwos2": {
+    "message": "QR code for this card",
+    "refs": [
+      "resources/js/components/public-card/counter-qr.tsx:33:26"
     ]
   },
   "1dxe1odbw39": {
@@ -1326,7 +1332,7 @@
   "1xtcmhrwe9c": {
     "message": "Powered by Yoiful",
     "refs": [
-      "resources/js/pages/public-card/show.tsx:91:26"
+      "resources/js/pages/public-card/show.tsx:98:26"
     ]
   },
   "1xu6al3whba": {
@@ -1545,7 +1551,7 @@
   "226w7dmwmr6": {
     "message": "Card frozen",
     "refs": [
-      "resources/js/pages/public-card/show.tsx:59:42"
+      "resources/js/pages/public-card/show.tsx:61:42"
     ]
   },
   "22fp3gthum9": {
@@ -1899,6 +1905,12 @@
     "message": "Members can create cards and post transactions again.",
     "refs": [
       "resources/js/pages/admin/organizations/show.tsx:170:42"
+    ]
+  },
+  "2eog1frn5jx": {
+    "message": "Show this code to the staff when you pay.",
+    "refs": [
+      "resources/js/components/public-card/counter-qr.tsx:27:22"
     ]
   },
   "2evszjj6fsj": {
@@ -2699,7 +2711,7 @@
   "mtb516uze5": {
     "message": "This card can no longer be used. Please contact {business} for assistance.",
     "refs": [
-      "resources/js/pages/public-card/show.tsx:73:34"
+      "resources/js/pages/public-card/show.tsx:75:34"
     ]
   },
   "mu8wdz9k9n": {
@@ -3002,6 +3014,12 @@
       "resources/js/pages/settings/business.tsx:51:23"
     ]
   },
+  "upza8f8lsk": {
+    "message": "Pay at the counter",
+    "refs": [
+      "resources/js/components/public-card/counter-qr.tsx:24:22"
+    ]
+  },
   "utuf67f9qs": {
     "message": "Enable 2FA",
     "refs": [
@@ -3044,7 +3062,7 @@
   "vehukx254v": {
     "message": "Card cancelled",
     "refs": [
-      "resources/js/pages/public-card/show.tsx:71:42"
+      "resources/js/pages/public-card/show.tsx:73:42"
     ]
   },
   "vh88ypv7zp": {

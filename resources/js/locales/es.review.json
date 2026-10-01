@@ -553,6 +553,13 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "1dqm85rwos2": {
+    "status": "machine",
+    "translatedHash": "1xrpiufsz4h",
+    "at": "2026-10-01",
+    "by": "claude",
+    "confidence": "high"
+  },
   "1dxe1odbw39": {
     "status": "machine",
     "translatedHash": "k5792nkwed",
@@ -2285,6 +2292,14 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "2eog1frn5jx": {
+    "status": "machine",
+    "translatedHash": "gpzwb1zcb",
+    "at": "2026-10-01",
+    "by": "claude",
+    "confidence": "high",
+    "note": "Drops 'to the staff'; the title already says where."
+  },
   "2evszjj6fsj": {
     "status": "machine",
     "translatedHash": "nfyhokcwec",
@@ -3625,6 +3640,17 @@
     "by": "agent",
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "upza8f8lsk": {
+    "status": "machine",
+    "translatedHash": "mc8mby6so9",
+    "at": "2026-10-01",
+    "by": "claude",
+    "confidence": "high",
+    "alternatives": [
+      "Paga en el mostrador"
+    ],
+    "note": "'Caja' is how Mexican shoppers name the counter where they pay."
   },
   "utuf67f9qs": {
     "status": "machine",

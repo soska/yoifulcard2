@@ -29,6 +29,8 @@ Route::post('theme', ThemeController::class)->name('theme.update');
 
 // Public card: anyone with the link, no login. The token is not constrained
 // here so malformed tokens get the same not-found page as unknown ones.
+// The QR comes first: the card page's catch-all token would swallow it.
+Route::get('c/{token}/qr.svg', [PublicCardController::class, 'qr'])->name('public-card.qr');
 Route::get('c/{token}', [PublicCardController::class, 'show'])->where('token', '.*')->name('public-card.show');
 Route::post('c/{token}/email', [PublicCardController::class, 'email'])
     ->middleware('throttle:public-card-email')
