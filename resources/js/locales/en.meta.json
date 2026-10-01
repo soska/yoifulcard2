@@ -9,7 +9,7 @@
     "message": "Last used",
     "refs": [
       "resources/js/pages/cards/index.tsx:76:39",
-      "resources/js/pages/cards/show.tsx:127:46"
+      "resources/js/pages/cards/show.tsx:120:46"
     ]
   },
   "10axxge8i8h": {
@@ -50,13 +50,13 @@
     "message": "Balance after",
     "refs": [
       "resources/js/components/transactions/transactions-table.tsx:48:26",
-      "resources/js/locales/php-messages.generated.ts:36:9"
+      "resources/js/locales/php-messages.generated.ts:40:9"
     ]
   },
   "10t1t7hj33a": {
     "message": "Passkey verification session expired. Please try again.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:64:9"
+      "resources/js/locales/php-messages.generated.ts:70:9"
     ]
   },
   "11cwj6fprvc": {
@@ -87,6 +87,12 @@
     "message": "owner@example.com",
     "refs": [
       "resources/js/pages/admin/organizations/create.tsx:144:66"
+    ]
+  },
+  "1276k6m2r4b": {
+    "message": "This card was emailed several times in the last hour. Try again later.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:110:9"
     ]
   },
   "128g53l4k91": {
@@ -166,7 +172,7 @@
   "13vh9wwjokq": {
     "message": "Passkey registration session expired. Please try again.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:62:9"
+      "resources/js/locales/php-messages.generated.ts:68:9"
     ]
   },
   "13w10qqmr70": {
@@ -185,6 +191,18 @@
     "message": "To",
     "refs": [
       "resources/js/pages/transactions/index.tsx:189:38"
+    ]
+  },
+  "14v7j1f6l2r": {
+    "message": "Your :business gift card",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:130:9"
+    ]
+  },
+  "14vy3be3o2": {
+    "message": "Sends to {email}.",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:224:39"
     ]
   },
   "153loh1e91v": {
@@ -224,13 +242,19 @@
   "16184re9sin": {
     "message": "An organization with this slug already exists.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:34:9"
+      "resources/js/locales/php-messages.generated.ts:38:9"
     ]
   },
   "164d0i89snr": {
     "message": "Profile updated.",
     "refs": [
-      "resources/js/lib/flash.ts:77:43"
+      "resources/js/lib/flash.ts:79:43"
+    ]
+  },
+  "167ohub88wl": {
+    "message": "Save a cardholder email to send the link.",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:221:39"
     ]
   },
   "167vf3bxief": {
@@ -250,7 +274,7 @@
   "16vz52anzdz": {
     "message": "Organization created and linked to {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:87:13"
+      "resources/js/lib/flash.ts:89:13"
     ]
   },
   "16zmzw0m70p": {
@@ -288,13 +312,13 @@
   "181htsajksu": {
     "message": "Charged {amount} to {code}. Balance: {balance}.",
     "refs": [
-      "resources/js/lib/flash.ts:67:19"
+      "resources/js/lib/flash.ts:69:19"
     ]
   },
   "181wia46bw0": {
     "message": "An email is already saved for this card.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:32:9"
+      "resources/js/locales/php-messages.generated.ts:36:9"
     ]
   },
   "18f16q5jxo2": {
@@ -337,7 +361,7 @@
       "resources/js/pages/admin/organizations/index.tsx:203:53",
       "resources/js/pages/admin/organizations/show.tsx:468:38",
       "resources/js/pages/cards/index.tsx:75:37",
-      "resources/js/pages/cards/show.tsx:119:46"
+      "resources/js/pages/cards/show.tsx:112:46"
     ]
   },
   "1ajy2490000": {
@@ -409,7 +433,7 @@
   "1bnqxsenmm7": {
     "message": "The provided two factor recovery code was invalid.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:88:9"
+      "resources/js/locales/php-messages.generated.ts:98:9"
     ]
   },
   "1butt4gcv4v": {
@@ -427,7 +451,7 @@
   "1byfp8uuczh": {
     "message": "This organization is already active.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:100:9"
+      "resources/js/locales/php-messages.generated.ts:112:9"
     ]
   },
   "1cdcaodbbnr": {
@@ -439,7 +463,7 @@
   "1cuoyfaghqv": {
     "message": "Only an active card can be frozen.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:60:9"
+      "resources/js/locales/php-messages.generated.ts:64:9"
     ]
   },
   "1d5l0x57k2m": {
@@ -482,7 +506,7 @@
   "1e04lsqmih": {
     "message": "That did not work",
     "refs": [
-      "resources/js/pages/cards/show.tsx:85:38"
+      "resources/js/pages/cards/show.tsx:78:38"
     ]
   },
   "1e0w4vf2eog": {
@@ -550,7 +574,7 @@
   "1fd7wm5rn2": {
     "message": ":name's Business",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:24:9"
+      "resources/js/locales/php-messages.generated.ts:26:9"
     ]
   },
   "1fiqoxd9jzg": {
@@ -562,7 +586,8 @@
   "1fn6xmcwhb6": {
     "message": "Download PNG",
     "refs": [
-      "resources/js/pages/cards/show.tsx:318:34"
+      "resources/js/components/cards/card-handoff.tsx:192:30",
+      "resources/js/components/cards/card-handoff.tsx:246:26"
     ]
   },
   "1fuve46z8l4": {
@@ -626,7 +651,13 @@
   "1gvvomqnlf4": {
     "message": "You are offline",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:114:9"
+      "resources/js/locales/php-messages.generated.ts:126:9"
+    ]
+  },
+  "1gxdwon6afh": {
+    "message": "Link copied.",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:80:27"
     ]
   },
   "1gyt4suqoib": {
@@ -664,13 +695,13 @@
   "1hlp8fxwqv0": {
     "message": "Charge",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:42:9"
+      "resources/js/locales/php-messages.generated.ts:46:9"
     ]
   },
   "1hm7vq979c2": {
     "message": "Performed by",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:66:9"
+      "resources/js/locales/php-messages.generated.ts:72:9"
     ]
   },
   "1hnagoswr2z": {
@@ -682,8 +713,8 @@
   "1hq11jbyfw4": {
     "message": "Cardholder email",
     "refs": [
-      "resources/js/pages/cards/show.tsx:218:45",
-      "resources/js/pages/cards/show.tsx:238:50"
+      "resources/js/pages/cards/show.tsx:211:45",
+      "resources/js/pages/cards/show.tsx:231:50"
     ]
   },
   "1hre3eqky15": {
@@ -701,7 +732,7 @@
   "1i8l8npmp3": {
     "message": "Added {amount} to {code}. Balance: {balance}.",
     "refs": [
-      "resources/js/lib/flash.ts:57:19"
+      "resources/js/lib/flash.ts:59:19"
     ]
   },
   "1i8vn65wqg9": {
@@ -731,7 +762,7 @@
   "1ihux2pdbcj": {
     "message": "The brand color must be a hex color such as #1e40af.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:78:9"
+      "resources/js/locales/php-messages.generated.ts:88:9"
     ]
   },
   "1ilkqwmxov4": {
@@ -755,7 +786,7 @@
   "1iquaqzxuzs": {
     "message": "The logo could not be stored.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:82:9"
+      "resources/js/locales/php-messages.generated.ts:92:9"
     ]
   },
   "1ivn7mt517c": {
@@ -937,10 +968,22 @@
       "resources/js/pages/admin/organizations/show.tsx:443:36"
     ]
   },
+  "1ntmhf36kco": {
+    "message": "Share",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:178:30"
+    ]
+  },
   "1od3ic7lxz8": {
     "message": "This organization is cancelled. Cancelled status is not managed from the admin area yet.",
     "refs": [
       "resources/js/pages/admin/organizations/show.tsx:184:30"
+    ]
+  },
+  "1oeq5aq8idg": {
+    "message": "The link could not be copied.",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:82:25"
     ]
   },
   "1ognjw99dvf": {
@@ -976,7 +1019,7 @@
   "1p39hysebb2": {
     "message": "Too many attempts. Please try again in a minute.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:106:9"
+      "resources/js/locales/php-messages.generated.ts:118:9"
     ]
   },
   "1pfx99caqy7": {
@@ -988,13 +1031,19 @@
   "1pk11ctiyxw": {
     "message": "Superadmin privileges granted.",
     "refs": [
-      "resources/js/lib/flash.ts:97:43"
+      "resources/js/lib/flash.ts:99:43"
     ]
   },
   "1plyeqi5xj4": {
     "message": "{active} active, {suspended} suspended",
     "refs": [
       "resources/js/pages/admin/index.tsx:41:21"
+    ]
+  },
+  "1prqq3c1q7o": {
+    "message": "Save a cardholder email first.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:76:9"
     ]
   },
   "1pvt7mfzmfn": {
@@ -1012,7 +1061,13 @@
   "1q8uutscthy": {
     "message": "Gift Card",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:48:9"
+      "resources/js/locales/php-messages.generated.ts:52:9"
+    ]
+  },
+  "1qchvrw0z3b": {
+    "message": ":business sent you a gift card",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:24:9"
     ]
   },
   "1qn5k6z8xr": {
@@ -1041,6 +1096,12 @@
       "resources/js/lib/labels.ts:44:17"
     ]
   },
+  "1r1pblvp0hp": {
+    "message": "Give to customer",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:109:29"
+    ]
+  },
   "1r5oki4grev": {
     "message": "Up to the available {balance}.",
     "refs": [
@@ -1051,7 +1112,7 @@
     "message": "Note",
     "refs": [
       "resources/js/components/transactions/transactions-table.tsx:50:33",
-      "resources/js/locales/php-messages.generated.ts:56:9"
+      "resources/js/locales/php-messages.generated.ts:60:9"
     ]
   },
   "1ra31kb3tih": {
@@ -1101,7 +1162,7 @@
       "resources/js/pages/cards/index.tsx:168:26",
       "resources/js/pages/cards/index.tsx:172:32",
       "resources/js/pages/cards/index.tsx:381:28",
-      "resources/js/pages/cards/show.tsx:394:18",
+      "resources/js/pages/cards/show.tsx:353:18",
       "resources/js/pages/dashboard.tsx:182:32"
     ]
   },
@@ -1152,7 +1213,7 @@
   "1tlt3qrgqsx": {
     "message": "Funds added to {code}.",
     "refs": [
-      "resources/js/lib/flash.ts:61:19"
+      "resources/js/lib/flash.ts:63:19"
     ]
   },
   "1tomwowemb": {
@@ -1160,14 +1221,26 @@
     "refs": [
       "resources/js/components/cards/card-balance-actions.tsx:98:29",
       "resources/js/pages/cards/index.tsx:69:34",
-      "resources/js/pages/cards/show.tsx:108:46",
+      "resources/js/pages/cards/show.tsx:101:46",
       "resources/js/pages/reader/card.tsx:108:30"
+    ]
+  },
+  "1tr3a4z3481": {
+    "message": "Open your card",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:66:9"
     ]
   },
   "1u6eldxzxiw": {
     "message": "Navigation menu",
     "refs": [
       "resources/js/components/app-header.tsx:111:38"
+    ]
+  },
+  "1udr3g6nnkf": {
+    "message": "A cancelled card cannot be sent.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:28:9"
     ]
   },
   "1uisypgik": {
@@ -1194,7 +1267,7 @@
   "1v1qyt6cszf": {
     "message": "Organization created with a new owner account.",
     "refs": [
-      "resources/js/lib/flash.ts:85:13"
+      "resources/js/lib/flash.ts:87:13"
     ]
   },
   "1v7qa6jw615": {
@@ -1256,7 +1329,7 @@
   "1wv8z2yvi5c": {
     "message": "Unfreeze card",
     "refs": [
-      "resources/js/pages/cards/show.tsx:179:50"
+      "resources/js/pages/cards/show.tsx:172:50"
     ]
   },
   "1wwaqy7lgcr": {
@@ -1286,7 +1359,7 @@
   "1x5hrgqzt7z": {
     "message": "The amount must be greater than 0.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:74:9"
+      "resources/js/locales/php-messages.generated.ts:84:9"
     ]
   },
   "1x6on0jacs9": {
@@ -1314,7 +1387,7 @@
   "1xinc6h3p2": {
     "message": "QR code for card {code}",
     "refs": [
-      "resources/js/pages/cards/show.tsx:298:42"
+      "resources/js/components/cards/card-handoff.tsx:71:19"
     ]
   },
   "1xj5d6loufn": {
@@ -1394,7 +1467,7 @@
   "1zboqgztnow": {
     "message": "Only a frozen card can be unfrozen.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:58:9"
+      "resources/js/locales/php-messages.generated.ts:62:9"
     ]
   },
   "1zj65nkezki": {
@@ -1406,25 +1479,25 @@
   "1zlopzysjem": {
     "message": "Leave empty to remove it.",
     "refs": [
-      "resources/js/pages/cards/show.tsx:273:50"
+      "resources/js/pages/cards/show.tsx:266:50"
     ]
   },
   "1zn4apu15xn": {
     "message": "Every balance change on this card.",
     "refs": [
-      "resources/js/pages/cards/show.tsx:338:43"
+      "resources/js/pages/cards/show.tsx:297:43"
     ]
   },
   "1zpe6veo7s9": {
     "message": "Freeze card",
     "refs": [
-      "resources/js/pages/cards/show.tsx:208:50"
+      "resources/js/pages/cards/show.tsx:201:50"
     ]
   },
   "1zsap8x3yrr": {
     "message": "Save",
     "refs": [
-      "resources/js/pages/cards/show.tsx:269:54",
+      "resources/js/pages/cards/show.tsx:262:54",
       "resources/js/pages/settings/profile.tsx:87:38",
       "resources/js/pages/settings/security.tsx:123:38"
     ]
@@ -1495,6 +1568,12 @@
       "resources/js/components/admin/one-time-credentials.tsx:32:26"
     ]
   },
+  "212zzkxejl2": {
+    "message": "Email link",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:217:34"
+    ]
+  },
   "219yu99blsi": {
     "message": "Plan notes",
     "refs": [
@@ -1526,7 +1605,7 @@
   "21nwd6dniz": {
     "message": "Temporary password set for {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:94:13"
+      "resources/js/lib/flash.ts:96:13"
     ]
   },
   "21poeejymlw": {
@@ -1545,7 +1624,7 @@
     "message": "Never",
     "refs": [
       "resources/js/pages/cards/index.tsx:347:53",
-      "resources/js/pages/cards/show.tsx:132:49"
+      "resources/js/pages/cards/show.tsx:125:49"
     ]
   },
   "226w7dmwmr6": {
@@ -1587,7 +1666,7 @@
   "22wi4adg3sl": {
     "message": "History",
     "refs": [
-      "resources/js/pages/cards/show.tsx:328:45"
+      "resources/js/pages/cards/show.tsx:287:45"
     ]
   },
   "23cd2xl2vk5": {
@@ -1608,7 +1687,7 @@
   "23fdu0cyh9q": {
     "message": "This business has no active program to issue cards from.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:92:9"
+      "resources/js/locales/php-messages.generated.ts:102:9"
     ]
   },
   "23rp7apg37x": {
@@ -1633,13 +1712,13 @@
     "message": "Card",
     "refs": [
       "resources/js/components/transactions/transactions-table.tsx:44:46",
-      "resources/js/locales/php-messages.generated.ts:38:9"
+      "resources/js/locales/php-messages.generated.ts:42:9"
     ]
   },
   "249xduqwte8": {
     "message": "The adjustment cannot be 0.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:70:9"
+      "resources/js/locales/php-messages.generated.ts:80:9"
     ]
   },
   "24jbe4xkyk4": {
@@ -1682,7 +1761,7 @@
   "264dl6c9913": {
     "message": "The adjustment would leave a negative balance.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:72:9"
+      "resources/js/locales/php-messages.generated.ts:82:9"
     ]
   },
   "26ciz7ptwcg": {
@@ -1691,11 +1770,23 @@
       "resources/js/pages/settings/security.tsx:34:28"
     ]
   },
+  "26tpm1x8cc": {
+    "message": "The customer opens the card on their phone. No app or account needed.",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:111:22"
+    ]
+  },
   "26w16tn7pzp": {
     "message": "No organizations yet",
     "refs": [
       "resources/js/pages/admin/index.tsx:133:42",
       "resources/js/pages/admin/organizations/index.tsx:176:47"
+    ]
+  },
+  "26xlad4d9zi": {
+    "message": "Scan to open your card",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:140:30"
     ]
   },
   "26xm7tg0ukm": {
@@ -1737,7 +1828,7 @@
   "282zvqncs0p": {
     "message": "This organization is already suspended.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:102:9"
+      "resources/js/locales/php-messages.generated.ts:114:9"
     ]
   },
   "28uv801464p": {
@@ -1781,6 +1872,12 @@
     "message": "Enter your details below to create your account",
     "refs": [
       "resources/js/pages/auth/register.tsx:124:18"
+    ]
+  },
+  "29ucbpe8an7": {
+    "message": "Your balance is :balance.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:132:9"
     ]
   },
   "29y6aac5m7m": {
@@ -1853,7 +1950,7 @@
   "2chcc47wtt5": {
     "message": "Program settings saved.",
     "refs": [
-      "resources/js/lib/flash.ts:76:41"
+      "resources/js/lib/flash.ts:78:41"
     ]
   },
   "2cs7jmm5jjj": {
@@ -1928,7 +2025,7 @@
   "2f238tcgfz1": {
     "message": "The latest {count} of {total} transactions.",
     "refs": [
-      "resources/js/pages/cards/show.tsx:331:43"
+      "resources/js/pages/cards/show.tsx:290:43"
     ]
   },
   "2f5ffyza511": {
@@ -1947,7 +2044,7 @@
     "message": "Back to cards",
     "refs": [
       "resources/js/pages/cards/create.tsx:47:26",
-      "resources/js/pages/cards/show.tsx:78:26"
+      "resources/js/pages/cards/show.tsx:71:26"
     ]
   },
   "2frz42wpc5k": {
@@ -1971,7 +2068,7 @@
   "2khkneof19": {
     "message": "Balance of {code} adjusted.",
     "refs": [
-      "resources/js/lib/flash.ts:74:13"
+      "resources/js/lib/flash.ts:76:13"
     ]
   },
   "2vihj1w1z0": {
@@ -2001,13 +2098,13 @@
   "36o0x9wkg4": {
     "message": "Superadmin granted to {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:99:13"
+      "resources/js/lib/flash.ts:101:13"
     ]
   },
   "38vnsidlu": {
     "message": "The balance cannot be more than :max.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:76:9"
+      "resources/js/locales/php-messages.generated.ts:86:9"
     ]
   },
   "3az60now0p": {
@@ -2025,7 +2122,7 @@
   "43sqe7fnyk": {
     "message": "Superadmin revoked from {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:101:13"
+      "resources/js/lib/flash.ts:103:13"
     ]
   },
   "4lakk5u7l7": {
@@ -2050,7 +2147,7 @@
     "message": "This card is cancelled.",
     "refs": [
       "resources/js/components/cards/card-balance-actions.tsx:90:15",
-      "resources/js/locales/php-messages.generated.ts:96:9",
+      "resources/js/locales/php-messages.generated.ts:106:9",
       "resources/js/pages/reader/card.tsx:62:15"
     ]
   },
@@ -2075,7 +2172,7 @@
   "5hbq7sfjc5": {
     "message": "Invalid credential format.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:52:9"
+      "resources/js/locales/php-messages.generated.ts:56:9"
     ]
   },
   "5mpfz3olim": {
@@ -2088,13 +2185,7 @@
   "5n0n0gv9gu": {
     "message": "Switched to {name}.",
     "refs": [
-      "resources/js/lib/flash.ts:81:13"
-    ]
-  },
-  "62tbkall94": {
-    "message": "QR code",
-    "refs": [
-      "resources/js/pages/cards/show.tsx:289:41"
+      "resources/js/lib/flash.ts:83:13"
     ]
   },
   "6ba06wwnpj": {
@@ -2121,20 +2212,20 @@
     "message": "Date",
     "refs": [
       "resources/js/components/transactions/transactions-table.tsx:43:33",
-      "resources/js/locales/php-messages.generated.ts:44:9"
+      "resources/js/locales/php-messages.generated.ts:48:9"
     ]
   },
   "740dfbxccn": {
     "message": "Plan saved.",
     "refs": [
-      "resources/js/lib/flash.ts:90:35"
+      "resources/js/lib/flash.ts:92:35"
     ]
   },
   "75a28xasw6": {
     "message": "Try again",
     "refs": [
       "resources/js/components/reader/qr-scanner.tsx:319:34",
-      "resources/js/locales/php-messages.generated.ts:108:9"
+      "resources/js/locales/php-messages.generated.ts:120:9"
     ]
   },
   "760pyp2fod": {
@@ -2159,7 +2250,7 @@
   "7guj9yqzud": {
     "message": "Loads, charges, and adjustments show up here.",
     "refs": [
-      "resources/js/pages/cards/show.tsx:372:42",
+      "resources/js/pages/cards/show.tsx:331:42",
       "resources/js/pages/transactions/index.tsx:257:47"
     ]
   },
@@ -2216,14 +2307,14 @@
   "8lhstr1ku2": {
     "message": "The provided two factor authentication code was invalid.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:86:9"
+      "resources/js/locales/php-messages.generated.ts:96:9"
     ]
   },
   "8nhmqil6xb": {
     "message": "customer@example.com",
     "refs": [
       "resources/js/pages/cards/create.tsx:136:66",
-      "resources/js/pages/cards/show.tsx:249:66"
+      "resources/js/pages/cards/show.tsx:242:66"
     ]
   },
   "8q0cv30ppn": {
@@ -2274,6 +2365,12 @@
       "resources/js/components/passkey-register.tsx:88:34"
     ]
   },
+  "a6xorhjsuj": {
+    "message": "Show QR to customer",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:136:26"
+    ]
+  },
   "a8p5m3vimm": {
     "message": "Active",
     "context": "organization status",
@@ -2285,7 +2382,7 @@
     "message": "Thanks! Your email is saved.",
     "refs": [
       "resources/js/components/public-card/email-capture.tsx:62:31",
-      "resources/js/lib/flash.ts:79:42"
+      "resources/js/lib/flash.ts:81:42"
     ]
   },
   "aai87ncak7": {
@@ -2303,7 +2400,7 @@
   "b9v71v0281": {
     "message": "Refund",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:68:9"
+      "resources/js/locales/php-messages.generated.ts:74:9"
     ]
   },
   "be97194fqg": {
@@ -2321,7 +2418,7 @@
   "bnq3beamw3": {
     "message": "See all",
     "refs": [
-      "resources/js/pages/cards/show.tsx:356:38"
+      "resources/js/pages/cards/show.tsx:315:38"
     ]
   },
   "cd8zplgkn6": {
@@ -2352,7 +2449,7 @@
   "ciy321kmmx": {
     "message": "Charged {code}.",
     "refs": [
-      "resources/js/lib/flash.ts:71:19"
+      "resources/js/lib/flash.ts:73:19"
     ]
   },
   "cw1grf7hmr": {
@@ -2394,6 +2491,12 @@
       "resources/js/components/manage-passkeys.tsx:50:24"
     ]
   },
+  "e0jdwf5ofl": {
+    "message": "Point your phone's camera at the code and tap the link.",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:143:30"
+    ]
+  },
   "e75q93a3f9": {
     "message": "Confirm password",
     "refs": [
@@ -2409,7 +2512,7 @@
   "ecb6ro616h": {
     "message": "You have reached your plan limit of :limit cards. Contact support to raise the limit.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:116:9"
+      "resources/js/locales/php-messages.generated.ts:128:9"
     ]
   },
   "eqg9wi2usk": {
@@ -2487,7 +2590,7 @@
   "gktxymbq14": {
     "message": "Organization reactivated.",
     "refs": [
-      "resources/js/lib/flash.ts:92:49"
+      "resources/js/lib/flash.ts:94:49"
     ]
   },
   "gmznfc5eow": {
@@ -2513,13 +2616,13 @@
   "gqulylnlei": {
     "message": "Optional. Saved for balance updates later.",
     "refs": [
-      "resources/js/pages/cards/show.tsx:220:38"
+      "resources/js/pages/cards/show.tsx:213:38"
     ]
   },
   "grngmmjbyn": {
     "message": "Password updated.",
     "refs": [
-      "resources/js/lib/flash.ts:78:44"
+      "resources/js/lib/flash.ts:80:44"
     ]
   },
   "h0pblyyblb": {
@@ -2555,7 +2658,7 @@
   "idtj14ogqb": {
     "message": "Insufficient balance.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:50:9"
+      "resources/js/locales/php-messages.generated.ts:54:9"
     ]
   },
   "ii2e798x54": {
@@ -2587,13 +2690,19 @@
   "ji96g5zh8j": {
     "message": "Business settings saved.",
     "refs": [
-      "resources/js/lib/flash.ts:75:42"
+      "resources/js/lib/flash.ts:77:42"
     ]
   },
   "jkkszphs0d": {
     "message": "Try another code, email, or status.",
     "refs": [
       "resources/js/pages/cards/index.tsx:285:47"
+    ]
+  },
+  "jlcgw14w3v": {
+    "message": "Show the code on that page when you pay. Keep this email: anyone with the link can use the card.",
+    "refs": [
+      "resources/js/locales/php-messages.generated.ts:78:9"
     ]
   },
   "jmp5nke2fe": {
@@ -2611,14 +2720,14 @@
   "k5gm3x3131": {
     "message": "The reader needs an internet connection to look up cards and post charges. Check your connection and try again.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:90:9"
+      "resources/js/locales/php-messages.generated.ts:100:9"
     ]
   },
   "k7wfdtk1dy": {
     "message": "Type",
     "refs": [
       "resources/js/components/transactions/transactions-table.tsx:45:33",
-      "resources/js/locales/php-messages.generated.ts:110:9",
+      "resources/js/locales/php-messages.generated.ts:122:9",
       "resources/js/pages/transactions/index.tsx:137:38"
     ]
   },
@@ -2656,7 +2765,7 @@
   "l9gvameg6d": {
     "message": "Load",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:54:9"
+      "resources/js/locales/php-messages.generated.ts:58:9"
     ]
   },
   "lcunbglek6": {
@@ -2686,7 +2795,7 @@
   "lxdjo92g5x": {
     "message": "A note is required for adjustments.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:26:9"
+      "resources/js/locales/php-messages.generated.ts:30:9"
     ]
   },
   "m997hoz843": {
@@ -2705,7 +2814,7 @@
   "mnw5q1sgfh": {
     "message": "Adjustment",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:28:9"
+      "resources/js/locales/php-messages.generated.ts:32:9"
     ]
   },
   "mtb516uze5": {
@@ -2732,7 +2841,7 @@
   "n6rto3r6ys": {
     "message": "Organization suspended.",
     "refs": [
-      "resources/js/lib/flash.ts:91:47"
+      "resources/js/lib/flash.ts:93:47"
     ]
   },
   "ne7vuo58sz": {
@@ -2760,7 +2869,7 @@
   "nox4lci43x": {
     "message": "Card not found.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:40:9",
+      "resources/js/locales/php-messages.generated.ts:44:9",
       "resources/js/pages/reader/scan.tsx:39:48"
     ]
   },
@@ -2816,7 +2925,7 @@
   "ogjy610dmo": {
     "message": "No transactions yet",
     "refs": [
-      "resources/js/pages/cards/show.tsx:369:42",
+      "resources/js/pages/cards/show.tsx:328:42",
       "resources/js/pages/transactions/index.tsx:250:47"
     ]
   },
@@ -2867,13 +2976,7 @@
   "qxtifz0t7m": {
     "message": "The last superadmin cannot be revoked. Grant the role to someone else first.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:80:9"
-    ]
-  },
-  "r0q72y2gqq": {
-    "message": "Scan it to open the card.",
-    "refs": [
-      "resources/js/pages/cards/show.tsx:291:34"
+      "resources/js/locales/php-messages.generated.ts:90:9"
     ]
   },
   "r53uwfa9ui": {
@@ -2918,7 +3021,7 @@
     "message": "Amount",
     "refs": [
       "resources/js/components/transactions/transactions-table.tsx:46:56",
-      "resources/js/locales/php-messages.generated.ts:30:9"
+      "resources/js/locales/php-messages.generated.ts:34:9"
     ]
   },
   "rzbxhud6e6": {
@@ -2930,7 +3033,7 @@
   "sd1vyhwrne": {
     "message": "This card is frozen.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:98:9"
+      "resources/js/locales/php-messages.generated.ts:108:9"
     ]
   },
   "swsn5779ql": {
@@ -2985,7 +3088,7 @@
   "u2wsky91a8": {
     "message": "Use only lowercase letters, numbers, and single hyphens.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:112:9"
+      "resources/js/locales/php-messages.generated.ts:124:9"
     ]
   },
   "uawxgub8b4": {
@@ -3006,8 +3109,8 @@
     "message": "This business is suspended. Contact support.",
     "refs": [
       "resources/js/components/organization/suspended-banner.tsx:9:12",
-      "resources/js/lib/flash.ts:83:13",
-      "resources/js/locales/php-messages.generated.ts:94:9",
+      "resources/js/lib/flash.ts:85:13",
+      "resources/js/locales/php-messages.generated.ts:104:9",
       "resources/js/pages/cards/create.tsx:159:59",
       "resources/js/pages/cards/index.tsx:199:39",
       "resources/js/pages/dashboard.tsx:147:39",
@@ -3056,7 +3159,7 @@
   "vdbommw5va": {
     "message": "Enter an amount with up to two decimals.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:46:9"
+      "resources/js/locales/php-messages.generated.ts:50:9"
     ]
   },
   "vehukx254v": {
@@ -3096,7 +3199,7 @@
     "refs": [
       "resources/js/pages/admin/organizations/index.tsx:196:53",
       "resources/js/pages/cards/index.tsx:305:53",
-      "resources/js/pages/cards/show.tsx:148:45"
+      "resources/js/pages/cards/show.tsx:141:45"
     ]
   },
   "w8xiuxis0d": {
@@ -3164,7 +3267,7 @@
   "xn9tsopmsi": {
     "message": "A frozen card cannot be charged or loaded.",
     "refs": [
-      "resources/js/pages/cards/show.tsx:150:38"
+      "resources/js/pages/cards/show.tsx:143:38"
     ]
   },
   "xw90vci12y": {
@@ -3184,6 +3287,12 @@
     "message": "Adjustment ({currency})",
     "refs": [
       "resources/js/components/cards/card-balance-actions.tsx:71:30"
+    ]
+  },
+  "ycxmtgfl6b": {
+    "message": "Card link sent to {email}.",
+    "refs": [
+      "resources/js/lib/flash.ts:54:13"
     ]
   },
   "yh6yjfndj9": {
@@ -3209,7 +3318,19 @@
   "yt27cbjtke": {
     "message": "This organization is cancelled.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:104:9"
+      "resources/js/locales/php-messages.generated.ts:116:9"
+    ]
+  },
+  "ywt56tr7zn": {
+    "message": "Copy link",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:169:26"
+    ]
+  },
+  "z3hpg6yek3": {
+    "message": "Your {business} gift card",
+    "refs": [
+      "resources/js/components/cards/card-handoff.tsx:93:24"
     ]
   },
   "zfg5718dbw": {
@@ -3227,7 +3348,7 @@
   "zlezvm2rqt": {
     "message": "The provided password was incorrect.",
     "refs": [
-      "resources/js/locales/php-messages.generated.ts:84:9"
+      "resources/js/locales/php-messages.generated.ts:94:9"
     ]
   },
   "zrb43vmdtr": {

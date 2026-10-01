@@ -8,6 +8,7 @@ use App\Support\Locales;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
 {
     /** Email form posts allowed per minute from one IP address. */
     public const PUBLIC_CARD_EMAIL_PER_MINUTE = 5;
+
+    /** Card link emails per card per hour, so a customer is not flooded. */
+    public const CARD_LINK_EMAILS_PER_HOUR = 3;
 
     /**
      * Register any application services.
@@ -51,6 +55,23 @@ class AppServiceProvider extends ServiceProvider
             ->response(fn (Request $request, array $headers) => back()
                 ->withErrors(['email' => __('Too many attempts. Please try again in a minute.')])
                 ->withHeaders($headers)));
+
+        RateLimiter::for('card-link-email', fn (Request $request) => Limit::perHour(self::CARD_LINK_EMAILS_PER_HOUR)
+            ->by('card:'.self::routeCardKey($request))
+            ->response(fn (Request $request, array $headers) => back()
+                ->withErrors(['link' => __('This card was emailed several times in the last hour. Try again later.')])
+                ->withHeaders($headers)));
+    }
+
+    /**
+     * The `{card}` route parameter as an id. Throttling runs before route
+     * model binding, so it is usually still the raw id.
+     */
+    private static function routeCardKey(Request $request): string
+    {
+        $card = $request->route('card');
+
+        return (string) ($card instanceof Model ? $card->getKey() : $card);
     }
 
     /**

@@ -1,14 +1,8 @@
 import { Form, Head, Link, usePage } from '@inertiajs/react';
-import {
-    AlertCircle,
-    ArrowLeft,
-    Download,
-    History,
-    Snowflake,
-    Sun,
-} from 'lucide-react';
+import { AlertCircle, ArrowLeft, History, Snowflake, Sun } from 'lucide-react';
 import { suspendedMessage } from '@/components/organization/suspended-banner';
 import { CardBalanceActions } from '@/components/cards/card-balance-actions';
+import { CardHandoff } from '@/components/cards/card-handoff';
 import { CardStatusBadge } from '@/components/cards/card-status-badge';
 import { TransactionsTable } from '@/components/transactions/transactions-table';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -38,7 +32,6 @@ import { Spinner } from '@/components/ui/spinner';
 import { useDateFormat } from '@/hooks/use-date-format';
 import { useMoneyFormat } from '@/hooks/use-money-format';
 import { email, freeze, index, show, unfreeze } from '@/routes/cards';
-import { png, svg } from '@/routes/cards/qr';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { CardDetail, TransactionRow } from '@/types';
 import { __ } from '@/i18n';
@@ -284,41 +277,7 @@ export default function ShowCard({
                         </Card>
                     </div>
 
-                    <Card className="h-fit">
-                        <CardHeader>
-                            <CardTitle>{__('QR code')}</CardTitle>
-                            <CardDescription>
-                                {__('Scan it to open the card.')}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="flex flex-col items-center gap-4">
-                            <div className="rounded-lg border bg-white p-2">
-                                <img
-                                    src={svg.url(card)}
-                                    alt={__('QR code for card {code}', {
-                                        code: card.code,
-                                    })}
-                                    width={240}
-                                    height={240}
-                                    className="size-60"
-                                />
-                            </div>
-                            <Button
-                                variant="outline"
-                                className="w-full"
-                                nativeButton={false}
-                                render={
-                                    <a
-                                        href={png.url(card)}
-                                        download={`${card.code}.png`}
-                                    />
-                                }
-                            >
-                                <Download data-icon="inline-start" />
-                                {__('Download PNG')}
-                            </Button>
-                        </CardContent>
-                    </Card>
+                    <CardHandoff card={card} writable={writable} />
                 </div>
 
                 <Card>

@@ -29,6 +29,9 @@ enum FlashMessage: string
     /** "Cardholder email saved." */
     case CardEmailSaved = 'card.email_saved';
 
+    /** "Card link sent to {email}." — params: email */
+    case CardLinkSent = 'card.link_sent';
+
     /** "Added {amount} to {code}. Balance: {balance}." — params: code, amount, balance, currency */
     case FundsAdded = 'ledger.loaded';
 

@@ -50,6 +50,8 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
         'card.frozen': () => __('Card frozen.'),
         'card.unfrozen': () => __('Card unfrozen.'),
         'card.email_saved': () => __('Cardholder email saved.'),
+        'card.link_sent': (p) =>
+            __('Card link sent to {email}.', { email: p.email ?? '' }),
         'ledger.loaded': (p) => {
             const money = ledgerAmounts(p);
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\CardController;
 use App\Http\Controllers\Dashboard\CardEmailController;
 use App\Http\Controllers\Dashboard\CardLedgerController;
+use App\Http\Controllers\Dashboard\CardLinkController;
 use App\Http\Controllers\Dashboard\CardQrController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\SettingsController;
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'organization'])->group(function () {
     Route::get('cards/{card}', [CardController::class, 'show'])->whereUuid('card')->name('cards.show');
     Route::get('cards/{card}/qr.svg', [CardQrController::class, 'svg'])->whereUuid('card')->name('cards.qr.svg');
     Route::get('cards/{card}/qr.png', [CardQrController::class, 'png'])->whereUuid('card')->name('cards.qr.png');
+    Route::get('cards/{card}/link', [CardLinkController::class, 'show'])->whereUuid('card')->name('cards.link');
 
     Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('transactions/export', [TransactionController::class, 'export'])->name('transactions.export');
@@ -61,6 +63,10 @@ Route::middleware(['auth', 'organization'])->group(function () {
         Route::post('cards/{card}/freeze', [CardController::class, 'freeze'])->whereUuid('card')->name('cards.freeze');
         Route::post('cards/{card}/unfreeze', [CardController::class, 'unfreeze'])->whereUuid('card')->name('cards.unfreeze');
         Route::patch('cards/{card}/email', CardEmailController::class)->whereUuid('card')->name('cards.email');
+        Route::post('cards/{card}/link/email', [CardLinkController::class, 'email'])
+            ->whereUuid('card')
+            ->middleware('throttle:card-link-email')
+            ->name('cards.link.email');
 
         // Ledger: every balance change goes through CardLedger.
         Route::post('cards/{card}/load', [CardLedgerController::class, 'load'])->whereUuid('card')->name('cards.load');
