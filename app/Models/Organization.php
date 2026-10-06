@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CardStatus;
 use App\Enums\OrganizationStatus;
 use Carbon\CarbonImmutable;
 use Database\Factories\OrganizationFactory;
@@ -27,11 +28,12 @@ use RuntimeException;
  * @property string $timezone
  * @property OrganizationStatus $status
  * @property int|null $card_limit
+ * @property int|null $preissue_limit
  * @property string|null $plan_notes
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  */
-#[Fillable(['name', 'slug', 'logo_url', 'primary_color', 'currency', 'timezone', 'status', 'card_limit', 'plan_notes'])]
+#[Fillable(['name', 'slug', 'logo_url', 'primary_color', 'currency', 'timezone', 'status', 'card_limit', 'preissue_limit', 'plan_notes'])]
 class Organization extends Model
 {
     /** @use HasFactory<OrganizationFactory> */
@@ -89,6 +91,7 @@ class Organization extends Model
         return [
             'status' => OrganizationStatus::class,
             'card_limit' => 'integer',
+            'preissue_limit' => 'integer',
         ];
     }
 
@@ -146,17 +149,29 @@ class Organization extends Model
 
     /**
      * Card usage against the plan's card limit. A null limit is unlimited.
-     * Usage at 80% or more is "near" the limit; at 100% creation is blocked.
+     * Usage at 80% or more is "near" the limit; at 100% creating and
+     * activating cards is blocked (CardLimit).
      *
-     * @return array{used: int, limit: int|null, percent: int|null, nearLimit: bool, atLimit: bool}
+     * Inactive cards (preissued stock) don't count until they are activated;
+     * `stock` is how many there are.
+     *
+     * @return array{used: int, limit: int|null, percent: int|null, nearLimit: bool, atLimit: bool, stock: int}
      */
     public function cardUsage(): array
     {
-        $used = $this->cards()->count();
+        $counts = Card::query()
+            ->forOrganization($this)
+            ->toBase()
+            ->selectRaw('count(*) filter (where status <> ?) as used', [CardStatus::Inactive->value])
+            ->selectRaw('count(*) filter (where status = ?) as stock', [CardStatus::Inactive->value])
+            ->first();
+
+        $used = (int) $counts->used;
+        $stock = (int) $counts->stock;
         $limit = $this->card_limit;
 
         if ($limit === null) {
-            return ['used' => $used, 'limit' => null, 'percent' => null, 'nearLimit' => false, 'atLimit' => false];
+            return ['used' => $used, 'limit' => null, 'percent' => null, 'nearLimit' => false, 'atLimit' => false, 'stock' => $stock];
         }
 
         $atLimit = $used >= $limit;
@@ -168,6 +183,7 @@ class Organization extends Model
             'percent' => $percent,
             'nearLimit' => ! $atLimit && $percent >= 80,
             'atLimit' => $atLimit,
+            'stock' => $stock,
         ];
     }
 

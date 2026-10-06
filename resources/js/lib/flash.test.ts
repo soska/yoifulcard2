@@ -28,6 +28,18 @@ describe('ledger toasts', () => {
                 },
             }),
         ).toBe('Added $100.00 to YGFT-CD2A7K. Balance: $514.50.');
+
+        expect(
+            flashMessage({
+                code: 'ledger.activated',
+                params: {
+                    code: 'YGFT-CD2A7K',
+                    amount: '200.00',
+                    balance: '200.00',
+                    currency: 'USD',
+                },
+            }),
+        ).toBe('Activated YGFT-CD2A7K with $200.00.');
     });
 
     it('fall back to the code alone when the amounts are missing', () => {
@@ -46,5 +58,12 @@ describe('ledger toasts', () => {
                 params: { code: 'YGFT-CD2A7K' },
             }),
         ).toBe('Funds added to YGFT-CD2A7K.');
+
+        expect(
+            flashMessage({
+                code: 'ledger.activated',
+                params: { code: 'YGFT-CD2A7K' },
+            }),
+        ).toBe('Card YGFT-CD2A7K activated.');
     });
 });

@@ -39,12 +39,15 @@ export type AdminOrganizationDetail = {
     primary_color: string;
     logo_url: string | null;
     card_limit: number | null;
+    /** The most unactivated cards the business can hold; null is unlimited. */
+    preissue_limit: number | null;
     plan_notes: string | null;
     created_at: string | null;
     updated_at: string | null;
 };
 
 export type AdminOrganizationStats = {
+    inactive: number;
     active: number;
     frozen: number;
     depleted: number;

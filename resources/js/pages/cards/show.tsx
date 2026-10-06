@@ -1,6 +1,7 @@
 import { Form, Head, Link, usePage } from '@inertiajs/react';
 import { AlertCircle, ArrowLeft, History, Snowflake, Sun } from 'lucide-react';
 import { suspendedMessage } from '@/components/organization/suspended-banner';
+import { CardActivation } from '@/components/cards/card-activation';
 import { CardBalanceActions } from '@/components/cards/card-balance-actions';
 import { CardHandoff } from '@/components/cards/card-handoff';
 import { CardStatusBadge } from '@/components/cards/card-status-badge';
@@ -56,6 +57,7 @@ export default function ShowCard({
     const pageError =
         (errors as Record<string, string | undefined>).organization ??
         (errors as Record<string, string | undefined>).status;
+    const inactive = card.status === 'inactive';
 
     return (
         <>
@@ -101,10 +103,12 @@ export default function ShowCard({
                                             {__('Balance')}
                                         </dt>
                                         <dd className="text-3xl font-semibold tabular-nums">
-                                            {formatMoney(
-                                                card.balance,
-                                                currency,
-                                            )}
+                                            {inactive
+                                                ? __('Not activated yet')
+                                                : formatMoney(
+                                                      card.balance,
+                                                      currency,
+                                                  )}
                                         </dd>
                                     </div>
                                     <div>
@@ -115,6 +119,18 @@ export default function ShowCard({
                                             {formatDateTime(card.created_at)}
                                         </dd>
                                     </div>
+                                    {card.activated_at && (
+                                        <div>
+                                            <dt className="text-sm text-muted-foreground">
+                                                {__('Activated')}
+                                            </dt>
+                                            <dd>
+                                                {formatDateTime(
+                                                    card.activated_at,
+                                                )}
+                                            </dd>
+                                        </div>
+                                    )}
                                     <div>
                                         <dt className="text-sm text-muted-foreground">
                                             {__('Last used')}
@@ -130,11 +146,19 @@ export default function ShowCard({
                             </CardContent>
                         </Card>
 
-                        <CardBalanceActions
-                            card={card}
-                            currency={currency}
-                            writable={writable}
-                        />
+                        {inactive ? (
+                            <CardActivation
+                                card={card}
+                                currency={currency}
+                                writable={writable}
+                            />
+                        ) : (
+                            <CardBalanceActions
+                                card={card}
+                                currency={currency}
+                                writable={writable}
+                            />
+                        )}
 
                         <Card>
                             <CardHeader>
@@ -185,7 +209,9 @@ export default function ShowCard({
                                                 disabled={
                                                     processing ||
                                                     !writable ||
-                                                    card.status === 'cancelled'
+                                                    card.status ===
+                                                        'cancelled' ||
+                                                    inactive
                                                 }
                                                 title={
                                                     writable

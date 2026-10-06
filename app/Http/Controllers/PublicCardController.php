@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CardStatus;
 use App\Enums\FlashMessage;
 use App\Http\Requests\PublicCard\SaveCardEmailRequest;
 use App\Models\Card;
@@ -17,7 +18,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * The cardholder's page at `/c/{token}`. No login. It shows the business
- * branding and the balance, and nothing else about the card. Its QR
+ * branding and the balance, and nothing else about the card. A card that
+ * is not activated yet says so instead of showing a balance. Its QR
  * (`/c/{token}/qr.svg`) encodes the page's own URL. A suspended
  * organization's card still shows its balance: that money belongs to the
  * cardholder.
@@ -76,16 +78,24 @@ class PublicCardController extends Controller
     /**
      * Save the cardholder's email for later balance updates. v1 stores it and
      * sends nothing. An email already on the card is not replaced from here;
-     * the business can change it from the dashboard.
+     * the business can change it from the dashboard. A card that is not
+     * activated yet takes no email: it is still stock, and whoever handles
+     * it before it's sold could claim it.
      */
     public function email(SaveCardEmailRequest $request, string $token): Response
     {
         $card = self::isWellFormed($token)
-            ? Card::query()->select(['id', 'email'])->where('qr_token', $token)->first()
+            ? Card::query()->select(['id', 'email', 'status'])->where('qr_token', $token)->first()
             : null;
 
         if ($card === null) {
             return $this->notFound($request);
+        }
+
+        if ($card->status === CardStatus::Inactive) {
+            throw ValidationException::withMessages([
+                'email' => __('This card is not activated yet.'),
+            ]);
         }
 
         if ($card->email !== null) {

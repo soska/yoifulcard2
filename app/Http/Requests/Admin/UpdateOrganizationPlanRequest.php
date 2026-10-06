@@ -20,12 +20,15 @@ class UpdateOrganizationPlanRequest extends FormRequest
     {
         $this->merge([
             'card_limit' => $this->input('card_limit') === '' ? null : $this->input('card_limit'),
+            'preissue_limit' => $this->input('preissue_limit') === '' ? null : $this->input('preissue_limit'),
             'plan_notes' => is_string($this->input('plan_notes')) && trim($this->input('plan_notes')) === '' ? null : $this->input('plan_notes'),
         ]);
     }
 
     /**
-     * An empty card limit means unlimited.
+     * An empty card limit means unlimited. The preissue limit caps how many
+     * unactivated cards the business holds at once; empty means unlimited,
+     * 0 means none.
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
@@ -33,6 +36,7 @@ class UpdateOrganizationPlanRequest extends FormRequest
     {
         return [
             'card_limit' => ['nullable', 'integer', 'min:1', 'max:'.self::MAX_CARD_LIMIT],
+            'preissue_limit' => ['nullable', 'integer', 'min:0', 'max:'.self::MAX_CARD_LIMIT],
             'plan_notes' => ['nullable', 'string', 'max:'.self::MAX_PLAN_NOTES],
         ];
     }

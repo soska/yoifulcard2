@@ -12,6 +12,7 @@ use App\Models\Organization;
 use App\Models\Transaction;
 use App\Services\CardCodeGenerator;
 use App\Services\CardLedger;
+use App\Services\CardLimit;
 use App\Support\CurrentOrganization;
 use App\Support\Flash;
 use Illuminate\Database\Eloquent\Builder;
@@ -103,19 +104,11 @@ class CardController extends Controller
 
         $card = DB::transaction(function () use ($organization, $request, $generator, $ledger): Card {
             // Lock the organization so two requests cannot both take the last slot.
-            $organization = Organization::query()->lockForUpdate()->findOrFail($organization->id);
-
-            if (! $organization->isWritable()) {
+            try {
+                $organization = CardLimit::reserve($organization->id);
+            } catch (LedgerException $exception) {
                 throw ValidationException::withMessages([
-                    'organization' => __('This business is suspended. Contact support.'),
-                ]);
-            }
-
-            if ($organization->cardUsage()['atLimit']) {
-                throw ValidationException::withMessages([
-                    'card_limit' => __('You have reached your plan limit of :limit cards. Contact support to raise the limit.', [
-                        'limit' => $organization->card_limit,
-                    ]),
+                    $exception->field => $exception->translated(),
                 ]);
             }
 
@@ -180,6 +173,10 @@ class CardController extends Controller
         ]);
     }
 
+    /**
+     * Only an active or depleted card can be frozen; an inactive card is
+     * refused like any other status.
+     */
     public function freeze(Card $card): RedirectResponse
     {
         Gate::authorize('update', $card);
@@ -217,7 +214,7 @@ class CardController extends Controller
     /**
      * The fields a page may see. The QR token is never among them.
      *
-     * @return array{id: string, code: string, balance: string, status: string, email: string|null, created_at: string|null, last_used_at: string|null}
+     * @return array{id: string, code: string, balance: string, status: string, email: string|null, created_at: string|null, last_used_at: string|null, activated_at: string|null}
      */
     private function cardProps(Card $card): array
     {
@@ -229,6 +226,7 @@ class CardController extends Controller
             'email' => $card->email,
             'created_at' => $card->created_at?->toIso8601String(),
             'last_used_at' => $card->last_used_at?->toIso8601String(),
+            'activated_at' => $card->activated_at?->toIso8601String(),
         ];
     }
 

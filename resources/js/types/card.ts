@@ -15,6 +15,8 @@ export type CardSummary = {
     email: string | null;
     created_at: string | null;
     last_used_at: string | null;
+    /** When a preissued card was activated; null for every other card. */
+    activated_at: string | null;
 };
 
 export type CardDetail = CardSummary & {
@@ -28,6 +30,8 @@ export type CardUsage = {
     percent: number | null;
     nearLimit: boolean;
     atLimit: boolean;
+    /** Preissued cards not activated yet. They don't count toward `used`. */
+    stock: number;
 };
 
 export type CardFilters = {

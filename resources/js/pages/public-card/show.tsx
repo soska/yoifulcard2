@@ -23,7 +23,8 @@ function tokenFromUrl(url: string): string {
 /**
  * The cardholder's page. No login, no app layout. Shows the business
  * branding, the balance, and (while the card can be used) the QR to show at
- * the counter. A suspended business's card looks the same:
+ * the counter. A card that is not activated yet shows no balance, QR, or
+ * email form. A suspended business's card looks the same:
  * the balance belongs to the cardholder.
  */
 export default function PublicCardShow({ card, organization }: Props) {
@@ -67,6 +68,18 @@ export default function PublicCardShow({ card, organization }: Props) {
                             </AlertDescription>
                         </Alert>
                     )}
+                    {card.status === 'inactive' && (
+                        <Alert>
+                            <AlertCircle />
+                            <AlertTitle>{__('Not activated yet')}</AlertTitle>
+                            <AlertDescription>
+                                {__(
+                                    '{business} activates this card when you buy it. Ask them if you already paid for it.',
+                                    { business: organization.name },
+                                )}
+                            </AlertDescription>
+                        </Alert>
+                    )}
                     {card.status === 'cancelled' && (
                         <Alert variant="destructive">
                             <AlertCircle />
@@ -89,10 +102,12 @@ export default function PublicCardShow({ card, organization }: Props) {
 
                     <WalletButtons />
 
-                    <EmailCapture
-                        token={tokenFromUrl(url)}
-                        hasEmail={card.has_email}
-                    />
+                    {card.status !== 'inactive' && (
+                        <EmailCapture
+                            token={tokenFromUrl(url)}
+                            hasEmail={card.has_email}
+                        />
+                    )}
 
                     <p className="text-center text-sm text-muted-foreground">
                         {__('Powered by Yoiful')}

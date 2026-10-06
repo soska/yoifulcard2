@@ -52,6 +52,12 @@ class CardLinkController extends Controller
             ]);
         }
 
+        if ($card->status === CardStatus::Inactive) {
+            throw ValidationException::withMessages([
+                'link' => __('Activate this card before sending it.'),
+            ]);
+        }
+
         if ($card->email === null) {
             throw ValidationException::withMessages([
                 'link' => __('Save a cardholder email first.'),

@@ -15,6 +15,18 @@
         "note": "A prepaid gift card a business issues to a customer. It has a code like YGFT-AB23CD, a QR code and a balance. Feminine in Spanish (la tarjeta), so its statuses are feminine: activa, congelada, agotada, cancelada.",
         "translations": { "es": "tarjeta" }
     },
+    "inactive": {
+        "note": "A card status: a card printed ahead of time (preissued) that can't be used until the business activates it with an amount. Feminine: inactiva. Not 'desactivada'.",
+        "translations": { "es": "inactiva" }
+    },
+    "activate": {
+        "note": "Turning an inactive (preissued) card into a usable one by loading its first amount. Verb 'Activar'; 'Not activated yet' is 'Aún no activada'.",
+        "translations": { "es": "activar" }
+    },
+    "stock": {
+        "note": "Preissued cards that are not activated yet, held by the business to sell. 'N cards in stock' is 'N tarjetas en inventario'.",
+        "translations": { "es": "inventario" }
+    },
     "balance": {
         "note": "The money left on a card.",
         "translations": { "es": "saldo" }

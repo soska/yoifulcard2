@@ -3,6 +3,7 @@ import { cardStatusLabel } from '@/lib/labels';
 import type { CardStatus } from '@/types';
 
 const variants = {
+    inactive: 'outline',
     active: 'default',
     frozen: 'secondary',
     depleted: 'outline',

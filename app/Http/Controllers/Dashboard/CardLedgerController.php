@@ -16,8 +16,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 
 /**
- * Add funds, charge, and adjust, from the card page and (load and spend
- * only) from the reader. The form requests authorize the member
+ * Add funds, charge, adjust, and activate, from the card page and (all but
+ * adjust) from the reader. The form requests authorize the member
  * (CardPolicy::transact). Every balance change goes through
  * CardLedger; its refusals come back as validation errors.
  */
@@ -51,6 +51,19 @@ class CardLedgerController extends Controller
             fn () => $this->ledger->adjust($card, $request->amount(), $request->user(), $request->note()),
             $card,
             FlashMessage::BalanceAdjusted,
+        );
+    }
+
+    /**
+     * Activate a preissued card with an amount. Refused at the card limit.
+     */
+    public function activate(LedgerAmountRequest $request, Card $card): RedirectResponse
+    {
+        return $this->post(
+            fn () => $this->ledger->activate($card, $request->amount(), $request->user()),
+            $card,
+            FlashMessage::CardActivated,
+            $request->boolean('reader'),
         );
     }
 

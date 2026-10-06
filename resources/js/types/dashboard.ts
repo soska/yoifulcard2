@@ -1,5 +1,6 @@
 export type DashboardStats = {
     cards: number;
+    inactive: number;
     active: number;
     frozen: number;
     depleted: number;

@@ -38,6 +38,9 @@ enum FlashMessage: string
     /** "Charged {amount} to {code}. Balance: {balance}." — params: code, amount, balance, currency */
     case CardCharged = 'ledger.charged';
 
+    /** "Activated {code} with {amount}." — params: code, amount, balance, currency */
+    case CardActivated = 'ledger.activated';
+
     /** "Balance of {code} adjusted." — params: code (also sent: amount, balance, currency) */
     case BalanceAdjusted = 'ledger.adjusted';
 

@@ -4,6 +4,7 @@ import { ConfirmAction } from '@/components/admin/confirm-action';
 import { OneTimeCredentials } from '@/components/admin/one-time-credentials';
 import { OrganizationStatusBadge } from '@/components/admin/organization-status-badge';
 import { RoleBadge } from '@/components/admin/role-badge';
+import { CardStockNotice } from '@/components/cards/card-stock-notice';
 import { CardUsageNotice } from '@/components/cards/card-usage-notice';
 import Heading from '@/components/heading';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -62,7 +63,11 @@ export default function AdminOrganizationShow({
     const { formatDateTimeInZone } = useDateFormat();
     const timeZone = organization.timezone;
     const cards =
-        stats.active + stats.frozen + stats.depleted + stats.cancelled;
+        stats.inactive +
+        stats.active +
+        stats.frozen +
+        stats.depleted +
+        stats.cancelled;
 
     const tiles = [
         {
@@ -244,7 +249,28 @@ export default function AdminOrganizationShow({
                                         aria-label={__('Cards used')}
                                     />
                                 )}
+                                <p className="text-sm text-muted-foreground">
+                                    {organization.preissue_limit === null
+                                        ? __(
+                                              {
+                                                  one: '{count} card in stock',
+                                                  other: '{count} cards in stock',
+                                              },
+                                              { count: usage.stock },
+                                          )
+                                        : __(
+                                              {
+                                                  one: '{count} card in stock of {limit} allowed',
+                                                  other: '{count} cards in stock of {limit} allowed',
+                                              },
+                                              {
+                                                  count: usage.stock,
+                                                  limit: organization.preissue_limit,
+                                              },
+                                          )}
+                                </p>
                                 <CardUsageNotice usage={usage} />
+                                <CardStockNotice usage={usage} />
                             </div>
 
                             <Form
@@ -284,6 +310,40 @@ export default function AdminOrganizationShow({
                                             </FieldDescription>
                                             <FieldError>
                                                 {errors.card_limit}
+                                            </FieldError>
+                                        </Field>
+                                        <Field
+                                            data-invalid={
+                                                !!errors.preissue_limit
+                                            }
+                                        >
+                                            <FieldLabel htmlFor="preissue_limit">
+                                                {__('Stock limit')}
+                                            </FieldLabel>
+                                            <Input
+                                                id="preissue_limit"
+                                                name="preissue_limit"
+                                                type="number"
+                                                min={0}
+                                                step={1}
+                                                inputMode="numeric"
+                                                defaultValue={
+                                                    organization.preissue_limit ??
+                                                    ''
+                                                }
+                                                placeholder={__('Unlimited')}
+                                                className="w-40"
+                                                aria-invalid={
+                                                    !!errors.preissue_limit
+                                                }
+                                            />
+                                            <FieldDescription>
+                                                {__(
+                                                    'The most cards not activated yet that the business can hold at once. Leave empty for unlimited.',
+                                                )}
+                                            </FieldDescription>
+                                            <FieldError>
+                                                {errors.preissue_limit}
                                             </FieldError>
                                         </Field>
                                         <Field

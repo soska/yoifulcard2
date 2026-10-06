@@ -32,7 +32,8 @@ function luminance(hex: string): number {
 /**
  * The branded card on the public page. The organization's color is set as
  * the `--brand` CSS variable and read by Tailwind classes; text switches to
- * dark on light brand colors so the balance stays readable.
+ * dark on light brand colors so the balance stays readable. A card that is
+ * not activated yet has no balance to show: it says so instead of $0.
  */
 export function CardFace({
     card,
@@ -62,14 +63,20 @@ export function CardFace({
                     </span>
                 )}
             </div>
-            <div className="flex flex-col gap-1">
-                <span className="text-sm opacity-90">
-                    {__('Current balance')}
-                </span>
-                <p className="text-5xl font-bold tracking-tight tabular-nums">
-                    {formatMoney(card.balance, organization.currency)}
+            {card.status === 'inactive' ? (
+                <p className="text-3xl font-bold tracking-tight">
+                    {__('Not activated yet')}
                 </p>
-            </div>
+            ) : (
+                <div className="flex flex-col gap-1">
+                    <span className="text-sm opacity-90">
+                        {__('Current balance')}
+                    </span>
+                    <p className="text-5xl font-bold tracking-tight tabular-nums">
+                        {formatMoney(card.balance, organization.currency)}
+                    </p>
+                </div>
+            )}
         </div>
     );
 }

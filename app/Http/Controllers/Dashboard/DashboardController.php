@@ -53,7 +53,7 @@ class DashboardController extends Controller
      * decimal string; the month starts at local midnight on the 1st in the
      * organization's timezone.
      *
-     * @return array{cards: int, active: int, frozen: int, depleted: int, cancelled: int, outstandingBalance: string, month: string, monthTransactions: int}
+     * @return array{cards: int, inactive: int, active: int, frozen: int, depleted: int, cancelled: int, outstandingBalance: string, month: string, monthTransactions: int}
      */
     public static function stats(Organization $organization): array
     {
@@ -61,6 +61,7 @@ class DashboardController extends Controller
             ->forOrganization($organization)
             ->toBase()
             ->selectRaw('count(*) as cards')
+            ->selectRaw('count(*) filter (where status = ?) as inactive', [CardStatus::Inactive->value])
             ->selectRaw('count(*) filter (where status = ?) as active', [CardStatus::Active->value])
             ->selectRaw('count(*) filter (where status = ?) as frozen', [CardStatus::Frozen->value])
             ->selectRaw('count(*) filter (where status = ?) as depleted', [CardStatus::Depleted->value])
@@ -77,6 +78,7 @@ class DashboardController extends Controller
 
         return [
             'cards' => (int) $totals->cards,
+            'inactive' => (int) $totals->inactive,
             'active' => (int) $totals->active,
             'frozen' => (int) $totals->frozen,
             'depleted' => (int) $totals->depleted,
