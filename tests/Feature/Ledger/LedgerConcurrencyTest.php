@@ -29,7 +29,8 @@ function concurrencyConnection(): Connection
 
 /**
  * Start `php tests/Support/ledger-spend.php` (or another script there that
- * takes the same arguments) in its own process.
+ * takes the same arguments) in its own process. batch-issue.php takes an
+ * organization id and a card count in place of the card id and amount.
  *
  * @return array{process: resource, stdout: resource, stderr: resource}
  */
@@ -245,6 +246,69 @@ test('two concurrent activations cannot both take the last slot', function () {
 
         $db->table('transactions')->whereIn('card_id', $cardIds)->delete();
         $db->table('cards')->whereIn('id', $cardIds)->delete();
+        $db->table('programs')->where('id', $program->id)->delete();
+        $db->table('organizations')->where('id', $organization->id)->delete();
+        $db->table('users')->where('id', $user->id)->delete();
+        $db->disconnect();
+    }
+});
+
+test('two concurrent batches cannot both take the last of the preissue limit', function () {
+    $db = concurrencyConnection();
+
+    // Committed fixtures: a business with room for 5 more cards in stock.
+    $user = User::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->create();
+    $organization = Organization::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->create(['preissue_limit' => 8]);
+    $program = Program::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->for($organization)->create();
+    Card::factory()->count(3)->connection(LEDGER_CONCURRENCY_CONNECTION)->inactive()->create(['program_id' => $program->id]);
+
+    $children = [];
+
+    try {
+        // Hold the organization row so both processes are inside
+        // CardBatchIssuer::issue, waiting on its lock, before either counts.
+        $db->beginTransaction();
+        $db->table('organizations')->where('id', $organization->id)->lockForUpdate()->first();
+
+        $children[] = startSpendProcess($organization->id, $user->id, '4', 'batch-issue.php');
+        $children[] = startSpendProcess($organization->id, $user->id, '4', 'batch-issue.php');
+
+        $deadline = microtime(true) + 20;
+        while (sessionsWaitingForLocks($db) < 2) {
+            if (microtime(true) > $deadline) {
+                throw new RuntimeException('The batch processes never reached the organization lock.');
+            }
+
+            usleep(20_000);
+        }
+
+        $db->commit();
+
+        $results = array_map(fn (array $child) => finishSpendProcess($child), $children);
+        $children = [];
+
+        $succeeded = array_values(array_filter($results, fn (array $result) => $result['ok'] === true));
+        $refused = array_values(array_filter($results, fn (array $result) => $result['ok'] === false));
+
+        expect($succeeded)->toHaveCount(1)
+            ->and($succeeded[0]['count'])->toBe(4)
+            ->and($refused)->toHaveCount(1)
+            ->and($refused[0]['error'])->toBe('This business can hold at most 8 cards in stock. There is room for 1 more.');
+
+        expect($db->table('card_batches')->where('organization_id', $organization->id)->count())->toBe(1)
+            ->and($db->table('cards')->where('program_id', $program->id)->where('status', CardStatus::Inactive->value)->count())->toBe(7);
+    } finally {
+        if ($db->transactionLevel() > 0) {
+            $db->rollBack();
+        }
+
+        foreach ($children as $child) {
+            proc_terminate($child['process'], 9);
+            proc_close($child['process']);
+        }
+
+        $db->table('cards')->where('program_id', $program->id)->delete();
+        $db->table('card_batches')->where('organization_id', $organization->id)->delete();
         $db->table('programs')->where('id', $program->id)->delete();
         $db->table('organizations')->where('id', $organization->id)->delete();
         $db->table('users')->where('id', $user->id)->delete();

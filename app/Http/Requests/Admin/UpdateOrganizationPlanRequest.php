@@ -42,10 +42,16 @@ class UpdateOrganizationPlanRequest extends FormRequest
     }
 
     /**
+     * can_preissue lets the business create card batches itself; a missing
+     * value (an unchecked box) turns it off.
+     *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
-        return self::planRules();
+        return [
+            ...self::planRules(),
+            'can_preissue' => ['nullable', 'boolean'],
+        ];
     }
 }

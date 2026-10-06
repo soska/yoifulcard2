@@ -27,6 +27,14 @@
         "note": "Preissued cards that are not activated yet, held by the business to sell. 'N cards in stock' is 'N tarjetas en inventario'.",
         "translations": { "es": "inventario" }
     },
+    "batch": {
+        "note": "A set of inactive cards preissued at once, for printing. Masculine: el lote. 'Card batches' is 'Lotes de tarjetas'.",
+        "translations": { "es": "lote" }
+    },
+    "void": {
+        "note": "Cancelling preissued cards that were never activated: a whole batch, or one card in stock that was lost or stolen. Verb 'Anular'; a voided batch is 'anulado', a voided card 'anulada'. Not 'invalidar'.",
+        "translations": { "es": "anular" }
+    },
     "balance": {
         "note": "The money left on a card.",
         "translations": { "es": "saldo" }

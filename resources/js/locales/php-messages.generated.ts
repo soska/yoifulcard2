@@ -2,7 +2,7 @@
 //
 // Laravel's translatable strings, declared to duckalization's extractor
 // so PHP and TypeScript share ONE catalog, one brief and one review. The
-// extractor parses TypeScript only; this is how the 58 messages
+// extractor parses TypeScript only; this is how the 63 messages
 // Laravel renders (validation refusals, ledger errors, the CSV header,
 // the offline page) get counted, briefed and translated with the UI.
 //
@@ -24,6 +24,10 @@ export function phpMessages(): string[] {
         __(':business sent you a gift card'),
         // app/Actions/Fortify/CreateNewUser.php:67
         __(':name\'s Business'),
+        // app/Exceptions/CardBatchException.php:35
+        __('A batch can have at most :max cards.'),
+        // app/Exceptions/CardBatchException.php:30
+        __('A batch needs at least one card.'),
         // app/Http/Controllers/Dashboard/CardLinkController.php:51
         __('A cancelled card cannot be sent.'),
         // app/Exceptions/LedgerException.php:44
@@ -60,9 +64,11 @@ export function phpMessages(): string[] {
         __('Load'),
         // app/Http/Controllers/Dashboard/TransactionController.php:72
         __('Note'),
-        // app/Http/Controllers/Dashboard/CardController.php:203
+        // app/Exceptions/CardBatchException.php:55
+        __('Only a card that is not activated yet can be voided.'),
+        // app/Http/Controllers/Dashboard/CardController.php:216
         __('Only a frozen card can be unfrozen.'),
-        // app/Http/Controllers/Dashboard/CardController.php:186
+        // app/Http/Controllers/Dashboard/CardController.php:199
         __('Only an active card can be frozen.'),
         // resources/views/mail/card-link.blade.php:27
         __('Open your card'),
@@ -100,9 +106,13 @@ export function phpMessages(): string[] {
         __('The provided two factor recovery code was invalid.'),
         // resources/views/offline.blade.php:46
         __('The reader needs an internet connection to look up cards and post charges. Check your connection and try again.'),
-        // app/Http/Controllers/Dashboard/CardController.php:119
+        // app/Exceptions/CardBatchException.php:50
+        __('This batch is already voided.'),
+        // app/Exceptions/CardBatchException.php:40
+        __('This business can hold at most :limit cards in stock. There is room for :room more.'),
+        // app/Exceptions/CardBatchException.php:45
         __('This business has no active program to issue cards from.'),
-        // app/Exceptions/LedgerException.php:89
+        // app/Exceptions/CardBatchException.php:60
         __('This business is suspended. Contact support.'),
         // app/Exceptions/LedgerException.php:79
         __('This card is already activated.'),
@@ -114,11 +124,11 @@ export function phpMessages(): string[] {
         __('This card is not activated yet.'),
         // app/Providers/AppServiceProvider.php:62
         __('This card was emailed several times in the last hour. Try again later.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:264
+        // app/Http/Controllers/Admin/OrganizationController.php:280
         __('This organization is already active.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:265
+        // app/Http/Controllers/Admin/OrganizationController.php:281
         __('This organization is already suspended.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:266
+        // app/Http/Controllers/Admin/OrganizationController.php:282
         __('This organization is cancelled.'),
         // app/Providers/AppServiceProvider.php:56
         __('Too many attempts. Please try again in a minute.'),

@@ -29,11 +29,12 @@ use RuntimeException;
  * @property OrganizationStatus $status
  * @property int|null $card_limit
  * @property int|null $preissue_limit
+ * @property bool $can_preissue
  * @property string|null $plan_notes
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  */
-#[Fillable(['name', 'slug', 'logo_url', 'primary_color', 'currency', 'timezone', 'status', 'card_limit', 'preissue_limit', 'plan_notes'])]
+#[Fillable(['name', 'slug', 'logo_url', 'primary_color', 'currency', 'timezone', 'status', 'card_limit', 'preissue_limit', 'can_preissue', 'plan_notes'])]
 class Organization extends Model
 {
     /** @use HasFactory<OrganizationFactory> */
@@ -58,6 +59,7 @@ class Organization extends Model
         'currency' => 'MXN',
         'timezone' => self::DEFAULT_TIMEZONE,
         'status' => 'active',
+        'can_preissue' => false,
     ];
 
     /**
@@ -92,6 +94,7 @@ class Organization extends Model
             'status' => OrganizationStatus::class,
             'card_limit' => 'integer',
             'preissue_limit' => 'integer',
+            'can_preissue' => 'boolean',
         ];
     }
 
@@ -118,6 +121,14 @@ class Organization extends Model
     public function defaultProgram(): ?Program
     {
         return $this->programs()->where('is_active', true)->oldest()->oldest('id')->first();
+    }
+
+    /**
+     * @return HasMany<CardBatch, $this>
+     */
+    public function cardBatches(): HasMany
+    {
+        return $this->hasMany(CardBatch::class);
     }
 
     /**

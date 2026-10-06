@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property string $id
  * @property string $program_id
+ * @property string|null $batch_id
  * @property string $code
  * @property string $qr_token
  * @property string $balance
@@ -27,9 +28,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property-read Program $program
+ * @property-read CardBatch|null $batch
  * @property-read Collection<int, Transaction> $transactions
  */
-#[Fillable(['program_id', 'code', 'qr_token', 'balance', 'status', 'email', 'last_used_at', 'activated_at'])]
+#[Fillable(['program_id', 'batch_id', 'code', 'qr_token', 'balance', 'status', 'email', 'last_used_at', 'activated_at'])]
 class Card extends Model
 {
     /** @use HasFactory<CardFactory> */
@@ -72,6 +74,17 @@ class Card extends Model
     public function program(): BelongsTo
     {
         return $this->belongsTo(Program::class);
+    }
+
+    /**
+     * The batch a preissued card came from; null for cards created one at a
+     * time.
+     *
+     * @return BelongsTo<CardBatch, $this>
+     */
+    public function batch(): BelongsTo
+    {
+        return $this->belongsTo(CardBatch::class);
     }
 
     /**

@@ -12,6 +12,8 @@ export type CurrentOrganization = {
     /** IANA timezone; dates and times are shown in it. */
     timezone: string;
     role: MembershipRole;
+    /** Whether the business creates card batches itself. */
+    can_preissue: boolean;
 };
 
 /** One of the user's businesses, as listed in the business switcher. */

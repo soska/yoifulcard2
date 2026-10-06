@@ -52,6 +52,36 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
         'card.email_saved': () => __('Cardholder email saved.'),
         'card.link_sent': (p) =>
             __('Card link sent to {email}.', { email: p.email ?? '' }),
+        'card.voided': (p) => __('Card {code} voided.', { code: p.code ?? '' }),
+        'batch.created': (p) => {
+            const count = Number(p.count ?? 0);
+            const beyond = Number(p.beyond ?? 0);
+
+            // More stock than room under the card limit: warn, don't cheer.
+            return beyond > 0
+                ? __(
+                      {
+                          one: 'Batch created. {count} card in stock has no room under your card limit yet.',
+                          other: 'Batch created. {count} cards in stock have no room under your card limit yet.',
+                      },
+                      { count: beyond },
+                  )
+                : __(
+                      {
+                          one: 'Created a batch of {count} card.',
+                          other: 'Created a batch of {count} cards.',
+                      },
+                      { count },
+                  );
+        },
+        'batch.voided': (p) =>
+            __(
+                {
+                    one: 'Batch voided. {count} card cancelled.',
+                    other: 'Batch voided. {count} cards cancelled.',
+                },
+                { count: Number(p.count ?? 0) },
+            ),
         'ledger.loaded': (p) => {
             const money = ledgerAmounts(p);
 

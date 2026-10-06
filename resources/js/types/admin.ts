@@ -1,4 +1,4 @@
-import type { CardUsage } from '@/types/card';
+import type { AdminCardBatch, CardUsage } from '@/types/card';
 import type { MembershipRole, OrganizationStatus } from '@/types/organization';
 
 export type AdminStats = {
@@ -41,6 +41,8 @@ export type AdminOrganizationDetail = {
     card_limit: number | null;
     /** The most unactivated cards the business can hold; null is unlimited. */
     preissue_limit: number | null;
+    /** Whether the business creates card batches itself. */
+    can_preissue: boolean;
     plan_notes: string | null;
     created_at: string | null;
     updated_at: string | null;
@@ -80,6 +82,8 @@ export type AdminOrganizationPage = {
     stats: AdminOrganizationStats;
     members: AdminMember[];
     programs: AdminProgram[];
+    batches: AdminCardBatch[];
+    maxBatchSize: number;
 };
 
 export type AdminUserMembership = {

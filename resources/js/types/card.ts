@@ -13,6 +13,8 @@ export type CardSummary = {
     balance: string;
     status: CardStatus;
     email: string | null;
+    /** The batch a preissued card came from; null for cards made one at a time. */
+    batch_id: string | null;
     created_at: string | null;
     last_used_at: string | null;
     /** When a preissued card was activated; null for every other card. */
@@ -39,6 +41,35 @@ export type CardFilters = {
     direction: SortDirection;
     status: CardStatus | null;
     q: string;
+    /** Only the cards of this batch. */
+    batch: string | null;
+};
+
+/** Preissued (inactive) cards made at once for printing. */
+export type CardBatchSummary = {
+    id: string;
+    count: number;
+    /** Cards from the batch that were activated, whatever their status now. */
+    activated: number;
+    /** Cards from the batch still not activated. */
+    stock: number;
+    created_by: string;
+    /** Made by Yoiful on the business's behalf. */
+    issued_by_admin: boolean;
+    voided_at: string | null;
+    created_at: string | null;
+};
+
+/** A batch as superadmins see it: with the internal notes. */
+export type AdminCardBatch = CardBatchSummary & {
+    notes: string | null;
+};
+
+/** The batch the card list is filtered by. */
+export type CardBatchFilter = {
+    id: string;
+    count: number;
+    created_at: string | null;
 };
 
 export type PaginationLink = {

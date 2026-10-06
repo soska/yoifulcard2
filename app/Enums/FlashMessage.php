@@ -32,6 +32,15 @@ enum FlashMessage: string
     /** "Card link sent to {email}." — params: email */
     case CardLinkSent = 'card.link_sent';
 
+    /** "Card {code} voided." — params: code. A card in stock that was lost or stolen. */
+    case CardVoided = 'card.voided';
+
+    /** "Created a batch of {count} cards." — params: count, beyond (cards in stock with no room under the card limit; when above 0 the toast warns instead) */
+    case CardBatchCreated = 'batch.created';
+
+    /** "Batch voided. {count} cards cancelled." — params: count */
+    case CardBatchVoided = 'batch.voided';
+
     /** "Added {amount} to {code}. Balance: {balance}." — params: code, amount, balance, currency */
     case FundsAdded = 'ledger.loaded';
 

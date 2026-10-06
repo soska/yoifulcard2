@@ -4,8 +4,10 @@ import {
     ArrowUp,
     ArrowUpDown,
     CreditCard,
+    Package,
     Plus,
     Search,
+    X,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
@@ -42,6 +44,7 @@ import { useDateFormat } from '@/hooks/use-date-format';
 import { useMoneyFormat } from '@/hooks/use-money-format';
 import { create, index, show } from '@/routes/cards';
 import type {
+    CardBatchFilter,
     CardFilters,
     CardSort,
     CardStatus,
@@ -58,6 +61,8 @@ type Props = {
     statuses: CardStatus[];
     currency: string;
     usage: CardUsage;
+    /** The batch the list is filtered by, if any. */
+    batch: CardBatchFilter | null;
 };
 
 const ALL = 'all';
@@ -83,9 +88,10 @@ export default function CardsIndex({
     statuses,
     currency,
     usage,
+    batch,
 }: Props) {
     const { currentOrganization } = usePage().props;
-    const { formatDate } = useDateFormat();
+    const { formatDate, formatDateTime } = useDateFormat();
     const { formatMoney } = useMoneyFormat();
     const writable = currentOrganization?.status === 'active';
     const [search, setSearch] = useState(filters.q);
@@ -100,6 +106,7 @@ export default function CardsIndex({
                     direction: next.direction,
                     status: next.status ?? undefined,
                     q: next.q || undefined,
+                    batch: next.batch ?? undefined,
                 },
             }),
             {},
@@ -125,7 +132,8 @@ export default function CardsIndex({
         visit({ q: search.trim() });
     };
 
-    const filtered = filters.status !== null || filters.q !== '';
+    const filtered =
+        filters.status !== null || filters.q !== '' || filters.batch !== null;
 
     const sortHeader = (key: CardSort, label: string, alignRight = false) => {
         const active = filters.sort === key;
@@ -208,6 +216,25 @@ export default function CardsIndex({
                 </div>
 
                 <CardUsageNotice usage={usage} />
+
+                {batch && (
+                    <div className="flex flex-wrap items-center gap-2 text-sm">
+                        <Package className="size-4 text-muted-foreground" />
+                        <span>
+                            {__('Only cards from the batch of {date}.', {
+                                date: formatDateTime(batch.created_at),
+                            })}
+                        </span>
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => visit({ batch: null })}
+                        >
+                            <X data-icon="inline-start" />
+                            {__('Show all cards')}
+                        </Button>
+                    </div>
+                )}
 
                 <Card>
                     <CardContent className="flex flex-col gap-4">
