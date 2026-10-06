@@ -164,7 +164,7 @@ class Organization extends Model
      * activating cards is blocked (CardLimit).
      *
      * Inactive cards (preissued stock) don't count until they are activated;
-     * `stock` is how many there are.
+     * `stock` is how many there are. Voided stock never counts.
      *
      * @return array{used: int, limit: int|null, percent: int|null, nearLimit: bool, atLimit: bool, stock: int}
      */
@@ -173,7 +173,7 @@ class Organization extends Model
         $counts = Card::query()
             ->forOrganization($this)
             ->toBase()
-            ->selectRaw('count(*) filter (where status <> ?) as used', [CardStatus::Inactive->value])
+            ->selectRaw('count(*) filter (where '.Card::countsTowardLimitSql().') as used')
             ->selectRaw('count(*) filter (where status = ?) as stock', [CardStatus::Inactive->value])
             ->first();
 

@@ -38,6 +38,9 @@ enum FlashMessage: string
     /** "Created a batch of {count} cards." — params: count, beyond (cards in stock with no room under the card limit; when above 0 the toast warns instead) */
     case CardBatchCreated = 'batch.created';
 
+    /** "Created a batch of {count} cards." — params: count, beyond. A batch a superadmin made; the warning speaks of the business's card limit. */
+    case AdminCardBatchCreated = 'admin.batch_created';
+
     /** "Batch voided. {count} cards cancelled." — params: count */
     case CardBatchVoided = 'batch.voided';
 

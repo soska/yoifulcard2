@@ -305,6 +305,10 @@
   "23ecl7xf4m6": "Negocio",
   "23fbozz3inz": "Ver todas las tarjetas",
   "23fdu0cyh9q": "Este negocio no tiene un programa activo para emitir tarjetas.",
+  "23jw5mitekb": {
+    "one": "Se creó el lote. {count} tarjeta en inventario no tiene espacio en el límite de tarjetas del negocio.",
+    "other": "Se creó el lote. {count} tarjetas en inventario no tienen espacio en el límite de tarjetas del negocio."
+  },
   "23rp7apg37x": "Código de recuperación",
   "23w5riqrom": "Una tarjeta en inventario que se perdió o te robaron se puede anular para que nunca se pueda activar.",
   "2402r5hg07d": "Iniciar sesión con llave de acceso",

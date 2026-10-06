@@ -43,6 +43,17 @@ function ledgerAmounts(
     };
 }
 
+/** "Created a batch of {count} cards.", for both batch-created toasts. */
+function batchCreated(p: FlashParams): string {
+    return __(
+        {
+            one: 'Created a batch of {count} card.',
+            other: 'Created a batch of {count} cards.',
+        },
+        { count: Number(p.count ?? 0) },
+    );
+}
+
 function messages(): Record<FlashMessage, (params: FlashParams) => string> {
     return {
         'card.created': (p) =>
@@ -54,7 +65,6 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
             __('Card link sent to {email}.', { email: p.email ?? '' }),
         'card.voided': (p) => __('Card {code} voided.', { code: p.code ?? '' }),
         'batch.created': (p) => {
-            const count = Number(p.count ?? 0);
             const beyond = Number(p.beyond ?? 0);
 
             // More stock than room under the card limit: warn, don't cheer.
@@ -66,13 +76,22 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
                       },
                       { count: beyond },
                   )
-                : __(
+                : batchCreated(p);
+        },
+        // The same toast for a batch a superadmin made: the card limit is the
+        // business's, not "yours".
+        'admin.batch_created': (p) => {
+            const beyond = Number(p.beyond ?? 0);
+
+            return beyond > 0
+                ? __(
                       {
-                          one: 'Created a batch of {count} card.',
-                          other: 'Created a batch of {count} cards.',
+                          one: "Batch created. {count} card in stock has no room under the business's card limit.",
+                          other: "Batch created. {count} cards in stock have no room under the business's card limit.",
                       },
-                      { count },
-                  );
+                      { count: beyond },
+                  )
+                : batchCreated(p);
         },
         'batch.voided': (p) =>
             __(

@@ -305,6 +305,10 @@
   "23ecl7xf4m6": "Business",
   "23fbozz3inz": "Show all cards",
   "23fdu0cyh9q": "This business has no active program to issue cards from.",
+  "23jw5mitekb": {
+    "one": "Batch created. {count} card in stock has no room under the business's card limit.",
+    "other": "Batch created. {count} cards in stock have no room under the business's card limit."
+  },
   "23rp7apg37x": "Recovery code",
   "23w5riqrom": "A card in stock that was lost or stolen can be voided so it can never be activated.",
   "2402r5hg07d": "Sign in with a passkey",

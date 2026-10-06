@@ -116,6 +116,31 @@ class Card extends Model
     }
 
     /**
+     * SQL condition for cards that take a slot under the card limit. Stock
+     * (inactive) doesn't, and neither does voided stock: preissued cards
+     * cancelled before they were ever activated. Cards created one at a time
+     * are active with no activated_at, so batch_id tells voided stock apart.
+     */
+    public static function countsTowardLimitSql(): string
+    {
+        $inactive = CardStatus::Inactive->value;
+        $cancelled = CardStatus::Cancelled->value;
+
+        return "cards.status <> '{$inactive}' and not (cards.status = '{$cancelled}' and cards.activated_at is null and cards.batch_id is not null)";
+    }
+
+    /**
+     * Limit the query to cards that take a slot under the card limit (see
+     * countsTowardLimitSql()).
+     *
+     * @param  Builder<Card>  $query
+     */
+    public function scopeCountingTowardLimit(Builder $query): void
+    {
+        $query->whereRaw(self::countsTowardLimitSql());
+    }
+
+    /**
      * The URL encoded in the card's QR code.
      */
     public function qrPayload(): string

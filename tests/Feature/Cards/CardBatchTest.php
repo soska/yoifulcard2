@@ -218,7 +218,7 @@ test('a superadmin can create a batch for a business that cannot preissue', func
 
     $response->assertRedirect(route('admin.batches.show', $batch))
         ->assertSessionHasNoErrors()
-        ->assertInertiaFlash('toast.code', 'batch.created');
+        ->assertInertiaFlash('toast.code', 'admin.batch_created');
 
     expect($batch->organization_id)->toBe($organization->id)
         ->and($batch->program_id)->toBe($program->id)
@@ -452,4 +452,38 @@ test('owners and managers can void a single unactivated card from its page', fun
         ->assertInertia(fn (Assert $page) => $page->where('canVoid', false)->where('canViewBatch', false));
     $this->get(route('cards.show', $lost))
         ->assertInertia(fn (Assert $page) => $page->where('canVoid', false)->where('canViewBatch', true));
+});
+
+test('voided stock never takes a slot under the card limit', function () {
+    [$user, $organization, $program] = preissuer(['card_limit' => 3]);
+    Card::factory()->for($program)->create(['status' => CardStatus::Cancelled]);
+    $batch = app(CardBatchIssuer::class)->issue($organization, 5, $user, byAdmin: false);
+    [$sold, $lost] = $batch->cards()->orderBy('code')->get();
+    app(CardLedger::class)->activate($sold, '100', $user);
+
+    // A card cancelled after it was in use still counts; the sold card too.
+    expect($organization->cardUsage())->toMatchArray(['used' => 2, 'stock' => 4]);
+
+    $issuer = app(CardBatchIssuer::class);
+    $issuer->voidCard($lost);
+    expect($organization->cardUsage())->toMatchArray(['used' => 2, 'stock' => 3]);
+
+    $issuer->void($batch);
+    expect($organization->cardUsage())->toMatchArray(['used' => 2, 'stock' => 0, 'atLimit' => false])
+        ->and(CardBatchIssuer::stockBeyondRoom($organization))->toBe(0);
+
+    // A sold card that is cancelled later keeps its slot.
+    $sold->update(['status' => CardStatus::Cancelled]);
+    expect($organization->cardUsage()['used'])->toBe(2);
+
+    // The last slot is still free for a new card.
+    $this->actingAs($user)
+        ->post(route('cards.store'), ['initial_balance' => '0', 'email' => ''])
+        ->assertSessionHasNoErrors();
+
+    expect($organization->cardUsage())->toMatchArray(['used' => 3, 'atLimit' => true]);
+
+    $this->actingAs(superadmin())
+        ->get(route('admin.organizations.index'))
+        ->assertInertia(fn (Assert $page) => $page->where('organizations.data.0.cards_count', 3));
 });

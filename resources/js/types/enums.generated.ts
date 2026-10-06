@@ -17,6 +17,7 @@ export type FlashMessage =
     | 'card.link_sent'
     | 'card.voided'
     | 'batch.created'
+    | 'admin.batch_created'
     | 'batch.voided'
     | 'ledger.loaded'
     | 'ledger.charged'

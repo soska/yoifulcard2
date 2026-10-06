@@ -161,11 +161,12 @@ class CardBatchController extends Controller
     /**
      * Toast for a new batch. When the stock is larger than the room left
      * under the card limit, the toast says how many cards can't be activated
-     * yet instead.
+     * yet instead. A batch a superadmin made gets the admin wording, which
+     * speaks of the business's card limit rather than "your" card limit.
      */
     public static function flashCreated(CardBatch $batch): void
     {
-        Flash::success(FlashMessage::CardBatchCreated, [
+        Flash::success($batch->issued_by_admin ? FlashMessage::AdminCardBatchCreated : FlashMessage::CardBatchCreated, [
             'count' => $batch->count,
             'beyond' => CardBatchIssuer::stockBeyondRoom($batch->organization),
         ]);

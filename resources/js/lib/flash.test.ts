@@ -93,6 +93,23 @@ describe('batch toasts', () => {
         );
     });
 
+    it("speak of the business's card limit when a superadmin made the batch", () => {
+        expect(
+            flashMessage({
+                code: 'admin.batch_created',
+                params: { count: '50', beyond: '1' },
+            }),
+        ).toBe(
+            "Batch created. 1 card in stock has no room under the business's card limit.",
+        );
+        expect(
+            flashMessage({
+                code: 'admin.batch_created',
+                params: { count: '50', beyond: '0' },
+            }),
+        ).toBe('Created a batch of 50 cards.');
+    });
+
     it('say how many cards a void cancelled', () => {
         expect(
             flashMessage({ code: 'batch.voided', params: { count: '3' } }),

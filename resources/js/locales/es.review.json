@@ -2190,6 +2190,14 @@
     "at": "2026-09-26",
     "by": "agent"
   },
+  "23jw5mitekb": {
+    "status": "machine",
+    "translatedHash": "r0qt2608ny",
+    "at": "2026-10-06",
+    "by": "claude",
+    "confidence": "high",
+    "note": "Admin wording of the batch-created warning; third person, like the admin stock warning."
+  },
   "23rp7apg37x": {
     "status": "machine",
     "translatedHash": "2073j9onmhs",

@@ -62,7 +62,7 @@
   "11cwj6fprvc": {
     "message": "Card {code} created.",
     "refs": [
-      "resources/js/lib/flash.ts:49:13"
+      "resources/js/lib/flash.ts:60:13"
     ]
   },
   "11d5m996df2": {
@@ -266,7 +266,7 @@
   "164d0i89snr": {
     "message": "Profile updated.",
     "refs": [
-      "resources/js/lib/flash.ts:119:43"
+      "resources/js/lib/flash.ts:138:43"
     ]
   },
   "167ohub88wl": {
@@ -292,13 +292,13 @@
   "16tlb39cu1r": {
     "message": "Card {code} voided.",
     "refs": [
-      "resources/js/lib/flash.ts:55:31"
+      "resources/js/lib/flash.ts:66:31"
     ]
   },
   "16vz52anzdz": {
     "message": "Organization created and linked to {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:129:13"
+      "resources/js/lib/flash.ts:148:13"
     ]
   },
   "16zmzw0m70p": {
@@ -342,7 +342,7 @@
   "181htsajksu": {
     "message": "Charged {amount} to {code}. Balance: {balance}.",
     "refs": [
-      "resources/js/lib/flash.ts:99:19"
+      "resources/js/lib/flash.ts:118:19"
     ]
   },
   "181wia46bw0": {
@@ -391,7 +391,7 @@
       "other": "Batch created. {count} cards in stock have no room under your card limit yet."
     },
     "refs": [
-      "resources/js/lib/flash.ts:62:19"
+      "resources/js/lib/flash.ts:72:19"
     ]
   },
   "1ajuoro6znp": {
@@ -815,7 +815,7 @@
   "1i8l8npmp3": {
     "message": "Added {amount} to {code}. Balance: {balance}.",
     "refs": [
-      "resources/js/lib/flash.ts:89:19"
+      "resources/js/lib/flash.ts:108:19"
     ]
   },
   "1i8vn65wqg9": {
@@ -1171,7 +1171,7 @@
   "1pk11ctiyxw": {
     "message": "Superadmin privileges granted.",
     "refs": [
-      "resources/js/lib/flash.ts:139:43"
+      "resources/js/lib/flash.ts:158:43"
     ]
   },
   "1plyeqi5xj4": {
@@ -1286,7 +1286,7 @@
   "1rma8gkvw5n": {
     "message": "Card {code} activated.",
     "refs": [
-      "resources/js/lib/flash.ts:113:19"
+      "resources/js/lib/flash.ts:132:19"
     ]
   },
   "1rncc50vod0": {
@@ -1362,7 +1362,7 @@
   "1tlt3qrgqsx": {
     "message": "Funds added to {code}.",
     "refs": [
-      "resources/js/lib/flash.ts:93:19"
+      "resources/js/lib/flash.ts:112:19"
     ]
   },
   "1tomwowemb": {
@@ -1422,7 +1422,7 @@
   "1v1qyt6cszf": {
     "message": "Organization created with a new owner account.",
     "refs": [
-      "resources/js/lib/flash.ts:127:13"
+      "resources/js/lib/flash.ts:146:13"
     ]
   },
   "1v7qa6jw615": {
@@ -1610,7 +1610,7 @@
       "other": "Batch voided. {count} cards cancelled."
     },
     "refs": [
-      "resources/js/lib/flash.ts:78:13"
+      "resources/js/lib/flash.ts:97:13"
     ]
   },
   "1y9x115k4mt": {
@@ -1811,7 +1811,7 @@
   "21nwd6dniz": {
     "message": "Temporary password set for {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:136:13"
+      "resources/js/lib/flash.ts:155:13"
     ]
   },
   "21poeejymlw": {
@@ -1906,6 +1906,15 @@
     "message": "This business has no active program to issue cards from.",
     "refs": [
       "resources/js/locales/php-messages.generated.ts:114:9"
+    ]
+  },
+  "23jw5mitekb": {
+    "message": {
+      "one": "Batch created. {count} card in stock has no room under the business's card limit.",
+      "other": "Batch created. {count} cards in stock have no room under the business's card limit."
+    },
+    "refs": [
+      "resources/js/lib/flash.ts:87:19"
     ]
   },
   "23rp7apg37x": {
@@ -2034,7 +2043,7 @@
   "27a7k4osvpt": {
     "message": "Card frozen.",
     "refs": [
-      "resources/js/lib/flash.ts:50:30"
+      "resources/js/lib/flash.ts:61:30"
     ]
   },
   "27nxsynl10g": {
@@ -2052,7 +2061,7 @@
   "27tdlr0ne3b": {
     "message": "Card unfrozen.",
     "refs": [
-      "resources/js/lib/flash.ts:51:32"
+      "resources/js/lib/flash.ts:62:32"
     ]
   },
   "27uz1w1s5y2": {
@@ -2217,7 +2226,7 @@
   "2chcc47wtt5": {
     "message": "Program settings saved.",
     "refs": [
-      "resources/js/lib/flash.ts:118:41"
+      "resources/js/lib/flash.ts:137:41"
     ]
   },
   "2cs7jmm5jjj": {
@@ -2354,13 +2363,13 @@
   "2jnqsugggb": {
     "message": "Activated {code} with {amount}.",
     "refs": [
-      "resources/js/lib/flash.ts:109:19"
+      "resources/js/lib/flash.ts:128:19"
     ]
   },
   "2khkneof19": {
     "message": "Balance of {code} adjusted.",
     "refs": [
-      "resources/js/lib/flash.ts:116:13"
+      "resources/js/lib/flash.ts:135:13"
     ]
   },
   "2qul6chpvd": {
@@ -2405,7 +2414,7 @@
   "36o0x9wkg4": {
     "message": "Superadmin granted to {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:141:13"
+      "resources/js/lib/flash.ts:160:13"
     ]
   },
   "38vnsidlu": {
@@ -2429,7 +2438,7 @@
   "43sqe7fnyk": {
     "message": "Superadmin revoked from {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:143:13"
+      "resources/js/lib/flash.ts:162:13"
     ]
   },
   "4dkg8qnzv7": {
@@ -2504,7 +2513,7 @@
   "5n0n0gv9gu": {
     "message": "Switched to {name}.",
     "refs": [
-      "resources/js/lib/flash.ts:123:13"
+      "resources/js/lib/flash.ts:142:13"
     ]
   },
   "6ba06wwnpj": {
@@ -2537,7 +2546,7 @@
   "740dfbxccn": {
     "message": "Plan saved.",
     "refs": [
-      "resources/js/lib/flash.ts:132:35"
+      "resources/js/lib/flash.ts:151:35"
     ]
   },
   "75a28xasw6": {
@@ -2726,7 +2735,7 @@
     "message": "Thanks! Your email is saved.",
     "refs": [
       "resources/js/components/public-card/email-capture.tsx:62:31",
-      "resources/js/lib/flash.ts:121:42"
+      "resources/js/lib/flash.ts:140:42"
     ]
   },
   "aai87ncak7": {
@@ -2800,7 +2809,7 @@
   "ciy321kmmx": {
     "message": "Charged {code}.",
     "refs": [
-      "resources/js/lib/flash.ts:103:19"
+      "resources/js/lib/flash.ts:122:19"
     ]
   },
   "cv4cek1xgb": {
@@ -2977,7 +2986,7 @@
   "gktxymbq14": {
     "message": "Organization reactivated.",
     "refs": [
-      "resources/js/lib/flash.ts:134:49"
+      "resources/js/lib/flash.ts:153:49"
     ]
   },
   "gmznfc5eow": {
@@ -2997,7 +3006,7 @@
   "go9h267ewj": {
     "message": "Cardholder email saved.",
     "refs": [
-      "resources/js/lib/flash.ts:52:35"
+      "resources/js/lib/flash.ts:63:35"
     ]
   },
   "gqn1ffplks": {
@@ -3016,7 +3025,7 @@
   "grngmmjbyn": {
     "message": "Password updated.",
     "refs": [
-      "resources/js/lib/flash.ts:120:44"
+      "resources/js/lib/flash.ts:139:44"
     ]
   },
   "h0pblyyblb": {
@@ -3096,7 +3105,7 @@
   "ji96g5zh8j": {
     "message": "Business settings saved.",
     "refs": [
-      "resources/js/lib/flash.ts:117:42"
+      "resources/js/lib/flash.ts:136:42"
     ]
   },
   "jkkszphs0d": {
@@ -3277,7 +3286,7 @@
   "n6rto3r6ys": {
     "message": "Organization suspended.",
     "refs": [
-      "resources/js/lib/flash.ts:133:47"
+      "resources/js/lib/flash.ts:152:47"
     ]
   },
   "ne7vuo58sz": {
@@ -3568,7 +3577,7 @@
     "message": "This business is suspended. Contact support.",
     "refs": [
       "resources/js/components/organization/suspended-banner.tsx:9:12",
-      "resources/js/lib/flash.ts:125:13",
+      "resources/js/lib/flash.ts:144:13",
       "resources/js/locales/php-messages.generated.ts:116:9",
       "resources/js/pages/admin/organizations/show.tsx:548:45",
       "resources/js/pages/cards/create.tsx:159:59",
@@ -3751,7 +3760,7 @@
       "other": "Created a batch of {count} cards."
     },
     "refs": [
-      "resources/js/lib/flash.ts:69:19"
+      "resources/js/lib/flash.ts:48:12"
     ]
   },
   "xuvbgniou0": {
@@ -3784,7 +3793,7 @@
   "ycxmtgfl6b": {
     "message": "Card link sent to {email}.",
     "refs": [
-      "resources/js/lib/flash.ts:54:13"
+      "resources/js/lib/flash.ts:65:13"
     ]
   },
   "yh6yjfndj9": {
