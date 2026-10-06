@@ -22,7 +22,7 @@ class CardFactory extends Factory
     {
         return [
             'program_id' => Program::factory(),
-            'code' => 'YGFT-'.fake()->unique()->regexify('[A-Z0-9]{4}'),
+            'code' => 'YGFT-'.fake()->unique()->regexify('[A-HJKMNP-Z2-9]{6}'),
             'qr_token' => fake()->unique()->regexify('[A-Za-z0-9_-]{64}'),
             'balance' => '0.00',
             'status' => CardStatus::Active,

@@ -12,7 +12,7 @@
         "note": "Third-party brand."
     },
     "card": {
-        "note": "A prepaid gift card a business issues to a customer. It has a code like YGFT-AB12, a QR code and a balance. Feminine in Spanish (la tarjeta), so its statuses are feminine: activa, congelada, agotada, cancelada.",
+        "note": "A prepaid gift card a business issues to a customer. It has a code like YGFT-AB23CD, a QR code and a balance. Feminine in Spanish (la tarjeta), so its statuses are feminine: activa, congelada, agotada, cancelada.",
         "translations": { "es": "tarjeta" }
     },
     "balance": {

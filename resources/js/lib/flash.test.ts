@@ -9,25 +9,25 @@ describe('ledger toasts', () => {
             flashMessage({
                 code: 'ledger.charged',
                 params: {
-                    code: 'YGFT-CD1A',
+                    code: 'YGFT-CD2A7K',
                     amount: '85.50',
                     balance: '414.50',
                     currency: 'USD',
                 },
             }),
-        ).toBe('Charged $85.50 to YGFT-CD1A. Balance: $414.50.');
+        ).toBe('Charged $85.50 to YGFT-CD2A7K. Balance: $414.50.');
 
         expect(
             flashMessage({
                 code: 'ledger.loaded',
                 params: {
-                    code: 'YGFT-CD1A',
+                    code: 'YGFT-CD2A7K',
                     amount: '100.00',
                     balance: '514.50',
                     currency: 'USD',
                 },
             }),
-        ).toBe('Added $100.00 to YGFT-CD1A. Balance: $514.50.');
+        ).toBe('Added $100.00 to YGFT-CD2A7K. Balance: $514.50.');
     });
 
     it('fall back to the code alone when the amounts are missing', () => {
@@ -36,15 +36,15 @@ describe('ledger toasts', () => {
         expect(
             flashMessage({
                 code: 'ledger.charged',
-                params: { code: 'YGFT-CD1A' },
+                params: { code: 'YGFT-CD2A7K' },
             }),
-        ).toBe('Charged YGFT-CD1A.');
+        ).toBe('Charged YGFT-CD2A7K.');
 
         expect(
             flashMessage({
                 code: 'ledger.loaded',
-                params: { code: 'YGFT-CD1A' },
+                params: { code: 'YGFT-CD2A7K' },
             }),
-        ).toBe('Funds added to YGFT-CD1A.');
+        ).toBe('Funds added to YGFT-CD2A7K.');
     });
 });

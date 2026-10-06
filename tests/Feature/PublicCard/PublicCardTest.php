@@ -27,7 +27,7 @@ function publicCard(array $organization = [], array $card = []): Card
     ]);
 
     return Card::factory()->forOrganization($org)->create([
-        'code' => 'YGFT-LUNA',
+        'code' => 'YGFT-LUNALU',
         'balance' => '250.50',
         'email' => 'holder@example.com',
         ...$card,
