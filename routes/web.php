@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CardBatchController as AdminCardBatchController;
+use App\Http\Controllers\Admin\CardBatchPdfController as AdminCardBatchPdfController;
 use App\Http\Controllers\Admin\ClaimSuperadminController;
 use App\Http\Controllers\Admin\OrganizationController as AdminOrganizationController;
 use App\Http\Controllers\Admin\OverviewController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\UserPasswordController;
 use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\CardBatchController;
+use App\Http\Controllers\Dashboard\CardBatchPdfController;
 use App\Http\Controllers\Dashboard\CardController;
 use App\Http\Controllers\Dashboard\CardEmailController;
 use App\Http\Controllers\Dashboard\CardLedgerController;
@@ -59,6 +61,8 @@ Route::middleware(['auth', 'organization'])->group(function () {
     // cards (OrganizationPolicy::viewBatches and ::preissue).
     Route::get('batches', [CardBatchController::class, 'index'])->name('batches.index');
     Route::get('batches/{batch}', [CardBatchController::class, 'show'])->whereUuid('batch')->name('batches.show');
+    // Only the person who asked for a PDF downloads it, once (CardBatchPrinter).
+    Route::get('batches/{batch}/pdfs/{pdf}', [CardBatchPdfController::class, 'download'])->whereUuid(['batch', 'pdf'])->name('batches.pdfs.download');
 
     // Business settings. The profile, security and appearance pages are in
     // routes/settings.php.
@@ -84,6 +88,7 @@ Route::middleware(['auth', 'organization'])->group(function () {
 
         Route::post('batches', [CardBatchController::class, 'store'])->name('batches.store');
         Route::post('batches/{batch}/void', [CardBatchController::class, 'void'])->whereUuid('batch')->name('batches.void');
+        Route::post('batches/{batch}/pdfs', [CardBatchPdfController::class, 'store'])->whereUuid('batch')->name('batches.pdfs.store');
 
         // Owners and managers only; the form requests check the role.
         Route::patch('settings/organization', [SettingsController::class, 'updateOrganization'])->name('settings.organization.update');
@@ -128,6 +133,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
         Route::get('batches/{batch}', [AdminCardBatchController::class, 'show'])->whereUuid('batch')->name('batches.show');
         Route::post('batches/{batch}/void', [AdminCardBatchController::class, 'void'])->whereUuid('batch')->name('batches.void');
+        Route::post('batches/{batch}/pdfs', [AdminCardBatchPdfController::class, 'store'])->whereUuid('batch')->name('batches.pdfs.store');
+        Route::get('batches/{batch}/pdfs/{pdf}', [AdminCardBatchPdfController::class, 'download'])->whereUuid(['batch', 'pdf'])->name('batches.pdfs.download');
 
         Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
         Route::post('users/{user}/password', UserPasswordController::class)->whereNumber('user')->name('users.password');

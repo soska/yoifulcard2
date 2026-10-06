@@ -101,6 +101,8 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
                 },
                 { count: Number(p.count ?? 0) },
             ),
+        'batch.pdf_requested': () =>
+            __("Making the PDF. We'll email you when it's ready."),
         'ledger.loaded': (p) => {
             const money = ledgerAmounts(p);
 

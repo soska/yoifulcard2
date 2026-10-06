@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\CardStatus;
 use App\Enums\FlashMessage;
+use App\Enums\TemplateAudience;
 use App\Exceptions\CardBatchException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CardBatches\StoreCardBatchRequest;
@@ -79,6 +80,8 @@ class CardBatchController extends Controller
 
         return Inertia::render('batches/show', [
             ...self::showProps($batch, $request),
+            ...CardBatchPdfController::props($batch, $request->user(), TemplateAudience::Business),
+            // Voiding and printing both need a writable business.
             'canVoid' => Gate::allows('preissue', $batch->organization),
         ]);
     }

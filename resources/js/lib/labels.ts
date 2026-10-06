@@ -1,7 +1,9 @@
 import { __ } from '@/i18n';
 import type { Appearance } from '@/hooks/use-appearance';
 import type {
+    CardBatchPdfAction,
     CardStatus,
+    CardTemplate,
     MembershipRole,
     OrganizationStatus,
     TransactionType,
@@ -34,6 +36,29 @@ export function cardStatusLabel(status: CardStatus): string {
     };
 
     return labels[status];
+}
+
+/** A layout a card batch is printed with (App\Enums\CardTemplate). */
+export function cardTemplateLabel(template: CardTemplate): string {
+    const labels: Record<CardTemplate, string> = {
+        sheet_letter: __('Sheet of 10, Letter', { context: 'card template' }),
+        sheet_a4: __('Sheet of 10, A4', { context: 'card template' }),
+        print_shop: __('Print shop, one card per page', {
+            context: 'card template',
+        }),
+    };
+
+    return labels[template];
+}
+
+/** What happened to a batch PDF, as its log says it. */
+export function cardBatchPdfActionLabel(action: CardBatchPdfAction): string {
+    const labels: Record<CardBatchPdfAction, string> = {
+        generated: __('Made', { context: 'batch PDF log action' }),
+        downloaded: __('Downloaded', { context: 'batch PDF log action' }),
+    };
+
+    return labels[action];
 }
 
 /** A ledger entry's kind. Nouns: "Charge" here is the entry, not the button. */

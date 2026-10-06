@@ -125,21 +125,10 @@ class SettingsController extends Controller
      */
     private function deleteLogo(?string $url): void
     {
-        if ($url === null) {
-            return;
-        }
+        $path = Organization::storedLogoPath($url);
 
-        $disk = Storage::disk('public');
-        $prefix = rtrim($disk->url(Organization::LOGO_DIRECTORY), '/').'/';
-
-        if (! str_starts_with($url, $prefix)) {
-            return;
-        }
-
-        $path = Organization::LOGO_DIRECTORY.'/'.substr($url, strlen($prefix));
-
-        if (! str_contains($path, '..')) {
-            $disk->delete($path);
+        if ($path !== null) {
+            Storage::disk('public')->delete($path);
         }
     }
 

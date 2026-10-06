@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use RuntimeException;
@@ -196,6 +197,27 @@ class Organization extends Model
             'atLimit' => $atLimit,
             'stock' => $stock,
         ];
+    }
+
+    /**
+     * Where a logo this app stored is on the public disk, or null for no
+     * logo and for a URL pointing anywhere else.
+     */
+    public static function storedLogoPath(?string $url): ?string
+    {
+        if ($url === null) {
+            return null;
+        }
+
+        $prefix = rtrim(Storage::disk('public')->url(self::LOGO_DIRECTORY), '/').'/';
+
+        if (! str_starts_with($url, $prefix)) {
+            return null;
+        }
+
+        $path = self::LOGO_DIRECTORY.'/'.substr($url, strlen($prefix));
+
+        return str_contains($path, '..') ? null : $path;
     }
 
     /**

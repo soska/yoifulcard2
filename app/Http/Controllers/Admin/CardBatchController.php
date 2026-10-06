@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\FlashMessage;
+use App\Enums\TemplateAudience;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\CardBatchController as DashboardCardBatchController;
+use App\Http\Controllers\Dashboard\CardBatchPdfController as DashboardCardBatchPdfController;
 use App\Http\Requests\CardBatches\StoreCardBatchRequest;
 use App\Models\CardBatch;
 use App\Models\Organization;
@@ -48,6 +50,7 @@ class CardBatchController extends Controller
 
         return Inertia::render('admin/batches/show', [
             ...$props,
+            ...DashboardCardBatchPdfController::props($batch, $request->user(), TemplateAudience::Admin),
             'batch' => [...$props['batch'], 'notes' => $batch->notes],
             'organization' => [
                 'id' => $organization->id,
