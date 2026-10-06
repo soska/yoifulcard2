@@ -120,7 +120,7 @@ export function phpMessages(): string[] {
         __('The provided two factor recovery code was invalid.'),
         // resources/views/offline.blade.php:46
         __('The reader needs an internet connection to look up cards and post charges. Check your connection and try again.'),
-        // app/Http/Controllers/Dashboard/CardBatchPdfController.php:73
+        // app/Http/Controllers/Dashboard/CardBatchPdfController.php:74
         __('This PDF is no longer available. Make a new one.'),
         // app/Exceptions/CardBatchException.php:55
         __('This batch has no cards in stock to print.'),

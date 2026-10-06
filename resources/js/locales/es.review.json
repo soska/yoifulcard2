@@ -1304,6 +1304,14 @@
     "at": "2026-10-06",
     "by": "claude"
   },
+  "1o9a0li30cg": {
+    "status": "machine",
+    "translatedHash": "1ibyytpzrnj",
+    "at": "2026-10-06",
+    "by": "claude",
+    "confidence": "high",
+    "note": "Same Spanish as the previous 24-hour string, with the hours as a placeholder."
+  },
   "1od3ic7lxz8": {
     "status": "machine",
     "translatedHash": "247klqz58on",
@@ -2473,12 +2481,6 @@
     "translatedHash": "21sew50573r",
     "at": "2026-09-26",
     "by": "agent"
-  },
-  "28i353gwk7m": {
-    "status": "machine",
-    "translatedHash": "1ecb9zj9vyz",
-    "at": "2026-10-06",
-    "by": "claude"
   },
   "28uv801464p": {
     "status": "machine",

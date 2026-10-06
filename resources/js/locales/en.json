@@ -192,6 +192,7 @@
     "one": "{count} card in stock of {limit} allowed",
     "other": "{count} cards in stock of {limit} allowed"
   },
+  "1o9a0li30cg": "Make a PDF of the cards still in stock. It holds the code of every card, so anyone with it can use the cards once they are activated. It can be downloaded once and expires after {hours} hours.",
   "1od3ic7lxz8": "This organization is cancelled. Cancelled status is not managed from the admin area yet.",
   "1oeq5aq8idg": "The link could not be copied.",
   "1of53gp0r3k": "Card batch",
@@ -352,7 +353,6 @@
   "27uz1w1s5y2": "Reason",
   "27z72q400ak": "Batch",
   "282zvqncs0p": "This organization is already suspended.",
-  "28i353gwk7m": "Make a PDF of the cards still in stock. It holds the code of every card, so anyone with it can use the cards once they are activated. It can be downloaded once and expires after 24 hours.",
   "28uv801464p": "Everyone with an account. Set a temporary password when someone is locked out, and manage superadmins.",
   "28v721n7uwx": "A name helps you identify this passkey later.",
   "28wa12ymyrr": "Your card batch PDF is ready",

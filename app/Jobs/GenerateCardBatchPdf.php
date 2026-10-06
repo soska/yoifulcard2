@@ -32,12 +32,16 @@ class GenerateCardBatchPdf implements ShouldQueue
     /** Rendering is deterministic: a failure would fail again. */
     public int $tries = 1;
 
+    /** Shorter than retry_after on the connection it runs on (config/queue.php, `pdf_connection`). */
     public int $timeout = 600;
 
     /** dompdf keeps the whole document in memory: about 260 MB for 1,000 print shop pages. */
     public const MEMORY_LIMIT = '512M';
 
-    public function __construct(public readonly string $pdfId) {}
+    public function __construct(public readonly string $pdfId)
+    {
+        $this->onConnection(config('queue.pdf_connection'));
+    }
 
     public function handle(CardBatchPdfRenderer $renderer): void
     {
@@ -71,8 +75,9 @@ class GenerateCardBatchPdf implements ShouldQueue
         $ready = DB::transaction(function () use ($pdf, $batch, $path, $cards, $result): ?CardBatchPdf {
             $pdf = CardBatchPdf::query()->lockForUpdate()->find($pdf->id);
 
-            // Replaced by a newer request while rendering.
-            if ($pdf === null) {
+            // Replaced by a newer request while rendering, or already
+            // marked failed (failed() runs when a worker is lost).
+            if ($pdf === null || $pdf->failed_at !== null) {
                 return null;
             }
 

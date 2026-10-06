@@ -14,4 +14,5 @@
     .code { font-family: 'DejaVu Sans Mono', monospace; font-weight: bold; font-size: 11.5pt; }
     .hint { color: #6b7280; font-size: 6pt; line-height: 1.3; }
     .mark { background: #000000; }
+    .guide { background: #9ca3af; }
 </style>

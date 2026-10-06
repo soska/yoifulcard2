@@ -17,6 +17,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Card Batch PDF Connection
+    |--------------------------------------------------------------------------
+    |
+    | Card batch PDFs (App\Jobs\GenerateCardBatchPdf) can render for up to
+    | 10 minutes, longer than the default connection's retry_after, which
+    | would hand the job to a second worker while the first still renders.
+    | On the database queue they go to the "pdfs" connection below; null
+    | is the default connection (sync in tests).
+    |
+    */
+
+    'pdf_connection' => env('PDF_QUEUE_CONNECTION', env('QUEUE_CONNECTION', 'database') === 'database' ? 'pdfs' : null),
+
+    /*
+    |--------------------------------------------------------------------------
     | Queue Connections
     |--------------------------------------------------------------------------
     |
@@ -41,6 +56,17 @@ return [
             'table' => env('DB_QUEUE_TABLE', 'jobs'),
             'queue' => env('DB_QUEUE', 'default'),
             'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 90),
+            'after_commit' => false,
+        ],
+
+        // Longer than GenerateCardBatchPdf::$timeout. Its own worker:
+        // `php artisan queue:work pdfs`.
+        'pdfs' => [
+            'driver' => 'database',
+            'connection' => env('DB_QUEUE_CONNECTION'),
+            'table' => env('DB_QUEUE_TABLE', 'jobs'),
+            'queue' => env('DB_PDF_QUEUE', 'pdfs'),
+            'retry_after' => (int) env('DB_PDF_QUEUE_RETRY_AFTER', 660),
             'after_commit' => false,
         ],
 

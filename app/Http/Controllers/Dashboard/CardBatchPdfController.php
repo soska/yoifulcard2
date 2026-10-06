@@ -8,6 +8,7 @@ use App\Enums\TemplateAudience;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CardBatches\PrintCardBatchRequest;
 use App\Models\CardBatch;
+use App\Models\CardBatchPdf;
 use App\Models\CardBatchPdfLog;
 use App\Models\User;
 use App\Services\CardBatchPrinter;
@@ -106,6 +107,7 @@ class CardBatchPdfController extends Controller
         return [
             'print' => [
                 'templates' => array_map(fn (CardTemplate $template) => $template->value, CardTemplate::for($audience)),
+                'expires_after_hours' => CardBatchPdf::EXPIRES_AFTER_HOURS,
                 'pdf' => $pdf === null ? null : [
                     'id' => $pdf->id,
                     'template' => $pdf->template->value,

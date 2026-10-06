@@ -192,6 +192,7 @@
     "one": "{count} tarjeta en inventario de {limit} permitidas",
     "other": "{count} tarjetas en inventario de {limit} permitidas"
   },
+  "1o9a0li30cg": "Genera un PDF de las tarjetas que siguen en inventario. Contiene el código de cada tarjeta, así que cualquiera que lo tenga puede usar las tarjetas una vez activadas. Se puede descargar una sola vez y vence después de {hours} horas.",
   "1od3ic7lxz8": "Esta organización está cancelada. El estado cancelado todavía no se administra desde aquí.",
   "1oeq5aq8idg": "No se pudo copiar el enlace.",
   "1of53gp0r3k": "Lote de tarjetas",
@@ -352,7 +353,6 @@
   "27uz1w1s5y2": "Motivo",
   "27z72q400ak": "Lote",
   "282zvqncs0p": "Esta organización ya está suspendida.",
-  "28i353gwk7m": "Genera un PDF de las tarjetas que siguen en inventario. Contiene el código de cada tarjeta, así que cualquiera que lo tenga puede usar las tarjetas una vez activadas. Se puede descargar una sola vez y vence después de 24 horas.",
   "28uv801464p": "Todas las personas con cuenta. Asigna una contraseña temporal cuando alguien no pueda entrar y administra a los superadmins.",
   "28v721n7uwx": "Un nombre te ayuda a identificar esta llave de acceso más adelante.",
   "28wa12ymyrr": "Tu PDF del lote de tarjetas está listo",

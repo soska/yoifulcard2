@@ -59,7 +59,7 @@ export function BatchPrint({
     downloadHref: (pdf: CardBatchPdf) => string;
 }) {
     const { formatDateTime } = useDateFormat();
-    const { pdf, logs, templates } = print;
+    const { pdf, logs, templates, expires_after_hours } = print;
     const pending = pdf?.status === 'pending';
 
     const { start, stop } = usePoll(
@@ -89,7 +89,8 @@ export function BatchPrint({
                 <CardTitle>{__('Print')}</CardTitle>
                 <CardDescription>
                     {__(
-                        'Make a PDF of the cards still in stock. It holds the code of every card, so anyone with it can use the cards once they are activated. It can be downloaded once and expires after 24 hours.',
+                        'Make a PDF of the cards still in stock. It holds the code of every card, so anyone with it can use the cards once they are activated. It can be downloaded once and expires after {hours} hours.',
+                        { hours: expires_after_hours },
                     )}
                 </CardDescription>
             </CardHeader>

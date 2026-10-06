@@ -134,11 +134,13 @@ class CardBatchPdf extends Model
         return $this->expires_at->isPast();
     }
 
+    /**
+     * Delete the file, even one the job wrote but never recorded in `path`
+     * (it stopped between writing the file and saving the row).
+     */
     public function deleteFile(): void
     {
-        if ($this->path !== null) {
-            Storage::disk(self::DISK)->delete($this->path);
-        }
+        Storage::disk(self::DISK)->delete($this->path ?? $this->filePath());
     }
 
     /**

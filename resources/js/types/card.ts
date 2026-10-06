@@ -102,6 +102,8 @@ export type CardBatchPdfLogEntry = {
 export type CardBatchPrint = {
     /** The templates this area can print with. */
     templates: CardTemplate[];
+    /** How long a PDF waits to be downloaded. */
+    expires_after_hours: number;
     pdf: CardBatchPdf | null;
     logs: CardBatchPdfLogEntry[];
 };

@@ -22,9 +22,15 @@ The seeder prints a few public card URLs (`/c/{token}`) when it finishes.
 ## Printing card batches
 
 Batch PDFs are made on the queue and expired ones are pruned by the scheduler
-(`model:prune`, hourly), so run a worker and the scheduler alongside the app:
+(`model:prune`, hourly), so run the workers and the scheduler alongside the app:
 
 ```bash
 php artisan queue:work
+php artisan queue:work pdfs
 php artisan schedule:work
 ```
+
+A PDF can take up to 10 minutes to render, so on the database queue it goes
+to its own `pdfs` connection, whose `retry_after` (`DB_PDF_QUEUE_RETRY_AFTER`,
+660 seconds) is longer than that. Set `PDF_QUEUE_CONNECTION` to use another
+connection.

@@ -239,7 +239,7 @@
   "15dqgoeap4q": {
     "message": "Cards are bank card size (85.6 × 54 mm). Print sheets at 100% scale.",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:133:42"
+      "resources/js/components/batches/batch-print.tsx:134:42"
     ]
   },
   "15fre7yepuw": {
@@ -319,7 +319,7 @@
       "other": "{count} cards. Available until {date}."
     },
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:172:34"
+      "resources/js/components/batches/batch-print.tsx:173:34"
     ]
   },
   "1752q9xm7wf": {
@@ -566,7 +566,7 @@
   "1dlq0slo14b": {
     "message": "By",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:235:49",
+      "resources/js/components/batches/batch-print.tsx:236:49",
       "resources/js/components/transactions/transactions-table.tsx:51:33"
     ]
   },
@@ -832,8 +832,8 @@
   "1hvhj8eohr8": {
     "message": "Template",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:107:42",
-      "resources/js/components/batches/batch-print.tsx:236:49"
+      "resources/js/components/batches/batch-print.tsx:108:42",
+      "resources/js/components/batches/batch-print.tsx:237:49"
     ]
   },
   "1hx1csz3i1": {
@@ -867,13 +867,13 @@
   "1i9rhgbipno": {
     "message": "Make PDF",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:150:42"
+      "resources/js/components/batches/batch-print.tsx:151:42"
     ]
   },
   "1ids1htnqim": {
     "message": "Making the PDF. We'll email you when it's ready.",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:161:26",
+      "resources/js/components/batches/batch-print.tsx:162:26",
       "resources/js/lib/flash.ts:105:13"
     ]
   },
@@ -1166,6 +1166,12 @@
       "resources/js/pages/batches/index.tsx:57:31"
     ]
   },
+  "1o9a0li30cg": {
+    "message": "Make a PDF of the cards still in stock. It holds the code of every card, so anyone with it can use the cards once they are activated. It can be downloaded once and expires after {hours} hours.",
+    "refs": [
+      "resources/js/components/batches/batch-print.tsx:91:22"
+    ]
+  },
   "1od3ic7lxz8": {
     "message": "This organization is cancelled. Cancelled status is not managed from the admin area yet.",
     "refs": [
@@ -1363,7 +1369,7 @@
       "resources/js/components/app-sidebar.tsx:48:20",
       "resources/js/components/batches/batch-details.tsx:113:33",
       "resources/js/components/batches/batch-details.tsx:50:18",
-      "resources/js/components/batches/batch-print.tsx:238:42",
+      "resources/js/components/batches/batch-print.tsx:239:42",
       "resources/js/components/batches/batches-table.tsx:36:56",
       "resources/js/pages/admin/index.tsx:48:20",
       "resources/js/pages/admin/organizations/index.tsx:201:46",
@@ -2170,12 +2176,6 @@
       "resources/js/locales/php-messages.generated.ts:148:9"
     ]
   },
-  "28i353gwk7m": {
-    "message": "Make a PDF of the cards still in stock. It holds the code of every card, so anyone with it can use the cards once they are activated. It can be downloaded once and expires after 24 hours.",
-    "refs": [
-      "resources/js/components/batches/batch-print.tsx:91:22"
-    ]
-  },
   "28uv801464p": {
     "message": "Everyone with an account. Set a temporary password when someone is locked out, and manage superadmins.",
     "refs": [
@@ -2252,7 +2252,7 @@
   "2aal0plswig": {
     "message": "PDF history",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:228:30"
+      "resources/js/components/batches/batch-print.tsx:229:30"
     ]
   },
   "2acvkkh85qe": {
@@ -2382,7 +2382,7 @@
   "2dot6av33wj": {
     "message": "Download PDF",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:205:34"
+      "resources/js/components/batches/batch-print.tsx:206:34"
     ]
   },
   "2dure704ydq": {
@@ -2676,7 +2676,7 @@
   "6zokvvlav4": {
     "message": "Date",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:233:49",
+      "resources/js/components/batches/batch-print.tsx:234:49",
       "resources/js/components/transactions/transactions-table.tsx:43:33",
       "resources/js/locales/php-messages.generated.ts:54:9"
     ]
@@ -2892,7 +2892,7 @@
   "ajf60xq284": {
     "message": "Try again. If it keeps failing, contact support.",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:218:30"
+      "resources/js/components/batches/batch-print.tsx:219:30"
     ]
   },
   "axif9jcda4": {
@@ -3653,7 +3653,7 @@
   "sjgcn90dcq": {
     "message": "The PDF could not be made",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:215:30"
+      "resources/js/components/batches/batch-print.tsx:216:30"
     ]
   },
   "swsn5779ql": {
@@ -3858,7 +3858,7 @@
   "wd22jjaktl": {
     "message": "Action",
     "refs": [
-      "resources/js/components/batches/batch-print.tsx:234:49"
+      "resources/js/components/batches/batch-print.tsx:235:49"
     ]
   },
   "wlwxg6d4mw": {

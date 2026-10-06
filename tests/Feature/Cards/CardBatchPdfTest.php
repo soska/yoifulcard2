@@ -18,6 +18,8 @@ use App\Services\CardBatchIssuer;
 use App\Services\CardBatchPdfRenderer;
 use App\Services\CardBatchPrinter;
 use App\Services\CardLedger;
+use App\Services\CardQrCode;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
@@ -96,6 +98,7 @@ test('a business prints only with business templates', function () {
     $this->get(route('batches.show', $batch))
         ->assertInertia(fn (Assert $page) => $page
             ->where('print.templates', ['sheet_letter', 'sheet_a4'])
+            ->where('print.expires_after_hours', CardBatchPdf::EXPIRES_AFTER_HOURS)
             ->where('print.pdf', null));
 
     // The admin area prints with every template.
@@ -227,6 +230,68 @@ test('a failed job marks the PDF failed', function () {
 
     $this->actingAs($user)->get(route('batches.show', $batch))
         ->assertInertia(fn (Assert $page) => $page->where('print.pdf.status', 'failed'));
+});
+
+test('the PDF job outlasts its render on the queue', function () {
+    $job = new GenerateCardBatchPdf('pdf');
+    $connection = config('queue.pdf_connection');
+
+    // In tests the default (sync) connection runs it.
+    expect($connection)->toBeNull()
+        ->and($job->connection)->toBeNull()
+        ->and(config('queue.connections.pdfs.driver'))->toBe('database')
+        ->and(config('queue.connections.pdfs.retry_after'))->toBeGreaterThan($job->timeout);
+});
+
+test('a PDF marked failed while rendering is never handed out', function () {
+    Queue::fake();
+    [$user, , $batch] = printableBatch();
+    $pdf = app(CardBatchPrinter::class)->request($batch, CardTemplate::SheetLetter, $user, TemplateAudience::Business);
+
+    // A second worker picked the job up and failed it (MaxAttemptsExceeded)
+    // while the first was still rendering.
+    $renderer = new class(app(CardQrCode::class)) extends CardBatchPdfRenderer
+    {
+        public function render(CardBatch $batch, CardTemplate $template, Collection $cards): array
+        {
+            CardBatchPdf::query()->update(['failed_at' => now()]);
+
+            return parent::render($batch, $template, $cards);
+        }
+    };
+
+    (new GenerateCardBatchPdf($pdf->id))->handle($renderer);
+
+    expect($pdf->fresh()->status())->toBe('failed')
+        ->and(Storage::disk(CardBatchPdf::DISK)->allFiles())->toBe([])
+        ->and(CardBatchPdfLog::count())->toBe(0);
+    Mail::assertNothingSent();
+});
+
+test('a file written by a job that stopped before saving is deleted', function () {
+    Queue::fake();
+    [$user, , $batch] = printableBatch();
+    $pdf = app(CardBatchPrinter::class)->request($batch, CardTemplate::SheetLetter, $user, TemplateAudience::Business);
+    $disk = Storage::disk(CardBatchPdf::DISK);
+
+    // The file is written, then saving the row fails.
+    CardBatchPdfLog::creating(fn () => throw new RuntimeException('Lock wait timeout'));
+
+    expect(fn () => (new GenerateCardBatchPdf($pdf->id))->handle(app(CardBatchPdfRenderer::class)))
+        ->toThrow(RuntimeException::class);
+    expect($pdf->fresh()->path)->toBeNull();
+    $disk->assertExists($pdf->filePath());
+
+    (new GenerateCardBatchPdf($pdf->id))->failed(new RuntimeException('Lock wait timeout'));
+    $disk->assertMissing($pdf->filePath());
+
+    // A worker that was killed never runs failed(): pruning deletes the file.
+    $disk->put($pdf->filePath(), '%PDF-');
+    $this->travel(CardBatchPdf::EXPIRES_AFTER_HOURS + 1)->hours();
+    $this->artisan('model:prune', ['--model' => CardBatchPdf::class])->assertSuccessful();
+
+    expect(CardBatchPdf::count())->toBe(0);
+    $disk->assertMissing($pdf->filePath());
 });
 
 test('the person who asked downloads the PDF once, privately', function () {
@@ -415,6 +480,35 @@ test('the logo is embedded only when this app stored it', function () {
     // A logo hosted elsewhere is never fetched.
     $organization->update(['logo_url' => 'https://example.com/logo.png']);
     expect($render())->not->toContain('/Subtype /Image');
+});
+
+test('sheet cut marks stay inside what a desktop printer can print', function () {
+    // A4: 3 column cuts and 6 row cuts, marked on both sides. Letter: a
+    // guide along each column cut, and the 4 row cuts inside the safe zone.
+    foreach ([[CardTemplate::SheetA4, 18], [CardTemplate::SheetLetter, 11]] as [$template, $expected]) {
+        [$pageWidth, $pageHeight] = $template->pageSize();
+        $card = ['code' => 'YGFT-AB23CD', 'qr' => 'data:image/svg+xml;base64,'];
+
+        $html = view($template->view(), [
+            'pageWidth' => $pageWidth,
+            'pageHeight' => $pageHeight,
+            'cardWidth' => CardTemplate::CARD_WIDTH_MM,
+            'cardHeight' => CardTemplate::CARD_HEIGHT_MM,
+            'pages' => [array_fill(0, 10, $card)],
+            'business' => ['name' => 'Café', 'logo' => null, 'color' => '#1d4ed8', 'ink' => '#ffffff'],
+        ])->render();
+
+        preg_match_all('#class="abs (?:mark|guide)" style="left: ([\d.-]+)mm; top: ([\d.-]+)mm; width: ([\d.-]+)mm; height: ([\d.-]+)mm;"#', $html, $marks, PREG_SET_ORDER);
+
+        expect($marks)->toHaveCount($expected);
+
+        foreach ($marks as [, $left, $top, $width, $height]) {
+            expect((float) $left)->toBeGreaterThanOrEqual(5.0)
+                ->and((float) $top)->toBeGreaterThanOrEqual(5.0)
+                ->and($pageWidth - (float) $left - (float) $width)->toBeGreaterThanOrEqual(5.0)
+                ->and($pageHeight - (float) $top - (float) $height)->toBeGreaterThanOrEqual(5.0);
+        }
+    }
 });
 
 test('ink on the brand color is black or white, whichever reads better', function () {
