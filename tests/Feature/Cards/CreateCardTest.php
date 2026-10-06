@@ -25,7 +25,7 @@ test('member can create a card', function () {
     $response->assertRedirect(route('cards.show', $card));
 
     expect($card->program_id)->toBe($program->id)
-        ->and($card->code)->toMatch('/^YGFT-[A-Z0-9]{4}$/')
+        ->and($card->code)->toMatch('/^YGFT-[A-HJKMNP-Z2-9]{6}$/')
         ->and(strlen($card->qr_token))->toBe(64)
         ->and($card->balance)->toBe('0.00')
         ->and($card->status)->toBe(CardStatus::Active)

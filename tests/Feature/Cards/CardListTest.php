@@ -31,11 +31,11 @@ test('cards list sorts by each column in both directions with never-used cards l
 
     // code, balance, created, last used
     $rows = [
-        ['YGFT-BBBB', '50.00', 3, 1],
-        ['YGFT-AAAA', '5.00', 1, null],
-        ['YGFT-DDDD', '500.00', 2, 3],
-        ['YGFT-CCCC', '0.00', 4, null],
-        ['YGFT-EEEE', '75.50', 5, 2],
+        ['YGFT-BBBBBB', '50.00', 3, 1],
+        ['YGFT-AAAAAA', '5.00', 1, null],
+        ['YGFT-DDDDDD', '500.00', 2, 3],
+        ['YGFT-CCCCCC', '0.00', 4, null],
+        ['YGFT-EEEEEE', '75.50', 5, 2],
     ];
 
     foreach ($rows as [$code, $balance, $createdDays, $usedDays]) {
@@ -50,12 +50,12 @@ test('cards list sorts by each column in both directions with never-used cards l
     $this->actingAs($user);
 
     // Default: newest first.
-    expect(listedCodes($this, []))->toBe(['YGFT-EEEE', 'YGFT-CCCC', 'YGFT-BBBB', 'YGFT-DDDD', 'YGFT-AAAA']);
+    expect(listedCodes($this, []))->toBe(['YGFT-EEEEEE', 'YGFT-CCCCCC', 'YGFT-BBBBBB', 'YGFT-DDDDDD', 'YGFT-AAAAAA']);
 
     $expected = [
-        'code' => ['YGFT-AAAA', 'YGFT-BBBB', 'YGFT-CCCC', 'YGFT-DDDD', 'YGFT-EEEE'],
-        'balance' => ['YGFT-CCCC', 'YGFT-AAAA', 'YGFT-BBBB', 'YGFT-EEEE', 'YGFT-DDDD'],
-        'created_at' => ['YGFT-AAAA', 'YGFT-DDDD', 'YGFT-BBBB', 'YGFT-CCCC', 'YGFT-EEEE'],
+        'code' => ['YGFT-AAAAAA', 'YGFT-BBBBBB', 'YGFT-CCCCCC', 'YGFT-DDDDDD', 'YGFT-EEEEEE'],
+        'balance' => ['YGFT-CCCCCC', 'YGFT-AAAAAA', 'YGFT-BBBBBB', 'YGFT-EEEEEE', 'YGFT-DDDDDD'],
+        'created_at' => ['YGFT-AAAAAA', 'YGFT-DDDDDD', 'YGFT-BBBBBB', 'YGFT-CCCCCC', 'YGFT-EEEEEE'],
     ];
 
     foreach ($expected as $sort => $ascending) {
@@ -66,10 +66,10 @@ test('cards list sorts by each column in both directions with never-used cards l
     $asc = listedCodes($this, ['sort' => 'last_used_at', 'direction' => 'asc']);
     $desc = listedCodes($this, ['sort' => 'last_used_at', 'direction' => 'desc']);
 
-    expect(array_slice($asc, 0, 3))->toBe(['YGFT-BBBB', 'YGFT-EEEE', 'YGFT-DDDD'])
-        ->and(array_slice($desc, 0, 3))->toBe(['YGFT-DDDD', 'YGFT-EEEE', 'YGFT-BBBB'])
-        ->and(array_slice($asc, 3))->toEqualCanonicalizing(['YGFT-AAAA', 'YGFT-CCCC'])
-        ->and(array_slice($desc, 3))->toEqualCanonicalizing(['YGFT-AAAA', 'YGFT-CCCC']);
+    expect(array_slice($asc, 0, 3))->toBe(['YGFT-BBBBBB', 'YGFT-EEEEEE', 'YGFT-DDDDDD'])
+        ->and(array_slice($desc, 0, 3))->toBe(['YGFT-DDDDDD', 'YGFT-EEEEEE', 'YGFT-BBBBBB'])
+        ->and(array_slice($asc, 3))->toEqualCanonicalizing(['YGFT-AAAAAA', 'YGFT-CCCCCC'])
+        ->and(array_slice($desc, 3))->toEqualCanonicalizing(['YGFT-AAAAAA', 'YGFT-CCCCCC']);
 
     // Unknown sort values fall back to the default.
     $this->get(route('cards.index', ['sort' => 'qr_token', 'direction' => 'sideways']))
@@ -81,23 +81,23 @@ test('cards list sorts by each column in both directions with never-used cards l
 test('cards list filters by status and searches code and email', function () {
     [$user, , $program] = cardOwner();
 
-    Card::factory()->for($program)->create(['code' => 'YGFT-AB12', 'email' => 'maria@example.com']);
-    Card::factory()->for($program)->frozen()->create(['code' => 'YGFT-CD34', 'email' => 'JUAN@Example.com']);
-    Card::factory()->for($program)->create(['code' => 'YGFT-EF56', 'email' => null, 'status' => CardStatus::Depleted]);
-    Card::factory()->for($program)->frozen()->create(['code' => 'YGFT-GH78', 'email' => 'ab12@shop.test']);
+    Card::factory()->for($program)->create(['code' => 'YGFT-AB12AB', 'email' => 'maria@example.com']);
+    Card::factory()->for($program)->frozen()->create(['code' => 'YGFT-CD34CD', 'email' => 'JUAN@Example.com']);
+    Card::factory()->for($program)->create(['code' => 'YGFT-EF56EF', 'email' => null, 'status' => CardStatus::Depleted]);
+    Card::factory()->for($program)->frozen()->create(['code' => 'YGFT-GH78GH', 'email' => 'ab12@shop.test']);
     // Another organization's card never shows up.
-    Card::factory()->create(['code' => 'YGFT-AB99', 'email' => 'maria@example.com']);
+    Card::factory()->create(['code' => 'YGFT-AB99AB', 'email' => 'maria@example.com']);
 
     $this->actingAs($user);
 
-    expect(listedCodes($this, ['status' => 'frozen', 'sort' => 'code', 'direction' => 'asc']))->toBe(['YGFT-CD34', 'YGFT-GH78'])
-        ->and(listedCodes($this, ['status' => 'depleted']))->toBe(['YGFT-EF56'])
+    expect(listedCodes($this, ['status' => 'frozen', 'sort' => 'code', 'direction' => 'asc']))->toBe(['YGFT-CD34CD', 'YGFT-GH78GH'])
+        ->and(listedCodes($this, ['status' => 'depleted']))->toBe(['YGFT-EF56EF'])
         // Case-insensitive, partial, on code or email.
-        ->and(listedCodes($this, ['q' => 'ab12', 'sort' => 'code', 'direction' => 'asc']))->toBe(['YGFT-AB12', 'YGFT-GH78'])
-        ->and(listedCodes($this, ['q' => 'juan@EXAMPLE']))->toBe(['YGFT-CD34'])
-        ->and(listedCodes($this, ['q' => 'maria']))->toBe(['YGFT-AB12'])
+        ->and(listedCodes($this, ['q' => 'ab12', 'sort' => 'code', 'direction' => 'asc']))->toBe(['YGFT-AB12AB', 'YGFT-GH78GH'])
+        ->and(listedCodes($this, ['q' => 'juan@EXAMPLE']))->toBe(['YGFT-CD34CD'])
+        ->and(listedCodes($this, ['q' => 'maria']))->toBe(['YGFT-AB12AB'])
         // Search and filter combine.
-        ->and(listedCodes($this, ['q' => 'ab12', 'status' => 'frozen']))->toBe(['YGFT-GH78'])
+        ->and(listedCodes($this, ['q' => 'ab12', 'status' => 'frozen']))->toBe(['YGFT-GH78GH'])
         // LIKE wildcards are matched literally.
         ->and(listedCodes($this, ['q' => '%']))->toBe([])
         ->and(listedCodes($this, ['q' => '_']))->toBe([]);

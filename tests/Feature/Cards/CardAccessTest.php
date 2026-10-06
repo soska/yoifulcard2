@@ -54,13 +54,13 @@ test('qr image encodes the public card url', function () {
 
 test('png download is named after the card code', function () {
     [$user, , $program] = cardOwner();
-    $card = Card::factory()->for($program)->create(['code' => 'YGFT-Q7R2']);
+    $card = Card::factory()->for($program)->create(['code' => 'YGFT-Q7R2HX']);
 
     $this->actingAs($user)
         ->get(route('cards.qr.png', $card))
         ->assertOk()
-        ->assertDownload('YGFT-Q7R2.png')
-        ->assertHeader('Content-Disposition', 'attachment; filename="YGFT-Q7R2.png"');
+        ->assertDownload('YGFT-Q7R2HX.png')
+        ->assertHeader('Content-Disposition', 'attachment; filename="YGFT-Q7R2HX.png"');
 });
 
 test('member of another organization gets 403 on a card', function () {

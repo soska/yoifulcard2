@@ -18,8 +18,8 @@ use Inertia\Testing\AssertableInertia as Assert;
 function transactionHistory(): array
 {
     [$user, $organization] = cardOwner();
-    $alpha = Card::factory()->forOrganization($organization)->create(['code' => 'YGFT-AAA1']);
-    $beta = Card::factory()->forOrganization($organization)->create(['code' => 'YGFT-BBB2']);
+    $alpha = Card::factory()->forOrganization($organization)->create(['code' => 'YGFT-AAA1AA']);
+    $beta = Card::factory()->forOrganization($organization)->create(['code' => 'YGFT-BBB2BB']);
 
     $make = fn (Card $card, string $type, string $at, string $amount, ?string $note = null) => Transaction::factory()
         ->for($card)
@@ -42,7 +42,7 @@ function transactionHistory(): array
 
     // Another organization's card, with a code that matches every search.
     [, $other] = cardOwner();
-    $foreign = Card::factory()->forOrganization($other)->create(['code' => 'YGFT-AAA9']);
+    $foreign = Card::factory()->forOrganization($other)->create(['code' => 'YGFT-AAA9AA']);
     Transaction::factory()->for($foreign)->create(['type' => 'load', 'created_at' => Carbon::parse('2026-09-10 12:00:00')]);
 
     return [$user, $organization, $rows];
@@ -98,7 +98,7 @@ test('transactions filter by type, date range, and card code', function () {
             ->where('filters', ['type' => null, 'from' => null, 'to' => null, 'card' => 'AAA'])
             ->where('types', ['load', 'spend', 'adjustment'])
             ->has('transactions.data', 3)
-            ->where('transactions.data.0.card.code', 'YGFT-AAA1')
+            ->where('transactions.data.0.card.code', 'YGFT-AAA1AA')
             ->where('transactions.data.0.performed_by', $user->name)
             ->missing('transactions.data.0.card.qr_token'));
 });
@@ -196,7 +196,7 @@ test('transaction date filter uses the organization\'s day boundaries', function
 
 test('csv export shows times in the organization\'s timezone', function () {
     [$user, $organization] = cardOwner(['timezone' => 'America/Mexico_City']);
-    $card = Card::factory()->forOrganization($organization)->create(['code' => 'YGFT-TZ01']);
+    $card = Card::factory()->forOrganization($organization)->create(['code' => 'YGFT-TZ01TZ']);
     Transaction::factory()->for($card)->create([
         'type' => 'load',
         'performed_by' => $user->id,

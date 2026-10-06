@@ -7,7 +7,7 @@ use Closure;
 use RuntimeException;
 
 /**
- * Makes the public card code (YGFT-XXXX) and the QR token. Both must be
+ * Makes the public card code (YGFT-XXXXXX) and the QR token. Both must be
  * unique, so a candidate that is already taken is replaced with a new one,
  * up to MAX_ATTEMPTS times.
  */
@@ -17,7 +17,14 @@ class CardCodeGenerator
 
     public const CODE_PREFIX = 'YGFT-';
 
-    public const CODE_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    /**
+     * Codes are printed on cards and typed by people, so the alphabet leaves
+     * out characters that look alike: 0, O, 1, I and L. 31 characters to the
+     * power of CODE_LENGTH is about 890 million codes.
+     */
+    public const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+
+    public const CODE_LENGTH = 6;
 
     public const TOKEN_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
@@ -38,7 +45,7 @@ class CardCodeGenerator
 
     public function code(): string
     {
-        return $this->unique('code', fn () => self::CODE_PREFIX.($this->random)(self::CODE_ALPHABET, 4));
+        return $this->unique('code', fn () => self::CODE_PREFIX.($this->random)(self::CODE_ALPHABET, self::CODE_LENGTH));
     }
 
     public function qrToken(): string
