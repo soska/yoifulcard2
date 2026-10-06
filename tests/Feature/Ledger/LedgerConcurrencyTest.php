@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\CardStatus;
 use App\Models\Card;
 use App\Models\Organization;
 use App\Models\Program;
@@ -27,11 +28,12 @@ function concurrencyConnection(): Connection
 }
 
 /**
- * Start `php tests/Support/ledger-spend.php` in its own process.
+ * Start `php tests/Support/ledger-spend.php` (or another script there that
+ * takes the same arguments) in its own process.
  *
  * @return array{process: resource, stdout: resource, stderr: resource}
  */
-function startSpendProcess(string $cardId, int $userId, string $amount): array
+function startSpendProcess(string $cardId, int $userId, string $amount, string $script = 'ledger-spend.php'): array
 {
     $pgsql = config('database.connections.pgsql');
 
@@ -47,7 +49,7 @@ function startSpendProcess(string $cardId, int $userId, string $amount): array
     ]);
 
     $process = proc_open(
-        [PHP_BINARY, base_path('tests/Support/ledger-spend.php'), $cardId, (string) $userId, $amount],
+        [PHP_BINARY, base_path('tests/Support/'.$script), $cardId, (string) $userId, $amount],
         [1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
         $pipes,
         base_path(),
@@ -175,6 +177,74 @@ test('two concurrent spends cannot overdraw', function () {
 
         $db->table('transactions')->where('card_id', $card->id)->delete();
         $db->table('cards')->where('id', $card->id)->delete();
+        $db->table('programs')->where('id', $program->id)->delete();
+        $db->table('organizations')->where('id', $organization->id)->delete();
+        $db->table('users')->where('id', $user->id)->delete();
+        $db->disconnect();
+    }
+});
+
+test('two concurrent activations cannot both take the last slot', function () {
+    $db = concurrencyConnection();
+
+    // Committed fixtures: a business with room for one more card and two
+    // inactive cards to activate.
+    $user = User::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->create();
+    $organization = Organization::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->create(['card_limit' => 2]);
+    $program = Program::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->for($organization)->create();
+    $active = Card::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->create(['program_id' => $program->id]);
+    $first = Card::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->inactive()->create(['program_id' => $program->id]);
+    $second = Card::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->inactive()->create(['program_id' => $program->id]);
+    $cardIds = [$active->id, $first->id, $second->id];
+
+    $children = [];
+
+    try {
+        // Hold the organization row so both processes are inside
+        // CardLedger::activate, waiting on its lock, before either counts.
+        $db->beginTransaction();
+        $db->table('organizations')->where('id', $organization->id)->lockForUpdate()->first();
+
+        $children[] = startSpendProcess($first->id, $user->id, '50.00', 'ledger-activate.php');
+        $children[] = startSpendProcess($second->id, $user->id, '50.00', 'ledger-activate.php');
+
+        $deadline = microtime(true) + 20;
+        while (sessionsWaitingForLocks($db) < 2) {
+            if (microtime(true) > $deadline) {
+                throw new RuntimeException('The activate processes never reached the organization lock.');
+            }
+
+            usleep(20_000);
+        }
+
+        $db->commit();
+
+        $results = array_map(fn (array $child) => finishSpendProcess($child), $children);
+        $children = [];
+
+        $succeeded = array_values(array_filter($results, fn (array $result) => $result['ok'] === true));
+        $refused = array_values(array_filter($results, fn (array $result) => $result['ok'] === false));
+
+        expect($succeeded)->toHaveCount(1)
+            ->and($succeeded[0]['balance_after'])->toBe('50.00')
+            ->and($refused)->toHaveCount(1)
+            ->and($refused[0]['error'])->toBe('You have reached your plan limit of 2 cards. Contact support to raise the limit.');
+
+        $statuses = $db->table('cards')->whereIn('id', [$first->id, $second->id])->pluck('status')->sort()->values()->all();
+        expect($statuses)->toBe([CardStatus::Active->value, CardStatus::Inactive->value])
+            ->and($db->table('transactions')->whereIn('card_id', $cardIds)->count())->toBe(1);
+    } finally {
+        if ($db->transactionLevel() > 0) {
+            $db->rollBack();
+        }
+
+        foreach ($children as $child) {
+            proc_terminate($child['process'], 9);
+            proc_close($child['process']);
+        }
+
+        $db->table('transactions')->whereIn('card_id', $cardIds)->delete();
+        $db->table('cards')->whereIn('id', $cardIds)->delete();
         $db->table('programs')->where('id', $program->id)->delete();
         $db->table('organizations')->where('id', $organization->id)->delete();
         $db->table('users')->where('id', $user->id)->delete();

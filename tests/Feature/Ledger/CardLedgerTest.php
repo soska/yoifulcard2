@@ -286,3 +286,112 @@ test('last_used_at changes on load and spend but not on adjust', function () {
 
     Carbon::setTestNow();
 });
+
+test('activate moves an inactive card to active with a load that is not a use', function () {
+    [$user, $card] = ledgerCard('0.00', ['status' => CardStatus::Inactive]);
+
+    Carbon::setTestNow('2026-10-06 10:00:00');
+    $transaction = ledger()->activate($card, '250', $user);
+
+    $fresh = $card->fresh();
+    expect($transaction->type)->toBe(TransactionType::Load)
+        ->and($transaction->amount)->toBe('250.00')
+        ->and($transaction->balance_after)->toBe('250.00')
+        ->and($transaction->note)->toBeNull()
+        ->and($transaction->performed_by)->toBe($user->id)
+        ->and($card->status)->toBe(CardStatus::Active)
+        ->and($fresh->status)->toBe(CardStatus::Active)
+        ->and($fresh->balance)->toBe('250.00')
+        ->and($fresh->activated_at->toDateTimeString())->toBe('2026-10-06 10:00:00')
+        ->and($fresh->last_used_at)->toBeNull();
+
+    // Once active, it works like any other card.
+    ledger()->spend($card, '50', $user);
+    expect($card->fresh()->balance)->toBe('200.00')
+        ->and(Transaction::count())->toBe(2);
+
+    Carbon::setTestNow();
+});
+
+test('activate requires a positive amount', function (string $amount) {
+    [$user, $card] = ledgerCard('0.00', ['status' => CardStatus::Inactive]);
+
+    expect(fn () => ledger()->activate($card, $amount, $user))->toThrow(LedgerException::class)
+        ->and($card->fresh()->status)->toBe(CardStatus::Inactive)
+        ->and($card->fresh()->activated_at)->toBeNull()
+        ->and(Transaction::count())->toBe(0);
+})->with(['zero' => '0', 'negative' => '-5.00', 'three decimals' => '1.005', 'empty' => '']);
+
+test('activate refuses a card that is not inactive', function (CardStatus $status, string $message) {
+    [$user, $card] = ledgerCard('10.00', ['status' => $status]);
+
+    $refusal = ledgerRefusal(fn () => ledger()->activate($card, '20.00', $user));
+
+    expect($refusal->getMessage())->toBe($message)
+        ->and($refusal->field)->toBe('card')
+        ->and($card->fresh()->status)->toBe($status)
+        ->and($card->fresh()->balance)->toBe('10.00')
+        ->and($card->fresh()->activated_at)->toBeNull()
+        ->and(Transaction::count())->toBe(0);
+})->with([
+    'active' => [CardStatus::Active, 'This card is already activated.'],
+    'depleted' => [CardStatus::Depleted, 'This card is already activated.'],
+    'frozen' => [CardStatus::Frozen, 'This card is frozen.'],
+    'cancelled' => [CardStatus::Cancelled, 'This card is cancelled.'],
+]);
+
+test('an inactive card refuses load, spend, and adjust', function () {
+    [$user, $card] = ledgerCard('0.00', ['status' => CardStatus::Inactive]);
+
+    $calls = [
+        'load' => fn () => ledger()->load($card, '1.00', $user),
+        'spend' => fn () => ledger()->spend($card, '1.00', $user),
+        'adjust' => fn () => ledger()->adjust($card, '1.00', $user, 'Correction'),
+        'issue' => fn () => ledger()->issue($card, '1.00', $user),
+    ];
+
+    foreach ($calls as $call) {
+        $refusal = ledgerRefusal($call);
+
+        expect($refusal->getMessage())->toBe('This card is not activated yet.')
+            ->and($refusal->field)->toBe('card');
+    }
+
+    expect($card->fresh()->status)->toBe(CardStatus::Inactive)
+        ->and($card->fresh()->balance)->toBe('0.00')
+        ->and(Transaction::count())->toBe(0);
+});
+
+test('activate is refused at the card limit, and inactive cards do not count toward it', function () {
+    [$user, $card, $organization] = ledgerCard('0.00', ['status' => CardStatus::Inactive], ['card_limit' => 2]);
+    Card::factory()->forOrganization($organization)->inactive()->count(3)->create();
+    $active = Card::factory()->forOrganization($organization)->create();
+
+    expect($organization->cardUsage())->toMatchArray(['used' => 1, 'stock' => 4, 'atLimit' => false]);
+
+    // The last slot.
+    ledger()->activate($card, '10.00', $user);
+    expect($organization->cardUsage())->toMatchArray(['used' => 2, 'stock' => 3, 'atLimit' => true]);
+
+    $next = Card::query()->forOrganization($organization)->where('status', CardStatus::Inactive)->firstOrFail();
+    $refusal = ledgerRefusal(fn () => ledger()->activate($next, '10.00', $user));
+
+    expect($refusal->getMessage())->toBe('You have reached your plan limit of 2 cards. Contact support to raise the limit.')
+        ->and($refusal->field)->toBe('card_limit')
+        ->and($next->fresh()->status)->toBe(CardStatus::Inactive)
+        ->and(Transaction::count())->toBe(1);
+
+    // A cancelled card still takes its slot, like before.
+    $active->update(['status' => CardStatus::Cancelled]);
+    expect($organization->cardUsage()['used'])->toBe(2);
+});
+
+test('activate is refused for a suspended organization', function () {
+    [$user, $card, $organization] = ledgerCard('0.00', ['status' => CardStatus::Inactive]);
+    Organization::query()->whereKey($organization->id)->update(['status' => 'suspended']);
+
+    $refusal = ledgerRefusal(fn () => ledger()->activate($card, '10.00', $user));
+
+    expect($refusal->field)->toBe('organization')
+        ->and($card->fresh()->status)->toBe(CardStatus::Inactive);
+});

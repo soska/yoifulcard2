@@ -101,7 +101,10 @@ export function CardHandoff({
     }
 
     const emailBlocked =
-        !writable || card.email === null || card.status === 'cancelled';
+        !writable ||
+        card.email === null ||
+        card.status === 'cancelled' ||
+        card.status === 'inactive';
 
     return (
         <Card className="h-fit">
@@ -217,13 +220,17 @@ export function CardHandoff({
                                 {__('Email link')}
                             </Button>
                             <p className="text-sm text-muted-foreground">
-                                {card.email === null
+                                {card.status === 'inactive'
                                     ? __(
-                                          'Save a cardholder email to send the link.',
+                                          'Activate this card before sending it.',
                                       )
-                                    : __('Sends to {email}.', {
-                                          email: card.email,
-                                      })}
+                                    : card.email === null
+                                      ? __(
+                                            'Save a cardholder email to send the link.',
+                                        )
+                                      : __('Sends to {email}.', {
+                                            email: card.email,
+                                        })}
                             </p>
                             <FieldError>{errors.link}</FieldError>
                         </>

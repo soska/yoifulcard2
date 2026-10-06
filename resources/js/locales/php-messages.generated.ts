@@ -2,7 +2,7 @@
 //
 // Laravel's translatable strings, declared to duckalization's extractor
 // so PHP and TypeScript share ONE catalog, one brief and one review. The
-// extractor parses TypeScript only; this is how the 55 messages
+// extractor parses TypeScript only; this is how the 58 messages
 // Laravel renders (validation refusals, ledger errors, the CSV header,
 // the offline page) get counted, briefed and translated with the UI.
 //
@@ -28,13 +28,15 @@ export function phpMessages(): string[] {
         __('A cancelled card cannot be sent.'),
         // app/Exceptions/LedgerException.php:44
         __('A note is required for adjustments.'),
+        // app/Http/Controllers/Dashboard/CardLinkController.php:57
+        __('Activate this card before sending it.'),
         // app/Enums/TransactionType.php:33
         __('Adjustment'),
         // app/Http/Controllers/Dashboard/TransactionController.php:70
         __('Amount'),
-        // app/Http/Controllers/PublicCardController.php:93
+        // app/Http/Controllers/PublicCardController.php:103
         __('An email is already saved for this card.'),
-        // app/Http/Requests/Admin/StoreOrganizationRequest.php:56
+        // app/Http/Requests/Admin/StoreOrganizationRequest.php:57
         __('An organization with this slug already exists.'),
         // app/Http/Controllers/Dashboard/TransactionController.php:71
         __('Balance after'),
@@ -58,9 +60,9 @@ export function phpMessages(): string[] {
         __('Load'),
         // app/Http/Controllers/Dashboard/TransactionController.php:72
         __('Note'),
-        // app/Http/Controllers/Dashboard/CardController.php:206
+        // app/Http/Controllers/Dashboard/CardController.php:203
         __('Only a frozen card can be unfrozen.'),
-        // app/Http/Controllers/Dashboard/CardController.php:189
+        // app/Http/Controllers/Dashboard/CardController.php:186
         __('Only an active card can be frozen.'),
         // resources/views/mail/card-link.blade.php:27
         __('Open your card'),
@@ -72,7 +74,7 @@ export function phpMessages(): string[] {
         __('Performed by'),
         // app/Enums/TransactionType.php:34
         __('Refund'),
-        // app/Http/Controllers/Dashboard/CardLinkController.php:57
+        // app/Http/Controllers/Dashboard/CardLinkController.php:63
         __('Save a cardholder email first.'),
         // resources/views/mail/card-link.blade.php:40
         __('Show the code on that page when you pay. Keep this email: anyone with the link can use the card.'),
@@ -98,21 +100,25 @@ export function phpMessages(): string[] {
         __('The provided two factor recovery code was invalid.'),
         // resources/views/offline.blade.php:46
         __('The reader needs an internet connection to look up cards and post charges. Check your connection and try again.'),
-        // app/Http/Controllers/Dashboard/CardController.php:126
+        // app/Http/Controllers/Dashboard/CardController.php:119
         __('This business has no active program to issue cards from.'),
-        // app/Exceptions/LedgerException.php:74
+        // app/Exceptions/LedgerException.php:89
         __('This business is suspended. Contact support.'),
+        // app/Exceptions/LedgerException.php:79
+        __('This card is already activated.'),
         // app/Exceptions/LedgerException.php:69
         __('This card is cancelled.'),
         // app/Exceptions/LedgerException.php:64
         __('This card is frozen.'),
+        // app/Exceptions/LedgerException.php:74
+        __('This card is not activated yet.'),
         // app/Providers/AppServiceProvider.php:62
         __('This card was emailed several times in the last hour. Try again later.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:256
+        // app/Http/Controllers/Admin/OrganizationController.php:264
         __('This organization is already active.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:257
+        // app/Http/Controllers/Admin/OrganizationController.php:265
         __('This organization is already suspended.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:258
+        // app/Http/Controllers/Admin/OrganizationController.php:266
         __('This organization is cancelled.'),
         // app/Providers/AppServiceProvider.php:56
         __('Too many attempts. Please try again in a minute.'),
@@ -120,11 +126,11 @@ export function phpMessages(): string[] {
         __('Try again'),
         // app/Http/Controllers/Dashboard/TransactionController.php:69
         __('Type'),
-        // app/Http/Requests/Admin/StoreOrganizationRequest.php:55
+        // app/Http/Requests/Admin/StoreOrganizationRequest.php:56
         __('Use only lowercase letters, numbers, and single hyphens.'),
         // resources/views/offline.blade.php:25
         __('You are offline'),
-        // app/Http/Controllers/Dashboard/CardController.php:116
+        // app/Exceptions/LedgerException.php:84
         __('You have reached your plan limit of :limit cards. Contact support to raise the limit.'),
         // app/Mail/CardLinkMail.php:30
         __('Your :business gift card'),

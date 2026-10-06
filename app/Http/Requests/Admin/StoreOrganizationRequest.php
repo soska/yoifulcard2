@@ -28,6 +28,7 @@ class StoreOrganizationRequest extends FormRequest
             'owner_email' => is_string($this->input('owner_email')) ? mb_strtolower(trim($this->input('owner_email'))) : $this->input('owner_email'),
             'owner_name' => is_string($this->input('owner_name')) ? trim($this->input('owner_name')) : $this->input('owner_name'),
             'card_limit' => $this->input('card_limit') === '' ? null : $this->input('card_limit'),
+            'preissue_limit' => $this->input('preissue_limit') === '' ? null : $this->input('preissue_limit'),
             'plan_notes' => is_string($this->input('plan_notes')) && trim($this->input('plan_notes')) === '' ? null : $this->input('plan_notes'),
         ]);
     }

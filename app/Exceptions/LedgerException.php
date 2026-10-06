@@ -69,6 +69,21 @@ class LedgerException extends RuntimeException
         return new self(__('This card is cancelled.'), 'card');
     }
 
+    public static function cardInactive(): self
+    {
+        return new self(__('This card is not activated yet.'), 'card');
+    }
+
+    public static function cardNotInactive(): self
+    {
+        return new self(__('This card is already activated.'), 'card');
+    }
+
+    public static function cardLimitReached(int $limit): self
+    {
+        return new self(__('You have reached your plan limit of :limit cards. Contact support to raise the limit.', ['limit' => $limit]), 'card_limit');
+    }
+
     public static function organizationNotWritable(): self
     {
         return new self(__('This business is suspended. Contact support.'), 'organization');

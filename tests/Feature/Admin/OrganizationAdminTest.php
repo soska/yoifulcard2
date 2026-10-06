@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\OrganizationStatus;
+use App\Http\Requests\Admin\UpdateOrganizationPlanRequest;
 use App\Models\Card;
 use App\Models\Organization;
 use App\Models\Program;
@@ -17,6 +18,8 @@ test('superadmin can list and search organizations', function () {
     $coffee->memberships()->create(['user_id' => $owner->id, 'role' => 'owner']);
     $program = Program::factory()->for($coffee)->create();
     Card::factory()->count(2)->for($program)->create();
+    // Preissued stock doesn't count against the card limit.
+    Card::factory()->count(3)->inactive()->for($program)->create();
 
     $this->actingAs($admin)
         ->get(route('admin.organizations.index'))
@@ -131,6 +134,38 @@ test('superadmin can set card limit and plan notes', function () {
     expect($organization->card_limit)->toBeNull()
         ->and($organization->plan_notes)->toBeNull()
         ->and($organization->cardUsage()['limit'])->toBeNull();
+});
+
+test('superadmin can set the preissue limit next to the card limit', function () {
+    $admin = superadmin();
+    $organization = Organization::factory()->create();
+
+    $this->actingAs($admin)
+        ->patch(route('admin.organizations.update', $organization), [
+            'card_limit' => '100',
+            'preissue_limit' => '500',
+            'plan_notes' => '',
+        ])
+        ->assertSessionHasNoErrors();
+
+    expect($organization->refresh()->preissue_limit)->toBe(500)
+        ->and($organization->card_limit)->toBe(100);
+
+    // Empty clears it (unlimited); 0 allows no stock at all.
+    $this->patch(route('admin.organizations.update', $organization), ['card_limit' => '100', 'preissue_limit' => ''])
+        ->assertSessionHasNoErrors();
+    expect($organization->refresh()->preissue_limit)->toBeNull();
+
+    $this->patch(route('admin.organizations.update', $organization), ['card_limit' => '100', 'preissue_limit' => '0'])
+        ->assertSessionHasNoErrors();
+    expect($organization->refresh()->preissue_limit)->toBe(0);
+
+    foreach (['-1', '1.5', 'many', (string) (UpdateOrganizationPlanRequest::MAX_CARD_LIMIT + 1)] as $limit) {
+        $this->patch(route('admin.organizations.update', $organization), ['preissue_limit' => $limit])
+            ->assertSessionHasErrors('preissue_limit');
+    }
+
+    expect($organization->refresh()->preissue_limit)->toBe(0);
 });
 
 test('card limit must be a positive whole number', function (mixed $limit) {

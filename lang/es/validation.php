@@ -264,6 +264,7 @@ return [
         'plan_notes' => 'notas del plan',
         'portfolio' => 'portafolio',
         'postal_code' => 'código postal',
+        'preissue_limit' => 'límite de inventario',
         'preview' => 'vista preliminar',
         'price' => 'precio',
         'primary_color' => 'color de marca',

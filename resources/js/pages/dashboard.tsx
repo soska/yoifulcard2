@@ -8,6 +8,7 @@ import {
     Wallet,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { CardStockNotice } from '@/components/cards/card-stock-notice';
 import { CardUsageNotice } from '@/components/cards/card-usage-notice';
 import { TransactionsTable } from '@/components/transactions/transactions-table';
 import { Button } from '@/components/ui/button';
@@ -87,6 +88,14 @@ function StatCard({
     );
 }
 
+/** Preissued cards not activated yet. */
+function cardsInStock(count: number): string {
+    return __(
+        { one: '{count} card in stock', other: '{count} cards in stock' },
+        { count },
+    );
+}
+
 function cardBreakdown(stats: DashboardStats): string | undefined {
     if (stats.cards === 0) {
         return undefined;
@@ -115,6 +124,7 @@ function cardBreakdown(stats: DashboardStats): string | undefined {
                   { count: stats.cancelled, context: 'cards' },
               )
             : null,
+        stats.inactive > 0 ? cardsInStock(stats.inactive) : null,
     ]
         .filter(Boolean)
         .join(' · ');
@@ -176,14 +186,16 @@ export default function Dashboard({
                 </div>
 
                 <CardUsageNotice usage={usage} />
+                <CardStockNotice usage={usage} />
 
                 <div className="grid gap-4 sm:grid-cols-2">
                     <StatCard
                         title={__('Cards')}
                         value={
+                            // Cards in stock don't count until activated.
                             usage.limit === null
-                                ? stats.cards
-                                : `${stats.cards} / ${usage.limit}`
+                                ? usage.used
+                                : `${usage.used} / ${usage.limit}`
                         }
                         detail={cardBreakdown(stats)}
                         icon={<CreditCard />}

@@ -26,6 +26,7 @@ import type {
 /** A card's status, as its badge and the status filter say it. */
 export function cardStatusLabel(status: CardStatus): string {
     const labels: Record<CardStatus, string> = {
+        inactive: __('Inactive', { context: 'card status' }),
         active: __('Active', { context: 'card status' }),
         frozen: __('Frozen', { context: 'card status' }),
         depleted: __('Depleted', { context: 'card status' }),

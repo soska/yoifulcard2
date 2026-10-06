@@ -2,6 +2,7 @@
 
 /** App\Enums\CardStatus */
 export type CardStatus =
+    | 'inactive'
     | 'active'
     | 'frozen'
     | 'depleted'
@@ -16,6 +17,7 @@ export type FlashMessage =
     | 'card.link_sent'
     | 'ledger.loaded'
     | 'ledger.charged'
+    | 'ledger.activated'
     | 'ledger.adjusted'
     | 'settings.business_saved'
     | 'settings.program_saved'

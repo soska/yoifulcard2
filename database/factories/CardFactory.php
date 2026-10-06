@@ -46,4 +46,12 @@ class CardFactory extends Factory
     {
         return $this->state(fn () => ['status' => CardStatus::Frozen]);
     }
+
+    /**
+     * A preissued card that has not been activated: no balance yet.
+     */
+    public function inactive(): static
+    {
+        return $this->state(fn () => ['status' => CardStatus::Inactive, 'balance' => '0.00']);
+    }
 }

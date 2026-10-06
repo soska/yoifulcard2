@@ -72,6 +72,16 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
                   })
                 : __('Charged {code}.', { code: p.code ?? '' });
         },
+        'ledger.activated': (p) => {
+            const money = ledgerAmounts(p);
+
+            return money
+                ? __('Activated {code} with {amount}.', {
+                      amount: money.amount,
+                      code: p.code ?? '',
+                  })
+                : __('Card {code} activated.', { code: p.code ?? '' });
+        },
         'ledger.adjusted': (p) =>
             __('Balance of {code} adjusted.', { code: p.code ?? '' }),
         'settings.business_saved': () => __('Business settings saved.'),

@@ -55,6 +55,29 @@ class CardLedger
     }
 
     /**
+     * Activate a preissued (inactive) card with its first load. Like issue(),
+     * the load is not a use. The card becomes active and gets `activated_at`.
+     * An activated card counts toward the card limit, so this is refused at
+     * the limit, under the same organization lock as creating a card.
+     */
+    public function activate(Card $card, string $amount, User $user): Transaction
+    {
+        $amount = $this->positive($amount);
+
+        return DB::transaction(function () use ($card, $amount, $user): Transaction {
+            // The organization row first, then the card (CardLimit's lock
+            // order), so two activations cannot both take the last slot.
+            $organization = CardLimit::lock(
+                (string) Program::query()->whereKey($card->program_id)->value('organization_id'),
+            );
+
+            return $this->post($card, TransactionType::Load, $user, null, function (string $balance) use ($amount): string {
+                return bcadd($balance, $amount, self::SCALE);
+            }, $amount, marksUse: false, activating: $organization);
+        });
+    }
+
+    /**
      * Charge a card. The amount may not be above the locked balance.
      */
     public function spend(Card $card, string $amount, User $user, ?string $note = null): Transaction
@@ -101,12 +124,13 @@ class CardLedger
      * @param  callable(numeric-string): numeric-string  $apply  Receives the locked balance and returns the new one, or throws.
      * @param  numeric-string  $amount
      * @param  bool  $marksUse  Whether the change sets `last_used_at`. Adjustments and the initial load do not.
+     * @param  Organization|null  $activating  When activating, the card's organization, already locked. Only an inactive card is accepted, and it must fit under the card limit.
      */
-    private function post(Card $card, TransactionType $type, User $user, ?string $note, callable $apply, string $amount, bool $marksUse = true): Transaction
+    private function post(Card $card, TransactionType $type, User $user, ?string $note, callable $apply, string $amount, bool $marksUse = true, ?Organization $activating = null): Transaction
     {
         $note = $note === null || trim($note) === '' ? null : trim($note);
 
-        [$transaction, $locked] = DB::transaction(function () use ($card, $type, $user, $note, $apply, $amount, $marksUse): array {
+        [$transaction, $locked] = DB::transaction(function () use ($card, $type, $user, $note, $apply, $amount, $marksUse, $activating): array {
             /** @var Card $locked */
             $locked = Card::query()->whereKey($card->getKey())->lockForUpdate()->firstOrFail();
 
@@ -127,6 +151,18 @@ class CardLedger
                 throw LedgerException::cardCancelled();
             }
 
+            if ($activating === null && $locked->status === CardStatus::Inactive) {
+                throw LedgerException::cardInactive();
+            }
+
+            if ($activating !== null) {
+                if ($locked->status !== CardStatus::Inactive) {
+                    throw LedgerException::cardNotInactive();
+                }
+
+                CardLimit::ensureRoom($activating);
+            }
+
             $before = $this->normalize((string) $locked->balance);
             $after = $apply($before);
 
@@ -143,7 +179,11 @@ class CardLedger
             ]);
 
             $locked->balance = $after;
-            $locked->status = $this->statusAfter($locked->status, $after);
+            $locked->status = $activating !== null ? CardStatus::Active : $this->statusAfter($locked->status, $after);
+
+            if ($activating !== null) {
+                $locked->activated_at = $transaction->created_at ?? now();
+            }
 
             if ($marksUse) {
                 $locked->last_used_at = $transaction->created_at ?? now();
@@ -162,7 +202,8 @@ class CardLedger
 
     /**
      * An active card that reaches zero is depleted; a depleted card that
-     * gets funds is active again. Other statuses never reach here.
+     * gets funds is active again. Other statuses never reach here (an
+     * inactive card only through activate(), which sets it active).
      *
      * @param  numeric-string  $balance
      */

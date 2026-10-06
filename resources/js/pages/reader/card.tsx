@@ -1,5 +1,5 @@
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
-import { AlertCircle, ArrowLeft, Minus, Plus } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Minus, Plus, Power } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CardStatusBadge } from '@/components/cards/card-status-badge';
 import { suspendedMessage } from '@/components/organization/suspended-banner';
@@ -14,7 +14,7 @@ import { recordRecentScan } from '@/hooks/use-reader-storage';
 import { useMoneyFormat } from '@/hooks/use-money-format';
 import { playReaderSound } from '@/lib/reader-sound';
 import { scan } from '@/routes';
-import { load, spend } from '@/routes/cards';
+import { activate, load, spend } from '@/routes/cards';
 import type { CardStatus } from '@/types';
 import { __ } from '@/i18n';
 
@@ -28,25 +28,36 @@ type Props = {
     currency: string;
 };
 
-type Action = 'spend' | 'load';
+type Action = 'spend' | 'load' | 'activate';
 
 const PRESETS = ['10', '20', '50', '100'];
 
 /** The submit button's word for each action, built at render time. */
 function submitLabel(action: Action): string {
-    return action === 'spend'
-        ? __('Charge', { context: 'verb: charge a card' })
-        : __('Add', { context: 'verb: add funds to a card' });
+    switch (action) {
+        case 'spend':
+            return __('Charge', { context: 'verb: charge a card' });
+        case 'load':
+            return __('Add', { context: 'verb: add funds to a card' });
+        case 'activate':
+            return __('Activate', { context: 'verb: activate a card' });
+    }
 }
 
+const routes = { spend, load, activate } as const;
+
 /**
- * A scanned card: charge it or add funds. Posts to the same ledger routes as
- * the card page, with `reader` set so a success returns to the scanner.
+ * A scanned card: charge it or add funds, or, for a preissued card that is
+ * not activated yet, activate it with an amount. Posts to the same ledger
+ * routes as the card page, with `reader` set so a success returns to the
+ * scanner.
  */
 export default function ReaderCard({ card, currency }: Props) {
     const { currentOrganization } = usePage().props;
     const { formatMoney } = useMoneyFormat();
-    const [action, setAction] = useState<Action>('spend');
+    const inactive = card.status === 'inactive';
+    const [chosen, setChosen] = useState<Action>('spend');
+    const action: Action = inactive ? 'activate' : chosen;
     const form = useForm({ amount: '', reader: true });
 
     useEffect(() => {
@@ -62,19 +73,18 @@ export default function ReaderCard({ card, currency }: Props) {
             ? __('This card is cancelled.')
             : null;
     const disabled = blockedReason !== null;
-    // CardLedger refusals come back on `card` or `organization`.
+    // CardLedger refusals come back on `card`, `organization`, or (when
+    // activating at the plan limit) `card_limit`.
     const errors = form.errors as Partial<
-        Record<'amount' | 'card' | 'organization', string>
+        Record<'amount' | 'card' | 'organization' | 'card_limit', string>
     >;
-    const formError = errors.card ?? errors.organization;
+    const formError = errors.card ?? errors.organization ?? errors.card_limit;
     const amount = form.data.amount.trim();
 
     function submit(event: React.FormEvent) {
         event.preventDefault();
 
-        const route = action === 'spend' ? spend : load;
-
-        form.post(route.url(card), {
+        form.post(routes[action].url(card), {
             preserveScroll: true,
             onSuccess: () => playReaderSound('success'),
             onError: () => playReaderSound('error'),
@@ -104,12 +114,20 @@ export default function ReaderCard({ card, currency }: Props) {
                             </span>
                             <CardStatusBadge status={card.status} />
                         </div>
-                        <p className="text-sm text-muted-foreground">
-                            {__('Balance')}
-                        </p>
-                        <p className="text-4xl font-semibold tabular-nums">
-                            {formatMoney(card.balance, currency)}
-                        </p>
+                        {inactive ? (
+                            <p className="text-2xl font-semibold">
+                                {__('Not activated yet')}
+                            </p>
+                        ) : (
+                            <>
+                                <p className="text-sm text-muted-foreground">
+                                    {__('Balance')}
+                                </p>
+                                <p className="text-4xl font-semibold tabular-nums">
+                                    {formatMoney(card.balance, currency)}
+                                </p>
+                            </>
+                        )}
                     </CardContent>
                 </Card>
 
@@ -120,24 +138,40 @@ export default function ReaderCard({ card, currency }: Props) {
                     </Alert>
                 )}
 
-                <Tabs
-                    value={action}
-                    onValueChange={(value: Action) => {
-                        setAction(value);
-                        form.clearErrors();
-                    }}
-                >
-                    <TabsList className="h-12 w-full">
-                        <TabsTrigger value="spend" className="text-base">
-                            <Minus data-icon="inline-start" />
-                            {__('Charge', { context: 'verb: charge a card' })}
-                        </TabsTrigger>
-                        <TabsTrigger value="load" className="text-base">
-                            <Plus data-icon="inline-start" />
-                            {__('Add funds')}
-                        </TabsTrigger>
-                    </TabsList>
-                </Tabs>
+                {inactive ? (
+                    <div className="flex flex-col gap-1">
+                        <h2 className="flex items-center gap-2 text-lg font-semibold">
+                            <Power className="size-5" />
+                            {__('Activate with amount')}
+                        </h2>
+                        <p className="text-sm text-muted-foreground">
+                            {__(
+                                'Enter the amount the customer paid. The card can be used right after.',
+                            )}
+                        </p>
+                    </div>
+                ) : (
+                    <Tabs
+                        value={action}
+                        onValueChange={(value: Action) => {
+                            setChosen(value);
+                            form.clearErrors();
+                        }}
+                    >
+                        <TabsList className="h-12 w-full">
+                            <TabsTrigger value="spend" className="text-base">
+                                <Minus data-icon="inline-start" />
+                                {__('Charge', {
+                                    context: 'verb: charge a card',
+                                })}
+                            </TabsTrigger>
+                            <TabsTrigger value="load" className="text-base">
+                                <Plus data-icon="inline-start" />
+                                {__('Add funds')}
+                            </TabsTrigger>
+                        </TabsList>
+                    </Tabs>
+                )}
 
                 <form onSubmit={submit} className="flex flex-col gap-4">
                     {formError && (

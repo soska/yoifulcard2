@@ -68,10 +68,11 @@ test('the link email names the business, the balance, and the card link', functi
     'spanish' => ['es', 'Tu tarjeta de regalo de Café Luna', '$500.00'],
 ]);
 
-test('the link is not emailed without a cardholder email or to a cancelled card', function () {
+test('the link is not emailed without a cardholder email or to a cancelled or inactive card', function () {
     [$user, , $program] = cardOwner();
     $noEmail = Card::factory()->for($program)->create(['email' => null]);
     $cancelled = Card::factory()->for($program)->create(['email' => 'holder@example.com', 'status' => 'cancelled']);
+    $inactive = Card::factory()->for($program)->inactive()->create(['email' => 'holder@example.com']);
 
     $this->actingAs($user)
         ->post(route('cards.link.email', $noEmail))
@@ -79,6 +80,9 @@ test('the link is not emailed without a cardholder email or to a cancelled card'
 
     $this->post(route('cards.link.email', $cancelled))
         ->assertSessionHasErrors(['link' => 'A cancelled card cannot be sent.']);
+
+    $this->post(route('cards.link.email', $inactive))
+        ->assertSessionHasErrors(['link' => 'Activate this card before sending it.']);
 
     Mail::assertNothingQueued();
 });

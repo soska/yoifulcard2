@@ -43,7 +43,9 @@ class OrganizationController extends Controller
         $status = OrganizationStatus::tryFrom((string) $request->query('status', ''));
 
         $organizations = Organization::query()
-            ->withCount(['memberships', 'cards'])
+            // Inactive (preissued) cards are stock, not usage, so they stay out
+            // of the count shown against the card limit.
+            ->withCount(['memberships', 'cards' => fn (Builder $query) => $query->where('status', '<>', CardStatus::Inactive)])
             ->when($status, fn (Builder $query, OrganizationStatus $status) => $query->where('status', $status))
             ->when($search !== '', function (Builder $query) use ($search): void {
                 $pattern = '%'.addcslashes(mb_strtolower($search), '\\%_').'%';
@@ -109,6 +111,7 @@ class OrganizationController extends Controller
                 'name' => $data['name'],
                 'slug' => $data['slug'],
                 'card_limit' => $data['card_limit'] ?? null,
+                'preissue_limit' => $data['preissue_limit'] ?? null,
                 'plan_notes' => $data['plan_notes'] ?? null,
             ]);
 
@@ -145,6 +148,7 @@ class OrganizationController extends Controller
         $cards = Card::query()
             ->forOrganization($organization)
             ->toBase()
+            ->selectRaw('count(*) filter (where status = ?) as inactive', [CardStatus::Inactive->value])
             ->selectRaw('count(*) filter (where status = ?) as active', [CardStatus::Active->value])
             ->selectRaw('count(*) filter (where status = ?) as frozen', [CardStatus::Frozen->value])
             ->selectRaw('count(*) filter (where status = ?) as depleted', [CardStatus::Depleted->value])
@@ -170,12 +174,14 @@ class OrganizationController extends Controller
                 'primary_color' => $organization->primary_color,
                 'logo_url' => $organization->logo_url,
                 'card_limit' => $organization->card_limit,
+                'preissue_limit' => $organization->preissue_limit,
                 'plan_notes' => $organization->plan_notes,
                 'created_at' => $organization->created_at?->toIso8601String(),
                 'updated_at' => $organization->updated_at?->toIso8601String(),
             ],
             'usage' => $organization->cardUsage(),
             'stats' => [
+                'inactive' => (int) $cards->inactive,
                 'active' => (int) $cards->active,
                 'frozen' => (int) $cards->frozen,
                 'depleted' => (int) $cards->depleted,
@@ -210,12 +216,14 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Set the card limit (empty means unlimited) and the plan notes.
+     * Set the card limit and the preissue limit (empty means unlimited) and
+     * the plan notes.
      */
     public function update(UpdateOrganizationPlanRequest $request, Organization $organization): RedirectResponse
     {
         $organization->update([
             'card_limit' => $request->validated('card_limit') === null ? null : (int) $request->validated('card_limit'),
+            'preissue_limit' => $request->validated('preissue_limit') === null ? null : (int) $request->validated('preissue_limit'),
             'plan_notes' => $request->validated('plan_notes'),
         ]);
 

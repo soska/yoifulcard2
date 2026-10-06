@@ -23,12 +23,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property CardStatus $status
  * @property string|null $email
  * @property CarbonImmutable|null $last_used_at
+ * @property CarbonImmutable|null $activated_at
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property-read Program $program
  * @property-read Collection<int, Transaction> $transactions
  */
-#[Fillable(['program_id', 'code', 'qr_token', 'balance', 'status', 'email', 'last_used_at'])]
+#[Fillable(['program_id', 'code', 'qr_token', 'balance', 'status', 'email', 'last_used_at', 'activated_at'])]
 class Card extends Model
 {
     /** @use HasFactory<CardFactory> */
@@ -61,6 +62,7 @@ class Card extends Model
             'balance' => 'decimal:2',
             'status' => CardStatus::class,
             'last_used_at' => 'datetime',
+            'activated_at' => 'datetime',
         ];
     }
 

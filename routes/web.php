@@ -72,6 +72,7 @@ Route::middleware(['auth', 'organization'])->group(function () {
         Route::post('cards/{card}/load', [CardLedgerController::class, 'load'])->whereUuid('card')->name('cards.load');
         Route::post('cards/{card}/spend', [CardLedgerController::class, 'spend'])->whereUuid('card')->name('cards.spend');
         Route::post('cards/{card}/adjust', [CardLedgerController::class, 'adjust'])->whereUuid('card')->name('cards.adjust');
+        Route::post('cards/{card}/activate', [CardLedgerController::class, 'activate'])->whereUuid('card')->name('cards.activate');
 
         // Owners and managers only; the form requests check the role.
         Route::patch('settings/organization', [SettingsController::class, 'updateOrganization'])->name('settings.organization.update');
@@ -87,8 +88,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('organizations.switch');
 });
 
-// Reader: members of an organization. Charge and add funds post to the
-// ledger routes above (cards.spend, cards.load).
+// Reader: members of an organization. Charge, add funds and activate post to
+// the ledger routes above (cards.spend, cards.load, cards.activate).
 Route::middleware(['auth', 'organization'])->group(function () {
     Route::get('scan', [ScanController::class, 'index'])->name('scan');
     Route::post('scan/lookup', [ScanController::class, 'lookup'])->name('scan.lookup');
