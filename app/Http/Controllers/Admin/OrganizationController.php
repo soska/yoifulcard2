@@ -43,7 +43,9 @@ class OrganizationController extends Controller
         $status = OrganizationStatus::tryFrom((string) $request->query('status', ''));
 
         $organizations = Organization::query()
-            ->withCount(['memberships', 'cards'])
+            // Inactive (preissued) cards are stock, not usage, so they stay out
+            // of the count shown against the card limit.
+            ->withCount(['memberships', 'cards' => fn (Builder $query) => $query->where('status', '<>', CardStatus::Inactive)])
             ->when($status, fn (Builder $query, OrganizationStatus $status) => $query->where('status', $status))
             ->when($search !== '', function (Builder $query) use ($search): void {
                 $pattern = '%'.addcslashes(mb_strtolower($search), '\\%_').'%';

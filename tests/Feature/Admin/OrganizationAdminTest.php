@@ -18,6 +18,8 @@ test('superadmin can list and search organizations', function () {
     $coffee->memberships()->create(['user_id' => $owner->id, 'role' => 'owner']);
     $program = Program::factory()->for($coffee)->create();
     Card::factory()->count(2)->for($program)->create();
+    // Preissued stock doesn't count against the card limit.
+    Card::factory()->count(3)->inactive()->for($program)->create();
 
     $this->actingAs($admin)
         ->get(route('admin.organizations.index'))
