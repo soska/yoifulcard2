@@ -5,11 +5,11 @@ namespace App\Exceptions;
 use RuntimeException;
 
 /**
- * CardBatchIssuer refused to create or void preissued cards. Like
- * LedgerException, the message is written in the request's language when the
- * exception is made, from a literal `__('…')` that `php artisan i18n:manifest`
- * declares to the shared catalog. Controllers turn it into a validation error
- * on the given field.
+ * CardBatchIssuer refused to create or void preissued cards, or
+ * CardBatchPrinter refused to print them. Like LedgerException, the message
+ * is written in the request's language when the exception is made, from a
+ * literal `__('…')` that `php artisan i18n:manifest` declares to the shared
+ * catalog. Controllers turn it into a validation error on the given field.
  */
 class CardBatchException extends RuntimeException
 {
@@ -48,6 +48,16 @@ class CardBatchException extends RuntimeException
     public static function batchVoided(): self
     {
         return new self(__('This batch is already voided.'), 'batch');
+    }
+
+    public static function nothingToPrint(): self
+    {
+        return new self(__('This batch has no cards in stock to print.'), 'batch');
+    }
+
+    public static function templateNotAvailable(): self
+    {
+        return new self(__('That template is not available here.'), 'template');
     }
 
     public static function cardNotInactive(): self

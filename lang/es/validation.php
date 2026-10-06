@@ -308,6 +308,7 @@ return [
         'tag' => 'etiqueta',
         'tags' => 'etiquetas',
         'teacher' => 'profesor',
+        'template' => 'plantilla',
         'terms' => 'términos',
         'terms_url' => 'URL de términos y condiciones',
         'test_description' => 'descripción de prueba',

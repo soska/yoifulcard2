@@ -1,17 +1,20 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { AlertCircle, ArrowLeft } from 'lucide-react';
 import { BatchDetails } from '@/components/batches/batch-details';
+import { BatchPrint } from '@/components/batches/batch-print';
 import { VoidBatch } from '@/components/batches/void-batch';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { index as adminIndex } from '@/routes/admin';
 import { show, voidMethod } from '@/routes/admin/batches';
+import { download, store as storePdf } from '@/routes/admin/batches/pdfs';
 import {
     index as organizationsIndex,
     show as organizationShow,
 } from '@/routes/admin/organizations';
 import type {
     AdminCardBatch,
+    CardBatchPrint,
     CardSummary,
     OrganizationStatus,
     Paginated,
@@ -23,9 +26,15 @@ type Props = {
     cards: Paginated<CardSummary>;
     currency: string;
     organization: { id: string; name: string; status: OrganizationStatus };
+    print: CardBatchPrint;
 };
 
-export default function AdminBatchShow({ batch, cards, organization }: Props) {
+export default function AdminBatchShow({
+    batch,
+    cards,
+    organization,
+    print,
+}: Props) {
     const { errors } = usePage().props;
     const pageError =
         (errors as Record<string, string | undefined>).batch ??
@@ -80,6 +89,18 @@ export default function AdminBatchShow({ batch, cards, organization }: Props) {
                         </div>
                     )}
                 </BatchDetails>
+
+                <BatchPrint
+                    print={print}
+                    form={
+                        !batch.voided_at && batch.stock > 0
+                            ? storePdf.form(batch.id)
+                            : null
+                    }
+                    downloadHref={(pdf) =>
+                        download.url({ batch: batch.id, pdf: pdf.id })
+                    }
+                />
             </div>
         </>
     );

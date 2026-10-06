@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $organization_id
  * @property string $program_id
  * @property int $count
- * @property string|null $template
+ * @property string|null $template The CardTemplate value it was last printed with.
  * @property int $created_by
  * @property bool $issued_by_admin
  * @property string|null $notes
@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Program $program
  * @property-read User $creator
  * @property-read Collection<int, Card> $cards
+ * @property-read Collection<int, CardBatchPdf> $pdfs
+ * @property-read Collection<int, CardBatchPdfLog> $pdfLogs
  */
 #[Fillable(['organization_id', 'program_id', 'count', 'template', 'created_by', 'issued_by_admin', 'notes', 'voided_at'])]
 class CardBatch extends Model
@@ -83,6 +85,22 @@ class CardBatch extends Model
     public function cards(): HasMany
     {
         return $this->hasMany(Card::class, 'batch_id');
+    }
+
+    /**
+     * @return HasMany<CardBatchPdf, $this>
+     */
+    public function pdfs(): HasMany
+    {
+        return $this->hasMany(CardBatchPdf::class);
+    }
+
+    /**
+     * @return HasMany<CardBatchPdfLog, $this>
+     */
+    public function pdfLogs(): HasMany
+    {
+        return $this->hasMany(CardBatchPdfLog::class);
     }
 
     public function isVoided(): bool

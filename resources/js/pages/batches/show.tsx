@@ -1,22 +1,31 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { AlertCircle, ArrowLeft, List } from 'lucide-react';
 import { BatchDetails } from '@/components/batches/batch-details';
+import { BatchPrint } from '@/components/batches/batch-print';
 import { VoidBatch } from '@/components/batches/void-batch';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { index, show, voidMethod } from '@/routes/batches';
+import { download, store as storePdf } from '@/routes/batches/pdfs';
 import { index as cardsIndex, show as cardShow } from '@/routes/cards';
-import type { CardBatchSummary, CardSummary, Paginated } from '@/types';
+import type {
+    CardBatchPrint,
+    CardBatchSummary,
+    CardSummary,
+    Paginated,
+} from '@/types';
 import { __ } from '@/i18n';
 
 type Props = {
     batch: CardBatchSummary;
     cards: Paginated<CardSummary>;
     currency: string;
+    /** Owner or manager of a writable business: can void and print. */
     canVoid: boolean;
+    print: CardBatchPrint;
 };
 
-export default function BatchShow({ batch, cards, canVoid }: Props) {
+export default function BatchShow({ batch, cards, canVoid, print }: Props) {
     const { errors } = usePage().props;
     const pageError =
         (errors as Record<string, string | undefined>).batch ??
@@ -72,6 +81,18 @@ export default function BatchShow({ batch, cards, canVoid }: Props) {
                                 />
                             )}
                         </>
+                    }
+                />
+
+                <BatchPrint
+                    print={print}
+                    form={
+                        canVoid && !batch.voided_at && batch.stock > 0
+                            ? storePdf.form(batch.id)
+                            : null
+                    }
+                    downloadHref={(pdf) =>
+                        download.url({ batch: batch.id, pdf: pdf.id })
                     }
                 />
             </div>

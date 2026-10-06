@@ -44,6 +44,9 @@ enum FlashMessage: string
     /** "Batch voided. {count} cards cancelled." — params: count */
     case CardBatchVoided = 'batch.voided';
 
+    /** "Making the PDF. We'll email you when it's ready." */
+    case CardBatchPdfRequested = 'batch.pdf_requested';
+
     /** "Added {amount} to {code}. Balance: {balance}." — params: code, amount, balance, currency */
     case FundsAdded = 'ledger.loaded';
 

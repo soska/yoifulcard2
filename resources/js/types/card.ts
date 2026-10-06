@@ -1,6 +1,10 @@
-import type { CardStatus } from '@/types/enums.generated';
+import type {
+    CardBatchPdfAction,
+    CardStatus,
+    CardTemplate,
+} from '@/types/enums.generated';
 
-export type { CardStatus };
+export type { CardBatchPdfAction, CardStatus, CardTemplate };
 
 export type CardSort = 'code' | 'balance' | 'created_at' | 'last_used_at';
 
@@ -63,6 +67,43 @@ export type CardBatchSummary = {
 /** A batch as superadmins see it: with the internal notes. */
 export type AdminCardBatch = CardBatchSummary & {
     notes: string | null;
+};
+
+/**
+ * A printable PDF of a batch, for the person who asked for it. It is made on
+ * the queue, downloaded once, and expires.
+ */
+export type CardBatchPdf = {
+    id: string;
+    template: CardTemplate;
+    status: 'pending' | 'ready' | 'failed';
+    /** Cards printed: the ones still in stock when it was made. */
+    cards: number | null;
+    pages: number | null;
+    /** In bytes. */
+    size: number | null;
+    created_at: string | null;
+    expires_at: string;
+};
+
+/** One audit log entry: a PDF made or downloaded. */
+export type CardBatchPdfLogEntry = {
+    id: number;
+    action: CardBatchPdfAction;
+    template: CardTemplate;
+    cards: number;
+    by_admin: boolean;
+    /** Null for Yoiful staff on the business page. */
+    user: string | null;
+    created_at: string | null;
+};
+
+/** The print section of a batch page. */
+export type CardBatchPrint = {
+    /** The templates this area can print with. */
+    templates: CardTemplate[];
+    pdf: CardBatchPdf | null;
+    logs: CardBatchPdfLogEntry[];
 };
 
 /** The batch the card list is filtered by. */

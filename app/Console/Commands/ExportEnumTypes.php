@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\CardBatchPdfAction;
 use App\Enums\CardStatus;
+use App\Enums\CardTemplate;
 use App\Enums\FlashMessage;
 use App\Enums\MembershipRole;
 use App\Enums\OrganizationStatus;
@@ -18,7 +20,7 @@ use Illuminate\Support\Facades\File;
  * them: add a case in PHP, run this, and `npm run types:check` fails until the
  * words exist.
  *
- * A small generator rather than a package: five enums of string cases need
+ * A small generator rather than a package: a few enums of string cases need
  * nothing more. `--check` exits 1 when the file is stale (a Pest test runs it).
  */
 #[Signature('types:enums {--check : Fail if the generated file is out of date}')]
@@ -29,7 +31,9 @@ class ExportEnumTypes extends Command
      * @var array<string, class-string<\BackedEnum>>
      */
     public const ENUMS = [
+        'CardBatchPdfAction' => CardBatchPdfAction::class,
         'CardStatus' => CardStatus::class,
+        'CardTemplate' => CardTemplate::class,
         'FlashMessage' => FlashMessage::class,
         'MembershipRole' => MembershipRole::class,
         'OrganizationStatus' => OrganizationStatus::class,

@@ -18,3 +18,13 @@ Every login uses the password `yoiful-test-123`:
 | `suspended@yoiful.test` | Owner of Bicis del Norte (suspended)                                   |
 
 The seeder prints a few public card URLs (`/c/{token}`) when it finishes.
+
+## Printing card batches
+
+Batch PDFs are made on the queue and expired ones are pruned by the scheduler
+(`model:prune`, hourly), so run a worker and the scheduler alongside the app:
+
+```bash
+php artisan queue:work
+php artisan schedule:work
+```
