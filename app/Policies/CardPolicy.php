@@ -48,4 +48,18 @@ class CardPolicy
         return $organization->isWritable()
             && $user->membershipFor($organization) !== null;
     }
+
+    /**
+     * Owners and managers can void a card that is not activated yet (lost or
+     * stolen stock) while the organization is active, whether or not the
+     * business can create batches itself. CardBatchIssuer checks the card's
+     * status under its lock.
+     */
+    public function void(User $user, Card $card): bool
+    {
+        $organization = $card->organization();
+
+        return $organization->isWritable()
+            && $user->membershipFor($organization)?->role->canManageSettings() === true;
+    }
 }

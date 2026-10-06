@@ -43,6 +43,17 @@ function ledgerAmounts(
     };
 }
 
+/** "Created a batch of {count} cards.", for both batch-created toasts. */
+function batchCreated(p: FlashParams): string {
+    return __(
+        {
+            one: 'Created a batch of {count} card.',
+            other: 'Created a batch of {count} cards.',
+        },
+        { count: Number(p.count ?? 0) },
+    );
+}
+
 function messages(): Record<FlashMessage, (params: FlashParams) => string> {
     return {
         'card.created': (p) =>
@@ -52,6 +63,46 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
         'card.email_saved': () => __('Cardholder email saved.'),
         'card.link_sent': (p) =>
             __('Card link sent to {email}.', { email: p.email ?? '' }),
+        'card.voided': (p) => __('Card {code} voided.', { code: p.code ?? '' }),
+        'batch.created': (p) => {
+            const beyond = Number(p.beyond ?? 0);
+
+            // More stock than room under the card limit: warn, don't cheer.
+            return beyond > 0
+                ? __(
+                      {
+                          one: 'Batch created. {count} card in stock has no room under your card limit yet.',
+                          other: 'Batch created. {count} cards in stock have no room under your card limit yet.',
+                      },
+                      { count: beyond },
+                  )
+                : batchCreated(p);
+        },
+        // The same toast for a batch a superadmin made: the card limit is the
+        // business's, not "yours".
+        'admin.batch_created': (p) => {
+            const beyond = Number(p.beyond ?? 0);
+
+            return beyond > 0
+                ? __(
+                      {
+                          one: "Batch created. {count} card in stock has no room under the business's card limit.",
+                          other: "Batch created. {count} cards in stock have no room under the business's card limit.",
+                      },
+                      { count: beyond },
+                  )
+                : batchCreated(p);
+        },
+        'batch.voided': (p) =>
+            __(
+                {
+                    one: 'Batch voided. {count} card cancelled.',
+                    other: 'Batch voided. {count} cards cancelled.',
+                },
+                { count: Number(p.count ?? 0) },
+            ),
+        'batch.pdf_requested': () =>
+            __("Making the PDF. We'll email you when it's ready."),
         'ledger.loaded': (p) => {
             const money = ledgerAmounts(p);
 

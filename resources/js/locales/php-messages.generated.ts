@@ -2,7 +2,7 @@
 //
 // Laravel's translatable strings, declared to duckalization's extractor
 // so PHP and TypeScript share ONE catalog, one brief and one review. The
-// extractor parses TypeScript only; this is how the 58 messages
+// extractor parses TypeScript only; this is how the 73 messages
 // Laravel renders (validation refusals, ledger errors, the CSV header,
 // the offline page) get counted, briefed and translated with the UI.
 //
@@ -24,6 +24,10 @@ export function phpMessages(): string[] {
         __(':business sent you a gift card'),
         // app/Actions/Fortify/CreateNewUser.php:67
         __(':name\'s Business'),
+        // app/Exceptions/CardBatchException.php:35
+        __('A batch can have at most :max cards.'),
+        // app/Exceptions/CardBatchException.php:30
+        __('A batch needs at least one card.'),
         // app/Http/Controllers/Dashboard/CardLinkController.php:51
         __('A cancelled card cannot be sent.'),
         // app/Exceptions/LedgerException.php:44
@@ -52,17 +56,25 @@ export function phpMessages(): string[] {
         __('Enter an amount with up to two decimals.'),
         // app/Actions/Fortify/CreateNewUser.php:53
         __('Gift Card'),
+        // resources/views/pdf/partials/card-front.blade.php:11
+        __('Gift card'),
+        // resources/views/mail/card-batch-pdf-ready.blade.php:27
+        __('Go to the batch'),
         // app/Exceptions/LedgerException.php:49
         __('Insufficient balance.'),
         // app/Support/PackageMessages.php:42
         __('Invalid credential format.'),
+        // resources/views/mail/card-batch-pdf-ready.blade.php:40
+        __('It can be downloaded once, within :hours hours. It holds the code of every card: keep it private and delete it after printing.'),
         // app/Enums/TransactionType.php:31
         __('Load'),
         // app/Http/Controllers/Dashboard/TransactionController.php:72
         __('Note'),
-        // app/Http/Controllers/Dashboard/CardController.php:203
+        // app/Exceptions/CardBatchException.php:65
+        __('Only a card that is not activated yet can be voided.'),
+        // app/Http/Controllers/Dashboard/CardController.php:216
         __('Only a frozen card can be unfrozen.'),
-        // app/Http/Controllers/Dashboard/CardController.php:186
+        // app/Http/Controllers/Dashboard/CardController.php:199
         __('Only an active card can be frozen.'),
         // resources/views/mail/card-link.blade.php:27
         __('Open your card'),
@@ -76,8 +88,14 @@ export function phpMessages(): string[] {
         __('Refund'),
         // app/Http/Controllers/Dashboard/CardLinkController.php:63
         __('Save a cardholder email first.'),
+        // resources/views/pdf/partials/card-front.blade.php:13
+        __('Scan the code to see your balance.'),
         // resources/views/mail/card-link.blade.php:40
         __('Show the code on that page when you pay. Keep this email: anyone with the link can use the card.'),
+        // resources/views/pdf/card-print-shop.blade.php:18
+        __('Terms and conditions'),
+        // app/Exceptions/CardBatchException.php:60
+        __('That template is not available here.'),
         // app/Exceptions/LedgerException.php:39
         __('The adjustment cannot be 0.'),
         // app/Exceptions/LedgerException.php:54
@@ -88,6 +106,8 @@ export function phpMessages(): string[] {
         __('The balance cannot be more than :max.'),
         // app/Http/Requests/Settings/UpdateOrganizationSettingsRequest.php:59
         __('The brand color must be a hex color such as #1e40af.'),
+        // resources/views/mail/card-batch-pdf-ready.blade.php:14
+        __('The card batch PDF for :business is ready to download.'),
         // app/Http/Controllers/Admin/SuperadminController.php:53
         __('The last superadmin cannot be revoked. Grant the role to someone else first.'),
         // app/Http/Controllers/Dashboard/SettingsController.php:117
@@ -100,9 +120,17 @@ export function phpMessages(): string[] {
         __('The provided two factor recovery code was invalid.'),
         // resources/views/offline.blade.php:46
         __('The reader needs an internet connection to look up cards and post charges. Check your connection and try again.'),
-        // app/Http/Controllers/Dashboard/CardController.php:119
+        // app/Http/Controllers/Dashboard/CardBatchPdfController.php:74
+        __('This PDF is no longer available. Make a new one.'),
+        // app/Exceptions/CardBatchException.php:55
+        __('This batch has no cards in stock to print.'),
+        // app/Exceptions/CardBatchException.php:50
+        __('This batch is already voided.'),
+        // app/Exceptions/CardBatchException.php:40
+        __('This business can hold at most :limit cards in stock. There is room for :room more.'),
+        // app/Exceptions/CardBatchException.php:45
         __('This business has no active program to issue cards from.'),
-        // app/Exceptions/LedgerException.php:89
+        // app/Exceptions/CardBatchException.php:70
         __('This business is suspended. Contact support.'),
         // app/Exceptions/LedgerException.php:79
         __('This card is already activated.'),
@@ -114,11 +142,11 @@ export function phpMessages(): string[] {
         __('This card is not activated yet.'),
         // app/Providers/AppServiceProvider.php:62
         __('This card was emailed several times in the last hour. Try again later.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:264
+        // app/Http/Controllers/Admin/OrganizationController.php:280
         __('This organization is already active.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:265
+        // app/Http/Controllers/Admin/OrganizationController.php:281
         __('This organization is already suspended.'),
-        // app/Http/Controllers/Admin/OrganizationController.php:266
+        // app/Http/Controllers/Admin/OrganizationController.php:282
         __('This organization is cancelled.'),
         // app/Providers/AppServiceProvider.php:56
         __('Too many attempts. Please try again in a minute.'),
@@ -136,5 +164,7 @@ export function phpMessages(): string[] {
         __('Your :business gift card'),
         // resources/views/mail/card-link.blade.php:14
         __('Your balance is :balance.'),
+        // app/Mail/CardBatchPdfReadyMail.php:23
+        __('Your card batch PDF is ready'),
     ];
 }

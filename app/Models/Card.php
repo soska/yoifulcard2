@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property string $id
  * @property string $program_id
+ * @property string|null $batch_id
  * @property string $code
  * @property string $qr_token
  * @property string $balance
@@ -27,9 +28,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property-read Program $program
+ * @property-read CardBatch|null $batch
  * @property-read Collection<int, Transaction> $transactions
  */
-#[Fillable(['program_id', 'code', 'qr_token', 'balance', 'status', 'email', 'last_used_at', 'activated_at'])]
+#[Fillable(['program_id', 'batch_id', 'code', 'qr_token', 'balance', 'status', 'email', 'last_used_at', 'activated_at'])]
 class Card extends Model
 {
     /** @use HasFactory<CardFactory> */
@@ -75,6 +77,17 @@ class Card extends Model
     }
 
     /**
+     * The batch a preissued card came from; null for cards created one at a
+     * time.
+     *
+     * @return BelongsTo<CardBatch, $this>
+     */
+    public function batch(): BelongsTo
+    {
+        return $this->belongsTo(CardBatch::class);
+    }
+
+    /**
      * @return HasMany<Transaction, $this>
      */
     public function transactions(): HasMany
@@ -100,6 +113,31 @@ class Card extends Model
         $id = $organization instanceof Organization ? $organization->id : $organization;
 
         $query->whereIn('program_id', Program::query()->select('id')->where('organization_id', $id));
+    }
+
+    /**
+     * SQL condition for cards that take a slot under the card limit. Stock
+     * (inactive) doesn't, and neither does voided stock: preissued cards
+     * cancelled before they were ever activated. Cards created one at a time
+     * are active with no activated_at, so batch_id tells voided stock apart.
+     */
+    public static function countsTowardLimitSql(): string
+    {
+        $inactive = CardStatus::Inactive->value;
+        $cancelled = CardStatus::Cancelled->value;
+
+        return "cards.status <> '{$inactive}' and not (cards.status = '{$cancelled}' and cards.activated_at is null and cards.batch_id is not null)";
+    }
+
+    /**
+     * Limit the query to cards that take a slot under the card limit (see
+     * countsTowardLimitSql()).
+     *
+     * @param  Builder<Card>  $query
+     */
+    public function scopeCountingTowardLimit(Builder $query): void
+    {
+        $query->whereRaw(self::countsTowardLimitSql());
     }
 
     /**

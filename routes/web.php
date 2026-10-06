@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\CardBatchController as AdminCardBatchController;
+use App\Http\Controllers\Admin\CardBatchPdfController as AdminCardBatchPdfController;
 use App\Http\Controllers\Admin\ClaimSuperadminController;
 use App\Http\Controllers\Admin\OrganizationController as AdminOrganizationController;
 use App\Http\Controllers\Admin\OverviewController;
@@ -7,6 +9,8 @@ use App\Http\Controllers\Admin\SuperadminController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\UserPasswordController;
 use App\Http\Controllers\Dashboard\AnalyticsController;
+use App\Http\Controllers\Dashboard\CardBatchController;
+use App\Http\Controllers\Dashboard\CardBatchPdfController;
 use App\Http\Controllers\Dashboard\CardController;
 use App\Http\Controllers\Dashboard\CardEmailController;
 use App\Http\Controllers\Dashboard\CardLedgerController;
@@ -53,6 +57,13 @@ Route::middleware(['auth', 'organization'])->group(function () {
 
     Route::get('analytics', AnalyticsController::class)->name('analytics');
 
+    // Card batches: owners and managers of a business that can preissue
+    // cards (OrganizationPolicy::viewBatches and ::preissue).
+    Route::get('batches', [CardBatchController::class, 'index'])->name('batches.index');
+    Route::get('batches/{batch}', [CardBatchController::class, 'show'])->whereUuid('batch')->name('batches.show');
+    // Only the person who asked for a PDF downloads it, once (CardBatchPrinter).
+    Route::get('batches/{batch}/pdfs/{pdf}', [CardBatchPdfController::class, 'download'])->whereUuid(['batch', 'pdf'])->name('batches.pdfs.download');
+
     // Business settings. The profile, security and appearance pages are in
     // routes/settings.php.
     Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
@@ -62,6 +73,7 @@ Route::middleware(['auth', 'organization'])->group(function () {
         Route::post('cards', [CardController::class, 'store'])->name('cards.store');
         Route::post('cards/{card}/freeze', [CardController::class, 'freeze'])->whereUuid('card')->name('cards.freeze');
         Route::post('cards/{card}/unfreeze', [CardController::class, 'unfreeze'])->whereUuid('card')->name('cards.unfreeze');
+        Route::post('cards/{card}/void', [CardController::class, 'void'])->whereUuid('card')->name('cards.void');
         Route::patch('cards/{card}/email', CardEmailController::class)->whereUuid('card')->name('cards.email');
         Route::post('cards/{card}/link/email', [CardLinkController::class, 'email'])
             ->whereUuid('card')
@@ -73,6 +85,10 @@ Route::middleware(['auth', 'organization'])->group(function () {
         Route::post('cards/{card}/spend', [CardLedgerController::class, 'spend'])->whereUuid('card')->name('cards.spend');
         Route::post('cards/{card}/adjust', [CardLedgerController::class, 'adjust'])->whereUuid('card')->name('cards.adjust');
         Route::post('cards/{card}/activate', [CardLedgerController::class, 'activate'])->whereUuid('card')->name('cards.activate');
+
+        Route::post('batches', [CardBatchController::class, 'store'])->name('batches.store');
+        Route::post('batches/{batch}/void', [CardBatchController::class, 'void'])->whereUuid('batch')->name('batches.void');
+        Route::post('batches/{batch}/pdfs', [CardBatchPdfController::class, 'store'])->whereUuid('batch')->name('batches.pdfs.store');
 
         // Owners and managers only; the form requests check the role.
         Route::patch('settings/organization', [SettingsController::class, 'updateOrganization'])->name('settings.organization.update');
@@ -113,6 +129,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         Route::patch('organizations/{organization}', [AdminOrganizationController::class, 'update'])->whereUuid('organization')->name('organizations.update');
         Route::post('organizations/{organization}/suspend', [AdminOrganizationController::class, 'suspend'])->whereUuid('organization')->name('organizations.suspend');
         Route::post('organizations/{organization}/reactivate', [AdminOrganizationController::class, 'reactivate'])->whereUuid('organization')->name('organizations.reactivate');
+        Route::post('organizations/{organization}/batches', [AdminCardBatchController::class, 'store'])->whereUuid('organization')->name('organizations.batches.store');
+
+        Route::get('batches/{batch}', [AdminCardBatchController::class, 'show'])->whereUuid('batch')->name('batches.show');
+        Route::post('batches/{batch}/void', [AdminCardBatchController::class, 'void'])->whereUuid('batch')->name('batches.void');
+        Route::post('batches/{batch}/pdfs', [AdminCardBatchPdfController::class, 'store'])->whereUuid('batch')->name('batches.pdfs.store');
+        Route::get('batches/{batch}/pdfs/{pdf}', [AdminCardBatchPdfController::class, 'download'])->whereUuid(['batch', 'pdf'])->name('batches.pdfs.download');
 
         Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
         Route::post('users/{user}/password', UserPasswordController::class)->whereNumber('user')->name('users.password');

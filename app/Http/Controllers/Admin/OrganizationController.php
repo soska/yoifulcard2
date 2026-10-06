@@ -9,14 +9,17 @@ use App\Enums\OrganizationStatus;
 use App\Enums\ProgramType;
 use App\Enums\TransactionType;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dashboard\CardBatchController;
 use App\Http\Requests\Admin\StoreOrganizationRequest;
 use App\Http\Requests\Admin\UpdateOrganizationPlanRequest;
 use App\Models\Card;
+use App\Models\CardBatch;
 use App\Models\Membership;
 use App\Models\Organization;
 use App\Models\Program;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Services\CardBatchIssuer;
 use App\Support\Decimal;
 use App\Support\Flash;
 use App\Support\OneTimeCredentials;
@@ -43,9 +46,9 @@ class OrganizationController extends Controller
         $status = OrganizationStatus::tryFrom((string) $request->query('status', ''));
 
         $organizations = Organization::query()
-            // Inactive (preissued) cards are stock, not usage, so they stay out
-            // of the count shown against the card limit.
-            ->withCount(['memberships', 'cards' => fn (Builder $query) => $query->where('status', '<>', CardStatus::Inactive)])
+            // Stock (inactive cards) and voided stock are not usage, so they
+            // stay out of the count shown against the card limit.
+            ->withCount(['memberships', 'cards' => fn (Builder $query) => $query->countingTowardLimit()])
             ->when($status, fn (Builder $query, OrganizationStatus $status) => $query->where('status', $status))
             ->when($search !== '', function (Builder $query) use ($search): void {
                 $pattern = '%'.addcslashes(mb_strtolower($search), '\\%_').'%';
@@ -139,7 +142,8 @@ class OrganizationController extends Controller
     }
 
     /**
-     * One organization: status, usage, plan, members, and programs.
+     * One organization: status, usage, plan, card batches, members, and
+     * programs.
      */
     public function show(Request $request, Organization $organization): Response
     {
@@ -175,6 +179,7 @@ class OrganizationController extends Controller
                 'logo_url' => $organization->logo_url,
                 'card_limit' => $organization->card_limit,
                 'preissue_limit' => $organization->preissue_limit,
+                'can_preissue' => $organization->can_preissue,
                 'plan_notes' => $organization->plan_notes,
                 'created_at' => $organization->created_at?->toIso8601String(),
                 'updated_at' => $organization->updated_at?->toIso8601String(),
@@ -202,6 +207,15 @@ class OrganizationController extends Controller
                     'email' => $membership->user?->email,
                     'user_id' => $membership->user_id,
                 ]),
+            'batches' => CardBatchController::withCounts($organization->cardBatches())
+                ->latest()
+                ->orderByDesc('id')
+                ->get()
+                ->map(fn (CardBatch $batch) => [
+                    ...CardBatchController::props($batch),
+                    'notes' => $batch->notes,
+                ]),
+            'maxBatchSize' => CardBatchIssuer::MAX_BATCH_SIZE,
             'programs' => $organization->programs()
                 ->oldest()
                 ->oldest('id')
@@ -216,14 +230,16 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Set the card limit and the preissue limit (empty means unlimited) and
-     * the plan notes.
+     * Set the card limit and the preissue limit (empty means unlimited),
+     * whether the business can create card batches itself, and the plan
+     * notes.
      */
     public function update(UpdateOrganizationPlanRequest $request, Organization $organization): RedirectResponse
     {
         $organization->update([
             'card_limit' => $request->validated('card_limit') === null ? null : (int) $request->validated('card_limit'),
             'preissue_limit' => $request->validated('preissue_limit') === null ? null : (int) $request->validated('preissue_limit'),
+            'can_preissue' => $request->boolean('can_preissue'),
             'plan_notes' => $request->validated('plan_notes'),
         ]);
 

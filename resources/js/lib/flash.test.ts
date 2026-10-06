@@ -67,3 +67,58 @@ describe('ledger toasts', () => {
         ).toBe('Card YGFT-CD2A7K activated.');
     });
 });
+
+describe('batch toasts', () => {
+    it('say how many cards the batch has', () => {
+        expect(
+            flashMessage({
+                code: 'batch.created',
+                params: { count: '50', beyond: '0' },
+            }),
+        ).toBe('Created a batch of 50 cards.');
+
+        expect(
+            flashMessage({ code: 'batch.created', params: { count: '1' } }),
+        ).toBe('Created a batch of 1 card.');
+    });
+
+    it('warn when stock has no room under the card limit', () => {
+        expect(
+            flashMessage({
+                code: 'batch.created',
+                params: { count: '50', beyond: '12' },
+            }),
+        ).toBe(
+            'Batch created. 12 cards in stock have no room under your card limit yet.',
+        );
+    });
+
+    it("speak of the business's card limit when a superadmin made the batch", () => {
+        expect(
+            flashMessage({
+                code: 'admin.batch_created',
+                params: { count: '50', beyond: '1' },
+            }),
+        ).toBe(
+            "Batch created. 1 card in stock has no room under the business's card limit.",
+        );
+        expect(
+            flashMessage({
+                code: 'admin.batch_created',
+                params: { count: '50', beyond: '0' },
+            }),
+        ).toBe('Created a batch of 50 cards.');
+    });
+
+    it('say how many cards a void cancelled', () => {
+        expect(
+            flashMessage({ code: 'batch.voided', params: { count: '3' } }),
+        ).toBe('Batch voided. 3 cards cancelled.');
+        expect(
+            flashMessage({
+                code: 'card.voided',
+                params: { code: 'YGFT-CD2A7K' },
+            }),
+        ).toBe('Card YGFT-CD2A7K voided.');
+    });
+});

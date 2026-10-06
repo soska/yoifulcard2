@@ -7,6 +7,7 @@ import {
     Settings,
     CreditCard,
     LayoutGrid,
+    Package,
     ReceiptText,
 } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
@@ -20,14 +21,23 @@ import { analytics, dashboard } from '@/routes';
 import { index as adminIndex } from '@/routes/admin';
 import { index as adminOrganizationsIndex } from '@/routes/admin/organizations';
 import { index as adminUsersIndex } from '@/routes/admin/users';
+import { index as batchesIndex } from '@/routes/batches';
 import { index as cardsIndex } from '@/routes/cards';
 import { edit as settingsEdit } from '@/routes/settings';
 import { index as transactionsIndex } from '@/routes/transactions';
-import type { NavItem } from '@/types';
+import type { CurrentOrganization, NavItem } from '@/types';
 import { __ } from '@/i18n';
 
-/** Built per render: `__()` at module scope would freeze English. */
-function mainNavItems(): NavItem[] {
+/**
+ * Built per render: `__()` at module scope would freeze English. Card
+ * batches show for owners and managers of a business that can preissue
+ * cards (OrganizationPolicy::viewBatches).
+ */
+function mainNavItems(organization: CurrentOrganization | null): NavItem[] {
+    const batches =
+        organization?.can_preissue === true &&
+        (organization.role === 'owner' || organization.role === 'manager');
+
     return [
         {
             title: __('Dashboard'),
@@ -39,6 +49,15 @@ function mainNavItems(): NavItem[] {
             href: cardsIndex(),
             icon: CreditCard,
         },
+        ...(batches
+            ? [
+                  {
+                      title: __('Card batches'),
+                      href: batchesIndex(),
+                      icon: Package,
+                  },
+              ]
+            : []),
         {
             title: __('Transactions'),
             href: transactionsIndex(),
@@ -78,7 +97,7 @@ function adminNavItems(): NavItem[] {
 }
 
 export function AppSidebar() {
-    const { auth } = usePage().props;
+    const { auth, currentOrganization } = usePage().props;
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -86,7 +105,10 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems()} label={__('Business')} />
+                <NavMain
+                    items={mainNavItems(currentOrganization)}
+                    label={__('Business')}
+                />
                 {auth.isSuperadmin && (
                     <NavMain items={adminNavItems()} label={__('Superadmin')} />
                 )}

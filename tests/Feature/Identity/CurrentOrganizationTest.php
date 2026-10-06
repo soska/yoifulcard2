@@ -37,6 +37,7 @@ test('login restores the current organization', function () {
                 'status' => 'active',
                 'timezone' => 'America/Mexico_City',
                 'role' => 'owner',
+                'can_preissue' => false,
             ]));
 });
 

@@ -117,8 +117,10 @@ class CurrentOrganization
 
     /**
      * The shape shared with every page as the `currentOrganization` prop.
+     * `can_preissue` says whether the business creates card batches itself
+     * (owners and managers see them in the sidebar).
      *
-     * @return array{id: string, name: string, status: string, timezone: string, role: string}|null
+     * @return array{id: string, name: string, status: string, timezone: string, role: string, can_preissue: bool}|null
      */
     public static function toProp(Request $request): ?array
     {
@@ -135,6 +137,7 @@ class CurrentOrganization
             'status' => $organization->status->value,
             'timezone' => $organization->timezone,
             'role' => $membership->role->value,
+            'can_preissue' => $organization->can_preissue,
         ];
     }
 

@@ -1,5 +1,13 @@
 import { Form, Head, Link, usePage } from '@inertiajs/react';
-import { AlertCircle, ArrowLeft, History, Snowflake, Sun } from 'lucide-react';
+import {
+    AlertCircle,
+    ArrowLeft,
+    Ban,
+    History,
+    Snowflake,
+    Sun,
+} from 'lucide-react';
+import { ConfirmAction } from '@/components/admin/confirm-action';
 import { suspendedMessage } from '@/components/organization/suspended-banner';
 import { CardActivation } from '@/components/cards/card-activation';
 import { CardBalanceActions } from '@/components/cards/card-balance-actions';
@@ -32,7 +40,15 @@ import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { useDateFormat } from '@/hooks/use-date-format';
 import { useMoneyFormat } from '@/hooks/use-money-format';
-import { email, freeze, index, show, unfreeze } from '@/routes/cards';
+import { show as batchShow } from '@/routes/batches';
+import {
+    email,
+    freeze,
+    index,
+    show,
+    unfreeze,
+    voidMethod,
+} from '@/routes/cards';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { CardDetail, TransactionRow } from '@/types';
 import { __ } from '@/i18n';
@@ -42,6 +58,9 @@ type Props = {
     currency: string;
     transactions: TransactionRow[];
     transactionCount: number;
+    /** An inactive card the user may void (lost or stolen stock). */
+    canVoid: boolean;
+    canViewBatch: boolean;
 };
 
 export default function ShowCard({
@@ -49,6 +68,8 @@ export default function ShowCard({
     currency,
     transactions,
     transactionCount,
+    canVoid,
+    canViewBatch,
 }: Props) {
     const { currentOrganization, errors } = usePage().props;
     const { formatDateTime } = useDateFormat();
@@ -131,6 +152,23 @@ export default function ShowCard({
                                             </dd>
                                         </div>
                                     )}
+                                    {card.batch_id && canViewBatch && (
+                                        <div>
+                                            <dt className="text-sm text-muted-foreground">
+                                                {__('Batch')}
+                                            </dt>
+                                            <dd>
+                                                <Link
+                                                    href={batchShow(
+                                                        card.batch_id,
+                                                    )}
+                                                    className="hover:underline"
+                                                >
+                                                    {__('See batch')}
+                                                </Link>
+                                            </dd>
+                                        </div>
+                                    )}
                                     <div>
                                         <dt className="text-sm text-muted-foreground">
                                             {__('Last used')}
@@ -164,12 +202,16 @@ export default function ShowCard({
                             <CardHeader>
                                 <CardTitle>{__('Status')}</CardTitle>
                                 <CardDescription>
-                                    {__(
-                                        'A frozen card cannot be charged or loaded.',
-                                    )}
+                                    {inactive
+                                        ? __(
+                                              'A card in stock that was lost or stolen can be voided so it can never be activated.',
+                                          )
+                                        : __(
+                                              'A frozen card cannot be charged or loaded.',
+                                          )}
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="flex flex-wrap gap-2">
                                 {card.status === 'frozen' ? (
                                     <Form
                                         {...unfreeze.form(card)}
@@ -228,6 +270,26 @@ export default function ShowCard({
                                             </Button>
                                         )}
                                     </Form>
+                                )}
+                                {inactive && canVoid && (
+                                    <ConfirmAction
+                                        trigger={<Button variant="outline" />}
+                                        triggerLabel={
+                                            <>
+                                                <Ban data-icon="inline-start" />
+                                                {__('Void card')}
+                                            </>
+                                        }
+                                        title={__('Void {code}?', {
+                                            code: card.code,
+                                        })}
+                                        description={__(
+                                            'The card is cancelled and can never be activated. Use this for cards in stock that were lost or stolen.',
+                                        )}
+                                        confirmLabel={__('Void card')}
+                                        form={voidMethod.form(card)}
+                                        destructive
+                                    />
                                 )}
                             </CardContent>
                         </Card>

@@ -8,6 +8,8 @@ import { CardStockNotice } from '@/components/cards/card-stock-notice';
 import { CardUsageNotice } from '@/components/cards/card-usage-notice';
 import Heading from '@/components/heading';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { BatchCreateForm } from '@/components/batches/batch-create-form';
+import { BatchesTable } from '@/components/batches/batches-table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -18,6 +20,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
     Field,
     FieldDescription,
@@ -32,6 +35,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useDateFormat } from '@/hooks/use-date-format';
 import { useMoneyFormat } from '@/hooks/use-money-format';
 import { index as adminIndex } from '@/routes/admin';
+import { show as batchShow } from '@/routes/admin/batches';
 import {
     index,
     reactivate,
@@ -39,6 +43,7 @@ import {
     suspend,
     update,
 } from '@/routes/admin/organizations';
+import { store as storeBatch } from '@/routes/admin/organizations/batches';
 import { index as usersIndex } from '@/routes/admin/users';
 import type { AdminOrganizationPage } from '@/types';
 import { __ } from '@/i18n';
@@ -58,6 +63,8 @@ export default function AdminOrganizationShow({
     stats,
     members,
     programs,
+    batches,
+    maxBatchSize,
 }: AdminOrganizationPage) {
     const { formatMoney } = useMoneyFormat();
     const { formatDateTimeInZone } = useDateFormat();
@@ -346,6 +353,31 @@ export default function AdminOrganizationShow({
                                                 {errors.preissue_limit}
                                             </FieldError>
                                         </Field>
+                                        <Field orientation="horizontal">
+                                            <Checkbox
+                                                id="can_preissue"
+                                                name="can_preissue"
+                                                value="1"
+                                                defaultChecked={
+                                                    organization.can_preissue
+                                                }
+                                            />
+                                            <div className="flex flex-col gap-1">
+                                                <FieldLabel
+                                                    htmlFor="can_preissue"
+                                                    className="font-normal"
+                                                >
+                                                    {__(
+                                                        'The business can create card batches',
+                                                    )}
+                                                </FieldLabel>
+                                                <FieldDescription>
+                                                    {__(
+                                                        'Owners and managers preissue cards themselves. Superadmins can always create batches here.',
+                                                    )}
+                                                </FieldDescription>
+                                            </div>
+                                        </Field>
                                         <Field
                                             data-invalid={!!errors.plan_notes}
                                         >
@@ -495,6 +527,41 @@ export default function AdminOrganizationShow({
                         </Card>
                     </div>
                 </div>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>{__('Card batches')}</CardTitle>
+                        <CardDescription>
+                            {__(
+                                'Preissue inactive cards to print on behalf of the business. They count toward the stock limit, not the card limit, until activated.',
+                            )}
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex flex-col gap-6">
+                        <BatchCreateForm
+                            form={storeBatch.form(organization.id)}
+                            usage={usage}
+                            preissueLimit={organization.preissue_limit}
+                            maxBatchSize={maxBatchSize}
+                            withNotes
+                            disabled={organization.status !== 'active'}
+                            disabledReason={__(
+                                'This business is suspended. Contact support.',
+                            )}
+                        />
+                        {batches.length === 0 ? (
+                            <p className="text-sm text-muted-foreground">
+                                {__('No batches yet.')}
+                            </p>
+                        ) : (
+                            <BatchesTable
+                                batches={batches}
+                                href={(batch) => batchShow(batch.id)}
+                                showNotes
+                            />
+                        )}
+                    </CardContent>
+                </Card>
 
                 <Card>
                     <CardHeader>
