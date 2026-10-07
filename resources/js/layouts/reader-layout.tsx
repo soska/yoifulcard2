@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import AppLogoIcon from '@/components/app-logo-icon';
 import { ReaderOrganizationSwitcher } from '@/components/organization/organization-switcher';
 import { SuspendedBanner } from '@/components/organization/suspended-banner';
-import { PreferenceSwitchers } from '@/components/preferences/preference-switchers';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useOnline } from '@/hooks/use-online';
@@ -48,7 +47,6 @@ export default function ReaderLayout({
                     </div>
                 </div>
                 <div className="flex items-center gap-1">
-                    <PreferenceSwitchers />
                     <Button
                         variant="ghost"
                         size="lg"

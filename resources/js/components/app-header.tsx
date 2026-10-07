@@ -9,7 +9,6 @@ import {
 import AppLogo from '@/components/app-logo';
 import AppLogoIcon from '@/components/app-logo-icon';
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { PreferenceSwitchers } from '@/components/preferences/preference-switchers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -171,7 +170,6 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                     </div>
 
                     <div className="ml-auto flex items-center space-x-2">
-                        <PreferenceSwitchers />
                         <DropdownMenu>
                             <DropdownMenuTrigger
                                 render={

@@ -100,7 +100,7 @@
   "128g53l4k91": {
     "message": "Update your name and email address",
     "refs": [
-      "resources/js/pages/settings/profile.tsx:29:34"
+      "resources/js/pages/settings/profile.tsx:30:34"
     ]
   },
   "12aiv6yg7xr": {
@@ -798,7 +798,7 @@
   "1hnagoswr2z": {
     "message": "You are offline. Scans and charges need a connection.",
     "refs": [
-      "resources/js/layouts/reader-layout.tsx:70:30"
+      "resources/js/layouts/reader-layout.tsx:68:30"
     ]
   },
   "1hq11jbyfw4": {
@@ -1316,8 +1316,8 @@
     "refs": [
       "resources/js/pages/auth/login.tsx:36:38",
       "resources/js/pages/auth/register.tsx:50:38",
-      "resources/js/pages/settings/profile.tsx:62:38",
-      "resources/js/pages/settings/profile.tsx:73:50"
+      "resources/js/pages/settings/profile.tsx:63:38",
+      "resources/js/pages/settings/profile.tsx:74:50"
     ]
   },
   "1rj859nmbst": {
@@ -1348,7 +1348,7 @@
   "1rwil0o3zkk": {
     "message": "Cards",
     "refs": [
-      "resources/js/components/app-header.tsx:56:20",
+      "resources/js/components/app-header.tsx:55:20",
       "resources/js/components/app-sidebar.tsx:46:20",
       "resources/js/components/batches/batch-details.tsx:113:33",
       "resources/js/components/batches/batch-details.tsx:50:18",
@@ -1433,7 +1433,7 @@
   "1u6eldxzxiw": {
     "message": "Navigation menu",
     "refs": [
-      "resources/js/components/app-header.tsx:104:38"
+      "resources/js/components/app-header.tsx:103:38"
     ]
   },
   "1udr3g6nnkf": {
@@ -1590,7 +1590,7 @@
   "1x6on0jacs9": {
     "message": "Analytics",
     "refs": [
-      "resources/js/components/app-header.tsx:66:20",
+      "resources/js/components/app-header.tsx:65:20",
       "resources/js/components/app-sidebar.tsx:65:20",
       "resources/js/pages/analytics/index.tsx:101:32",
       "resources/js/pages/analytics/index.tsx:256:28",
@@ -1753,7 +1753,7 @@
     "message": "Save",
     "refs": [
       "resources/js/pages/cards/show.tsx:350:54",
-      "resources/js/pages/settings/profile.tsx:87:38",
+      "resources/js/pages/settings/profile.tsx:88:38",
       "resources/js/pages/settings/security.tsx:123:38"
     ]
   },
@@ -1803,7 +1803,7 @@
   "20mclgrkbsj": {
     "message": "Transactions",
     "refs": [
-      "resources/js/components/app-header.tsx:61:20",
+      "resources/js/components/app-header.tsx:60:20",
       "resources/js/components/app-sidebar.tsx:60:20",
       "resources/js/pages/admin/organizations/show.tsx:109:20",
       "resources/js/pages/analytics/index.tsx:160:32",
@@ -2711,7 +2711,7 @@
     "message": "Name",
     "refs": [
       "resources/js/pages/auth/register.tsx:31:56",
-      "resources/js/pages/settings/profile.tsx:42:56"
+      "resources/js/pages/settings/profile.tsx:43:56"
     ]
   },
   "7guj9yqzud": {
@@ -2754,9 +2754,9 @@
   "841u6ezovk": {
     "message": "Profile settings",
     "refs": [
-      "resources/js/pages/settings/profile.tsx:103:20",
-      "resources/js/pages/settings/profile.tsx:21:26",
-      "resources/js/pages/settings/profile.tsx:23:38"
+      "resources/js/pages/settings/profile.tsx:109:20",
+      "resources/js/pages/settings/profile.tsx:22:26",
+      "resources/js/pages/settings/profile.tsx:24:38"
     ]
   },
   "843ios6jcq": {
@@ -3413,7 +3413,7 @@
     "message": "Profile",
     "refs": [
       "resources/js/layouts/settings/layout.tsx:23:20",
-      "resources/js/pages/settings/profile.tsx:28:28"
+      "resources/js/pages/settings/profile.tsx:29:28"
     ]
   },
   "nn1ei3v45t": {
@@ -3502,9 +3502,9 @@
   "pqbk79k7rs": {
     "message": "Dashboard",
     "refs": [
-      "resources/js/components/app-header.tsx:51:20",
+      "resources/js/components/app-header.tsx:50:20",
       "resources/js/components/app-sidebar.tsx:41:20",
-      "resources/js/layouts/reader-layout.tsx:59:26",
+      "resources/js/layouts/reader-layout.tsx:57:26",
       "resources/js/pages/dashboard.tsx:189:20",
       "resources/js/pages/dashboard.tsx:55:26",
       "resources/js/pages/welcome.tsx:37:30"
@@ -3570,7 +3570,8 @@
     "message": "Language",
     "refs": [
       "resources/js/components/preferences/locale-switcher.tsx:78:37",
-      "resources/js/components/preferences/locale-switcher.tsx:88:41"
+      "resources/js/components/preferences/locale-switcher.tsx:88:41",
+      "resources/js/pages/settings/profile.tsx:97:49"
     ]
   },
   "rtr3cdg3m6": {
@@ -3779,7 +3780,7 @@
     "message": "Full name",
     "refs": [
       "resources/js/pages/auth/register.tsx:40:50",
-      "resources/js/pages/settings/profile.tsx:51:50"
+      "resources/js/pages/settings/profile.tsx:52:50"
     ]
   },
   "w0ql8swnwo": {
@@ -3828,7 +3829,7 @@
   "wytlvq49bv": {
     "message": "Reader",
     "refs": [
-      "resources/js/layouts/reader-layout.tsx:37:30",
+      "resources/js/layouts/reader-layout.tsx:36:30",
       "resources/js/pages/reader/card.tsx:96:29",
       "resources/js/pages/reader/scan.tsx:49:26"
     ]
