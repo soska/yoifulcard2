@@ -27,7 +27,7 @@
   "10nfdbj7lob": {
     "message": "No users found",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:107:42"
+      "resources/js/pages/admin/users/index.tsx:120:42"
     ]
   },
   "10pdu7nmpj4": {
@@ -175,7 +175,8 @@
   "13uodsi9t97": {
     "message": "Grant superadmin",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:310:79"
+      "resources/js/pages/admin/users/index.tsx:342:78",
+      "resources/js/pages/admin/users/index.tsx:356:83"
     ]
   },
   "13vh9wwjokq": {
@@ -435,7 +436,7 @@
       "resources/js/pages/admin/organizations/create.tsx:281:18",
       "resources/js/pages/admin/organizations/index.tsx:278:18",
       "resources/js/pages/admin/organizations/show.tsx:625:18",
-      "resources/js/pages/admin/users/index.tsx:353:18"
+      "resources/js/pages/admin/users/index.tsx:403:18"
     ]
   },
   "1aktyzsph79": {
@@ -488,7 +489,7 @@
   "1bm5zscauco": {
     "message": "Cancel",
     "refs": [
-      "resources/js/components/admin/confirm-action.tsx:61:34",
+      "resources/js/components/admin/confirm-action.tsx:99:38",
       "resources/js/components/delete-user.tsx:103:46",
       "resources/js/components/passkey-item.tsx:84:30",
       "resources/js/components/passkey-register.tsx:104:22"
@@ -621,7 +622,7 @@
   "1e2oj7ufdbg": {
     "message": "(you)",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:143:66"
+      "resources/js/pages/admin/users/index.tsx:169:66"
     ]
   },
   "1eatevx7xs2": {
@@ -776,9 +777,9 @@
       "resources/js/pages/admin/index.tsx:117:34",
       "resources/js/pages/admin/index.tsx:54:20",
       "resources/js/pages/admin/organizations/show.tsx:438:38",
-      "resources/js/pages/admin/users/index.tsx:354:18",
-      "resources/js/pages/admin/users/index.tsx:60:26",
-      "resources/js/pages/admin/users/index.tsx:63:28"
+      "resources/js/pages/admin/users/index.tsx:404:18",
+      "resources/js/pages/admin/users/index.tsx:73:26",
+      "resources/js/pages/admin/users/index.tsx:76:28"
     ]
   },
   "1h5fk5ihbc0": {
@@ -885,14 +886,14 @@
     "message": "Superadmin",
     "refs": [
       "resources/js/components/app-sidebar.tsx:106:61",
-      "resources/js/pages/admin/users/index.tsx:124:46",
-      "resources/js/pages/admin/users/index.tsx:199:62"
+      "resources/js/pages/admin/users/index.tsx:152:77",
+      "resources/js/pages/admin/users/index.tsx:155:72"
     ]
   },
   "1ihblq0973h": {
     "message": "They can manage every organization, plan, and user.",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:307:78"
+      "resources/js/pages/admin/users/index.tsx:353:82"
     ]
   },
   "1ihux2pdbcj": {
@@ -963,7 +964,7 @@
     "message": "Search",
     "refs": [
       "resources/js/pages/admin/organizations/index.tsx:131:38",
-      "resources/js/pages/admin/users/index.tsx:96:34",
+      "resources/js/pages/admin/users/index.tsx:109:34",
       "resources/js/pages/cards/index.tsx:288:38"
     ]
   },
@@ -1009,14 +1010,14 @@
   "1kxn1xfrz9": {
     "message": "Set a temporary password for {email}?",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:224:68"
+      "resources/js/pages/admin/users/index.tsx:265:72"
     ]
   },
   "1lac8iorsbk": {
     "message": "Search by name or email",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:91:46",
-      "resources/js/pages/admin/users/index.tsx:92:45"
+      "resources/js/pages/admin/users/index.tsx:104:46",
+      "resources/js/pages/admin/users/index.tsx:105:45"
     ]
   },
   "1lkri6lxzh8": {
@@ -1132,7 +1133,8 @@
     "message": "Details",
     "refs": [
       "resources/js/components/transactions/transactions-table.tsx:96:34",
-      "resources/js/pages/admin/organizations/show.tsx:570:36"
+      "resources/js/pages/admin/organizations/show.tsx:570:36",
+      "resources/js/pages/admin/users/index.tsx:178:62"
     ]
   },
   "1ntmhf36kco": {
@@ -1326,6 +1328,12 @@
       "resources/js/pages/auth/two-factor-challenge.tsx:40:25"
     ]
   },
+  "1rfhsusygbe": {
+    "message": "Type {email} to confirm",
+    "refs": [
+      "resources/js/components/admin/confirm-action.tsx:76:42"
+    ]
+  },
   "1rirklzm0o8": {
     "message": "Email address",
     "refs": [
@@ -1501,7 +1509,7 @@
       "resources/js/pages/admin/organizations/index.tsx:92:26",
       "resources/js/pages/admin/organizations/index.tsx:96:32",
       "resources/js/pages/admin/organizations/show.tsx:626:18",
-      "resources/js/pages/admin/users/index.tsx:120:46"
+      "resources/js/pages/admin/users/index.tsx:133:46"
     ]
   },
   "1v9oyjvzd9t": {
@@ -1521,12 +1529,6 @@
     "message": "You do not have permission to access this page.",
     "refs": [
       "resources/js/pages/errors/forbidden.tsx:39:30"
-    ]
-  },
-  "1vqugrvir99": {
-    "message": "Revoke",
-    "refs": [
-      "resources/js/pages/admin/users/index.tsx:251:74"
     ]
   },
   "1vt2qztixfh": {
@@ -1569,13 +1571,7 @@
   "1wwaqy7lgcr": {
     "message": "Try another name or email.",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:110:42"
-    ]
-  },
-  "1x0nu35r42d": {
-    "message": "Grant",
-    "refs": [
-      "resources/js/pages/admin/users/index.tsx:296:74"
+      "resources/js/pages/admin/users/index.tsx:123:42"
     ]
   },
   "1x1dscjganl": {
@@ -1605,7 +1601,7 @@
   "1xepvuia13": {
     "message": "Showing {from} to {to} of {total} users",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:330:38"
+      "resources/js/pages/admin/users/index.tsx:380:38"
     ]
   },
   "1xf9z26jg3m": {
@@ -1703,7 +1699,7 @@
   "1yxnu4m1dvv": {
     "message": "Revoke your own superadmin role?",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:258:75"
+      "resources/js/pages/admin/users/index.tsx:300:79"
     ]
   },
   "1z57eyi5dfo": {
@@ -1783,7 +1779,7 @@
   "20cmm9ewpd": {
     "message": "Joined",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:122:53"
+      "resources/js/pages/admin/users/index.tsx:181:62"
     ]
   },
   "20e22lsd4zw": {
@@ -1819,7 +1815,7 @@
   "20necazrl3k": {
     "message": "You will lose access to the admin area right away. The last superadmin cannot be revoked.",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:270:75"
+      "resources/js/pages/admin/users/index.tsx:312:79"
     ]
   },
   "20qtmpxt0f4": {
@@ -1890,7 +1886,8 @@
   "21poeejymlw": {
     "message": "Revoke superadmin",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:277:79"
+      "resources/js/pages/admin/users/index.tsx:293:78",
+      "resources/js/pages/admin/users/index.tsx:319:83"
     ]
   },
   "21rjkq8k9uj": {
@@ -2184,7 +2181,7 @@
   "28uv801464p": {
     "message": "Everyone with an account. Set a temporary password when someone is locked out, and manage superadmins.",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:64:34"
+      "resources/js/pages/admin/users/index.tsx:77:34"
     ]
   },
   "28v721n7uwx": {
@@ -2265,7 +2262,7 @@
   "2a5d0xtb3sd": {
     "message": "Revoke superadmin from {email}?",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:261:75"
+      "resources/js/pages/admin/users/index.tsx:303:79"
     ]
   },
   "2aal0plswig": {
@@ -2309,6 +2306,12 @@
     "message": "Page not found",
     "refs": [
       "resources/js/pages/errors/error.tsx:31:20"
+    ]
+  },
+  "2bmze7tfhhk": {
+    "message": "Actions for {email}",
+    "refs": [
+      "resources/js/pages/admin/users/index.tsx:234:81"
     ]
   },
   "2bqf6vaf7d4": {
@@ -2395,7 +2398,7 @@
     "message": "Temporary password",
     "refs": [
       "resources/js/components/admin/one-time-credentials.tsx:45:26",
-      "resources/js/pages/admin/users/index.tsx:219:70"
+      "resources/js/pages/admin/users/index.tsx:260:74"
     ]
   },
   "2dot6av33wj": {
@@ -2558,7 +2561,7 @@
   "30kzn56ltd": {
     "message": "Set password",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:233:75"
+      "resources/js/pages/admin/users/index.tsx:274:79"
     ]
   },
   "319pnaoaed": {
@@ -2923,7 +2926,7 @@
   "axif9jcda4": {
     "message": "Make {email} a superadmin?",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:301:72"
+      "resources/js/pages/admin/users/index.tsx:347:76"
     ]
   },
   "b35afls1tw": {
@@ -3266,7 +3269,7 @@
   "jmp5nke2fe": {
     "message": "Their current password stops working and they are signed out on other devices. The new password is shown once.",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:230:74"
+      "resources/js/pages/admin/users/index.tsx:271:78"
     ]
   },
   "k1sucxnuss": {
@@ -3380,7 +3383,7 @@
   "m997hoz843": {
     "message": "They lose access to the admin area. The last superadmin cannot be revoked.",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:273:75"
+      "resources/js/pages/admin/users/index.tsx:315:79"
     ]
   },
   "me33ea3jpr": {
@@ -3658,7 +3661,7 @@
   "t3a315u4p2": {
     "message": "Actions",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:127:46"
+      "resources/js/pages/admin/users/index.tsx:136:46"
     ]
   },
   "t5pzxeo2v2": {
@@ -3854,7 +3857,7 @@
   "wlwxg6d4mw": {
     "message": "User",
     "refs": [
-      "resources/js/pages/admin/users/index.tsx:118:53"
+      "resources/js/pages/admin/users/index.tsx:131:53"
     ]
   },
   "wnhmh5yz21": {

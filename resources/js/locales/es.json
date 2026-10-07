@@ -238,7 +238,6 @@
   "1v9oyjvzd9t": "Suspendida",
   "1vb1khfoxl4": "Nuevo lote",
   "1vjn8kt648j": "No tienes permiso para entrar a esta página.",
-  "1vqugrvir99": "Revocar",
   "1vt2qztixfh": "Estamos haciendo algunas mejoras. Vuelve en unos minutos.",
   "1w41hd19mti": "Inicia sesión en tu cuenta",
   "1wagu0x0pmv": "Límite de inventario",
@@ -246,7 +245,6 @@
   "1wndfg44twv": "Monto a agregar ({currency})",
   "1wv8z2yvi5c": "Descongelar tarjeta",
   "1wwaqy7lgcr": "Prueba con otro nombre o correo.",
-  "1x0nu35r42d": "Otorgar",
   "1x1dscjganl": "Esta es una sección protegida. Confirma tu contraseña para continuar.",
   "1x2um48y627": "Procede con cuidado; esto no se puede deshacer.",
   "1x5hrgqzt7z": "El monto debe ser mayor a 0.",
@@ -656,5 +654,7 @@
   "18tpci2jt91": "Resumen",
   "2410hf7m6ao": "Actividad diaria de tarjetas prepagadas. Selecciona una fecha para ver sus transacciones.",
   "29rrdcvdfef": "Tarjetas emitidas",
-  "80wos2exeo": "Saldo actual en tarjetas"
+  "80wos2exeo": "Saldo actual en tarjetas",
+  "1rfhsusygbe": "Escribe {email} para confirmar",
+  "2bmze7tfhhk": "Acciones para {email}"
 }

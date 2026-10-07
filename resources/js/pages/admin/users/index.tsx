@@ -1,5 +1,5 @@
 import { Head, Link, router, usePage } from '@inertiajs/react';
-import { KeyRound, Search, ShieldCheck, ShieldOff, Users } from 'lucide-react';
+import { Crown, Ellipsis, KeyRound, Search, Users } from 'lucide-react';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { ConfirmAction } from '@/components/admin/confirm-action';
@@ -8,7 +8,6 @@ import { RoleBadge } from '@/components/admin/role-badge';
 import { ListPagination } from '@/components/cards/list-pagination';
 import Heading from '@/components/heading';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -18,6 +17,12 @@ import {
     EmptyMedia,
     EmptyTitle,
 } from '@/components/ui/empty';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import {
     Table,
@@ -119,10 +124,6 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                         <TableHead>
                                             {__('Organizations')}
                                         </TableHead>
-                                        <TableHead>{__('Joined')}</TableHead>
-                                        <TableHead>
-                                            {__('Superadmin')}
-                                        </TableHead>
                                         <TableHead className="text-right">
                                             {__('Actions')}
                                         </TableHead>
@@ -135,8 +136,25 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                         return (
                                             <TableRow key={user.id}>
                                                 <TableCell>
-                                                    <div className="font-medium">
+                                                    <div className="flex flex-wrap items-center gap-2 font-medium">
                                                         {user.name}
+                                                        {user.is_superadmin && (
+                                                            <span
+                                                                role="img"
+                                                                aria-label={__(
+                                                                    'Superadmin',
+                                                                )}
+                                                                title={__(
+                                                                    'Superadmin',
+                                                                )}
+                                                                className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-800 ring-1 ring-amber-300/60 dark:bg-amber-400/15 dark:text-amber-300 dark:ring-amber-400/30"
+                                                            >
+                                                                <Crown
+                                                                    className="size-4"
+                                                                    aria-hidden="true"
+                                                                />
+                                                            </span>
+                                                        )}
                                                         {isYou && (
                                                             <span className="text-muted-foreground">
                                                                 {' '}
@@ -147,6 +165,17 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                                     <div className="text-xs text-muted-foreground">
                                                         {user.email}
                                                     </div>
+                                                    <details className="mt-1 text-xs text-muted-foreground">
+                                                        <summary className="cursor-pointer">
+                                                            {__('Details')}
+                                                        </summary>
+                                                        <p className="mt-1">
+                                                            {__('Joined')}:{' '}
+                                                            {formatDate(
+                                                                user.created_at,
+                                                            )}
+                                                        </p>
+                                                    </details>
                                                 </TableCell>
                                                 <TableCell>
                                                     {user.memberships.length ===
@@ -187,135 +216,148 @@ export default function AdminUsersIndex({ users, filters }: Props) {
                                                         </ul>
                                                     )}
                                                 </TableCell>
-                                                <TableCell className="text-muted-foreground">
-                                                    {formatDate(
-                                                        user.created_at,
-                                                    )}
-                                                </TableCell>
                                                 <TableCell>
-                                                    {user.is_superadmin ? (
-                                                        <Badge>
-                                                            <ShieldCheck data-icon="inline-start" />
-                                                            {__('Superadmin')}
-                                                        </Badge>
-                                                    ) : (
-                                                        <span className="text-muted-foreground">
-                                                            —
-                                                        </span>
-                                                    )}
-                                                </TableCell>
-                                                <TableCell>
-                                                    <div className="flex justify-end gap-2">
-                                                        <ConfirmAction
-                                                            trigger={
+                                                    <DropdownMenu>
+                                                        <DropdownMenuTrigger
+                                                            render={
                                                                 <Button
-                                                                    variant="outline"
-                                                                    size="sm"
+                                                                    variant="ghost"
+                                                                    size="icon"
+                                                                    aria-label={__(
+                                                                        'Actions for {email}',
+                                                                        {
+                                                                            email: user.email,
+                                                                        },
+                                                                    )}
                                                                 />
                                                             }
-                                                            triggerLabel={
-                                                                <>
-                                                                    <KeyRound data-icon="inline-start" />
-                                                                    {__(
-                                                                        'Temporary password',
-                                                                    )}
-                                                                </>
-                                                            }
-                                                            title={__(
-                                                                'Set a temporary password for {email}?',
-                                                                {
-                                                                    email: user.email,
-                                                                },
-                                                            )}
-                                                            description={__(
-                                                                'Their current password stops working and they are signed out on other devices. The new password is shown once.',
-                                                            )}
-                                                            confirmLabel={__(
-                                                                'Set password',
-                                                            )}
-                                                            form={password.form(
-                                                                user.id,
-                                                            )}
-                                                        />
-                                                        {user.is_superadmin ? (
+                                                        >
+                                                            <Ellipsis />
+                                                        </DropdownMenuTrigger>
+                                                        <DropdownMenuContent
+                                                            align="end"
+                                                            className="min-w-60"
+                                                        >
                                                             <ConfirmAction
                                                                 trigger={
-                                                                    <Button
-                                                                        variant="outline"
-                                                                        size="sm"
+                                                                    <DropdownMenuItem
+                                                                        closeOnClick={
+                                                                            false
+                                                                        }
                                                                     />
                                                                 }
                                                                 triggerLabel={
                                                                     <>
-                                                                        <ShieldOff data-icon="inline-start" />
+                                                                        <KeyRound data-icon="inline-start" />
                                                                         {__(
-                                                                            'Revoke',
-                                                                        )}
-                                                                    </>
-                                                                }
-                                                                title={
-                                                                    isYou
-                                                                        ? __(
-                                                                              'Revoke your own superadmin role?',
-                                                                          )
-                                                                        : __(
-                                                                              'Revoke superadmin from {email}?',
-                                                                              {
-                                                                                  email: user.email,
-                                                                              },
-                                                                          )
-                                                                }
-                                                                description={
-                                                                    isYou
-                                                                        ? __(
-                                                                              'You will lose access to the admin area right away. The last superadmin cannot be revoked.',
-                                                                          )
-                                                                        : __(
-                                                                              'They lose access to the admin area. The last superadmin cannot be revoked.',
-                                                                          )
-                                                                }
-                                                                confirmLabel={__(
-                                                                    'Revoke superadmin',
-                                                                )}
-                                                                form={destroy.form(
-                                                                    user.id,
-                                                                )}
-                                                                destructive
-                                                            />
-                                                        ) : (
-                                                            <ConfirmAction
-                                                                trigger={
-                                                                    <Button
-                                                                        variant="outline"
-                                                                        size="sm"
-                                                                    />
-                                                                }
-                                                                triggerLabel={
-                                                                    <>
-                                                                        <ShieldCheck data-icon="inline-start" />
-                                                                        {__(
-                                                                            'Grant',
+                                                                            'Temporary password',
                                                                         )}
                                                                     </>
                                                                 }
                                                                 title={__(
-                                                                    'Make {email} a superadmin?',
+                                                                    'Set a temporary password for {email}?',
                                                                     {
                                                                         email: user.email,
                                                                     },
                                                                 )}
                                                                 description={__(
-                                                                    'They can manage every organization, plan, and user.',
+                                                                    'Their current password stops working and they are signed out on other devices. The new password is shown once.',
                                                                 )}
                                                                 confirmLabel={__(
-                                                                    'Grant superadmin',
+                                                                    'Set password',
                                                                 )}
-                                                                form={store.form(
+                                                                form={password.form(
                                                                     user.id,
                                                                 )}
                                                             />
-                                                        )}
-                                                    </div>
+                                                            {user.is_superadmin ? (
+                                                                <ConfirmAction
+                                                                    trigger={
+                                                                        <DropdownMenuItem
+                                                                            closeOnClick={
+                                                                                false
+                                                                            }
+                                                                        />
+                                                                    }
+                                                                    triggerLabel={
+                                                                        <>
+                                                                            <Crown data-icon="inline-start" />
+                                                                            {__(
+                                                                                'Revoke superadmin',
+                                                                            )}
+                                                                        </>
+                                                                    }
+                                                                    title={
+                                                                        isYou
+                                                                            ? __(
+                                                                                  'Revoke your own superadmin role?',
+                                                                              )
+                                                                            : __(
+                                                                                  'Revoke superadmin from {email}?',
+                                                                                  {
+                                                                                      email: user.email,
+                                                                                  },
+                                                                              )
+                                                                    }
+                                                                    description={
+                                                                        isYou
+                                                                            ? __(
+                                                                                  'You will lose access to the admin area right away. The last superadmin cannot be revoked.',
+                                                                              )
+                                                                            : __(
+                                                                                  'They lose access to the admin area. The last superadmin cannot be revoked.',
+                                                                              )
+                                                                    }
+                                                                    confirmLabel={__(
+                                                                        'Revoke superadmin',
+                                                                    )}
+                                                                    confirmationEmail={
+                                                                        user.email
+                                                                    }
+                                                                    form={destroy.form(
+                                                                        user.id,
+                                                                    )}
+                                                                    destructive
+                                                                />
+                                                            ) : (
+                                                                <ConfirmAction
+                                                                    trigger={
+                                                                        <DropdownMenuItem
+                                                                            closeOnClick={
+                                                                                false
+                                                                            }
+                                                                        />
+                                                                    }
+                                                                    triggerLabel={
+                                                                        <>
+                                                                            <Crown data-icon="inline-start" />
+                                                                            {__(
+                                                                                'Grant superadmin',
+                                                                            )}
+                                                                        </>
+                                                                    }
+                                                                    title={__(
+                                                                        'Make {email} a superadmin?',
+                                                                        {
+                                                                            email: user.email,
+                                                                        },
+                                                                    )}
+                                                                    description={__(
+                                                                        'They can manage every organization, plan, and user.',
+                                                                    )}
+                                                                    confirmLabel={__(
+                                                                        'Grant superadmin',
+                                                                    )}
+                                                                    confirmationEmail={
+                                                                        user.email
+                                                                    }
+                                                                    form={store.form(
+                                                                        user.id,
+                                                                    )}
+                                                                />
+                                                            )}
+                                                        </DropdownMenuContent>
+                                                    </DropdownMenu>
                                                 </TableCell>
                                             </TableRow>
                                         );
