@@ -4,7 +4,8 @@
     "type": "module",
     "scripts": {
         "build": "vp build",
-        "dev": "vp dev",
+        "dev": "php artisan dev",
+        "dev:vite": "vp dev",
         "check": "vp check",
         "check:fix": "vp check --fix",
         "types:check": "tsc --noEmit",

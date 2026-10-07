@@ -22,7 +22,9 @@ The seeder prints a few public card URLs (`/c/{token}`) when it finishes.
 ## Printing card batches
 
 Batch PDFs are made on the queue and expired ones are pruned by the scheduler
-(`model:prune`, hourly), so run the workers and the scheduler alongside the app:
+(`model:prune`, hourly). In development, `pnpm dev` starts both queue workers
+along with the server and Vite. Elsewhere, run the workers and the scheduler
+alongside the app:
 
 ```bash
 php artisan queue:work

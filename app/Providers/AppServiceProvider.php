@@ -9,6 +9,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\DevCommands;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +42,18 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDefaults();
         $this->rememberOrganizationOnLogin();
         $this->configureRateLimiting();
+        $this->configureDevCommands();
+    }
+
+    /**
+     * `pnpm dev` runs `php artisan dev`, so Vite runs as `dev:vite` here: the
+     * default (`pnpm run dev`) would start artisan dev again. Card batch PDFs
+     * go to their own queue connection, which needs its own worker.
+     */
+    protected function configureDevCommands(): void
+    {
+        DevCommands::node('dev:vite', 'vite');
+        DevCommands::artisan('queue:listen pdfs --tries=1 --timeout=0', 'pdfs');
     }
 
     /**
