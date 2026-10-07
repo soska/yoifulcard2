@@ -56,7 +56,10 @@ export function TransactionsTable({
                     const amount = signedAmount(transaction);
 
                     return (
-                        <TableRow key={transaction.id}>
+                        <TableRow
+                            key={transaction.id}
+                            className="[&>td]:py-3.5"
+                        >
                             <TableCell className="whitespace-nowrap text-muted-foreground">
                                 {formatDateTime(transaction.created_at)}
                             </TableCell>
