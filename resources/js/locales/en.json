@@ -5,10 +5,6 @@
   "10f3jl55aqr": "No members.",
   "10nfdbj7lob": "No users found",
   "10pdu7nmpj4": "A link to your terms and conditions.",
-  "10r1ie41le2": {
-    "one": "{count} active",
-    "other": "{count} active"
-  },
   "10rdx7z6m6w": "Balance after",
   "10t1t7hj33a": "Passkey verification session expired. Please try again.",
   "11cwj6fprvc": "Card {code} created.",
@@ -75,7 +71,7 @@
   "1ajuoro6znp": "Created",
   "1ajy2490000": "Admin",
   "1aktyzsph79": "All statuses",
-  "1b0vfdd8su8": "The latest transactions across all cards.",
+  "1b4carm7ng0": "Copy amount",
   "1b8g8mavvcd": "Initial balance ({currency})",
   "1bahks3o107": "https://yourbusiness.com/terms",
   "1bjn3xjv3c": "Log in",
@@ -111,7 +107,6 @@
   "1ecdlb1cdnb": "Security",
   "1ehboq0b5ag": "You are not part of a business yet",
   "1emymuoqehx": "Print",
-  "1epujjaqd0u": "Create a card and add funds to get started.",
   "1esddlkv0s9": "Card limit",
   "1f1a2a3h8xj": "Switch business",
   "1f69ehq4fo0": "View recovery codes",
@@ -364,6 +359,7 @@
   "29soi5j2rkr": "Enter your details below to create your account",
   "29ucbpe8an7": "Your balance is :balance.",
   "29y6aac5m7m": "acme-coffee",
+  "2a3wepfhtxt": "The amount could not be copied.",
   "2a5d0xtb3sd": "Revoke superadmin from {email}?",
   "2aal0plswig": "PDF history",
   "2acvkkh85qe": "Activate this card before sending it.",
@@ -491,10 +487,6 @@
     "other": "{count} cards in stock"
   },
   "d8uwxid69d": "Create account",
-  "deut0dsn3k": {
-    "one": "{count} transaction in {month}",
-    "other": "{count} transactions in {month}"
-  },
   "dmjydccuxx": "Manage your two-factor authentication settings",
   "doqmbl7ch4": "A voided card was never activated; activated cards keep working when a batch is voided.",
   "dyxte40li2": "Passkeys",
@@ -505,22 +497,10 @@
   "euf7o3nze7": "Something went wrong.",
   "exzzc81bc6": "By day",
   "f2v9rtmf85": "Code",
-  "fck8u3o77b": {
-    "one": "{count} frozen",
-    "other": "{count} frozen"
-  },
-  "fi1aj4103u": {
-    "one": "{count} cancelled",
-    "other": "{count} cancelled"
-  },
   "fjazhsf9ja": "See batch",
   "frjj2motly": "Sound on",
   "g20j58fbil": "Stock limit reached",
   "gbq6pkhmy1": "Save email",
-  "gexz7lm4ol": {
-    "one": "{count} depleted",
-    "other": "{count} depleted"
-  },
   "gklvo3l49v": "Failed to fetch recovery codes",
   "gktxymbq14": "Organization reactivated.",
   "gmznfc5eow": "Add funds",

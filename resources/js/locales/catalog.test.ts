@@ -153,19 +153,19 @@ it('renders Spanish through the runtime, selecting the right plural form', () =>
         __({ one: '{count} card', other: '{count} cards' }, { count: 0 }),
     ).toBe('0 tarjetas');
 
-    // Cards are feminine, so the dashboard's status counts agree in number.
+    // Stock counts agree in number.
     expect(
         __(
-            { one: '{count} active', other: '{count} active' },
-            { count: 1, context: 'cards' },
+            { one: '{count} card in stock', other: '{count} cards in stock' },
+            { count: 1 },
         ),
-    ).toBe('1 activa');
+    ).toBe('1 tarjeta en inventario');
     expect(
         __(
-            { one: '{count} active', other: '{count} active' },
-            { count: 3, context: 'cards' },
+            { one: '{count} card in stock', other: '{count} cards in stock' },
+            { count: 3 },
         ),
-    ).toBe('3 activas');
+    ).toBe('3 tarjetas en inventario');
 });
 
 it('falls back to the English source for a message it has no entry for', () => {

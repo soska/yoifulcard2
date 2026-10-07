@@ -1,43 +1,27 @@
 import { Head, Link } from '@inertiajs/react';
-import {
-    ArrowRight,
-    CreditCard,
-    Plus,
-    ReceiptText,
-    ScanLine,
-    Wallet,
-} from 'lucide-react';
-import type { ReactNode } from 'react';
+import { ArrowRight, Ban, Copy, Plus, ScanLine } from 'lucide-react';
+import { toast } from 'sonner';
 import { CardStockNotice } from '@/components/cards/card-stock-notice';
 import { CardUsageNotice } from '@/components/cards/card-usage-notice';
-import { TransactionsTable } from '@/components/transactions/transactions-table';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
     Card,
     CardAction,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import {
-    Empty,
-    EmptyDescription,
-    EmptyHeader,
-    EmptyMedia,
-    EmptyTitle,
-} from '@/components/ui/empty';
+import { TransactionTypeBadge } from '@/components/transactions/transaction-type-badge';
 import { useDateFormat } from '@/hooks/use-date-format';
 import { useMoneyFormat } from '@/hooks/use-money-format';
-import { analytics, dashboard, scan } from '@/routes';
-import { create, index as cardsIndex } from '@/routes/cards';
+import { dashboard, scan } from '@/routes';
+import { create, show } from '@/routes/cards';
 import { index as transactionsIndex } from '@/routes/transactions';
-import type { CardUsage, DashboardStats, TransactionRow } from '@/types';
-import type { RouteDefinition } from '@/wayfinder';
+import type { CardUsage, TransactionRow } from '@/types';
 import { __ } from '@/i18n';
 
 type Props = {
-    stats: DashboardStats;
     recentTransactions: TransactionRow[];
     currency: string;
     usage: CardUsage;
@@ -47,99 +31,24 @@ type Props = {
 // The two things people come to the dashboard to do.
 const primaryAction = 'h-16 gap-3 text-base sm:h-20 sm:text-lg [&_svg]:size-6!';
 
-function StatCard({
-    title,
-    value,
-    detail,
-    icon,
-    href,
-}: {
-    title: string;
-    value: ReactNode;
-    detail?: ReactNode;
-    icon: ReactNode;
-    href: RouteDefinition<'get'>;
-}) {
-    return (
-        <Link
-            href={href}
-            className="rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-        >
-            <Card
-                size="sm"
-                className="h-full transition-colors hover:bg-muted/50"
-            >
-                <CardHeader>
-                    <CardDescription>{title}</CardDescription>
-                    <CardTitle className="text-2xl font-semibold tabular-nums">
-                        {value}
-                    </CardTitle>
-                    <CardAction className="text-muted-foreground [&_svg]:size-4">
-                        {icon}
-                    </CardAction>
-                </CardHeader>
-                {detail && (
-                    <CardContent className="text-sm text-muted-foreground">
-                        {detail}
-                    </CardContent>
-                )}
-            </Card>
-        </Link>
-    );
-}
-
-/** Preissued cards not activated yet. */
-function cardsInStock(count: number): string {
-    return __(
-        { one: '{count} card in stock', other: '{count} cards in stock' },
-        { count },
-    );
-}
-
-function cardBreakdown(stats: DashboardStats): string | undefined {
-    if (stats.cards === 0) {
-        return undefined;
-    }
-
-    return [
-        __(
-            { one: '{count} active', other: '{count} active' },
-            { count: stats.active, context: 'cards' },
-        ),
-        stats.frozen > 0
-            ? __(
-                  { one: '{count} frozen', other: '{count} frozen' },
-                  { count: stats.frozen, context: 'cards' },
-              )
-            : null,
-        stats.depleted > 0
-            ? __(
-                  { one: '{count} depleted', other: '{count} depleted' },
-                  { count: stats.depleted, context: 'cards' },
-              )
-            : null,
-        stats.cancelled > 0
-            ? __(
-                  { one: '{count} cancelled', other: '{count} cancelled' },
-                  { count: stats.cancelled, context: 'cards' },
-              )
-            : null,
-        stats.inactive > 0 ? cardsInStock(stats.inactive) : null,
-    ]
-        .filter(Boolean)
-        .join(' · ');
-}
-
 export default function Dashboard({
-    stats,
-    recentTransactions,
-    currency,
     usage,
     canCreateCards,
+    recentTransactions,
+    currency,
 }: Props) {
-    const createBlocked = !canCreateCards || usage.atLimit;
     const { formatMoney } = useMoneyFormat();
-    const { formatMonth } = useDateFormat();
+    const { formatDateTime } = useDateFormat();
+
+    async function copyAmount(amount: string) {
+        try {
+            await navigator.clipboard.writeText(amount);
+            toast.success(__('Copied'));
+        } catch {
+            toast.error(__('The amount could not be copied.'));
+        }
+    }
+    const createBlocked = !canCreateCards || usage.atLimit;
 
     return (
         <>
@@ -185,82 +94,87 @@ export default function Dashboard({
                     </Button>
                 </div>
 
+                {!canCreateCards && (
+                    <Alert variant="destructive">
+                        <Ban />
+                        <AlertTitle>{__('Create card')}</AlertTitle>
+                        <AlertDescription>
+                            {__('This business is suspended. Contact support.')}
+                        </AlertDescription>
+                    </Alert>
+                )}
                 <CardUsageNotice usage={usage} />
                 <CardStockNotice usage={usage} />
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                    <StatCard
-                        title={__('Cards')}
-                        value={
-                            // Cards in stock don't count until activated.
-                            usage.limit === null
-                                ? usage.used
-                                : `${usage.used} / ${usage.limit}`
-                        }
-                        detail={cardBreakdown(stats)}
-                        icon={<CreditCard />}
-                        href={cardsIndex()}
-                    />
-                    <StatCard
-                        title={__('Outstanding balance')}
-                        value={formatMoney(stats.outstandingBalance, currency)}
-                        detail={__(
-                            {
-                                one: '{count} transaction in {month}',
-                                other: '{count} transactions in {month}',
-                            },
-                            {
-                                count: stats.monthTransactions,
-                                month: formatMonth(stats.month),
-                            },
-                        )}
-                        icon={<Wallet />}
-                        href={analytics()}
-                    />
-                </div>
 
                 <Card>
                     <CardHeader>
                         <CardTitle>{__('Recent activity')}</CardTitle>
-                        <CardDescription>
-                            {__('The latest transactions across all cards.')}
-                        </CardDescription>
-                        {recentTransactions.length > 0 && (
-                            <CardAction>
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    nativeButton={false}
-                                    render={<Link href={transactionsIndex()} />}
-                                >
-                                    {__('View all')}
-                                    <ArrowRight data-icon="inline-end" />
-                                </Button>
-                            </CardAction>
-                        )}
+                        <CardAction>
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                nativeButton={false}
+                                render={<Link href={transactionsIndex()} />}
+                            >
+                                {__('View all')}
+                                <ArrowRight data-icon="inline-end" />
+                            </Button>
+                        </CardAction>
                     </CardHeader>
                     <CardContent>
                         {recentTransactions.length === 0 ? (
-                            <Empty>
-                                <EmptyHeader>
-                                    <EmptyMedia variant="icon">
-                                        <ReceiptText />
-                                    </EmptyMedia>
-                                    <EmptyTitle>
-                                        {__('No activity yet')}
-                                    </EmptyTitle>
-                                    <EmptyDescription>
-                                        {__(
-                                            'Create a card and add funds to get started.',
-                                        )}
-                                    </EmptyDescription>
-                                </EmptyHeader>
-                            </Empty>
+                            <p className="text-sm text-muted-foreground">
+                                {__('No activity yet')}
+                            </p>
                         ) : (
-                            <TransactionsTable
-                                transactions={recentTransactions}
-                                currency={currency}
-                            />
+                            <ul className="divide-y">
+                                {recentTransactions
+                                    .slice(0, 5)
+                                    .map((transaction) => (
+                                        <li
+                                            key={transaction.id}
+                                            className="flex items-center justify-between gap-3 py-3 first:pt-0 last:pb-0"
+                                        >
+                                            <div className="min-w-0 space-y-1.5">
+                                                <div className="flex flex-wrap items-center gap-2">
+                                                    <TransactionTypeBadge
+                                                        type={transaction.type}
+                                                    />
+                                                    <Link
+                                                        href={show(
+                                                            transaction.card.id,
+                                                        )}
+                                                        className="font-mono text-sm font-medium hover:underline"
+                                                    >
+                                                        {transaction.card.code}
+                                                    </Link>
+                                                </div>
+                                                <p className="text-xs text-muted-foreground">
+                                                    {formatDateTime(
+                                                        transaction.created_at,
+                                                    )}
+                                                </p>
+                                            </div>
+                                            <Button
+                                                variant="ghost"
+                                                className="h-auto shrink-0 gap-2 px-2 py-3 text-base font-semibold tabular-nums"
+                                                title={__('Copy amount')}
+                                                aria-label={`${__('Copy amount')}: ${formatMoney(transaction.amount, currency)}`}
+                                                onClick={() =>
+                                                    void copyAmount(
+                                                        transaction.amount,
+                                                    )
+                                                }
+                                            >
+                                                {formatMoney(
+                                                    transaction.amount,
+                                                    currency,
+                                                )}
+                                                <Copy className="size-3.5 text-muted-foreground" />
+                                            </Button>
+                                        </li>
+                                    ))}
+                            </ul>
                         )}
                     </CardContent>
                 </Card>

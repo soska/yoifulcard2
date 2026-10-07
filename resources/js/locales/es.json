@@ -5,10 +5,6 @@
   "10f3jl55aqr": "Sin miembros.",
   "10nfdbj7lob": "No se encontraron usuarios",
   "10pdu7nmpj4": "Un enlace a tus términos y condiciones.",
-  "10r1ie41le2": {
-    "one": "{count} activa",
-    "other": "{count} activas"
-  },
   "10rdx7z6m6w": "Saldo después",
   "10t1t7hj33a": "La sesión para verificar la llave de acceso expiró. Vuelve a intentarlo.",
   "11cwj6fprvc": "Se creó la tarjeta {code}.",
@@ -75,7 +71,6 @@
   "1ajuoro6znp": "Creada",
   "1ajy2490000": "Administración",
   "1aktyzsph79": "Todos los estados",
-  "1b0vfdd8su8": "Las transacciones más recientes de todas las tarjetas.",
   "1b8g8mavvcd": "Saldo inicial ({currency})",
   "1bahks3o107": "https://tunegocio.com/terminos",
   "1bjn3xjv3c": "Iniciar sesión",
@@ -111,7 +106,6 @@
   "1ecdlb1cdnb": "Seguridad",
   "1ehboq0b5ag": "Aún no formas parte de un negocio",
   "1emymuoqehx": "Imprimir",
-  "1epujjaqd0u": "Crea una tarjeta y agrégale fondos para empezar.",
   "1esddlkv0s9": "Límite de tarjetas",
   "1f1a2a3h8xj": "Cambiar de negocio",
   "1f69ehq4fo0": "Ver códigos de recuperación",
@@ -491,10 +485,6 @@
     "other": "{count} tarjetas en inventario"
   },
   "d8uwxid69d": "Crear cuenta",
-  "deut0dsn3k": {
-    "one": "{count} transacción en {month}",
-    "other": "{count} transacciones en {month}"
-  },
   "dmjydccuxx": "Administra la verificación en dos pasos",
   "doqmbl7ch4": "Una tarjeta anulada nunca se activó; las tarjetas activadas siguen funcionando cuando se anula un lote.",
   "dyxte40li2": "Llaves de acceso",
@@ -505,22 +495,10 @@
   "euf7o3nze7": "Algo salió mal.",
   "exzzc81bc6": "Por día",
   "f2v9rtmf85": "Código",
-  "fck8u3o77b": {
-    "one": "{count} congelada",
-    "other": "{count} congeladas"
-  },
-  "fi1aj4103u": {
-    "one": "{count} cancelada",
-    "other": "{count} canceladas"
-  },
   "fjazhsf9ja": "Ver lote",
   "frjj2motly": "Sonido activado",
   "g20j58fbil": "Límite de inventario alcanzado",
   "gbq6pkhmy1": "Guardar correo",
-  "gexz7lm4ol": {
-    "one": "{count} agotada",
-    "other": "{count} agotadas"
-  },
   "gklvo3l49v": "No se pudieron obtener los códigos de recuperación",
   "gktxymbq14": "Se reactivó la organización.",
   "gmznfc5eow": "Agregar fondos",
@@ -671,5 +649,7 @@
   "zgf5b3csc7": "Registrar llave de acceso",
   "zlezvm2rqt": "La contraseña es incorrecta.",
   "zrb43vmdtr": "Ir a la página siguiente",
-  "zy26nd35b5": "Inactiva"
+  "zy26nd35b5": "Inactiva",
+  "1b4carm7ng0": "Copiar monto",
+  "2a3wepfhtxt": "No se pudo copiar el monto."
 }
