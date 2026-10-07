@@ -1,7 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import {
     ChartColumn,
-    Settings,
     CreditCard,
     LayoutGrid,
     ReceiptText,
@@ -37,7 +36,6 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { analytics, dashboard } from '@/routes';
 import { index as cardsIndex } from '@/routes/cards';
-import { edit as settingsEdit } from '@/routes/settings';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { __ } from '@/i18n';
@@ -68,11 +66,6 @@ function mainNavItems(): NavItem[] {
             title: __('Analytics'),
             href: analytics(),
             icon: ChartColumn,
-        },
-        {
-            title: __('Settings'),
-            href: settingsEdit(),
-            icon: Settings,
         },
     ];
 }

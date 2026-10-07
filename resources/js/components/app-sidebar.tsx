@@ -4,7 +4,6 @@ import {
     ChartColumn,
     ShieldCheck,
     Users,
-    Settings,
     CreditCard,
     LayoutGrid,
     Package,
@@ -23,7 +22,6 @@ import { index as adminOrganizationsIndex } from '@/routes/admin/organizations';
 import { index as adminUsersIndex } from '@/routes/admin/users';
 import { index as batchesIndex } from '@/routes/batches';
 import { index as cardsIndex } from '@/routes/cards';
-import { edit as settingsEdit } from '@/routes/settings';
 import { index as transactionsIndex } from '@/routes/transactions';
 import type { CurrentOrganization, NavItem } from '@/types';
 import { __ } from '@/i18n';
@@ -67,11 +65,6 @@ function mainNavItems(organization: CurrentOrganization | null): NavItem[] {
             title: __('Analytics'),
             href: analytics(),
             icon: ChartColumn,
-        },
-        {
-            title: __('Settings'),
-            href: settingsEdit(),
-            icon: Settings,
         },
     ];
 }
