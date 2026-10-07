@@ -120,7 +120,7 @@ test('superadmin can grant and revoke superadmin', function () {
     expect(Superadmin::query()->where('user_id', $user->id)->count())->toBe(1);
 
     // The new superadmin can open admin.
-    $this->actingAs($user)->get(route('admin.index'))->assertOk();
+    $this->actingAs($user)->get(route('admin.index'))->assertRedirect(route('admin.organizations.index'));
 
     $this->actingAs($admin)
         ->from(route('admin.users.index'))
@@ -144,7 +144,7 @@ test('last superadmin cannot be revoked', function () {
     expect($admin->isSuperadmin())->toBeTrue()
         ->and(Superadmin::count())->toBe(1);
 
-    $this->actingAs($admin)->get(route('admin.index'))->assertOk();
+    $this->actingAs($admin)->get(route('admin.index'))->assertRedirect(route('admin.organizations.index'));
 });
 
 test('superadmin can revoke themselves when another remains', function () {

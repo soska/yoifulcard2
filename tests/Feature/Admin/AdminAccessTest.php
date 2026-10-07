@@ -87,7 +87,7 @@ test('guests are sent to login from every admin route', function () {
 
 test('superadmin sees admin links in the shared props', function () {
     $this->actingAs(superadmin())
-        ->get(route('admin.index'))
+        ->get(route('admin.organizations.index'))
         ->assertInertia(fn (Assert $page) => $page->where('auth.isSuperadmin', true));
 
     [$owner] = cardOwner();

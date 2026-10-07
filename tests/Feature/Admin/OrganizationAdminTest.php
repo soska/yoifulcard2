@@ -238,20 +238,8 @@ test('cancelled organizations are not changed from admin', function () {
     expect($organization->refresh()->status)->toBe(OrganizationStatus::Cancelled);
 });
 
-test('admin overview shows platform totals', function () {
-    $admin = superadmin();
-    Organization::factory()->count(2)->create();
-    Organization::factory()->suspended()->create();
-
-    $this->actingAs($admin)
+test('admin landing redirects to organizations', function () {
+    $this->actingAs(superadmin())
         ->get(route('admin.index'))
-        ->assertOk()
-        ->assertInertia(fn (Assert $page) => $page
-            ->component('admin/index')
-            ->where('stats.organizations', 3)
-            ->where('stats.activeOrganizations', 2)
-            ->where('stats.suspendedOrganizations', 1)
-            ->where('stats.users', 1)
-            ->where('stats.superadmins', 1)
-            ->has('recentOrganizations', 3));
+        ->assertRedirect(route('admin.organizations.index'));
 });

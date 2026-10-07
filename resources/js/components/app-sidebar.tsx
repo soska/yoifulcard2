@@ -2,7 +2,6 @@ import { usePage } from '@inertiajs/react';
 import {
     Building2,
     ChartColumn,
-    ShieldCheck,
     Users,
     CreditCard,
     LayoutGrid,
@@ -17,7 +16,6 @@ import {
     SidebarHeader,
 } from '@/components/ui/sidebar';
 import { analytics, dashboard } from '@/routes';
-import { index as adminIndex } from '@/routes/admin';
 import { index as adminOrganizationsIndex } from '@/routes/admin/organizations';
 import { index as adminUsersIndex } from '@/routes/admin/users';
 import { index as batchesIndex } from '@/routes/batches';
@@ -71,11 +69,6 @@ function mainNavItems(organization: CurrentOrganization | null): NavItem[] {
 
 function adminNavItems(): NavItem[] {
     return [
-        {
-            title: __('Admin'),
-            href: adminIndex(),
-            icon: ShieldCheck,
-        },
         {
             title: __('Organizations'),
             href: adminOrganizationsIndex(),
