@@ -140,7 +140,7 @@ export function phpMessages(): string[] {
         __('This card is frozen.'),
         // app/Exceptions/LedgerException.php:74
         __('This card is not activated yet.'),
-        // app/Providers/AppServiceProvider.php:62
+        // app/Providers/AppServiceProvider.php:75
         __('This card was emailed several times in the last hour. Try again later.'),
         // app/Http/Controllers/Admin/OrganizationController.php:280
         __('This organization is already active.'),
@@ -148,7 +148,7 @@ export function phpMessages(): string[] {
         __('This organization is already suspended.'),
         // app/Http/Controllers/Admin/OrganizationController.php:282
         __('This organization is cancelled.'),
-        // app/Providers/AppServiceProvider.php:56
+        // app/Providers/AppServiceProvider.php:69
         __('Too many attempts. Please try again in a minute.'),
         // resources/views/offline.blade.php:50
         __('Try again'),
