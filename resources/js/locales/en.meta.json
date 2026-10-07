@@ -39,7 +39,8 @@
   "10rdx7z6m6w": {
     "message": "Balance after",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:48:26",
+      "resources/js/components/transactions/transactions-table.tsx:101:42",
+      "resources/js/components/transactions/transactions-table.tsx:143:34",
       "resources/js/locales/php-messages.generated.ts:46:9"
     ]
   },
@@ -186,7 +187,7 @@
   "13w10qqmr70": {
     "message": "{from} to {to}, in your business's timezone.",
     "refs": [
-      "resources/js/pages/analytics/index.tsx:102:38"
+      "resources/js/pages/analytics/index.tsx:103:38"
     ]
   },
   "141xsxugpnx": {
@@ -238,6 +239,12 @@
       "resources/js/pages/admin/organizations/index.tsx:198:46",
       "resources/js/pages/admin/organizations/show.tsx:426:49",
       "resources/js/pages/admin/organizations/show.tsx:81:20"
+    ]
+  },
+  "15ietdz051r": {
+    "message": "Loads, charges and cards issued follow the selected dates. Current card balance includes all cards as of now.",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:178:22"
     ]
   },
   "15j2syq20cb": {
@@ -377,6 +384,15 @@
       "resources/js/components/passkey-register.tsx:82:48"
     ]
   },
+  "18tpci2jt91": {
+    "message": "Overview",
+    "refs": [
+      "resources/js/components/app-sidebar.tsx:65:20",
+      "resources/js/pages/analytics/index.tsx:102:32",
+      "resources/js/pages/analytics/index.tsx:270:28",
+      "resources/js/pages/analytics/index.tsx:98:26"
+    ]
+  },
   "18yd92ykhig": {
     "message": "Members can still sign in and read their cards, transactions, and settings, but they cannot create cards, change balances, or edit anything. The public card page keeps showing balances.",
     "refs": [
@@ -433,6 +449,8 @@
   "1b4carm7ng0": {
     "message": "Copy amount",
     "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:60:20",
+      "resources/js/components/transactions/transactions-table.tsx:61:28",
       "resources/js/pages/dashboard.tsx:161:56",
       "resources/js/pages/dashboard.tsx:162:64"
     ]
@@ -558,7 +576,8 @@
     "message": "By",
     "refs": [
       "resources/js/components/batches/batch-print.tsx:236:49",
-      "resources/js/components/transactions/transactions-table.tsx:51:33"
+      "resources/js/components/transactions/transactions-table.tsx:113:42",
+      "resources/js/components/transactions/transactions-table.tsx:164:46"
     ]
   },
   "1dm8s19afug": {
@@ -716,8 +735,8 @@
     "message": "Loaded",
     "refs": [
       "resources/js/components/analytics/analytics-charts.tsx:54:26",
-      "resources/js/pages/analytics/index.tsx:165:32",
-      "resources/js/pages/analytics/index.tsx:207:42"
+      "resources/js/pages/analytics/index.tsx:166:32",
+      "resources/js/pages/analytics/index.tsx:211:42"
     ]
   },
   "1gqujgo1p3j": {
@@ -919,7 +938,7 @@
     "message": "Charges",
     "refs": [
       "resources/js/components/analytics/analytics-charts.tsx:48:25",
-      "resources/js/pages/analytics/index.tsx:201:42"
+      "resources/js/pages/analytics/index.tsx:205:42"
     ]
   },
   "1ja6j0q49ec": {
@@ -993,12 +1012,6 @@
       "resources/js/pages/admin/users/index.tsx:224:68"
     ]
   },
-  "1l2bm9pclr2": {
-    "message": "The numbers behind the charts, newest first.",
-    "refs": [
-      "resources/js/pages/analytics/index.tsx:186:30"
-    ]
-  },
   "1lac8iorsbk": {
     "message": "Search by name or email",
     "refs": [
@@ -1009,7 +1022,7 @@
   "1lkri6lxzh8": {
     "message": "Export CSV",
     "refs": [
-      "resources/js/pages/analytics/index.tsx:148:30",
+      "resources/js/pages/analytics/index.tsx:149:30",
       "resources/js/pages/transactions/index.tsx:123:26"
     ]
   },
@@ -1118,6 +1131,7 @@
   "1n906oaoop5": {
     "message": "Details",
     "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:96:34",
       "resources/js/pages/admin/organizations/show.tsx:570:36"
     ]
   },
@@ -1301,7 +1315,8 @@
   "1r8zizzfdmj": {
     "message": "Note",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:50:33",
+      "resources/js/components/transactions/transactions-table.tsx:120:46",
+      "resources/js/components/transactions/transactions-table.tsx:145:55",
       "resources/js/locales/php-messages.generated.ts:72:9"
     ]
   },
@@ -1357,12 +1372,11 @@
       "resources/js/pages/admin/index.tsx:48:20",
       "resources/js/pages/admin/organizations/index.tsx:201:46",
       "resources/js/pages/admin/organizations/show.tsx:92:20",
-      "resources/js/pages/analytics/index.tsx:195:42",
       "resources/js/pages/cards/create.tsx:181:18",
       "resources/js/pages/cards/index.tsx:168:26",
       "resources/js/pages/cards/index.tsx:172:32",
       "resources/js/pages/cards/index.tsx:232:58",
-      "resources/js/pages/cards/index.tsx:463:28",
+      "resources/js/pages/cards/index.tsx:481:28",
       "resources/js/pages/cards/show.tsx:441:18"
     ]
   },
@@ -1585,11 +1599,7 @@
   "1x6on0jacs9": {
     "message": "Analytics",
     "refs": [
-      "resources/js/components/app-header.tsx:65:20",
-      "resources/js/components/app-sidebar.tsx:65:20",
-      "resources/js/pages/analytics/index.tsx:101:32",
-      "resources/js/pages/analytics/index.tsx:256:28",
-      "resources/js/pages/analytics/index.tsx:97:26"
+      "resources/js/components/app-header.tsx:65:20"
     ]
   },
   "1xepvuia13": {
@@ -1801,7 +1811,6 @@
       "resources/js/components/app-header.tsx:60:20",
       "resources/js/components/app-sidebar.tsx:60:20",
       "resources/js/pages/admin/organizations/show.tsx:109:20",
-      "resources/js/pages/analytics/index.tsx:160:32",
       "resources/js/pages/transactions/index.tsx:102:26",
       "resources/js/pages/transactions/index.tsx:106:32",
       "resources/js/pages/transactions/index.tsx:295:28"
@@ -1912,7 +1921,7 @@
   "221ct4go232": {
     "message": "Never",
     "refs": [
-      "resources/js/pages/cards/index.tsx:428:57",
+      "resources/js/pages/cards/index.tsx:446:57",
       "resources/js/pages/cards/show.tsx:179:49"
     ]
   },
@@ -2013,6 +2022,12 @@
       "resources/js/components/passkey-verify.tsx:56:37"
     ]
   },
+  "2410hf7m6ao": {
+    "message": "Daily prepaid activity. Select a date to see its transactions.",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:188:30"
+    ]
+  },
   "2410ux64h44": {
     "message": "No cards yet",
     "refs": [
@@ -2022,7 +2037,7 @@
   "248xs7h38vj": {
     "message": "Card",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:44:46",
+      "resources/js/components/transactions/transactions-table.tsx:137:54",
       "resources/js/locales/php-messages.generated.ts:48:9"
     ]
   },
@@ -2208,6 +2223,13 @@
       "resources/js/locales/php-messages.generated.ts:142:9"
     ]
   },
+  "29rrdcvdfef": {
+    "message": "Cards issued",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:156:32",
+      "resources/js/pages/analytics/index.tsx:199:42"
+    ]
+  },
   "29s7yt15s4z": {
     "message": "Create one to onboard a business.",
     "refs": [
@@ -2236,6 +2258,7 @@
   "2a3wepfhtxt": {
     "message": "The amount could not be copied.",
     "refs": [
+      "resources/js/components/transactions/transactions-table.tsx:47:25",
       "resources/js/pages/dashboard.tsx:48:25"
     ]
   },
@@ -2422,7 +2445,7 @@
     "message": "Showing {from} to {to} of {total} cards",
     "refs": [
       "resources/js/components/batches/batch-details.tsx:163:34",
-      "resources/js/pages/cards/index.tsx:441:38"
+      "resources/js/pages/cards/index.tsx:459:38"
     ]
   },
   "2f238tcgfz1": {
@@ -2659,8 +2682,8 @@
     "message": "Charged",
     "refs": [
       "resources/js/components/analytics/analytics-charts.tsx:55:25",
-      "resources/js/pages/analytics/index.tsx:170:32",
-      "resources/js/pages/analytics/index.tsx:210:42"
+      "resources/js/pages/analytics/index.tsx:171:32",
+      "resources/js/pages/analytics/index.tsx:214:42"
     ]
   },
   "6jehwoavqq": {
@@ -2673,7 +2696,7 @@
     "message": "Date",
     "refs": [
       "resources/js/components/batches/batch-print.tsx:234:49",
-      "resources/js/components/transactions/transactions-table.tsx:43:33",
+      "resources/js/components/transactions/transactions-table.tsx:136:41",
       "resources/js/locales/php-messages.generated.ts:54:9"
     ]
   },
@@ -2751,6 +2774,12 @@
     "message": "Reactivate {name}?",
     "refs": [
       "resources/js/pages/admin/organizations/show.tsx:179:36"
+    ]
+  },
+  "80wos2exeo": {
+    "message": "Current card balance",
+    "refs": [
+      "resources/js/pages/analytics/index.tsx:161:32"
     ]
   },
   "81wem04jqz": {
@@ -2850,7 +2879,7 @@
   "a5h4wj9ump": {
     "message": "Last {days} days",
     "refs": [
-      "resources/js/pages/analytics/index.tsx:92:16"
+      "resources/js/pages/analytics/index.tsx:93:16"
     ]
   },
   "a5t143j7kl": {
@@ -2918,7 +2947,7 @@
   "bn4fv7eipw": {
     "message": "Date range",
     "refs": [
-      "resources/js/pages/analytics/index.tsx:121:45"
+      "resources/js/pages/analytics/index.tsx:122:45"
     ]
   },
   "bnq3beamw3": {
@@ -3057,7 +3086,7 @@
   "exzzc81bc6": {
     "message": "By day",
     "refs": [
-      "resources/js/pages/analytics/index.tsx:184:37"
+      "resources/js/pages/analytics/index.tsx:186:37"
     ]
   },
   "f2v9rtmf85": {
@@ -3255,7 +3284,7 @@
   "k7wfdtk1dy": {
     "message": "Type",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:45:33",
+      "resources/js/components/transactions/transactions-table.tsx:138:41",
       "resources/js/locales/php-messages.generated.ts:156:9",
       "resources/js/pages/transactions/index.tsx:137:38"
     ]
@@ -3460,7 +3489,7 @@
     "message": "Loads",
     "refs": [
       "resources/js/components/analytics/analytics-charts.tsx:47:24",
-      "resources/js/pages/analytics/index.tsx:198:42"
+      "resources/js/pages/analytics/index.tsx:202:42"
     ]
   },
   "o41g0gbbvj": {
@@ -3522,7 +3551,7 @@
   "q7gx504kvd": {
     "message": "Day",
     "refs": [
-      "resources/js/pages/analytics/index.tsx:193:49"
+      "resources/js/pages/analytics/index.tsx:197:49"
     ]
   },
   "qejz9sldll": {
@@ -3592,7 +3621,7 @@
   "ryo3bxpr4k": {
     "message": "Amount",
     "refs": [
-      "resources/js/components/transactions/transactions-table.tsx:46:56",
+      "resources/js/components/transactions/transactions-table.tsx:140:34",
       "resources/js/locales/php-messages.generated.ts:40:9"
     ]
   },
@@ -3769,6 +3798,7 @@
     "message": "Copied",
     "refs": [
       "resources/js/components/admin/one-time-credentials.tsx:66:31",
+      "resources/js/components/transactions/transactions-table.tsx:45:27",
       "resources/js/pages/dashboard.tsx:46:27"
     ]
   },
@@ -3782,7 +3812,7 @@
     "message": "Adjustments",
     "refs": [
       "resources/js/components/analytics/analytics-charts.tsx:49:30",
-      "resources/js/pages/analytics/index.tsx:204:42"
+      "resources/js/pages/analytics/index.tsx:208:42"
     ]
   },
   "vxgf42ygvf": {
@@ -3941,8 +3971,7 @@
     "message": "Cards created",
     "refs": [
       "resources/js/components/analytics/analytics-charts.tsx:109:20",
-      "resources/js/components/analytics/analytics-charts.tsx:42:25",
-      "resources/js/pages/analytics/index.tsx:155:32"
+      "resources/js/components/analytics/analytics-charts.tsx:42:25"
     ]
   },
   "ymwpff1mxc": {

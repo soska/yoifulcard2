@@ -160,7 +160,6 @@
   "1kkv1uu1nsh": "Anular tarjeta",
   "1kskaqmm55e": "El programa desde el que se emiten tus tarjetas.",
   "1kxn1xfrz9": "¿Asignar una contraseña temporal a {email}?",
-  "1l2bm9pclr2": "Los números detrás de las gráficas, del más reciente al más antiguo.",
   "1lac8iorsbk": "Buscar por nombre o correo",
   "1lkri6lxzh8": "Exportar CSV",
   "1llaomynj87": "Zona horaria",
@@ -652,5 +651,10 @@
   "1b4carm7ng0": "Copiar monto",
   "2a3wepfhtxt": "No se pudo copiar el monto.",
   "21rrlrliuq8": "{used} de {limit} tarjetas emitidas",
-  "258ma2znora": "Emitidas"
+  "258ma2znora": "Emitidas",
+  "15ietdz051r": "Las cargas, los cobros y las tarjetas emitidas corresponden al período seleccionado. El saldo actual incluye todas las tarjetas al momento.",
+  "18tpci2jt91": "Resumen",
+  "2410hf7m6ao": "Actividad diaria de tarjetas prepagadas. Selecciona una fecha para ver sus transacciones.",
+  "29rrdcvdfef": "Tarjetas emitidas",
+  "80wos2exeo": "Saldo actual en tarjetas"
 }

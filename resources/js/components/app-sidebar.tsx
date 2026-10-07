@@ -62,7 +62,7 @@ function mainNavItems(organization: CurrentOrganization | null): NavItem[] {
             icon: ReceiptText,
         },
         {
-            title: __('Analytics'),
+            title: __('Overview'),
             href: analytics(),
             icon: ChartColumn,
         },

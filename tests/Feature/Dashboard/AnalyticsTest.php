@@ -4,6 +4,8 @@ use App\Models\Card;
 use App\Models\Organization;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Services\CardBatchIssuer;
+use App\Services\CardLedger;
 use Illuminate\Support\Carbon;
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -136,4 +138,20 @@ test('analytics is readable by a suspended organization and needs login', functi
     auth()->logout();
 
     $this->get(route('analytics'))->assertRedirect(route('login'));
+});
+
+test('analytics counts activation rather than inventory creation and shows current balance', function () {
+    Carbon::setTestNow(Carbon::parse('2026-09-20 18:00:00', 'UTC'));
+    [$user, $organization] = cardOwner();
+    Card::factory()->forOrganization($organization)->create(['balance' => '12.50', 'created_at' => now()->subDays(40)]);
+    $batch = app(CardBatchIssuer::class)->issue($organization, 3, $user, byAdmin: false);
+    $batch->cards()->update(['created_at' => now()->subDays(40)]);
+    app(CardLedger::class)->activate($batch->cards()->first(), '25.00', $user);
+    Card::factory()->create(['balance' => '999.00']);
+
+    $this->actingAs($user)->get(route('analytics', ['days' => 7]))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('summary.cards', 1)
+            ->where('currentBalance', '37.50')
+            ->where('series.6.cards', 1));
 });

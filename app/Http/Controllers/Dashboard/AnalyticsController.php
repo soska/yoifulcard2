@@ -16,7 +16,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 
 /**
- * Cards created and transaction volume per day, over the last 7 to 90 days.
+ * Customer issuance and prepaid activity per day, over the last 7 to 90 days.
  *
  * Days are the organization's local days. Each day starts at local midnight,
  * converted to UTC with TransactionFilters::dayStart, the same boundaries the
@@ -44,6 +44,7 @@ class AnalyticsController extends Controller
             ...self::report($organization, $days),
             'ranges' => self::RANGES,
             'currency' => $organization->currency,
+            'currentBalance' => Decimal::of(Card::query()->forOrganization($organization)->sum('balance')),
         ]);
     }
 
@@ -72,10 +73,11 @@ class AnalyticsController extends Controller
         $cardsByDay = Card::query()
             ->forOrganization($organization)
             ->toBase()
-            ->selectRaw('width_bucket(created_at, ?::timestamp[]) as bucket', [$thresholds])
+            ->selectRaw('width_bucket(coalesce(activated_at, created_at), ?::timestamp[]) as bucket', [$thresholds])
             ->selectRaw('count(*) as total')
-            ->where('created_at', '>=', $from)
-            ->where('created_at', '<', $until)
+            ->where(fn ($query) => $query->whereNull('batch_id')->orWhereNotNull('activated_at'))
+            ->whereRaw('coalesce(activated_at, created_at) >= ?', [$from])
+            ->whereRaw('coalesce(activated_at, created_at) < ?', [$until])
             ->groupByRaw('1')
             ->pluck('total', 'bucket');
 

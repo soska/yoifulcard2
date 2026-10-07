@@ -1,16 +1,12 @@
-import { Head, router } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import {
     ArrowDownToLine,
     ArrowUpFromLine,
     CreditCard,
-    ReceiptText,
+    Wallet,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
-import {
-    CardsCreatedChart,
-    MoneyFlowChart,
-    TransactionVolumeChart,
-} from '@/components/analytics/analytics-charts';
+import { MoneyFlowChart } from '@/components/analytics/analytics-charts';
 import Heading from '@/components/heading';
 import { Button } from '@/components/ui/button';
 import {
@@ -38,7 +34,10 @@ import {
 import { useDateFormat } from '@/hooks/use-date-format';
 import { useMoneyFormat } from '@/hooks/use-money-format';
 import { analytics } from '@/routes';
-import { exportMethod } from '@/routes/transactions';
+import {
+    exportMethod,
+    index as transactionsIndex,
+} from '@/routes/transactions';
 import type { AnalyticsDay, AnalyticsSummary } from '@/types';
 import { __ } from '@/i18n';
 
@@ -50,6 +49,7 @@ type Props = {
     summary: AnalyticsSummary;
     ranges: number[];
     currency: string;
+    currentBalance: string;
 };
 
 function SummaryCard({
@@ -84,6 +84,7 @@ export default function Analytics({
     summary,
     ranges,
     currency,
+    currentBalance,
 }: Props) {
     const { formatMoney } = useMoneyFormat();
     const { formatDay } = useDateFormat();
@@ -94,11 +95,11 @@ export default function Analytics({
 
     return (
         <>
-            <Head title={__('Analytics')} />
+            <Head title={__('Overview')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <Heading
-                        title={__('Analytics')}
+                        title={__('Overview')}
                         description={__(
                             "{from} to {to}, in your business's timezone.",
                             { from: formatDay(from), to: formatDay(to) },
@@ -152,14 +153,14 @@ export default function Analytics({
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <SummaryCard
-                        title={__('Cards created')}
+                        title={__('Cards issued')}
                         value={summary.cards}
                         icon={<CreditCard />}
                     />
                     <SummaryCard
-                        title={__('Transactions')}
-                        value={summary.transactions}
-                        icon={<ReceiptText />}
+                        title={__('Current card balance')}
+                        value={formatMoney(currentBalance, currency)}
+                        icon={<Wallet />}
                     />
                     <SummaryCard
                         title={__('Loaded')}
@@ -173,17 +174,20 @@ export default function Analytics({
                     />
                 </div>
 
-                <div className="grid gap-4 lg:grid-cols-2">
-                    <CardsCreatedChart series={series} />
-                    <TransactionVolumeChart series={series} />
-                </div>
+                <p className="text-sm text-muted-foreground">
+                    {__(
+                        'Loads, charges and cards issued follow the selected dates. Current card balance includes all cards as of now.',
+                    )}
+                </p>
                 <MoneyFlowChart series={series} currency={currency} />
 
                 <Card>
                     <CardHeader>
                         <CardTitle>{__('By day')}</CardTitle>
                         <CardDescription>
-                            {__('The numbers behind the charts, newest first.')}
+                            {__(
+                                'Daily prepaid activity. Select a date to see its transactions.',
+                            )}
                         </CardDescription>
                     </CardHeader>
                     <div className="px-(--card-spacing)">
@@ -192,7 +196,7 @@ export default function Analytics({
                                 <TableRow>
                                     <TableHead>{__('Day')}</TableHead>
                                     <TableHead className="text-right">
-                                        {__('Cards')}
+                                        {__('Cards issued')}
                                     </TableHead>
                                     <TableHead className="text-right">
                                         {__('Loads')}
@@ -215,7 +219,17 @@ export default function Analytics({
                                 {[...series].reverse().map((day) => (
                                     <TableRow key={day.date}>
                                         <TableCell className="whitespace-nowrap">
-                                            {formatDay(day.date)}
+                                            <Link
+                                                href={transactionsIndex({
+                                                    query: {
+                                                        from: day.date,
+                                                        to: day.date,
+                                                    },
+                                                })}
+                                                className="rounded-sm font-medium underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                                            >
+                                                {formatDay(day.date)}
+                                            </Link>
                                         </TableCell>
                                         <TableCell className="text-right tabular-nums">
                                             {day.cards}
@@ -253,5 +267,5 @@ export default function Analytics({
 }
 
 Analytics.layout = () => ({
-    breadcrumbs: [{ title: __('Analytics'), href: analytics() }],
+    breadcrumbs: [{ title: __('Overview'), href: analytics() }],
 });
