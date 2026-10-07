@@ -238,7 +238,6 @@
   "1v7qa6jw615": "Organizaciones",
   "1v9oyjvzd9t": "Suspendida",
   "1vb1khfoxl4": "Nuevo lote",
-  "1vhgtfibnud": "{used} de {limit} tarjetas usadas",
   "1vjn8kt648j": "No tienes permiso para entrar a esta página.",
   "1vqugrvir99": "Revocar",
   "1vt2qztixfh": "Estamos haciendo algunas mejoras. Vuelve en unos minutos.",
@@ -651,5 +650,7 @@
   "zrb43vmdtr": "Ir a la página siguiente",
   "zy26nd35b5": "Inactiva",
   "1b4carm7ng0": "Copiar monto",
-  "2a3wepfhtxt": "No se pudo copiar el monto."
+  "2a3wepfhtxt": "No se pudo copiar el monto.",
+  "21rrlrliuq8": "{used} de {limit} tarjetas emitidas",
+  "258ma2znora": "Emitidas"
 }

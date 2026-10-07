@@ -53,8 +53,19 @@ class CardController extends Controller
         $search = trim((string) $request->query('q', ''));
         $batch = $this->batchFilter($request, $organization);
 
+        $view = $request->query('view');
+        if (! in_array($view, ['issued', 'inventory', 'all'], true)) {
+            $view = $batch ? 'all' : ($status === CardStatus::Inactive ? 'inventory' : 'issued');
+        }
+        if ($view === 'inventory') {
+            $status = CardStatus::Inactive;
+        } elseif ($view === 'issued' && $status === CardStatus::Inactive) {
+            $status = null;
+        }
+
         $cards = Card::query()
             ->forOrganization($organization)
+            ->when($view === 'issued', fn (Builder $query) => $query->where('status', '!=', CardStatus::Inactive))
             ->when($status, fn (Builder $query, CardStatus $status) => $query->where('status', $status))
             ->when($batch, fn (Builder $query, CardBatch $batch) => $query->where('batch_id', $batch->id))
             ->when($search !== '', function (Builder $query) use ($search): void {
@@ -74,6 +85,7 @@ class CardController extends Controller
         return Inertia::render('cards/index', [
             'cards' => $cards,
             'filters' => [
+                'view' => $view,
                 'sort' => $sort,
                 'direction' => $direction,
                 'status' => $status?->value,

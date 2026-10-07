@@ -170,3 +170,25 @@ test('qr_token never appears in list or detail props', function () {
         ->and($json['props']['card'])->not->toHaveKey('qr_token')
         ->and($card->toArray())->not->toHaveKey('qr_token');
 });
+
+test('issued and inventory views partition cards and preserve filtering', function () {
+    [$user, , $program] = cardOwner();
+    Card::factory()->for($program)->create(['code' => 'YGFT-ISSUED', 'email' => 'customer@example.com']);
+    Card::factory()->for($program)->create(['code' => 'YGFT-STOCK1', 'status' => CardStatus::Inactive]);
+    Card::factory()->create(['status' => CardStatus::Inactive]);
+    $this->actingAs($user);
+
+    expect(listedCodes($this, []))->toBe(['YGFT-ISSUED'])
+        ->and(listedCodes($this, ['view' => 'inventory']))->toBe(['YGFT-STOCK1'])
+        ->and(listedCodes($this, ['status' => 'inactive']))->toBe(['YGFT-STOCK1'])
+        ->and(listedCodes($this, ['view' => 'issued', 'status' => 'inactive']))->toBe(['YGFT-ISSUED'])
+        ->and(listedCodes($this, ['view' => 'inventory', 'q' => 'ISSUED']))->toBe([])
+        ->and(listedCodes($this, ['view' => 'unknown']))->toBe(['YGFT-ISSUED']);
+
+    Card::factory()->count(21)->for($program)->create(['status' => CardStatus::Inactive]);
+    $this->get(route('cards.index', ['view' => 'inventory']))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('filters.view', 'inventory')
+            ->where('cards.total', 22)
+            ->where('cards.next_page_url', fn (string $url) => str_contains($url, 'view=inventory')));
+});

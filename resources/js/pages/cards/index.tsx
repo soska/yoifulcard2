@@ -24,6 +24,7 @@ import {
     EmptyMedia,
     EmptyTitle,
 } from '@/components/ui/empty';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import {
     Select,
@@ -102,6 +103,7 @@ export default function CardsIndex({
         router.get(
             index.url({
                 query: {
+                    view: next.view,
                     sort: next.sort,
                     direction: next.direction,
                     status: next.status ?? undefined,
@@ -132,8 +134,13 @@ export default function CardsIndex({
         visit({ q: search.trim() });
     };
 
+    const inventory = filters.view === 'inventory';
+    const visibleStatuses = statuses.filter((status) => status !== 'inactive');
+
     const filtered =
-        filters.status !== null || filters.q !== '' || filters.batch !== null;
+        (!inventory && filters.status !== null) ||
+        filters.q !== '' ||
+        filters.batch !== null;
 
     const sortHeader = (key: CardSort, label: string, alignRight = false) => {
         const active = filters.sort === key;
@@ -187,7 +194,7 @@ export default function CardsIndex({
                                       },
                                       { count: usage.used },
                                   )
-                                : __('{used} of {limit} cards used', {
+                                : __('{used} of {limit} cards issued', {
                                       used: usage.used,
                                       limit: usage.limit,
                                   })
@@ -236,6 +243,43 @@ export default function CardsIndex({
                     </div>
                 )}
 
+                <Tabs value={filters.view}>
+                    <TabsList variant="line" aria-label={__('Cards')}>
+                        <TabsTrigger
+                            value="issued"
+                            onClick={() =>
+                                visit({ view: 'issued', status: null })
+                            }
+                        >
+                            {__('Issued')}{' '}
+                            <span className="text-muted-foreground tabular-nums">
+                                {usage.used}
+                            </span>
+                        </TabsTrigger>
+                        <TabsTrigger
+                            value="inventory"
+                            onClick={() =>
+                                visit({ view: 'inventory', status: null })
+                            }
+                        >
+                            {__('In stock')}{' '}
+                            <span className="text-muted-foreground tabular-nums">
+                                {usage.stock}
+                            </span>
+                        </TabsTrigger>
+                        {batch && (
+                            <TabsTrigger
+                                value="all"
+                                onClick={() =>
+                                    visit({ view: 'all', status: null })
+                                }
+                            >
+                                {__('Show all cards')}
+                            </TabsTrigger>
+                        )}
+                    </TabsList>
+                </Tabs>
+
                 <Card>
                     <CardContent className="flex flex-col gap-4">
                         <div className="flex flex-col gap-3 sm:flex-row">
@@ -259,41 +303,49 @@ export default function CardsIndex({
                                     {__('Search')}
                                 </Button>
                             </form>
-                            <Select
-                                value={filters.status ?? ALL}
-                                onValueChange={(value) =>
-                                    visit({
-                                        status:
-                                            value === ALL || value === null
-                                                ? null
-                                                : (value as CardStatus),
-                                    })
-                                }
-                                items={[
-                                    { value: ALL, label: __('All statuses') },
-                                    ...statuses.map((status) => ({
-                                        value: status,
-                                        label: cardStatusLabel(status),
-                                    })),
-                                ]}
-                            >
-                                <SelectTrigger
-                                    className="w-full sm:w-44"
-                                    aria-label={__('Filter by status')}
+                            {!inventory && (
+                                <Select
+                                    value={filters.status ?? ALL}
+                                    onValueChange={(value) =>
+                                        visit({
+                                            status:
+                                                value === ALL || value === null
+                                                    ? null
+                                                    : (value as CardStatus),
+                                        })
+                                    }
+                                    items={[
+                                        {
+                                            value: ALL,
+                                            label: __('All statuses'),
+                                        },
+                                        ...visibleStatuses.map((status) => ({
+                                            value: status,
+                                            label: cardStatusLabel(status),
+                                        })),
+                                    ]}
                                 >
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value={ALL}>
-                                        {__('All statuses')}
-                                    </SelectItem>
-                                    {statuses.map((status) => (
-                                        <SelectItem key={status} value={status}>
-                                            {cardStatusLabel(status)}
+                                    <SelectTrigger
+                                        className="w-full sm:w-44"
+                                        aria-label={__('Filter by status')}
+                                    >
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value={ALL}>
+                                            {__('All statuses')}
                                         </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                                        {visibleStatuses.map((status) => (
+                                            <SelectItem
+                                                key={status}
+                                                value={status}
+                                            >
+                                                {cardStatusLabel(status)}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            )}
                         </div>
 
                         {cards.data.length === 0 ? (
@@ -344,7 +396,7 @@ export default function CardsIndex({
                                             <TableCell>
                                                 <Link
                                                     href={show(card)}
-                                                    className="font-mono font-medium hover:underline"
+                                                    className="inline-flex min-h-8 items-center rounded-sm font-mono font-medium hover:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
                                                 >
                                                     {card.code}
                                                 </Link>

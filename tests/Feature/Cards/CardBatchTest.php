@@ -332,7 +332,8 @@ test('the batches list and batch page show counts, creator, and cards', function
         ->assertInertia(fn (Assert $page) => $page
             ->where('filters.batch', null)
             ->where('batch', null)
-            ->has('cards.data', 5));
+            ->where('filters.view', 'issued')
+            ->has('cards.data', 1));
 
     $this->get(route('batches.show', $foreign))->assertForbidden();
 });

@@ -41,6 +41,7 @@ export type CardUsage = {
 };
 
 export type CardFilters = {
+    view: 'issued' | 'inventory' | 'all';
     sort: CardSort;
     direction: SortDirection;
     status: CardStatus | null;

@@ -72,9 +72,9 @@ export function phpMessages(): string[] {
         __('Note'),
         // app/Exceptions/CardBatchException.php:65
         __('Only a card that is not activated yet can be voided.'),
-        // app/Http/Controllers/Dashboard/CardController.php:216
+        // app/Http/Controllers/Dashboard/CardController.php:228
         __('Only a frozen card can be unfrozen.'),
-        // app/Http/Controllers/Dashboard/CardController.php:199
+        // app/Http/Controllers/Dashboard/CardController.php:211
         __('Only an active card can be frozen.'),
         // resources/views/mail/card-link.blade.php:27
         __('Open your card'),
