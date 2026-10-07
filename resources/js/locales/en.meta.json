@@ -8,7 +8,7 @@
   "106tpfv0mks": {
     "message": "Last used",
     "refs": [
-      "resources/js/pages/cards/index.tsx:82:39",
+      "resources/js/pages/cards/index.tsx:382:49",
       "resources/js/pages/cards/show.tsx:174:46"
     ]
   },
@@ -335,7 +335,7 @@
     "message": "Filter by status",
     "refs": [
       "resources/js/pages/admin/organizations/index.tsx:148:49",
-      "resources/js/pages/cards/index.tsx:330:53"
+      "resources/js/pages/cards/index.tsx:315:53"
     ]
   },
   "181gcyu0dax": {
@@ -404,7 +404,7 @@
     "refs": [
       "resources/js/pages/admin/organizations/index.tsx:203:53",
       "resources/js/pages/admin/organizations/show.tsx:595:38",
-      "resources/js/pages/cards/index.tsx:81:37",
+      "resources/js/pages/cards/index.tsx:377:49",
       "resources/js/pages/cards/show.tsx:137:46"
     ]
   },
@@ -426,8 +426,8 @@
     "message": "All statuses",
     "refs": [
       "resources/js/pages/admin/organizations/index.tsx:83:30",
-      "resources/js/pages/cards/index.tsx:320:52",
-      "resources/js/pages/cards/index.tsx:336:46"
+      "resources/js/pages/cards/index.tsx:305:52",
+      "resources/js/pages/cards/index.tsx:321:46"
     ]
   },
   "1b4carm7ng0": {
@@ -564,7 +564,7 @@
   "1dm8s19afug": {
     "message": "Create your first card to get started.",
     "refs": [
-      "resources/js/pages/cards/index.tsx:367:47"
+      "resources/js/pages/cards/index.tsx:352:47"
     ]
   },
   "1dqm85rwos2": {
@@ -945,7 +945,7 @@
     "refs": [
       "resources/js/pages/admin/organizations/index.tsx:131:38",
       "resources/js/pages/admin/users/index.tsx:96:34",
-      "resources/js/pages/cards/index.tsx:303:38"
+      "resources/js/pages/cards/index.tsx:288:38"
     ]
   },
   "1jubhoknu0l": {
@@ -961,8 +961,8 @@
       "resources/js/pages/cards/create.tsx:165:50",
       "resources/js/pages/cards/create.tsx:182:18",
       "resources/js/pages/cards/create.tsx:38:26",
-      "resources/js/pages/cards/index.tsx:206:30",
-      "resources/js/pages/cards/index.tsx:220:30",
+      "resources/js/pages/cards/index.tsx:191:30",
+      "resources/js/pages/cards/index.tsx:205:30",
       "resources/js/pages/dashboard.tsx:100:38",
       "resources/js/pages/dashboard.tsx:72:30",
       "resources/js/pages/dashboard.tsx:82:30"
@@ -1130,7 +1130,7 @@
   "1nvbp7kxonc": {
     "message": "Only cards from the batch of {date}.",
     "refs": [
-      "resources/js/pages/cards/index.tsx:231:30"
+      "resources/js/pages/cards/index.tsx:216:30"
     ]
   },
   "1o6spcnp0cv": {
@@ -1359,10 +1359,10 @@
       "resources/js/pages/admin/organizations/show.tsx:92:20",
       "resources/js/pages/analytics/index.tsx:195:42",
       "resources/js/pages/cards/create.tsx:181:18",
-      "resources/js/pages/cards/index.tsx:183:26",
-      "resources/js/pages/cards/index.tsx:187:32",
-      "resources/js/pages/cards/index.tsx:247:58",
-      "resources/js/pages/cards/index.tsx:460:28",
+      "resources/js/pages/cards/index.tsx:168:26",
+      "resources/js/pages/cards/index.tsx:172:32",
+      "resources/js/pages/cards/index.tsx:232:58",
+      "resources/js/pages/cards/index.tsx:463:28",
       "resources/js/pages/cards/show.tsx:441:18"
     ]
   },
@@ -1420,7 +1420,7 @@
     "message": "Balance",
     "refs": [
       "resources/js/components/cards/card-balance-actions.tsx:98:29",
-      "resources/js/pages/cards/index.tsx:75:34",
+      "resources/js/pages/cards/index.tsx:366:49",
       "resources/js/pages/cards/show.tsx:124:46",
       "resources/js/pages/reader/card.tsx:124:38"
     ]
@@ -1893,7 +1893,7 @@
   "21rrlrliuq8": {
     "message": "{used} of {limit} cards issued",
     "refs": [
-      "resources/js/pages/cards/index.tsx:197:35"
+      "resources/js/pages/cards/index.tsx:182:35"
     ]
   },
   "21tdormco8j": {
@@ -1912,7 +1912,7 @@
   "221ct4go232": {
     "message": "Never",
     "refs": [
-      "resources/js/pages/cards/index.tsx:426:53",
+      "resources/js/pages/cards/index.tsx:428:57",
       "resources/js/pages/cards/show.tsx:179:49"
     ]
   },
@@ -1976,8 +1976,8 @@
   "23fbozz3inz": {
     "message": "Show all cards",
     "refs": [
-      "resources/js/pages/cards/index.tsx:241:30",
-      "resources/js/pages/cards/index.tsx:277:34"
+      "resources/js/pages/cards/index.tsx:226:30",
+      "resources/js/pages/cards/index.tsx:262:34"
     ]
   },
   "23fdu0cyh9q": {
@@ -2016,7 +2016,7 @@
   "2410ux64h44": {
     "message": "No cards yet",
     "refs": [
-      "resources/js/pages/cards/index.tsx:360:47"
+      "resources/js/pages/cards/index.tsx:345:47"
     ]
   },
   "248xs7h38vj": {
@@ -2053,7 +2053,7 @@
   "258ma2znora": {
     "message": "Issued",
     "refs": [
-      "resources/js/pages/cards/index.tsx:254:30"
+      "resources/js/pages/cards/index.tsx:239:30"
     ]
   },
   "25ht8pafnof": {
@@ -2422,7 +2422,7 @@
     "message": "Showing {from} to {to} of {total} cards",
     "refs": [
       "resources/js/components/batches/batch-details.tsx:163:34",
-      "resources/js/pages/cards/index.tsx:438:38"
+      "resources/js/pages/cards/index.tsx:441:38"
     ]
   },
   "2f238tcgfz1": {
@@ -2969,7 +2969,7 @@
     "message": "In stock",
     "refs": [
       "resources/js/components/batches/batch-details.tsx:55:18",
-      "resources/js/pages/cards/index.tsx:265:30"
+      "resources/js/pages/cards/index.tsx:250:30"
     ]
   },
   "cw1grf7hmr": {
@@ -3064,7 +3064,7 @@
     "message": "Code",
     "refs": [
       "resources/js/components/batches/batch-details.tsx:124:45",
-      "resources/js/pages/cards/index.tsx:74:31"
+      "resources/js/pages/cards/index.tsx:362:61"
     ]
   },
   "fjazhsf9ja": {
@@ -3157,7 +3157,7 @@
   "hdcjznzjw6": {
     "message": "No cards match your search",
     "refs": [
-      "resources/js/pages/cards/index.tsx:359:47"
+      "resources/js/pages/cards/index.tsx:344:47"
     ]
   },
   "hj1o1glkxj": {
@@ -3225,7 +3225,7 @@
   "jkkszphs0d": {
     "message": "Try another code, email, or status.",
     "refs": [
-      "resources/js/pages/cards/index.tsx:364:47"
+      "resources/js/pages/cards/index.tsx:349:47"
     ]
   },
   "jlcgw14w3v": {
@@ -3387,7 +3387,7 @@
       "other": "{count} cards"
     },
     "refs": [
-      "resources/js/pages/cards/index.tsx:190:35"
+      "resources/js/pages/cards/index.tsx:175:35"
     ]
   },
   "n5chxaq0b4": {
@@ -3702,7 +3702,7 @@
       "resources/js/locales/php-messages.generated.ts:134:9",
       "resources/js/pages/admin/organizations/show.tsx:548:45",
       "resources/js/pages/cards/create.tsx:159:59",
-      "resources/js/pages/cards/index.tsx:214:39",
+      "resources/js/pages/cards/index.tsx:199:39",
       "resources/js/pages/dashboard.tsx:102:30",
       "resources/js/pages/dashboard.tsx:66:39",
       "resources/js/pages/settings/business.tsx:51:23"
@@ -3805,7 +3805,7 @@
     "refs": [
       "resources/js/components/batches/batch-details.tsx:125:45",
       "resources/js/pages/admin/organizations/index.tsx:196:53",
-      "resources/js/pages/cards/index.tsx:384:53",
+      "resources/js/pages/cards/index.tsx:371:50",
       "resources/js/pages/cards/show.tsx:203:45"
     ]
   },
@@ -3831,7 +3831,7 @@
     "message": "Card limit reached",
     "refs": [
       "resources/js/components/cards/card-usage-notice.tsx:28:30",
-      "resources/js/pages/cards/index.tsx:213:39",
+      "resources/js/pages/cards/index.tsx:198:39",
       "resources/js/pages/dashboard.tsx:65:39"
     ]
   },
@@ -3903,8 +3903,8 @@
   "xw90vci12y": {
     "message": "Search by code or email",
     "refs": [
-      "resources/js/pages/cards/index.tsx:298:50",
-      "resources/js/pages/cards/index.tsx:299:49"
+      "resources/js/pages/cards/index.tsx:283:50",
+      "resources/js/pages/cards/index.tsx:284:49"
     ]
   },
   "xwwbikmmob": {

@@ -68,21 +68,6 @@ type Props = {
 
 const ALL = 'all';
 
-/** Sortable column headings, built at render time (never at module scope). */
-function columns(): { key: CardSort; label: string; align?: 'right' }[] {
-    return [
-        { key: 'code', label: __('Code') },
-        { key: 'balance', label: __('Balance'), align: 'right' },
-    ];
-}
-
-function dateColumns(): { key: CardSort; label: string }[] {
-    return [
-        { key: 'created_at', label: __('Created') },
-        { key: 'last_used_at', label: __('Last used') },
-    ];
-}
-
 export default function CardsIndex({
     cards,
     filters,
@@ -374,25 +359,51 @@ export default function CardsIndex({
                             <Table>
                                 <TableHeader>
                                     <TableRow>
-                                        {columns().map((column) =>
+                                        {sortHeader('code', __('Code'))}
+                                        {!inventory &&
                                             sortHeader(
-                                                column.key,
-                                                column.label,
-                                                column.align === 'right',
-                                            ),
+                                                'balance',
+                                                __('Balance'),
+                                                true,
+                                            )}
+                                        {!inventory && (
+                                            <TableHead>
+                                                {__('Status')}
+                                            </TableHead>
                                         )}
-                                        <TableHead>{__('Status')}</TableHead>
-                                        {dateColumns().map((column) =>
+                                        {filters.view !== 'issued' &&
                                             sortHeader(
-                                                column.key,
-                                                column.label,
-                                            ),
-                                        )}
+                                                'created_at',
+                                                __('Created'),
+                                            )}
+                                        {!inventory &&
+                                            sortHeader(
+                                                'last_used_at',
+                                                __('Last used'),
+                                            )}
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {cards.data.map((card) => (
-                                        <TableRow key={card.id}>
+                                        <TableRow
+                                            key={card.id}
+                                            className="cursor-pointer focus-within:bg-muted/50"
+                                            onClick={(event) => {
+                                                const target =
+                                                    event.target as HTMLElement;
+                                                if (
+                                                    target.closest(
+                                                        'a, button',
+                                                    ) ||
+                                                    window
+                                                        .getSelection()
+                                                        ?.toString()
+                                                ) {
+                                                    return;
+                                                }
+                                                router.visit(show.url(card));
+                                            }}
+                                        >
                                             <TableCell>
                                                 <Link
                                                     href={show(card)}
@@ -406,26 +417,36 @@ export default function CardsIndex({
                                                     </div>
                                                 )}
                                             </TableCell>
-                                            <TableCell className="text-right tabular-nums">
-                                                {formatMoney(
-                                                    card.balance,
-                                                    currency,
-                                                )}
-                                            </TableCell>
-                                            <TableCell>
-                                                <CardStatusBadge
-                                                    status={card.status}
-                                                />
-                                            </TableCell>
-                                            <TableCell className="text-muted-foreground">
-                                                {formatDate(card.created_at)}
-                                            </TableCell>
-                                            <TableCell className="text-muted-foreground">
-                                                {formatDate(
-                                                    card.last_used_at,
-                                                    __('Never'),
-                                                )}
-                                            </TableCell>
+                                            {!inventory && (
+                                                <>
+                                                    <TableCell className="text-right tabular-nums">
+                                                        {formatMoney(
+                                                            card.balance,
+                                                            currency,
+                                                        )}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <CardStatusBadge
+                                                            status={card.status}
+                                                        />
+                                                    </TableCell>
+                                                </>
+                                            )}
+                                            {filters.view !== 'issued' && (
+                                                <TableCell className="text-muted-foreground">
+                                                    {formatDate(
+                                                        card.created_at,
+                                                    )}
+                                                </TableCell>
+                                            )}
+                                            {!inventory && (
+                                                <TableCell className="text-muted-foreground">
+                                                    {formatDate(
+                                                        card.last_used_at,
+                                                        __('Never'),
+                                                    )}
+                                                </TableCell>
+                                            )}
                                         </TableRow>
                                     ))}
                                 </TableBody>
