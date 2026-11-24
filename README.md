@@ -16,6 +16,24 @@ Every login uses the password `yoiful-test-123`:
 | `owner2@yoiful.test`    | Owner of Panadería Dulce Hogar (card usage above 80%)                  |
 | `employee@yoiful.test`  | Employee at Panadería Dulce Hogar                                      |
 | `suspended@yoiful.test` | Owner of Bicis del Norte (suspended)                                   |
+| `cometa@yoiful.test`    | Owner of Café Cometa (rewards: points per amount spent)                |
+| `yoga@yoiful.test`      | Owner of Loto Yoga Studio (rewards: a point per visit)                 |
+
+`armando@yoiful.test` also manages Café Cometa and Loto Yoga Studio, and
+`employee@yoiful.test` is an employee at Café Cometa too, so the reader's
+earn and redeem tabs can be tried as staff.
+
+The two rewards businesses show the points features:
+
+- **Café Cometa** earns one point per 10 pesos, and its points expire after a
+  month idle. It has a card with prepaid balance and points, a rewards-only
+  card for a customer who pays cash, a card that already went through an
+  expiry, and one idle card whose 40 points are due to expire: run
+  `php artisan rewards:expire-points` to watch it happen.
+- **Loto Yoga Studio** earns a point per visit, and its points expire after
+  three months. It has a class pack used up (depleted) with ten points ready
+  to redeem, a regular student who has already redeemed once, and a card one
+  visit away from a free class.
 
 The seeder prints a few public card URLs (`/c/{token}`) when it finishes.
 
