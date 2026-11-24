@@ -48,7 +48,7 @@ class OrganizationController extends Controller
         $organizations = Organization::query()
             // Stock (inactive cards) and voided stock are not usage, so they
             // stay out of the count shown against the card limit.
-            ->withCount(['memberships', 'cards' => fn (Builder $query) => $query->countingTowardLimit()])
+            ->withCount(['memberships', 'cards' => fn (Builder $query) => $query->whereRaw(Card::countsTowardLimitSql(), Card::countsTowardLimitBindings())])
             ->when($status, fn (Builder $query, OrganizationStatus $status) => $query->where('status', $status))
             ->when($search !== '', function (Builder $query) use ($search): void {
                 $pattern = '%'.addcslashes(mb_strtolower($search), '\\%_').'%';

@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $code
  * @property string $qr_token
  * @property string $balance
+ * @property int $points
  * @property CardStatus $status
  * @property string|null $email
  * @property CarbonImmutable|null $last_used_at
@@ -31,7 +32,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read CardBatch|null $batch
  * @property-read Collection<int, Transaction> $transactions
  */
-#[Fillable(['program_id', 'batch_id', 'code', 'qr_token', 'balance', 'status', 'email', 'last_used_at', 'activated_at'])]
+#[Fillable(['program_id', 'batch_id', 'code', 'qr_token', 'balance', 'points', 'status', 'email', 'last_used_at', 'activated_at'])]
 class Card extends Model
 {
     /** @use HasFactory<CardFactory> */
@@ -50,6 +51,7 @@ class Card extends Model
      */
     protected $attributes = [
         'balance' => '0.00',
+        'points' => 0,
         'status' => 'active',
     ];
 
@@ -62,6 +64,7 @@ class Card extends Model
     {
         return [
             'balance' => 'decimal:2',
+            'points' => 'integer',
             'status' => CardStatus::class,
             'last_used_at' => 'datetime',
             'activated_at' => 'datetime',
@@ -116,17 +119,27 @@ class Card extends Model
     }
 
     /**
-     * SQL condition for cards that take a slot under the card limit. Stock
+     * SQL condition for cards that take a slot under the card limit, with `?`
+     * placeholders for the values countsTowardLimitBindings() returns. Stock
      * (inactive) doesn't, and neither does voided stock: preissued cards
      * cancelled before they were ever activated. Cards created one at a time
      * are active with no activated_at, so batch_id tells voided stock apart.
+     *
+     * @return literal-string
      */
     public static function countsTowardLimitSql(): string
     {
-        $inactive = CardStatus::Inactive->value;
-        $cancelled = CardStatus::Cancelled->value;
+        return 'cards.status <> ? and not (cards.status = ? and cards.activated_at is null and cards.batch_id is not null)';
+    }
 
-        return "cards.status <> '{$inactive}' and not (cards.status = '{$cancelled}' and cards.activated_at is null and cards.batch_id is not null)";
+    /**
+     * The values for countsTowardLimitSql()'s placeholders.
+     *
+     * @return list<string>
+     */
+    public static function countsTowardLimitBindings(): array
+    {
+        return [CardStatus::Inactive->value, CardStatus::Cancelled->value];
     }
 
     /**
@@ -137,7 +150,7 @@ class Card extends Model
      */
     public function scopeCountingTowardLimit(Builder $query): void
     {
-        $query->whereRaw(self::countsTowardLimitSql());
+        $query->whereRaw(self::countsTowardLimitSql(), self::countsTowardLimitBindings());
     }
 
     /**

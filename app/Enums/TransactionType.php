@@ -10,6 +10,12 @@ enum TransactionType: string
     // Reserved on the enum. Not exposed in v1.
     case Refund = 'refund';
 
+    // Reward points (unit: points). Not exposed until the rewards phases.
+    case Earn = 'earn';
+    case Redeem = 'redeem';
+    case Expire = 'expire';
+    case PointsAdjustment = 'points_adjustment';
+
     /**
      * The types a person can filter by. Refund is not exposed in v1.
      *
@@ -32,6 +38,10 @@ enum TransactionType: string
             self::Spend => __('Charge'),
             self::Adjustment => __('Adjustment'),
             self::Refund => __('Refund'),
+            self::Earn => __('Earned'),
+            self::Redeem => __('Redeemed'),
+            self::Expire => __('Expired'),
+            self::PointsAdjustment => __('Points adjustment'),
         };
     }
 }

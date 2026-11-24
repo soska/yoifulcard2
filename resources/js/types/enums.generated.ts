@@ -69,4 +69,8 @@ export type TransactionType =
     | 'load'
     | 'spend'
     | 'adjustment'
-    | 'refund';
+    | 'refund'
+    | 'earn'
+    | 'redeem'
+    | 'expire'
+    | 'points_adjustment';
