@@ -160,15 +160,15 @@ test('public card props contain only the allowed fields', function () {
         ->assertInertia(fn (Assert $page) => $page
             ->component('public-card/show')
             ->has('card', fn (Assert $props) => $props
-                ->hasAll(['balance', 'status', 'has_email'])
+                ->hasAll(['balance', 'points', 'status', 'has_email'])
                 ->etc(false))
             ->has('organization', fn (Assert $props) => $props
                 ->hasAll(['name', 'logo_url', 'primary_color', 'currency'])));
 
     $props = $response->viewData('page')['props'];
 
-    expect(array_keys($props))->toEqualCanonicalizing([...$shared, 'card', 'organization'])
-        ->and(array_keys($props['card']))->toEqualCanonicalizing(['balance', 'status', 'has_email'])
+    expect(array_keys($props))->toEqualCanonicalizing([...$shared, 'card', 'rewards_enabled', 'organization'])
+        ->and(array_keys($props['card']))->toEqualCanonicalizing(['balance', 'points', 'status', 'has_email'])
         ->and(array_keys($props['organization']))->toEqualCanonicalizing(['name', 'logo_url', 'primary_color', 'currency']);
 
     // Nothing else about the card, program, or organization leaks.

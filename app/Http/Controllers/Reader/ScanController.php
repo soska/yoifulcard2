@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reader;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dashboard\SettingsController;
 use App\Models\Card;
 use App\Models\Organization;
 use App\Support\CurrentOrganization;
@@ -68,8 +69,10 @@ class ScanController extends Controller
                 'id' => $card->id,
                 'code' => $card->code,
                 'balance' => $card->balance,
+                'points' => $card->points,
                 'status' => $card->status->value,
             ],
+            'rewards' => SettingsController::rewardsProps($card->program),
             'currency' => $organization->currency,
         ]);
     }

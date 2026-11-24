@@ -161,6 +161,7 @@ class OrganizationController extends Controller
             ->first();
 
         $transactions = Transaction::query()
+            ->money()
             ->forOrganization($organization)
             ->toBase()
             ->selectRaw('count(*) as total')

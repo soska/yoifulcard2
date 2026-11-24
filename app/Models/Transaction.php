@@ -81,6 +81,18 @@ class Transaction extends Model
     }
 
     /**
+     * Limit the query to money entries. The organization-wide reports (the
+     * transactions page and export, analytics, the dashboard) only count
+     * money until points get their own reporting.
+     *
+     * @param  Builder<Transaction>  $query
+     */
+    public function scopeMoney(Builder $query): void
+    {
+        $query->where('unit', TransactionUnit::Money->value);
+    }
+
+    /**
      * Limit the query to transactions on one organization's cards.
      *
      * @param  Builder<Transaction>  $query

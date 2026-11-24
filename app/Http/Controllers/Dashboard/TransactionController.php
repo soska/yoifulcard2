@@ -91,7 +91,7 @@ class TransactionController extends Controller
     }
 
     /**
-     * @return array{id: string, card: array{id: string, code: string}, type: string, amount: string, balance_after: string, note: string|null, performed_by: string|null, created_at: string|null}
+     * @return array{id: string, card: array{id: string, code: string}, type: string, unit: string, amount: string, balance_after: string, note: string|null, performed_by: string|null, created_at: string|null}
      */
     public static function props(Transaction $transaction): array
     {
@@ -99,6 +99,7 @@ class TransactionController extends Controller
             'id' => $transaction->id,
             'card' => ['id' => $transaction->card->id, 'code' => $transaction->card->code],
             'type' => $transaction->type->value,
+            'unit' => $transaction->unit->value,
             'amount' => $transaction->amount,
             'balance_after' => $transaction->balance_after,
             'note' => $transaction->note,

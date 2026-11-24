@@ -49,6 +49,7 @@ final readonly class TransactionFilters
         $timezone = $organization->timezone;
 
         return Transaction::query()
+            ->money()
             ->forOrganization($organization)
             ->when($this->type, fn (Builder $query, TransactionType $type) => $query->where('type', $type))
             ->when($this->from, fn (Builder $query, string $from) => $query

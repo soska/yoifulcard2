@@ -22,11 +22,21 @@ type Props = {
     showCard?: boolean;
 };
 
-/** Signed amount from the card's point of view: charges are negative. */
+/**
+ * Signed amount from the card's point of view: charges and redemptions are
+ * negative.
+ */
 function signedAmount(transaction: TransactionRow): string {
-    return transaction.type === 'spend'
+    return transaction.type === 'spend' || transaction.type === 'redeem'
         ? `-${transaction.amount}`
         : transaction.amount;
+}
+
+/** A points entry's whole number, with its sign when asked ("+5", "-3"). */
+function formatPoints(value: string, signed: boolean): string {
+    const points = Math.trunc(Number(value));
+
+    return signed && points > 0 ? `+${points}` : String(points);
 }
 
 export function TransactionsTable({
@@ -81,14 +91,25 @@ export function TransactionsTable({
                                         : 'text-foreground',
                                 )}
                             >
-                                {formatSignedMoney(amount, currency)}
+                                {transaction.unit === 'points'
+                                    ? __('{points} pts', {
+                                          points: formatPoints(amount, true),
+                                      })
+                                    : formatSignedMoney(amount, currency)}
                             </TableCell>
                             <TableCell className="text-right whitespace-nowrap tabular-nums">
-                                {formatSignedMoney(
-                                    transaction.balance_after,
-                                    currency,
-                                    false,
-                                )}
+                                {transaction.unit === 'points'
+                                    ? __('{points} pts', {
+                                          points: formatPoints(
+                                              transaction.balance_after,
+                                              false,
+                                          ),
+                                      })
+                                    : formatSignedMoney(
+                                          transaction.balance_after,
+                                          currency,
+                                          false,
+                                      )}
                             </TableCell>
                             <TableCell className="max-w-64 truncate text-muted-foreground">
                                 {transaction.note ?? '—'}

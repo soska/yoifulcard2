@@ -15,6 +15,8 @@ export type CardSummary = {
     id: string;
     code: string;
     balance: string;
+    /** Reward points. Whole number. */
+    points: number;
     status: CardStatus;
     email: string | null;
     /** The batch a preissued card came from; null for cards made one at a time. */

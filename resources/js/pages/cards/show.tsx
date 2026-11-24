@@ -12,6 +12,7 @@ import { suspendedMessage } from '@/components/organization/suspended-banner';
 import { CardActivation } from '@/components/cards/card-activation';
 import { CardBalanceActions } from '@/components/cards/card-balance-actions';
 import { CardHandoff } from '@/components/cards/card-handoff';
+import { CardPointsActions } from '@/components/cards/card-points-actions';
 import { CardStatusBadge } from '@/components/cards/card-status-badge';
 import { TransactionsTable } from '@/components/transactions/transactions-table';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -50,12 +51,15 @@ import {
     voidMethod,
 } from '@/routes/cards';
 import { index as transactionsIndex } from '@/routes/transactions';
-import type { CardDetail, TransactionRow } from '@/types';
+import type { CardDetail, RewardsSettings, TransactionRow } from '@/types';
 import { __ } from '@/i18n';
 
 type Props = {
     card: CardDetail;
     currency: string;
+    rewards: RewardsSettings;
+    /** Owners and managers can correct a card's points. */
+    canAdjustPoints: boolean;
     transactions: TransactionRow[];
     transactionCount: number;
     /** An inactive card the user may void (lost or stolen stock). */
@@ -66,6 +70,8 @@ type Props = {
 export default function ShowCard({
     card,
     currency,
+    rewards,
+    canAdjustPoints,
     transactions,
     transactionCount,
     canVoid,
@@ -132,6 +138,16 @@ export default function ShowCard({
                                                   )}
                                         </dd>
                                     </div>
+                                    {rewards.enabled && !inactive && (
+                                        <div className="col-span-2">
+                                            <dt className="text-sm text-muted-foreground">
+                                                {__('Reward points')}
+                                            </dt>
+                                            <dd className="text-2xl font-semibold tabular-nums">
+                                                {card.points}
+                                            </dd>
+                                        </div>
+                                    )}
                                     <div>
                                         <dt className="text-sm text-muted-foreground">
                                             {__('Created')}
@@ -194,6 +210,13 @@ export default function ShowCard({
                             <CardBalanceActions
                                 card={card}
                                 currency={currency}
+                                writable={writable}
+                            />
+                        )}
+
+                        {rewards.enabled && !inactive && canAdjustPoints && (
+                            <CardPointsActions
+                                card={card}
                                 writable={writable}
                             />
                         )}

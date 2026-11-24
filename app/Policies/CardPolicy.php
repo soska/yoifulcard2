@@ -62,4 +62,16 @@ class CardPolicy
         return $organization->isWritable()
             && $user->membershipFor($organization)?->role->canManageSettings() === true;
     }
+
+    /**
+     * Owners and managers can correct a card's points while the organization
+     * is active. CardLedger checks the organization again under its lock.
+     */
+    public function adjustPoints(User $user, Card $card): bool
+    {
+        $organization = $card->organization();
+
+        return $organization->isWritable()
+            && $user->membershipFor($organization)?->role->canManageSettings() === true;
+    }
 }

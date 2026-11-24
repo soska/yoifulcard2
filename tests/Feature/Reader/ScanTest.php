@@ -39,6 +39,7 @@ test('scan lookup resolves a token from the current organization', function () {
                 'id' => $card->id,
                 'code' => $card->code,
                 'balance' => $card->balance,
+                'points' => 0,
                 'status' => 'active',
             ])
             ->where('currency', $organization->currency))

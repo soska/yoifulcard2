@@ -19,6 +19,11 @@ export type CardTemplate =
     | 'sheet_a4'
     | 'print_shop';
 
+/** App\Enums\EarnMode */
+export type EarnMode =
+    | 'spend'
+    | 'visits';
+
 /** App\Enums\FlashMessage */
 export type FlashMessage =
     | 'card.created'
@@ -35,8 +40,11 @@ export type FlashMessage =
     | 'ledger.charged'
     | 'ledger.activated'
     | 'ledger.adjusted'
+    | 'ledger.points_earned'
+    | 'ledger.points_adjusted'
     | 'settings.business_saved'
     | 'settings.program_saved'
+    | 'settings.rewards_saved'
     | 'settings.profile_updated'
     | 'settings.password_updated'
     | 'public_card.email_saved'

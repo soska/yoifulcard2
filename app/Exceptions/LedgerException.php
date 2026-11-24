@@ -109,6 +109,21 @@ class LedgerException extends RuntimeException
         return new self(__('The points cannot be more than :max.', ['max' => $maximum]), 'points');
     }
 
+    public static function amountTooSmallForPoints(): self
+    {
+        return new self(__('That amount is too small to earn points.'));
+    }
+
+    public static function amountRequiredForPoints(): self
+    {
+        return new self(__('Enter the purchase amount.'));
+    }
+
+    public static function visitLimitReached(int $limit): self
+    {
+        return new self(__('This card already earned its :limit visit points today.', ['limit' => $limit]), 'card');
+    }
+
     public static function rewardsNotEnabled(): self
     {
         return new self(__('Rewards are not turned on for this business.'), 'rewards');

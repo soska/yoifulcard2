@@ -80,6 +80,7 @@ class AnalyticsController extends Controller
             ->pluck('total', 'bucket');
 
         $transactionRows = Transaction::query()
+            ->money()
             ->forOrganization($organization)
             ->toBase()
             ->selectRaw('width_bucket(created_at, ?::timestamp[]) as bucket', [$thresholds])
