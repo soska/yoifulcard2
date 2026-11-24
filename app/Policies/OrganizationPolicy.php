@@ -28,6 +28,15 @@ class OrganizationPolicy
     }
 
     /**
+     * Owners and managers can see the reward catalog, even while the
+     * organization is suspended (like the settings, it is read-only then).
+     */
+    public function viewRewards(User $user, Organization $organization): bool
+    {
+        return $user->membershipFor($organization)?->role->canManageSettings() === true;
+    }
+
+    /**
      * Owners and managers can see the card batches of a business that is
      * allowed to preissue cards (can_preissue). Superadmins see every batch
      * from the admin area instead.

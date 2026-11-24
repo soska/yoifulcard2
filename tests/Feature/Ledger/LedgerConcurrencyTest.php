@@ -4,6 +4,7 @@ use App\Enums\CardStatus;
 use App\Models\Card;
 use App\Models\Organization;
 use App\Models\Program;
+use App\Models\Reward;
 use App\Models\User;
 use Illuminate\Database\Connection;
 use Illuminate\Support\Facades\DB;
@@ -178,6 +179,86 @@ test('two concurrent spends cannot overdraw', function () {
 
         $db->table('transactions')->where('card_id', $card->id)->delete();
         $db->table('cards')->where('id', $card->id)->delete();
+        $db->table('programs')->where('id', $program->id)->delete();
+        $db->table('organizations')->where('id', $organization->id)->delete();
+        $db->table('users')->where('id', $user->id)->delete();
+        $db->disconnect();
+    }
+});
+
+test('two concurrent redemptions cannot spend the same points twice', function () {
+    $db = concurrencyConnection();
+
+    // Committed fixtures: a card with 15 points, a reward that costs 10, and a user.
+    $user = User::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->create();
+    $organization = Organization::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->create();
+    $program = Program::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->for($organization)->create([
+        'rewards_enabled' => true,
+        'earn_mode' => 'visits',
+    ]);
+    $reward = Reward::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->create([
+        'program_id' => $program->id,
+        'name' => 'Free coffee',
+        'points_cost' => 10,
+    ]);
+    $card = Card::factory()->connection(LEDGER_CONCURRENCY_CONNECTION)->create([
+        'program_id' => $program->id,
+        'points' => 15,
+    ]);
+
+    $children = [];
+
+    try {
+        // Hold the card row so both processes are inside CardLedger, waiting
+        // on lockForUpdate(), before either one reads the points.
+        $db->beginTransaction();
+        $db->table('cards')->where('id', $card->id)->lockForUpdate()->first();
+
+        $children[] = startSpendProcess($card->id, $user->id, $reward->id, 'ledger-redeem.php');
+        $children[] = startSpendProcess($card->id, $user->id, $reward->id, 'ledger-redeem.php');
+
+        $deadline = microtime(true) + 20;
+        while (sessionsWaitingForLocks($db) < 2) {
+            if (microtime(true) > $deadline) {
+                throw new RuntimeException('The redeem processes never reached the card lock.');
+            }
+
+            usleep(20_000);
+        }
+
+        $db->commit();
+
+        $results = array_map(fn (array $child) => finishSpendProcess($child), $children);
+        $children = [];
+
+        $succeeded = array_values(array_filter($results, fn (array $result) => $result['ok'] === true));
+        $refused = array_values(array_filter($results, fn (array $result) => $result['ok'] === false));
+
+        expect($succeeded)->toHaveCount(1)
+            ->and($succeeded[0]['balance_after'])->toBe('5.00')
+            ->and($refused)->toHaveCount(1)
+            ->and($refused[0]['error'])->toBe('Not enough points.');
+
+        expect((int) $db->table('cards')->where('id', $card->id)->value('points'))->toBe(5);
+
+        $rows = $db->table('transactions')->where('card_id', $card->id)->get();
+        expect($rows)->toHaveCount(1)
+            ->and($rows[0]->type)->toBe('redeem')
+            ->and($rows[0]->unit)->toBe('points')
+            ->and($rows[0]->reward_name)->toBe('Free coffee');
+    } finally {
+        if ($db->transactionLevel() > 0) {
+            $db->rollBack();
+        }
+
+        foreach ($children as $child) {
+            proc_terminate($child['process'], 9);
+            proc_close($child['process']);
+        }
+
+        $db->table('transactions')->where('card_id', $card->id)->delete();
+        $db->table('cards')->where('id', $card->id)->delete();
+        $db->table('rewards')->where('id', $reward->id)->delete();
         $db->table('programs')->where('id', $program->id)->delete();
         $db->table('organizations')->where('id', $organization->id)->delete();
         $db->table('users')->where('id', $user->id)->delete();

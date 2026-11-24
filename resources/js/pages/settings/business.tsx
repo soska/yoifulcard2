@@ -1,4 +1,4 @@
-import { Form, Head, usePage } from '@inertiajs/react';
+import { Form, Head, Link, usePage } from '@inertiajs/react';
 import { Lock } from 'lucide-react';
 import { useState } from 'react';
 import { CardUsageNotice } from '@/components/cards/card-usage-notice';
@@ -28,6 +28,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { edit } from '@/routes/settings';
 import { update as updateOrganization } from '@/routes/settings/organization';
 import { update as updateProgram } from '@/routes/settings/program';
+import { index as rewardsIndex } from '@/routes/rewards';
 import { update as updateRewards } from '@/routes/settings/rewards';
 import type { EarnMode } from '@/types/enums.generated';
 import type {
@@ -558,6 +559,16 @@ function RewardsForm({
                                     {processing && <Spinner />}
                                     {__('Save rewards')}
                                 </Button>
+                                {rewards.enabled && canEdit && (
+                                    <Button
+                                        type="button"
+                                        variant="link"
+                                        nativeButton={false}
+                                        render={<Link href={rewardsIndex()} />}
+                                    >
+                                        {__('Manage rewards')}
+                                    </Button>
+                                )}
                             </div>
                         </FieldGroup>
                     </FieldSet>

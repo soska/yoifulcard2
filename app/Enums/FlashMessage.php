@@ -62,6 +62,9 @@ enum FlashMessage: string
     /** "{points} points added to {code}. Total: {total}." — params: code, points, total */
     case PointsEarned = 'ledger.points_earned';
 
+    /** "Redeemed {reward} for {code}. Points left: {total}." — params: code, reward, points, total */
+    case RewardRedeemed = 'ledger.reward_redeemed';
+
     /** "Points of {code} adjusted." — params: code (also sent: points, total) */
     case PointsAdjusted = 'ledger.points_adjusted';
 
@@ -70,6 +73,9 @@ enum FlashMessage: string
 
     /** "Program settings saved." */
     case ProgramSettingsSaved = 'settings.program_saved';
+
+    /** "Reward saved." */
+    case RewardSaved = 'rewards.saved';
 
     /** "Rewards settings saved." */
     case RewardsSettingsSaved = 'settings.rewards_saved';

@@ -2,7 +2,7 @@
 //
 // Laravel's translatable strings, declared to duckalization's extractor
 // so PHP and TypeScript share ONE catalog, one brief and one review. The
-// extractor parses TypeScript only; this is how the 86 messages
+// extractor parses TypeScript only; this is how the 87 messages
 // Laravel renders (validation refusals, ledger errors, the CSV header,
 // the offline page) get counted, briefed and translated with the UI.
 //
@@ -38,7 +38,7 @@ export function phpMessages(): string[] {
         __('Adjustment'),
         // app/Http/Controllers/Dashboard/TransactionController.php:70
         __('Amount'),
-        // app/Http/Controllers/PublicCardController.php:106
+        // app/Http/Controllers/PublicCardController.php:117
         __('An email is already saved for this card.'),
         // app/Http/Requests/Admin/StoreOrganizationRequest.php:57
         __('An organization with this slug already exists.'),
@@ -46,7 +46,7 @@ export function phpMessages(): string[] {
         __('Balance after'),
         // app/Http/Controllers/Dashboard/TransactionController.php:68
         __('Card'),
-        // app/Http/Controllers/Reader/ScanController.php:46
+        // app/Http/Controllers/Reader/ScanController.php:47
         __('Card not found.'),
         // app/Enums/TransactionType.php:38
         __('Charge'),
@@ -98,7 +98,7 @@ export function phpMessages(): string[] {
         __('Redeemed'),
         // app/Enums/TransactionType.php:40
         __('Refund'),
-        // app/Exceptions/LedgerException.php:129
+        // app/Exceptions/LedgerException.php:134
         __('Rewards are not turned on for this business.'),
         // app/Http/Controllers/Dashboard/CardLinkController.php:63
         __('Save a cardholder email first.'),
@@ -110,6 +110,8 @@ export function phpMessages(): string[] {
         __('Terms and conditions'),
         // app/Exceptions/LedgerException.php:114
         __('That amount is too small to earn points.'),
+        // app/Exceptions/LedgerException.php:129
+        __('That reward is not available.'),
         // app/Exceptions/CardBatchException.php:60
         __('That template is not available here.'),
         // app/Exceptions/LedgerException.php:39

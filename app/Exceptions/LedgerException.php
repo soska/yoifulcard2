@@ -124,6 +124,11 @@ class LedgerException extends RuntimeException
         return new self(__('This card already earned its :limit visit points today.', ['limit' => $limit]), 'card');
     }
 
+    public static function rewardNotAvailable(): self
+    {
+        return new self(__('That reward is not available.'), 'reward');
+    }
+
     public static function rewardsNotEnabled(): self
     {
         return new self(__('Rewards are not turned on for this business.'), 'rewards');

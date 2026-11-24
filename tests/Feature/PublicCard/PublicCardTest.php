@@ -167,7 +167,7 @@ test('public card props contain only the allowed fields', function () {
 
     $props = $response->viewData('page')['props'];
 
-    expect(array_keys($props))->toEqualCanonicalizing([...$shared, 'card', 'rewards_enabled', 'organization'])
+    expect(array_keys($props))->toEqualCanonicalizing([...$shared, 'card', 'rewards_enabled', 'rewards', 'organization'])
         ->and(array_keys($props['card']))->toEqualCanonicalizing(['balance', 'points', 'status', 'has_email'])
         ->and(array_keys($props['organization']))->toEqualCanonicalizing(['name', 'logo_url', 'primary_color', 'currency']);
 

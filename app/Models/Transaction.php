@@ -26,11 +26,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $balance_after
  * @property string|null $note
  * @property int $performed_by
+ * @property string|null $reward_id
+ * @property string|null $reward_name
  * @property CarbonImmutable|null $created_at
  * @property-read Card $card
  * @property-read User $performer
  */
-#[Fillable(['card_id', 'type', 'unit', 'amount', 'balance_after', 'note', 'performed_by'])]
+#[Fillable(['card_id', 'type', 'unit', 'amount', 'balance_after', 'note', 'performed_by', 'reward_id', 'reward_name'])]
 class Transaction extends Model
 {
     /** @use HasFactory<TransactionFactory> */
