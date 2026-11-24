@@ -45,6 +45,8 @@ class PublicCardController extends Controller
                 'status' => $card->status->value,
                 // Whether an email is saved, never the address itself.
                 'has_email' => (bool) $card->getAttribute('has_email'),
+                // The day the points expire if the card stays idle, in the business's local time.
+                'points_expire_on' => self::pointsExpireOn($card),
             ],
             // Points show only while the business has rewards on.
             'rewards_enabled' => (bool) $card->getAttribute('rewards_enabled'),
@@ -144,6 +146,10 @@ class PublicCardController extends Controller
                 'cards.balance',
                 'cards.points',
                 'cards.program_id',
+                'cards.last_used_at',
+                'cards.created_at',
+                'programs.points_expiry_months',
+                'organizations.timezone as organization_timezone',
                 'cards.status',
                 'programs.rewards_enabled',
                 DB::raw('cards.email is not null as has_email'),
@@ -152,6 +158,26 @@ class PublicCardController extends Controller
                 'organizations.primary_color as organization_primary_color',
                 'organizations.currency as organization_currency',
             ]);
+    }
+
+    /**
+     * The local day a card's points expire if nothing happens on the card
+     * until then, or null when they will not: rewards off, no points, or no
+     * expiry rule.
+     */
+    private static function pointsExpireOn(Card $card): ?string
+    {
+        $months = $card->getAttribute('points_expiry_months');
+        $lastActivity = $card->last_used_at ?? $card->created_at;
+
+        if (! $card->getAttribute('rewards_enabled') || $card->points <= 0 || ! is_numeric($months) || $lastActivity === null) {
+            return null;
+        }
+
+        return $lastActivity
+            ->addMonths((int) $months)
+            ->setTimezone((string) $card->getAttribute('organization_timezone'))
+            ->toDateString();
     }
 
     /**

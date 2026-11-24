@@ -548,6 +548,40 @@ function RewardsForm({
                                             )}
                                         </FieldDescription>
                                     )}
+
+                                    <Field
+                                        data-invalid={
+                                            !!errors.points_expiry_months
+                                        }
+                                    >
+                                        <FieldLabel htmlFor="points_expiry_months">
+                                            {__(
+                                                'Points expire after this many months without activity',
+                                            )}
+                                        </FieldLabel>
+                                        <Input
+                                            id="points_expiry_months"
+                                            name="points_expiry_months"
+                                            inputMode="numeric"
+                                            autoComplete="off"
+                                            placeholder={__('Never')}
+                                            defaultValue={
+                                                rewards.expiry_months ?? ''
+                                            }
+                                            className="w-full sm:w-40"
+                                            aria-invalid={
+                                                !!errors.points_expiry_months
+                                            }
+                                        />
+                                        <FieldDescription>
+                                            {__(
+                                                'Leave empty if points never expire. Any visit, charge or redemption starts the count again.',
+                                            )}
+                                        </FieldDescription>
+                                        <FieldError>
+                                            {errors.points_expiry_months}
+                                        </FieldError>
+                                    </Field>
                                 </>
                             )}
 

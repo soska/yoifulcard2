@@ -7,6 +7,8 @@ import type { CardStatus } from './card';
 export type PublicCard = {
     balance: string;
     points: number;
+    /** The local day the points expire if the card stays idle (YYYY-MM-DD); null when they will not. */
+    points_expire_on: string | null;
     status: CardStatus;
     has_email: boolean;
 };

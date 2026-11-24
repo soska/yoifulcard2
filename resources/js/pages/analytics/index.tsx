@@ -3,7 +3,11 @@ import {
     ArrowDownToLine,
     ArrowUpFromLine,
     CreditCard,
+    Gift,
+    Hourglass,
     ReceiptText,
+    Star,
+    Wallet,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import {
@@ -50,6 +54,8 @@ type Props = {
     summary: AnalyticsSummary;
     ranges: number[];
     currency: string;
+    /** Whether the business uses rewards: points numbers show only then. */
+    pointsEnabled: boolean;
 };
 
 function SummaryCard({
@@ -84,6 +90,7 @@ export default function Analytics({
     summary,
     ranges,
     currency,
+    pointsEnabled,
 }: Props) {
     const { formatMoney } = useMoneyFormat();
     const { formatDay } = useDateFormat();
@@ -173,6 +180,31 @@ export default function Analytics({
                     />
                 </div>
 
+                {pointsEnabled && (
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        <SummaryCard
+                            title={__('Points earned')}
+                            value={summary.pointsEarned}
+                            icon={<Star />}
+                        />
+                        <SummaryCard
+                            title={__('Points redeemed')}
+                            value={summary.pointsRedeemed}
+                            icon={<Gift />}
+                        />
+                        <SummaryCard
+                            title={__('Points expired')}
+                            value={summary.pointsExpired}
+                            icon={<Hourglass />}
+                        />
+                        <SummaryCard
+                            title={__('Points outstanding')}
+                            value={summary.pointsOutstanding}
+                            icon={<Wallet />}
+                        />
+                    </div>
+                )}
+
                 <div className="grid gap-4 lg:grid-cols-2">
                     <CardsCreatedChart series={series} />
                     <TransactionVolumeChart series={series} />
@@ -209,6 +241,19 @@ export default function Analytics({
                                     <TableHead className="text-right">
                                         {__('Charged')}
                                     </TableHead>
+                                    {pointsEnabled && (
+                                        <>
+                                            <TableHead className="text-right">
+                                                {__('Points earned')}
+                                            </TableHead>
+                                            <TableHead className="text-right">
+                                                {__('Points redeemed')}
+                                            </TableHead>
+                                            <TableHead className="text-right">
+                                                {__('Points expired')}
+                                            </TableHead>
+                                        </>
+                                    )}
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -241,6 +286,19 @@ export default function Analytics({
                                                 currency,
                                             )}
                                         </TableCell>
+                                        {pointsEnabled && (
+                                            <>
+                                                <TableCell className="text-right tabular-nums">
+                                                    {day.pointsEarned}
+                                                </TableCell>
+                                                <TableCell className="text-right tabular-nums">
+                                                    {day.pointsRedeemed}
+                                                </TableCell>
+                                                <TableCell className="text-right tabular-nums">
+                                                    {day.pointsExpired}
+                                                </TableCell>
+                                            </>
+                                        )}
                                     </TableRow>
                                 ))}
                             </TableBody>

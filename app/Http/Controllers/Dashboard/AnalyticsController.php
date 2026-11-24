@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\TransactionType;
+use App\Enums\TransactionUnit;
 use App\Http\Controllers\Controller;
 use App\Models\Card;
 use App\Models\Organization;
@@ -44,11 +45,12 @@ class AnalyticsController extends Controller
             ...self::report($organization, $days),
             'ranges' => self::RANGES,
             'currency' => $organization->currency,
+            'pointsEnabled' => $organization->usesRewards(),
         ]);
     }
 
     /**
-     * @return array{days: int, from: string, to: string, series: list<array{date: string, cards: int, load: int, spend: int, adjustment: int, loadAmount: string, spendAmount: string}>, summary: array{cards: int, transactions: int, loadAmount: string, spendAmount: string}}
+     * @return array{days: int, from: string, to: string, series: list<array{date: string, cards: int, load: int, spend: int, adjustment: int, loadAmount: string, spendAmount: string, pointsEarned: int, pointsRedeemed: int, pointsExpired: int}>, summary: array{cards: int, transactions: int, loadAmount: string, spendAmount: string, pointsEarned: int, pointsRedeemed: int, pointsExpired: int, pointsOutstanding: int}}
      */
     public static function report(Organization $organization, int $days): array
     {
@@ -103,10 +105,55 @@ class AnalyticsController extends Controller
                 'adjustment' => 0,
                 'loadAmount' => '0.00',
                 'spendAmount' => '0.00',
+                'pointsEarned' => 0,
+                'pointsRedeemed' => 0,
+                'pointsExpired' => 0,
             ];
         }
 
-        $summary = ['cards' => array_sum(array_column($series, 'cards')), 'transactions' => 0, 'loadAmount' => '0.00', 'spendAmount' => '0.00'];
+        $summary = [
+            'cards' => array_sum(array_column($series, 'cards')),
+            'transactions' => 0,
+            'loadAmount' => '0.00',
+            'spendAmount' => '0.00',
+            'pointsEarned' => 0,
+            'pointsRedeemed' => 0,
+            'pointsExpired' => 0,
+            'pointsOutstanding' => (int) Card::query()->forOrganization($organization)->sum('points'),
+        ];
+
+        // Points are their own numbers: whole points earned, redeemed and
+        // expired. Adjustments are corrections and stay out, like money's.
+        $pointRows = Transaction::query()
+            ->where('unit', TransactionUnit::Points->value)
+            ->whereIn('type', [TransactionType::Earn->value, TransactionType::Redeem->value, TransactionType::Expire->value])
+            ->forOrganization($organization)
+            ->toBase()
+            ->selectRaw('width_bucket(created_at, ?::timestamp[]) as bucket', [$thresholds])
+            ->addSelect('type')
+            ->selectRaw('sum(amount) as amount')
+            ->where('created_at', '>=', $from)
+            ->where('created_at', '<', $until)
+            ->groupByRaw('1, 2')
+            ->get();
+
+        foreach ($pointRows as $row) {
+            $bucket = (int) $row->bucket;
+            $points = (int) $row->amount;
+            $key = match (TransactionType::tryFrom((string) $row->type)) {
+                TransactionType::Earn => 'pointsEarned',
+                TransactionType::Redeem => 'pointsRedeemed',
+                TransactionType::Expire => 'pointsExpired',
+                default => null,
+            };
+
+            if ($key === null || ! isset($series[$bucket])) {
+                continue;
+            }
+
+            $series[$bucket][$key] += $points;
+            $summary[$key] += $points;
+        }
 
         foreach ($transactionRows as $row) {
             $bucket = (int) $row->bucket;

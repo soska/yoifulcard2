@@ -10,3 +10,6 @@ Artisan::command('inspire', function () {
 
 // Expired batch PDFs and their files (App\Models\CardBatchPdf::prunable()).
 Schedule::command('model:prune')->hourly();
+
+// Points of cards idle longer than their program's expiry rule.
+Schedule::command('rewards:expire-points')->daily();

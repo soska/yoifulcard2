@@ -53,6 +53,12 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "10pxk93bj1s": {
+    "status": "machine",
+    "translatedHash": "1uzu63kg1ex",
+    "at": "2026-11-24",
+    "by": "claude"
+  },
   "10r1ie41le2": {
     "status": "machine",
     "translatedHash": "1hz1f93rahx",
@@ -503,6 +509,12 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "19e6h629vhc": {
+    "status": "machine",
+    "translatedHash": "18yy1ueeqlm",
+    "at": "2026-11-24",
+    "by": "claude"
+  },
   "19fxrz15txi": {
     "status": "machine",
     "translatedHash": "l56uso4cjg",
@@ -513,6 +525,12 @@
     "status": "machine",
     "translatedHash": "ws55u43omg",
     "at": "2026-10-06",
+    "by": "claude"
+  },
+  "1aj46zjbmrz": {
+    "status": "machine",
+    "translatedHash": "26yhulks19m",
+    "at": "2026-11-24",
     "by": "claude"
   },
   "1ajuoro6znp": {
@@ -2404,6 +2422,12 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "232n0low5z0": {
+    "status": "machine",
+    "translatedHash": "1iz380k4pma",
+    "at": "2026-11-24",
+    "by": "claude"
+  },
   "235uv0wvoh0": {
     "status": "machine",
     "translatedHash": "zj8zj4by3c",
@@ -2630,6 +2654,12 @@
     "at": "2026-11-24",
     "by": "claude"
   },
+  "27kw514jw7d": {
+    "status": "machine",
+    "translatedHash": "rm7hsnp6s6",
+    "at": "2026-11-24",
+    "by": "claude"
+  },
   "27nxsynl10g": {
     "status": "machine",
     "translatedHash": "n27ehz9g5t",
@@ -2736,6 +2766,12 @@
     "status": "machine",
     "translatedHash": "2gorl2hb5eg",
     "at": "2026-10-06",
+    "by": "claude"
+  },
+  "29oo4ead5mq": {
+    "status": "machine",
+    "translatedHash": "10i8s6yblhm",
+    "at": "2026-11-24",
     "by": "claude"
   },
   "29s7yt15s4z": {
@@ -3173,6 +3209,12 @@
     "translatedHash": "nes97g7uj8",
     "at": "2026-09-26",
     "by": "agent"
+  },
+  "39kgl40ldf": {
+    "status": "machine",
+    "translatedHash": "1kutjtqivr5",
+    "at": "2026-11-24",
+    "by": "claude"
   },
   "3az60now0p": {
     "status": "machine",
@@ -4423,6 +4465,12 @@
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
   },
+  "omqxcrm29i": {
+    "status": "machine",
+    "translatedHash": "2fyaaaml7le",
+    "at": "2026-11-24",
+    "by": "claude"
+  },
   "oohcztmjy7": {
     "status": "machine",
     "translatedHash": "reu056azdh",
@@ -4436,6 +4484,12 @@
     "by": "agent",
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "p9kq8zpme2": {
+    "status": "machine",
+    "translatedHash": "1ne0ayff0na",
+    "at": "2026-11-24",
+    "by": "claude"
   },
   "pqbk79k7rs": {
     "status": "machine",
@@ -4807,6 +4861,12 @@
     "by": "agent",
     "confidence": "high",
     "note": "Reused the Phase 8 Spanish (lang/es.json) for the same English."
+  },
+  "w8bcifkiem": {
+    "status": "machine",
+    "translatedHash": "1nd0g5nobjx",
+    "at": "2026-11-24",
+    "by": "claude"
   },
   "w8xiuxis0d": {
     "status": "machine",

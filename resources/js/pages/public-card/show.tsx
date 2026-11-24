@@ -8,6 +8,7 @@ import { WalletButtons } from '@/components/public-card/wallet-buttons';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
+import { useDateFormat } from '@/hooks/use-date-format';
 import type { PublicCard, PublicOrganization, PublicReward } from '@/types';
 import { __ } from '@/i18n';
 
@@ -39,6 +40,7 @@ export default function PublicCardShow({
     organization,
 }: Props) {
     const { url } = usePage();
+    const { formatDay } = useDateFormat();
     const initial = organization.name.trim().charAt(0).toUpperCase();
     return (
         <>
@@ -113,6 +115,18 @@ export default function PublicCardShow({
                             <p className="text-3xl font-semibold tabular-nums">
                                 {card.points}
                             </p>
+                            {card.points_expire_on && (
+                                <p className="mt-1 text-xs text-muted-foreground">
+                                    {__(
+                                        'Your points expire on {date} unless you use your card before then.',
+                                        {
+                                            date: formatDay(
+                                                card.points_expire_on,
+                                            ),
+                                        },
+                                    )}
+                                </p>
+                            )}
                         </div>
                     )}
 

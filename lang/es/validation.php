@@ -270,6 +270,7 @@ return [
         'plan_notes' => 'notas del plan',
         'points' => 'puntos',
         'points_cost' => 'costo en puntos',
+        'points_expiry_months' => 'meses para que venzan los puntos',
         'portfolio' => 'portafolio',
         'postal_code' => 'código postal',
         'preissue_limit' => 'límite de inventario',

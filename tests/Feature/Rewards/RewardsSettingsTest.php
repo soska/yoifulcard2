@@ -38,7 +38,7 @@ test('an owner turns rewards on with a spend rule', function () {
 
     $this->actingAs($user)->get(route('settings.edit'))
         ->assertInertia(fn (Assert $page) => $page
-            ->where('program.rewards', ['enabled' => true, 'mode' => 'spend', 'rate' => '1.50', 'visit_cap' => 3]));
+            ->where('program.rewards', ['enabled' => true, 'mode' => 'spend', 'rate' => '1.50', 'visit_cap' => 3, 'expiry_months' => null]));
 });
 
 test('a manager can switch to visits, which clears the rate', function () {

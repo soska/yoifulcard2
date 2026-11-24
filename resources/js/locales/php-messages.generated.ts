@@ -2,7 +2,7 @@
 //
 // Laravel's translatable strings, declared to duckalization's extractor
 // so PHP and TypeScript share ONE catalog, one brief and one review. The
-// extractor parses TypeScript only; this is how the 87 messages
+// extractor parses TypeScript only; this is how the 90 messages
 // Laravel renders (validation refusals, ledger errors, the CSV header,
 // the offline page) get counted, briefed and translated with the UI.
 //
@@ -34,31 +34,31 @@ export function phpMessages(): string[] {
         __('A note is required for adjustments.'),
         // app/Http/Controllers/Dashboard/CardLinkController.php:57
         __('Activate this card before sending it.'),
-        // app/Enums/TransactionType.php:39
+        // app/Enums/TransactionType.php:45
         __('Adjustment'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:70
+        // app/Http/Controllers/Dashboard/TransactionController.php:72
         __('Amount'),
-        // app/Http/Controllers/PublicCardController.php:117
+        // app/Http/Controllers/PublicCardController.php:119
         __('An email is already saved for this card.'),
         // app/Http/Requests/Admin/StoreOrganizationRequest.php:57
         __('An organization with this slug already exists.'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:71
+        // app/Http/Controllers/Dashboard/TransactionController.php:73
         __('Balance after'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:68
+        // app/Http/Controllers/Dashboard/TransactionController.php:69
         __('Card'),
         // app/Http/Controllers/Reader/ScanController.php:47
         __('Card not found.'),
-        // app/Enums/TransactionType.php:38
+        // app/Enums/TransactionType.php:44
         __('Charge'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:67
+        // app/Http/Controllers/Dashboard/TransactionController.php:68
         __('Date'),
-        // app/Enums/TransactionType.php:41
+        // app/Enums/TransactionType.php:47
         __('Earned'),
         // app/Exceptions/LedgerException.php:29
         __('Enter an amount with up to two decimals.'),
         // app/Exceptions/LedgerException.php:119
         __('Enter the purchase amount.'),
-        // app/Enums/TransactionType.php:43
+        // app/Enums/TransactionType.php:49
         __('Expired'),
         // app/Actions/Fortify/CreateNewUser.php:53
         __('Gift Card'),
@@ -72,11 +72,13 @@ export function phpMessages(): string[] {
         __('Invalid credential format.'),
         // resources/views/mail/card-batch-pdf-ready.blade.php:40
         __('It can be downloaded once, within :hours hours. It holds the code of every card: keep it private and delete it after printing.'),
-        // app/Enums/TransactionType.php:37
+        // app/Enums/TransactionType.php:43
         __('Load'),
+        // app/Enums/TransactionUnit.php:17
+        __('Money'),
         // app/Exceptions/LedgerException.php:99
         __('Not enough points.'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:72
+        // app/Http/Controllers/Dashboard/TransactionController.php:74
         __('Note'),
         // app/Exceptions/CardBatchException.php:65
         __('Only a card that is not activated yet can be voided.'),
@@ -90,13 +92,15 @@ export function phpMessages(): string[] {
         __('Passkey registration session expired. Please try again.'),
         // app/Support/PackageMessages.php:44
         __('Passkey verification session expired. Please try again.'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:73
+        // app/Http/Controllers/Dashboard/TransactionController.php:75
         __('Performed by'),
-        // app/Enums/TransactionType.php:44
+        // app/Enums/TransactionUnit.php:18
+        __('Points'),
+        // app/Enums/TransactionType.php:50
         __('Points adjustment'),
-        // app/Enums/TransactionType.php:42
+        // app/Enums/TransactionType.php:48
         __('Redeemed'),
-        // app/Enums/TransactionType.php:40
+        // app/Enums/TransactionType.php:46
         __('Refund'),
         // app/Exceptions/LedgerException.php:134
         __('Rewards are not turned on for this business.'),
@@ -130,7 +134,7 @@ export function phpMessages(): string[] {
         __('The card batch PDF for :business is ready to download.'),
         // app/Http/Controllers/Admin/SuperadminController.php:53
         __('The last superadmin cannot be revoked. Grant the role to someone else first.'),
-        // app/Http/Controllers/Dashboard/SettingsController.php:156
+        // app/Http/Controllers/Dashboard/SettingsController.php:157
         __('The logo could not be stored.'),
         // app/Exceptions/LedgerException.php:94
         __('The points adjustment cannot be 0.'),
@@ -180,8 +184,10 @@ export function phpMessages(): string[] {
         __('Too many attempts. Please try again in a minute.'),
         // resources/views/offline.blade.php:50
         __('Try again'),
-        // app/Http/Controllers/Dashboard/TransactionController.php:69
+        // app/Http/Controllers/Dashboard/TransactionController.php:70
         __('Type'),
+        // app/Http/Controllers/Dashboard/TransactionController.php:71
+        __('Unit'),
         // app/Http/Requests/Admin/StoreOrganizationRequest.php:56
         __('Use only lowercase letters, numbers, and single hyphens.'),
         // resources/views/offline.blade.php:25

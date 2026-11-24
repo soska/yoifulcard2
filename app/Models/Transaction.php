@@ -14,7 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * A ledger entry. Only App\Services\CardLedger writes these. The unit says
+ * A ledger entry. Only App\Services\CardLedger writes these. A person does
+ * (performed_by), except for entries the system writes itself, such as expiring
+ * points. The unit says
  * what it counts: money, or reward points (whole numbers kept in amount and
  * balance_after).
  *
@@ -25,12 +27,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $amount
  * @property string $balance_after
  * @property string|null $note
- * @property int $performed_by
+ * @property int|null $performed_by
  * @property string|null $reward_id
  * @property string|null $reward_name
  * @property CarbonImmutable|null $created_at
  * @property-read Card $card
- * @property-read User $performer
+ * @property-read User|null $performer
  */
 #[Fillable(['card_id', 'type', 'unit', 'amount', 'balance_after', 'note', 'performed_by', 'reward_id', 'reward_name'])]
 class Transaction extends Model
