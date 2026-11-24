@@ -23,6 +23,10 @@ export type AnalyticsDay = {
     adjustment: number;
     loadAmount: string;
     spendAmount: string;
+    /** Whole points earned, redeemed and expired that day. */
+    pointsEarned: number;
+    pointsRedeemed: number;
+    pointsExpired: number;
 };
 
 export type AnalyticsSummary = {
@@ -30,6 +34,11 @@ export type AnalyticsSummary = {
     transactions: number;
     loadAmount: string;
     spendAmount: string;
+    pointsEarned: number;
+    pointsRedeemed: number;
+    pointsExpired: number;
+    /** The points on every card right now. */
+    pointsOutstanding: number;
 };
 
 export type OrganizationSettings = {
@@ -48,6 +57,8 @@ export type RewardsSettings = {
     rate: string | null;
     /** The most visits that earn points for one card in a day. */
     visit_cap: number;
+    /** Points expire after this many months idle; null never. */
+    expiry_months: number | null;
 };
 
 export type ProgramSettings = {

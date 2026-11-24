@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\CardStatus;
 use App\Enums\OrganizationStatus;
+use App\Enums\TransactionUnit;
 use Carbon\CarbonImmutable;
 use Database\Factories\OrganizationFactory;
 use DateTimeZone;
@@ -157,6 +158,17 @@ class Organization extends Model
     public function isWritable(): bool
     {
         return $this->status === OrganizationStatus::Active;
+    }
+
+    /**
+     * Whether the business uses rewards: its program has them on, or its cards
+     * have points history from when it did. Screens that talk about points
+     * show up only then.
+     */
+    public function usesRewards(): bool
+    {
+        return $this->defaultProgram()?->rewards_enabled === true
+            || Transaction::query()->forOrganization($this)->where('unit', TransactionUnit::Points->value)->exists();
     }
 
     /**

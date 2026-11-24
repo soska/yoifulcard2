@@ -17,13 +17,19 @@ enum TransactionType: string
     case PointsAdjustment = 'points_adjustment';
 
     /**
-     * The types a person can filter by. Refund is not exposed in v1.
+     * The types a person can filter by. Refund is not exposed in v1. The
+     * points types are only for businesses that use rewards.
      *
      * @return list<string>
      */
-    public static function visibleValues(): array
+    public static function visibleValues(bool $withPoints = false): array
     {
-        return [self::Load->value, self::Spend->value, self::Adjustment->value];
+        return [
+            self::Load->value,
+            self::Spend->value,
+            self::Adjustment->value,
+            ...($withPoints ? [self::Earn->value, self::Redeem->value, self::Expire->value, self::PointsAdjustment->value] : []),
+        ];
     }
 
     /**

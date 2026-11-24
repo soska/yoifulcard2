@@ -9,11 +9,14 @@ use Illuminate\Validation\Rule;
 
 /**
  * Turn rewards on or off and choose how points are earned. Owners and
- * managers of an active organization. Turning rewards off keeps the rule, so
- * turning them on again starts where the business left off.
+ * managers of an active organization. Turning rewards off keeps the rule and
+ * the expiry, so turning them on again starts where the business left off.
  */
 class UpdateRewardsSettingsRequest extends FormRequest
 {
+    /** The longest a business can let points sit before they expire. */
+    public const MAX_EXPIRY_MONTHS = 120;
+
     public function authorize(): bool
     {
         $organization = CurrentOrganization::organization($this);
@@ -40,6 +43,8 @@ class UpdateRewardsSettingsRequest extends FormRequest
                 'gt:0',
                 'lte:1000',
             ],
+            // Empty means points never expire.
+            'points_expiry_months' => ['nullable', 'integer', 'min:1', 'max:'.self::MAX_EXPIRY_MONTHS],
         ];
     }
 
@@ -65,6 +70,7 @@ class UpdateRewardsSettingsRequest extends FormRequest
             'rewards_enabled' => true,
             'earn_mode' => $mode,
             'earn_rate' => $mode === EarnMode::Spend ? (string) $this->validated('earn_rate') : null,
+            'points_expiry_months' => is_numeric($months = $this->validated('points_expiry_months')) ? (int) $months : null,
         ];
     }
 }

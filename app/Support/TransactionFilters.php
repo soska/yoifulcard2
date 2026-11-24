@@ -32,7 +32,7 @@ final readonly class TransactionFilters
         $type = TransactionType::tryFrom((string) $request->query('type', ''));
 
         return new self(
-            type: $type !== null && in_array($type->value, TransactionType::visibleValues(), true) ? $type : null,
+            type: $type !== null && in_array($type->value, TransactionType::visibleValues(withPoints: true), true) ? $type : null,
             from: self::date($request->query('from')),
             to: self::date($request->query('to')),
             card: mb_substr(trim((string) $request->query('card', '')), 0, 50),
@@ -49,7 +49,6 @@ final readonly class TransactionFilters
         $timezone = $organization->timezone;
 
         return Transaction::query()
-            ->money()
             ->forOrganization($organization)
             ->when($this->type, fn (Builder $query, TransactionType $type) => $query->where('type', $type))
             ->when($this->from, fn (Builder $query, string $from) => $query

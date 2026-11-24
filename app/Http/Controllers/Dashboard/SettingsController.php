@@ -128,7 +128,7 @@ class SettingsController extends Controller
     /**
      * The program's rewards rule as pages see it.
      *
-     * @return array{enabled: bool, mode: string|null, rate: string|null, visit_cap: int}
+     * @return array{enabled: bool, mode: string|null, rate: string|null, visit_cap: int, expiry_months: int|null}
      */
     public static function rewardsProps(Program $program): array
     {
@@ -137,6 +137,7 @@ class SettingsController extends Controller
             'mode' => $program->earn_mode?->value,
             'rate' => $program->earn_rate,
             'visit_cap' => CardLedger::VISIT_POINTS_PER_DAY,
+            'expiry_months' => $program->points_expiry_months,
         ];
     }
 

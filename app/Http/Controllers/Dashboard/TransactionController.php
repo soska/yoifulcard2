@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\TransactionType;
+use App\Enums\TransactionUnit;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\Transaction;
@@ -36,7 +37,7 @@ class TransactionController extends Controller
         return Inertia::render('transactions/index', [
             'transactions' => $transactions,
             'filters' => $filters->toArray(),
-            'types' => TransactionType::visibleValues(),
+            'types' => TransactionType::visibleValues(withPoints: $organization->usesRewards()),
             'currency' => $organization->currency,
         ]);
     }
@@ -67,6 +68,7 @@ class TransactionController extends Controller
                 __('Date'),
                 __('Card'),
                 __('Type'),
+                __('Unit'),
                 __('Amount'),
                 __('Balance after'),
                 __('Note'),
@@ -79,10 +81,12 @@ class TransactionController extends Controller
                     $transaction->created_at?->setTimezone($timezone)->toIso8601String(),
                     $transaction->card->code,
                     $transaction->type->label(),
-                    $transaction->amount,
-                    $transaction->balance_after,
+                    $transaction->unit->label(),
+                    // Points are whole numbers; money keeps its two decimals.
+                    $transaction->unit === TransactionUnit::Points ? (string) (int) $transaction->amount : $transaction->amount,
+                    $transaction->unit === TransactionUnit::Points ? (string) (int) $transaction->balance_after : $transaction->balance_after,
                     self::cell($transaction->note),
-                    self::cell($transaction->performer->email),
+                    self::cell($transaction->performer?->email),
                 ], escape: '');
             }
 
@@ -104,7 +108,7 @@ class TransactionController extends Controller
             'balance_after' => $transaction->balance_after,
             'note' => $transaction->note,
             'reward_name' => $transaction->reward_name,
-            'performed_by' => $transaction->performer->name,
+            'performed_by' => $transaction->performer?->name,
             'created_at' => $transaction->created_at?->toIso8601String(),
         ];
     }

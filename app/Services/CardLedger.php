@@ -351,6 +351,42 @@ class CardLedger
     }
 
     /**
+     * Expire the points of a card that has been idle longer than its
+     * program's rule (points_expiry_months), with an `expire` entry the system
+     * writes (no person). Nothing happens, and null comes back, when the card
+     * is not due: no points, rewards or the rule off, used since, or the card
+     * or the business cannot take changes right now (frozen, cancelled,
+     * suspended). It is not a use of the card, so the card keeps its last
+     * activity. Everything is checked against the locked card, so a visit that
+     * lands while the job runs keeps its points, and running it again does
+     * nothing.
+     */
+    public function expireInactive(Card $card): ?Transaction
+    {
+        return DB::transaction(function () use ($card): ?Transaction {
+            try {
+                [$locked] = $this->lockUsable($card);
+            } catch (LedgerException) {
+                return null;
+            }
+
+            $program = Program::query()->whereKey($locked->program_id)->first();
+
+            if ($program === null || ! $program->rewards_enabled || $program->points_expiry_months === null || $locked->points <= 0) {
+                return null;
+            }
+
+            $lastActivity = $locked->last_used_at ?? $locked->created_at;
+
+            if ($lastActivity === null || $lastActivity->gt(now()->subMonths($program->points_expiry_months))) {
+                return null;
+            }
+
+            return $this->postPoints($card, TransactionType::Expire, null, null, fn (int $balance): int => 0, (int) $locked->points, marksUse: false);
+        });
+    }
+
+    /**
      * Correct a card's points up (positive) or down (negative). A note is
      * required and the result may not go below zero. Not a use of the card.
      */
@@ -477,7 +513,7 @@ class CardLedger
      * @param  bool  $marksUse  Whether the change sets `last_used_at`. Point adjustments do not.
      * @param  Reward|null  $reward  The reward a redemption is for; its name is kept on the entry.
      */
-    private function postPoints(Card $card, TransactionType $type, User $user, ?string $note, callable $apply, int $points, bool $marksUse = true, ?Reward $reward = null): Transaction
+    private function postPoints(Card $card, TransactionType $type, ?User $user, ?string $note, callable $apply, int $points, bool $marksUse = true, ?Reward $reward = null): Transaction
     {
         $note = $note === null || trim($note) === '' ? null : trim($note);
 
@@ -502,7 +538,7 @@ class CardLedger
                 'amount' => (string) $points,
                 'balance_after' => (string) $after,
                 'note' => $note,
-                'performed_by' => $user->getKey(),
+                'performed_by' => $user?->getKey(),
                 'reward_id' => $reward?->getKey(),
                 'reward_name' => $reward?->name,
             ]);

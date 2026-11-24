@@ -331,7 +331,7 @@ test('the reader, the card page and the public page show points', function () {
         ->assertInertia(fn (Assert $page) => $page
             ->component('reader/card')
             ->where('card.points', 7)
-            ->where('rewards', ['enabled' => true, 'mode' => 'visits', 'rate' => null, 'visit_cap' => CardLedger::VISIT_POINTS_PER_DAY]));
+            ->where('rewards', ['enabled' => true, 'mode' => 'visits', 'rate' => null, 'visit_cap' => CardLedger::VISIT_POINTS_PER_DAY, 'expiry_months' => null]));
 
     $this->actingAs($user)->get(route('cards.show', $card))
         ->assertInertia(fn (Assert $page) => $page
@@ -358,7 +358,7 @@ test('an employee does not get the points adjustment on the card page', function
         ->assertInertia(fn (Assert $page) => $page->where('canAdjustPoints', false));
 });
 
-test('points entries show in the card history but stay out of the money reports', function () {
+test('points entries show in the card history and the transactions page, but not in the money counts', function () {
     [$user, $card] = rewardsSetup(EarnMode::Spend, '1.00');
 
     app(CardLedger::class)->load($card, '5.00', $user);
@@ -375,8 +375,8 @@ test('points entries show in the card history but stay out of the money reports'
 
     $this->actingAs($user)->get(route('transactions.index'))
         ->assertInertia(fn (Assert $page) => $page
-            ->has('transactions.data', 1)
-            ->where('transactions.data.0.type', 'load'));
+            ->has('transactions.data', 2)
+            ->where('transactions.data.0.type', 'earn'));
 
     $this->actingAs($user)->get(route('analytics'))
         ->assertInertia(fn (Assert $page) => $page->where('summary.transactions', 1));

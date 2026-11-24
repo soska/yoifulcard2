@@ -23,11 +23,13 @@ type Props = {
 };
 
 /**
- * Signed amount from the card's point of view: charges and redemptions are
- * negative.
+ * Signed amount from the card's point of view: charges, redemptions and
+ * expired points are negative.
  */
 function signedAmount(transaction: TransactionRow): string {
-    return transaction.type === 'spend' || transaction.type === 'redeem'
+    return transaction.type === 'spend' ||
+        transaction.type === 'redeem' ||
+        transaction.type === 'expire'
         ? `-${transaction.amount}`
         : transaction.amount;
 }
@@ -117,7 +119,10 @@ export function TransactionsTable({
                                     .join(' · ') || '—'}
                             </TableCell>
                             <TableCell className="whitespace-nowrap text-muted-foreground">
-                                {transaction.performed_by ?? '—'}
+                                {transaction.performed_by ??
+                                    (transaction.type === 'expire'
+                                        ? __('Automatic')
+                                        : '—')}
                             </TableCell>
                         </TableRow>
                     );

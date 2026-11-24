@@ -36,3 +36,14 @@ A PDF can take up to 10 minutes to render, so on the database queue it goes
 to its own `pdfs` connection, whose `retry_after` (`DB_PDF_QUEUE_RETRY_AFTER`,
 660 seconds) is longer than that. Set `PDF_QUEUE_CONNECTION` to use another
 connection.
+
+## Reward points
+
+Points expire when a business sets an expiry (in months of no activity on the
+card). The scheduler runs `php artisan rewards:expire-points` daily; it writes
+an `expire` entry for each idle card and is safe to run again. In development
+it runs with `php artisan schedule:work`, or by hand:
+
+```bash
+php artisan rewards:expire-points
+```

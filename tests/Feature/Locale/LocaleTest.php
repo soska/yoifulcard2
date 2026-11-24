@@ -158,8 +158,9 @@ test('ledger errors, flash messages, and the csv are translated', function () {
 
     $rows = array_map(fn (string $line) => str_getcsv($line, escape: ''), array_values(array_filter(explode("\n", $csv))));
 
-    expect($rows[0])->toBe(['Fecha', 'Tarjeta', 'Tipo', 'Monto', 'Saldo después', 'Nota', 'Realizada por'])
-        ->and($rows[1][2])->toBe('Carga');
+    expect($rows[0])->toBe(['Fecha', 'Tarjeta', 'Tipo', 'Unidad', 'Monto', 'Saldo después', 'Nota', 'Realizada por'])
+        ->and($rows[1][2])->toBe('Carga')
+        ->and($rows[1][3])->toBe('Dinero');
 });
 
 test('suspended organizations get the translated error', function () {

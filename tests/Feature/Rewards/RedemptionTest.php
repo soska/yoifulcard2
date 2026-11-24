@@ -268,7 +268,7 @@ test('the public page lists the active rewards with names and costs only', funct
 
 // --- History
 
-test('a redemption shows in the card history with its reward, not in the money reports', function () {
+test('a redemption shows in the card history and the transactions page with its reward', function () {
     [$user, $card, $reward] = redemptionSetup(25, 10, MembershipRole::Owner);
 
     app(CardLedger::class)->redeemReward($card, $reward, $user);
@@ -281,5 +281,7 @@ test('a redemption shows in the card history with its reward, not in the money r
             ->where('transactions.0.amount', '10.00'));
 
     $this->actingAs($user)->get(route('transactions.index'))
-        ->assertInertia(fn (Assert $page) => $page->has('transactions.data', 0));
+        ->assertInertia(fn (Assert $page) => $page
+            ->has('transactions.data', 1)
+            ->where('transactions.data.0.reward_name', 'Free coffee'));
 });
