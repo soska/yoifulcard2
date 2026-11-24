@@ -68,6 +68,10 @@ export function transactionTypeLabel(type: TransactionType): string {
         spend: __('Charge', { context: 'transaction type' }),
         adjustment: __('Adjustment', { context: 'transaction type' }),
         refund: __('Refund', { context: 'transaction type' }),
+        earn: __('Earned', { context: 'transaction type' }),
+        redeem: __('Redeemed', { context: 'transaction type' }),
+        expire: __('Expired', { context: 'transaction type' }),
+        points_adjustment: __('Points adjustment', { context: 'transaction type' }),
     };
 
     return labels[type];

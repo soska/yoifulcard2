@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\TransactionType;
+use App\Enums\TransactionUnit;
 use Carbon\CarbonImmutable;
 use Database\Factories\TransactionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -13,11 +14,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * A ledger entry. Only App\Services\CardLedger writes these.
+ * A ledger entry. Only App\Services\CardLedger writes these. The unit says
+ * what it counts: money, or reward points (whole numbers kept in amount and
+ * balance_after).
  *
  * @property string $id
  * @property string $card_id
  * @property TransactionType $type
+ * @property TransactionUnit $unit
  * @property string $amount
  * @property string $balance_after
  * @property string|null $note
@@ -26,7 +30,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read Card $card
  * @property-read User $performer
  */
-#[Fillable(['card_id', 'type', 'amount', 'balance_after', 'note', 'performed_by'])]
+#[Fillable(['card_id', 'type', 'unit', 'amount', 'balance_after', 'note', 'performed_by'])]
 class Transaction extends Model
 {
     /** @use HasFactory<TransactionFactory> */
@@ -38,6 +42,13 @@ class Transaction extends Model
     public const UPDATED_AT = null;
 
     /**
+     * @var array<string, mixed>
+     */
+    protected $attributes = [
+        'unit' => 'money',
+    ];
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
@@ -46,6 +57,7 @@ class Transaction extends Model
     {
         return [
             'type' => TransactionType::class,
+            'unit' => TransactionUnit::class,
             'amount' => 'decimal:2',
             'balance_after' => 'decimal:2',
             'performed_by' => 'integer',

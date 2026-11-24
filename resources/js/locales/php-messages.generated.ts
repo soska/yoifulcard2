@@ -2,7 +2,7 @@
 //
 // Laravel's translatable strings, declared to duckalization's extractor
 // so PHP and TypeScript share ONE catalog, one brief and one review. The
-// extractor parses TypeScript only; this is how the 73 messages
+// extractor parses TypeScript only; this is how the 83 messages
 // Laravel renders (validation refusals, ledger errors, the CSV header,
 // the offline page) get counted, briefed and translated with the UI.
 //
@@ -34,7 +34,7 @@ export function phpMessages(): string[] {
         __('A note is required for adjustments.'),
         // app/Http/Controllers/Dashboard/CardLinkController.php:57
         __('Activate this card before sending it.'),
-        // app/Enums/TransactionType.php:33
+        // app/Enums/TransactionType.php:39
         __('Adjustment'),
         // app/Http/Controllers/Dashboard/TransactionController.php:70
         __('Amount'),
@@ -48,12 +48,16 @@ export function phpMessages(): string[] {
         __('Card'),
         // app/Http/Controllers/Reader/ScanController.php:45
         __('Card not found.'),
-        // app/Enums/TransactionType.php:32
+        // app/Enums/TransactionType.php:38
         __('Charge'),
         // app/Http/Controllers/Dashboard/TransactionController.php:67
         __('Date'),
+        // app/Enums/TransactionType.php:41
+        __('Earned'),
         // app/Exceptions/LedgerException.php:29
         __('Enter an amount with up to two decimals.'),
+        // app/Enums/TransactionType.php:43
+        __('Expired'),
         // app/Actions/Fortify/CreateNewUser.php:53
         __('Gift Card'),
         // resources/views/pdf/partials/card-front.blade.php:11
@@ -66,8 +70,10 @@ export function phpMessages(): string[] {
         __('Invalid credential format.'),
         // resources/views/mail/card-batch-pdf-ready.blade.php:40
         __('It can be downloaded once, within :hours hours. It holds the code of every card: keep it private and delete it after printing.'),
-        // app/Enums/TransactionType.php:31
+        // app/Enums/TransactionType.php:37
         __('Load'),
+        // app/Exceptions/LedgerException.php:99
+        __('Not enough points.'),
         // app/Http/Controllers/Dashboard/TransactionController.php:72
         __('Note'),
         // app/Exceptions/CardBatchException.php:65
@@ -84,8 +90,14 @@ export function phpMessages(): string[] {
         __('Passkey verification session expired. Please try again.'),
         // app/Http/Controllers/Dashboard/TransactionController.php:73
         __('Performed by'),
-        // app/Enums/TransactionType.php:34
+        // app/Enums/TransactionType.php:44
+        __('Points adjustment'),
+        // app/Enums/TransactionType.php:42
+        __('Redeemed'),
+        // app/Enums/TransactionType.php:40
         __('Refund'),
+        // app/Exceptions/LedgerException.php:114
+        __('Rewards are not turned on for this business.'),
         // app/Http/Controllers/Dashboard/CardLinkController.php:63
         __('Save a cardholder email first.'),
         // resources/views/pdf/partials/card-front.blade.php:13
@@ -100,6 +112,8 @@ export function phpMessages(): string[] {
         __('The adjustment cannot be 0.'),
         // app/Exceptions/LedgerException.php:54
         __('The adjustment would leave a negative balance.'),
+        // app/Exceptions/LedgerException.php:104
+        __('The adjustment would leave negative points.'),
         // app/Exceptions/LedgerException.php:34
         __('The amount must be greater than 0.'),
         // app/Exceptions/LedgerException.php:59
@@ -112,6 +126,12 @@ export function phpMessages(): string[] {
         __('The last superadmin cannot be revoked. Grant the role to someone else first.'),
         // app/Http/Controllers/Dashboard/SettingsController.php:117
         __('The logo could not be stored.'),
+        // app/Exceptions/LedgerException.php:94
+        __('The points adjustment cannot be 0.'),
+        // app/Exceptions/LedgerException.php:109
+        __('The points cannot be more than :max.'),
+        // app/Exceptions/LedgerException.php:89
+        __('The points must be a whole number greater than 0.'),
         // app/Support/PackageMessages.php:40
         __('The provided password was incorrect.'),
         // app/Support/PackageMessages.php:38

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\CardStatus;
 use App\Enums\TransactionType;
+use App\Enums\TransactionUnit;
 use App\Exceptions\LedgerException;
 use App\Models\Card;
 use App\Models\Organization;
@@ -13,12 +14,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 /**
- * The only code that writes card balances.
+ * The only code that writes card balances and points.
  *
  * Every change locks the card row, checks the rules against the locked
  * balance, records a transaction with the balance after the change, and
  * updates the card, all in one database transaction. Amounts are decimal
- * strings with up to two decimals and all arithmetic uses bcmath.
+ * strings with up to two decimals and all arithmetic uses bcmath. Points are
+ * whole numbers kept in their own column, with their own ledger entries
+ * (unit: points); they never change the money balance or the card's status.
  */
 class CardLedger
 {
@@ -26,6 +29,11 @@ class CardLedger
      * The largest value a decimal(10,2) column holds.
      */
     public const MAX_BALANCE = '99999999.99';
+
+    /**
+     * The most points a card holds.
+     */
+    public const MAX_POINTS = 99999999;
 
     private const SCALE = 2;
 
@@ -121,6 +129,87 @@ class CardLedger
     }
 
     /**
+     * Activate a preissued (inactive) card with no money on it, for a card
+     * that will only collect reward points. No ledger entry is written (there
+     * is no amount to record); the card becomes active and gets
+     * `activated_at`, and `last_used_at` stays as it was. Like activate(), it
+     * counts toward the card limit and is refused at the limit.
+     */
+    public function activateWithoutFunds(Card $card): Card
+    {
+        $locked = DB::transaction(function () use ($card): Card {
+            $organization = CardLimit::lock(
+                (string) Program::query()->whereKey($card->program_id)->value('organization_id'),
+            );
+
+            [$locked] = $this->lockUsable($card, activating: true);
+
+            CardLimit::ensureRoom($organization);
+
+            $locked->status = CardStatus::Active;
+            $locked->activated_at = now();
+            $locked->save();
+
+            return $locked;
+        });
+
+        $card->setRawAttributes($locked->getAttributes(), true);
+
+        return $card;
+    }
+
+    /**
+     * Award points to a card.
+     */
+    public function earn(Card $card, int $points, User $user, ?string $note = null): Transaction
+    {
+        $points = $this->positivePoints($points);
+
+        return $this->postPoints($card, TransactionType::Earn, $user, $note, fn (int $balance): int => $balance + $points, $points);
+    }
+
+    /**
+     * Spend points on a reward. The amount may not be above the locked points.
+     */
+    public function redeem(Card $card, int $points, User $user, ?string $note = null): Transaction
+    {
+        $points = $this->positivePoints($points);
+
+        return $this->postPoints($card, TransactionType::Redeem, $user, $note, function (int $balance) use ($points): int {
+            if ($points > $balance) {
+                throw LedgerException::insufficientPoints();
+            }
+
+            return $balance - $points;
+        }, $points);
+    }
+
+    /**
+     * Correct a card's points up (positive) or down (negative). A note is
+     * required and the result may not go below zero. Not a use of the card.
+     */
+    public function adjustPoints(Card $card, int $points, User $user, ?string $note): Transaction
+    {
+        if ($points === 0) {
+            throw LedgerException::pointsAreZero();
+        }
+
+        if ($note === null || trim($note) === '') {
+            throw LedgerException::noteRequired();
+        }
+
+        return $this->postPoints($card, TransactionType::PointsAdjustment, $user, $note, function (int $balance) use ($points): int {
+            $after = $balance + $points;
+
+            if ($after < 0) {
+                throw LedgerException::pointsBelowZero();
+            }
+
+            return $after;
+        }, $points, marksUse: false);
+    }
+
+    /**
      * @param  callable(numeric-string): numeric-string  $apply  Receives the locked balance and returns the new one, or throws.
      * @param  numeric-string  $amount
      * @param  bool  $marksUse  Whether the change sets `last_used_at`. Adjustments and the initial load do not.
@@ -131,35 +220,9 @@ class CardLedger
         $note = $note === null || trim($note) === '' ? null : trim($note);
 
         [$transaction, $locked] = DB::transaction(function () use ($card, $type, $user, $note, $apply, $amount, $marksUse, $activating): array {
-            /** @var Card $locked */
-            $locked = Card::query()->whereKey($card->getKey())->lockForUpdate()->firstOrFail();
-
-            /** @var Organization $organization */
-            $organization = Organization::query()
-                ->whereIn('id', Program::query()->select('organization_id')->whereKey($locked->program_id))
-                ->firstOrFail();
-
-            if (! $organization->isWritable()) {
-                throw LedgerException::organizationNotWritable();
-            }
-
-            if ($locked->status === CardStatus::Frozen) {
-                throw LedgerException::cardFrozen();
-            }
-
-            if ($locked->status === CardStatus::Cancelled) {
-                throw LedgerException::cardCancelled();
-            }
-
-            if ($activating === null && $locked->status === CardStatus::Inactive) {
-                throw LedgerException::cardInactive();
-            }
+            [$locked] = $this->lockUsable($card, $activating !== null);
 
             if ($activating !== null) {
-                if ($locked->status !== CardStatus::Inactive) {
-                    throw LedgerException::cardNotInactive();
-                }
-
                 CardLimit::ensureRoom($activating);
             }
 
@@ -198,6 +261,106 @@ class CardLedger
         $card->setRawAttributes($locked->getAttributes(), true);
 
         return $transaction;
+    }
+
+    /**
+     * Lock the card row and refuse it unless it can take a change: its
+     * organization is writable, it is not frozen or cancelled, and it is
+     * active (or, when activating, inactive).
+     *
+     * @return array{0: Card, 1: Organization}
+     */
+    private function lockUsable(Card $card, bool $activating = false): array
+    {
+        /** @var Card $locked */
+        $locked = Card::query()->whereKey($card->getKey())->lockForUpdate()->firstOrFail();
+
+        /** @var Organization $organization */
+        $organization = Organization::query()
+            ->whereIn('id', Program::query()->select('organization_id')->whereKey($locked->program_id))
+            ->firstOrFail();
+
+        if (! $organization->isWritable()) {
+            throw LedgerException::organizationNotWritable();
+        }
+
+        if ($locked->status === CardStatus::Frozen) {
+            throw LedgerException::cardFrozen();
+        }
+
+        if ($locked->status === CardStatus::Cancelled) {
+            throw LedgerException::cardCancelled();
+        }
+
+        if (! $activating && $locked->status === CardStatus::Inactive) {
+            throw LedgerException::cardInactive();
+        }
+
+        if ($activating && $locked->status !== CardStatus::Inactive) {
+            throw LedgerException::cardNotInactive();
+        }
+
+        return [$locked, $organization];
+    }
+
+    /**
+     * Post a points entry. The card must be usable and its program must have
+     * rewards on. The money balance and the card's status do not change.
+     *
+     * @param  callable(int): int  $apply  Receives the locked points and returns the new total, or throws.
+     * @param  bool  $marksUse  Whether the change sets `last_used_at`. Point adjustments do not.
+     */
+    private function postPoints(Card $card, TransactionType $type, User $user, ?string $note, callable $apply, int $points, bool $marksUse = true): Transaction
+    {
+        $note = $note === null || trim($note) === '' ? null : trim($note);
+
+        [$transaction, $locked] = DB::transaction(function () use ($card, $type, $user, $note, $apply, $points, $marksUse): array {
+            [$locked] = $this->lockUsable($card);
+
+            $rewardsEnabled = Program::query()->whereKey($locked->program_id)->value('rewards_enabled');
+
+            if (! $rewardsEnabled) {
+                throw LedgerException::rewardsNotEnabled();
+            }
+
+            $after = $apply((int) $locked->points);
+
+            if ($after > self::MAX_POINTS) {
+                throw LedgerException::pointsAboveMaximum(self::MAX_POINTS);
+            }
+
+            $transaction = $locked->transactions()->create([
+                'type' => $type,
+                'unit' => TransactionUnit::Points,
+                'amount' => (string) $points,
+                'balance_after' => (string) $after,
+                'note' => $note,
+                'performed_by' => $user->getKey(),
+            ]);
+
+            $locked->points = $after;
+
+            if ($marksUse) {
+                $locked->last_used_at = $transaction->created_at ?? now();
+            }
+
+            $locked->save();
+
+            return [$transaction, $locked];
+        });
+
+        $card->setRawAttributes($locked->getAttributes(), true);
+
+        return $transaction;
+    }
+
+    private function positivePoints(int $points): int
+    {
+        if ($points <= 0) {
+            throw LedgerException::pointsNotPositive();
+        }
+
+        return $points;
     }
 
     /**

@@ -7,6 +7,10 @@ const variants = {
     spend: 'secondary',
     adjustment: 'outline',
     refund: 'outline',
+    earn: 'default',
+    redeem: 'secondary',
+    expire: 'outline',
+    points_adjustment: 'outline',
 } as const satisfies Record<TransactionType, string>;
 
 export function TransactionTypeBadge({ type }: { type: TransactionType }) {

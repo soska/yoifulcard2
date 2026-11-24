@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $code
  * @property string $qr_token
  * @property string $balance
+ * @property int $points
  * @property CardStatus $status
  * @property string|null $email
  * @property CarbonImmutable|null $last_used_at
@@ -31,7 +32,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read CardBatch|null $batch
  * @property-read Collection<int, Transaction> $transactions
  */
-#[Fillable(['program_id', 'batch_id', 'code', 'qr_token', 'balance', 'status', 'email', 'last_used_at', 'activated_at'])]
+#[Fillable(['program_id', 'batch_id', 'code', 'qr_token', 'balance', 'points', 'status', 'email', 'last_used_at', 'activated_at'])]
 class Card extends Model
 {
     /** @use HasFactory<CardFactory> */
@@ -50,6 +51,7 @@ class Card extends Model
      */
     protected $attributes = [
         'balance' => '0.00',
+        'points' => 0,
         'status' => 'active',
     ];
 
@@ -62,6 +64,7 @@ class Card extends Model
     {
         return [
             'balance' => 'decimal:2',
+            'points' => 'integer',
             'status' => CardStatus::class,
             'last_used_at' => 'datetime',
             'activated_at' => 'datetime',

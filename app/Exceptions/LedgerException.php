@@ -84,6 +84,36 @@ class LedgerException extends RuntimeException
         return new self(__('You have reached your plan limit of :limit cards. Contact support to raise the limit.', ['limit' => $limit]), 'card_limit');
     }
 
+    public static function pointsNotPositive(): self
+    {
+        return new self(__('The points must be a whole number greater than 0.'), 'points');
+    }
+
+    public static function pointsAreZero(): self
+    {
+        return new self(__('The points adjustment cannot be 0.'), 'points');
+    }
+
+    public static function insufficientPoints(): self
+    {
+        return new self(__('Not enough points.'), 'points');
+    }
+
+    public static function pointsBelowZero(): self
+    {
+        return new self(__('The adjustment would leave negative points.'), 'points');
+    }
+
+    public static function pointsAboveMaximum(int $maximum): self
+    {
+        return new self(__('The points cannot be more than :max.', ['max' => $maximum]), 'points');
+    }
+
+    public static function rewardsNotEnabled(): self
+    {
+        return new self(__('Rewards are not turned on for this business.'), 'rewards');
+    }
+
     public static function organizationNotWritable(): self
     {
         return new self(__('This business is suspended. Contact support.'), 'organization');
