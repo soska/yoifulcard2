@@ -117,7 +117,7 @@
     "message": "Owner",
     "context": "membership role",
     "refs": [
-      "resources/js/lib/labels.ts:83:16"
+      "resources/js/lib/labels.ts:85:16"
     ]
   },
   "12aqrfl0ffg": {
@@ -568,7 +568,7 @@
     "message": "Employee",
     "context": "membership role",
     "refs": [
-      "resources/js/lib/labels.ts:85:19"
+      "resources/js/lib/labels.ts:87:19"
     ]
   },
   "1di0yyp09wj": {
@@ -802,7 +802,7 @@
     "message": "Dark",
     "context": "theme",
     "refs": [
-      "resources/js/lib/labels.ts:106:15"
+      "resources/js/lib/labels.ts:108:15"
     ]
   },
   "1hhclcg25ps": {
@@ -1468,7 +1468,7 @@
     "message": "Light",
     "context": "theme",
     "refs": [
-      "resources/js/lib/labels.ts:105:16"
+      "resources/js/lib/labels.ts:107:16"
     ]
   },
   "1tch9koz7br": {
@@ -1561,7 +1561,7 @@
     "message": "Suspended",
     "context": "organization status",
     "refs": [
-      "resources/js/lib/labels.ts:95:20"
+      "resources/js/lib/labels.ts:97:20"
     ]
   },
   "1vb1khfoxl4": {
@@ -2425,7 +2425,7 @@
     "message": "Manager",
     "context": "membership role",
     "refs": [
-      "resources/js/lib/labels.ts:84:18"
+      "resources/js/lib/labels.ts:86:18"
     ]
   },
   "2dnovna4kzo": {
@@ -2457,7 +2457,7 @@
     "message": "Cancelled",
     "context": "organization status",
     "refs": [
-      "resources/js/lib/labels.ts:96:20"
+      "resources/js/lib/labels.ts:98:20"
     ]
   },
   "2e7jtod20fa": {
@@ -2941,7 +2941,7 @@
     "message": "Active",
     "context": "organization status",
     "refs": [
-      "resources/js/lib/labels.ts:94:17"
+      "resources/js/lib/labels.ts:96:17"
     ]
   },
   "a9iatti38r": {
@@ -3778,7 +3778,7 @@
     "message": "System",
     "context": "theme",
     "refs": [
-      "resources/js/lib/labels.ts:107:17"
+      "resources/js/lib/labels.ts:109:17"
     ]
   },
   "tv2h2s9ap1": {
