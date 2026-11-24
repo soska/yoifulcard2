@@ -152,6 +152,13 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
                     total: Number(p.total ?? 0),
                 },
             ),
+        'ledger.reward_redeemed': (p) =>
+            __('Redeemed {reward} for {code}. Points left: {total}.', {
+                reward: p.reward ?? '',
+                code: p.code ?? '',
+                total: Number(p.total ?? 0),
+            }),
+        'rewards.saved': () => __('Reward saved.'),
         'ledger.points_adjusted': (p) =>
             __('Points of {code} adjusted.', { code: p.code ?? '' }),
         'ledger.activated': (p) => {

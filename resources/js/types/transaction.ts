@@ -13,6 +13,8 @@ export type TransactionRow = {
     amount: string;
     balance_after: string;
     note: string | null;
+    /** The reward a redemption was for, as named when it was redeemed. */
+    reward_name: string | null;
     performed_by: string | null;
     created_at: string | null;
 };

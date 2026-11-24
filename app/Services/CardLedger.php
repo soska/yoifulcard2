@@ -10,6 +10,7 @@ use App\Exceptions\LedgerException;
 use App\Models\Card;
 use App\Models\Organization;
 use App\Models\Program;
+use App\Models\Reward;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -324,6 +325,32 @@ class CardLedger
     }
 
     /**
+     * Redeem a reward: spend its cost in points. The reward must be active and
+     * belong to the card's program. The entry keeps the reward's name as it is
+     * now, and its cost is the entry's amount, so editing the reward later
+     * leaves the history as it was. Refused when the card has too few points,
+     * checked against the locked total.
+     */
+    public function redeemReward(Card $card, Reward $reward, User $user, ?string $note = null): Transaction
+    {
+        $current = Reward::query()->whereKey($reward->getKey())->first();
+
+        if ($current === null || ! $current->is_active || $current->program_id !== $card->program_id) {
+            throw LedgerException::rewardNotAvailable();
+        }
+
+        $points = $this->positivePoints($current->points_cost);
+
+        return $this->postPoints($card, TransactionType::Redeem, $user, $note, function (int $balance) use ($points): int {
+            if ($points > $balance) {
+                throw LedgerException::insufficientPoints();
+            }
+
+            return $balance - $points;
+        }, $points, reward: $current);
+    }
+
+    /**
      * Correct a card's points up (positive) or down (negative). A note is
      * required and the result may not go below zero. Not a use of the card.
      */
@@ -448,12 +475,13 @@ class CardLedger
      *
      * @param  callable(int): int  $apply  Receives the locked points and returns the new total, or throws.
      * @param  bool  $marksUse  Whether the change sets `last_used_at`. Point adjustments do not.
+     * @param  Reward|null  $reward  The reward a redemption is for; its name is kept on the entry.
      */
-    private function postPoints(Card $card, TransactionType $type, User $user, ?string $note, callable $apply, int $points, bool $marksUse = true): Transaction
+    private function postPoints(Card $card, TransactionType $type, User $user, ?string $note, callable $apply, int $points, bool $marksUse = true, ?Reward $reward = null): Transaction
     {
         $note = $note === null || trim($note) === '' ? null : trim($note);
 
-        [$transaction, $locked] = DB::transaction(function () use ($card, $type, $user, $note, $apply, $points, $marksUse): array {
+        [$transaction, $locked] = DB::transaction(function () use ($card, $type, $user, $note, $apply, $points, $marksUse, $reward): array {
             [$locked] = $this->lockUsable($card);
 
             $rewardsEnabled = Program::query()->whereKey($locked->program_id)->value('rewards_enabled');
@@ -475,6 +503,8 @@ class CardLedger
                 'balance_after' => (string) $after,
                 'note' => $note,
                 'performed_by' => $user->getKey(),
+                'reward_id' => $reward?->getKey(),
+                'reward_name' => $reward?->name,
             ]);
 
             $locked->points = $after;

@@ -7,13 +7,16 @@ import { EmailCapture } from '@/components/public-card/email-capture';
 import { WalletButtons } from '@/components/public-card/wallet-buttons';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import type { PublicCard, PublicOrganization } from '@/types';
+import { Progress } from '@/components/ui/progress';
+import type { PublicCard, PublicOrganization, PublicReward } from '@/types';
 import { __ } from '@/i18n';
 
 type Props = {
     card: PublicCard;
     /** Whether the business has rewards on: points show only then. */
     rewards_enabled: boolean;
+    /** What the points can buy, cheapest first. */
+    rewards: PublicReward[];
     organization: PublicOrganization;
 };
 
@@ -32,6 +35,7 @@ function tokenFromUrl(url: string): string {
 export default function PublicCardShow({
     card,
     rewards_enabled,
+    rewards,
     organization,
 }: Props) {
     const { url } = usePage();
@@ -111,6 +115,58 @@ export default function PublicCardShow({
                             </p>
                         </div>
                     )}
+
+                    {rewards_enabled &&
+                        card.status !== 'inactive' &&
+                        rewards.length > 0 && (
+                            <section className="flex flex-col gap-3 rounded-xl border bg-card px-4 py-3">
+                                <h2 className="text-sm font-medium">
+                                    {__('Rewards')}
+                                </h2>
+                                <ul className="flex flex-col gap-4">
+                                    {rewards.map((reward) => {
+                                        const ready =
+                                            card.points >= reward.points_cost;
+
+                                        return (
+                                            <li
+                                                key={`${reward.name}-${reward.points_cost}`}
+                                                className="flex flex-col gap-1.5"
+                                            >
+                                                <div className="flex items-baseline justify-between gap-3">
+                                                    <span className="font-medium">
+                                                        {reward.name}
+                                                    </span>
+                                                    <span className="text-sm text-muted-foreground tabular-nums">
+                                                        {ready
+                                                            ? __(
+                                                                  'Ready to redeem',
+                                                              )
+                                                            : __(
+                                                                  '{points} of {cost} points',
+                                                                  {
+                                                                      points: card.points,
+                                                                      cost: reward.points_cost,
+                                                                  },
+                                                              )}
+                                                    </span>
+                                                </div>
+                                                <Progress
+                                                    value={Math.min(
+                                                        100,
+                                                        Math.round(
+                                                            (card.points /
+                                                                reward.points_cost) *
+                                                                100,
+                                                        ),
+                                                    )}
+                                                />
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </section>
+                        )}
 
                     {(card.status === 'active' ||
                         card.status === 'depleted') && (

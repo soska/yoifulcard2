@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Models\Card;
 use App\Models\Organization;
+use App\Models\Reward;
 use App\Support\CurrentOrganization;
 use App\Support\QrPayload;
 use Illuminate\Http\RedirectResponse;
@@ -73,6 +74,12 @@ class ScanController extends Controller
                 'status' => $card->status->value,
             ],
             'rewards' => SettingsController::rewardsProps($card->program),
+            // What the card's points can buy, cheapest first.
+            'rewardOptions' => $card->program->rewards_enabled
+                ? $card->program->rewards()->active()->byCost()->get()
+                    ->map(fn (Reward $reward) => ['id' => $reward->id, 'name' => $reward->name, 'points_cost' => $reward->points_cost])
+                    ->all()
+                : [],
             'currency' => $organization->currency,
         ]);
     }

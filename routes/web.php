@@ -17,6 +17,7 @@ use App\Http\Controllers\Dashboard\CardLedgerController;
 use App\Http\Controllers\Dashboard\CardLinkController;
 use App\Http\Controllers\Dashboard\CardQrController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\RewardController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\SwitchOrganizationController;
 use App\Http\Controllers\Dashboard\TransactionController;
@@ -57,6 +58,9 @@ Route::middleware(['auth', 'organization'])->group(function () {
 
     Route::get('analytics', AnalyticsController::class)->name('analytics');
 
+    // The reward catalog: owners and managers (OrganizationPolicy::viewRewards).
+    Route::get('rewards', [RewardController::class, 'index'])->name('rewards.index');
+
     // Card batches: owners and managers of a business that can preissue
     // cards (OrganizationPolicy::viewBatches and ::preissue).
     Route::get('batches', [CardBatchController::class, 'index'])->name('batches.index');
@@ -89,6 +93,10 @@ Route::middleware(['auth', 'organization'])->group(function () {
         // Rewards points: awarded at the counter; corrected by owners and managers.
         Route::post('cards/{card}/earn', [CardLedgerController::class, 'earn'])->whereUuid('card')->name('cards.earn');
         Route::post('cards/{card}/points/adjust', [CardLedgerController::class, 'adjustPoints'])->whereUuid('card')->name('cards.points.adjust');
+        Route::post('cards/{card}/redeem', [CardLedgerController::class, 'redeem'])->whereUuid('card')->name('cards.redeem');
+
+        Route::post('rewards', [RewardController::class, 'store'])->name('rewards.store');
+        Route::patch('rewards/{reward}', [RewardController::class, 'update'])->whereUuid('reward')->name('rewards.update');
 
         Route::post('batches', [CardBatchController::class, 'store'])->name('batches.store');
         Route::post('batches/{batch}/void', [CardBatchController::class, 'void'])->whereUuid('batch')->name('batches.void');

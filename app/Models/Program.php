@@ -68,6 +68,14 @@ class Program extends Model
     }
 
     /**
+     * @return HasMany<Reward, $this>
+     */
+    public function rewards(): HasMany
+    {
+        return $this->hasMany(Reward::class);
+    }
+
+    /**
      * @return HasMany<Card, $this>
      */
     public function cards(): HasMany

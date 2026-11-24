@@ -55,3 +55,14 @@ export type ProgramSettings = {
     terms_url: string | null;
     rewards: RewardsSettings;
 };
+
+/** A reward in the catalog. */
+export type Reward = {
+    id: string;
+    name: string;
+    points_cost: number;
+    is_active: boolean;
+};
+
+/** A reward the reader offers for a card. Only active ones. */
+export type RewardOption = Pick<Reward, 'id' | 'name' | 'points_cost'>;

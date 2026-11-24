@@ -6,6 +6,7 @@ use App\Enums\CardStatus;
 use App\Enums\FlashMessage;
 use App\Http\Requests\PublicCard\SaveCardEmailRequest;
 use App\Models\Card;
+use App\Models\Reward;
 use App\Services\CardCodeGenerator;
 use App\Services\CardQrCode;
 use App\Support\Flash;
@@ -47,6 +48,16 @@ class PublicCardController extends Controller
             ],
             // Points show only while the business has rewards on.
             'rewards_enabled' => (bool) $card->getAttribute('rewards_enabled'),
+            // What the points can buy: names and costs only.
+            'rewards' => $card->getAttribute('rewards_enabled')
+                ? Reward::query()
+                    ->where('program_id', $card->getAttribute('program_id'))
+                    ->active()
+                    ->byCost()
+                    ->get(['name', 'points_cost'])
+                    ->map(fn (Reward $reward) => ['name' => $reward->name, 'points_cost' => $reward->points_cost])
+                    ->all()
+                : [],
             'organization' => [
                 'name' => $card->getAttribute('organization_name'),
                 'logo_url' => $card->getAttribute('organization_logo_url'),
@@ -132,6 +143,7 @@ class PublicCardController extends Controller
             ->first([
                 'cards.balance',
                 'cards.points',
+                'cards.program_id',
                 'cards.status',
                 'programs.rewards_enabled',
                 DB::raw('cards.email is not null as has_email'),

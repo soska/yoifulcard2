@@ -112,7 +112,9 @@ export function TransactionsTable({
                                       )}
                             </TableCell>
                             <TableCell className="max-w-64 truncate text-muted-foreground">
-                                {transaction.note ?? '—'}
+                                {[transaction.reward_name, transaction.note]
+                                    .filter(Boolean)
+                                    .join(' · ') || '—'}
                             </TableCell>
                             <TableCell className="whitespace-nowrap text-muted-foreground">
                                 {transaction.performed_by ?? '—'}

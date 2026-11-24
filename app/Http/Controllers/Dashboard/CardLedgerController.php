@@ -10,6 +10,7 @@ use App\Http\Requests\Ledger\AdjustBalanceRequest;
 use App\Http\Requests\Ledger\AdjustPointsRequest;
 use App\Http\Requests\Ledger\EarnPointsRequest;
 use App\Http\Requests\Ledger\LedgerAmountRequest;
+use App\Http\Requests\Ledger\RedeemRewardRequest;
 use App\Models\Card;
 use App\Models\Transaction;
 use App\Services\CardLedger;
@@ -66,6 +67,22 @@ class CardLedgerController extends Controller
     }
 
     /**
+     * Redeem a reward: the card spends the reward's cost in points.
+     */
+    public function redeem(RedeemRewardRequest $request, Card $card): RedirectResponse
+    {
+        $reward = $request->reward();
+
+        return $this->post(
+            fn () => $this->ledger->redeemReward($card, $reward ?? throw LedgerException::rewardNotAvailable(), $request->user()),
+            $card,
+            FlashMessage::RewardRedeemed,
+            $request->boolean('reader'),
+            fn () => ['reward' => $reward->name ?? ''],
+        );
+    }
+
+    /**
      * Correct a card's points. Owners and managers only.
      */
     public function adjustPoints(AdjustPointsRequest $request, Card $card): RedirectResponse
@@ -108,7 +125,7 @@ class CardLedgerController extends Controller
      * the only place staff see what is left before the next scan.
      *
      * @param  Closure(): Transaction  $action
-     * @param  (Closure(): array<string, int>)|null  $extra  More toast params, read after the action ran.
+     * @param  (Closure(): array<string, int|string>)|null  $extra  More toast params, read after the action ran.
      */
     private function post(Closure $action, Card $card, FlashMessage $message, bool $toScanner = false, ?Closure $extra = null): RedirectResponse
     {
@@ -120,7 +137,7 @@ class CardLedgerController extends Controller
             ]);
         }
 
-        Flash::success($message, $transaction->unit === TransactionUnit::Points
+        $params = $transaction->unit === TransactionUnit::Points
             ? [
                 'code' => $card->code,
                 'points' => (int) $transaction->amount,
@@ -131,8 +148,9 @@ class CardLedgerController extends Controller
                 'amount' => $transaction->amount,
                 'balance' => $transaction->balance_after,
                 'currency' => $card->organization()->currency,
-                ...($extra === null ? [] : $extra()),
-            ]);
+            ];
+
+        Flash::success($message, [...$params, ...($extra === null ? [] : $extra())]);
 
         return $toScanner ? to_route('scan') : back();
     }
