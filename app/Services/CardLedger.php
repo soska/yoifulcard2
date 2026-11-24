@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\CardStatus;
+use App\Enums\EarnMode;
 use App\Enums\TransactionType;
 use App\Enums\TransactionUnit;
 use App\Exceptions\LedgerException;
@@ -34,6 +35,13 @@ class CardLedger
      * The most points a card holds.
      */
     public const MAX_POINTS = 99999999;
+
+    /**
+     * The most visits a card earns points for in one day of the business's
+     * local time, in visits mode. It keeps one scan, done again and again,
+     * from piling up points. Spend mode has no cap: it follows the amount.
+     */
+    public const VISIT_POINTS_PER_DAY = 3;
 
     private const SCALE = 2;
 
@@ -86,19 +94,29 @@ class CardLedger
     }
 
     /**
-     * Charge a card. The amount may not be above the locked balance.
+     * Charge a card. The amount may not be above the locked balance. When
+     * the card's program has rewards on, the charge also earns points by the
+     * program's rule, in the same database transaction. A charge that earns
+     * nothing (the amount is too small, or the daily visit cap is reached)
+     * still goes through.
      */
     public function spend(Card $card, string $amount, User $user, ?string $note = null): Transaction
     {
         $amount = $this->positive($amount);
 
-        return $this->post($card, TransactionType::Spend, $user, $note, function (string $balance) use ($amount): string {
-            if (bccomp($amount, $balance, self::SCALE) > 0) {
-                throw LedgerException::insufficientBalance();
-            }
+        return DB::transaction(function () use ($card, $amount, $user, $note): Transaction {
+            $transaction = $this->post($card, TransactionType::Spend, $user, $note, function (string $balance) use ($amount): string {
+                if (bccomp($amount, $balance, self::SCALE) > 0) {
+                    throw LedgerException::insufficientBalance();
+                }
 
-            return bcsub($balance, $amount, self::SCALE);
-        }, $amount);
+                return bcsub($balance, $amount, self::SCALE);
+            }, $amount);
+
+            $this->earnOnCharge($card, $amount, $user);
+
+            return $transaction;
+        });
     }
 
     /**
@@ -156,6 +174,127 @@ class CardLedger
         $card->setRawAttributes($locked->getAttributes(), true);
 
         return $card;
+    }
+
+    /**
+     * Award points for a purchase or a visit, by the program's earn rule:
+     * points per amount spent (the amount is required, and the points are
+     * whole, rounded down) or one point per visit (no amount; limited per day
+     * by VISIT_POINTS_PER_DAY). Staff do this at the counter, whatever the
+     * customer paid with.
+     */
+    public function earnForPurchase(Card $card, ?string $amount, User $user, ?string $note = null): Transaction
+    {
+        return DB::transaction(function () use ($card, $amount, $user, $note): Transaction {
+            // The card first, like every points change, so the daily count
+            // below cannot be read while another scan of this card is mid-way.
+            $locked = Card::query()->whereKey($card->getKey())->lockForUpdate()->firstOrFail();
+            $program = $this->earningProgram($locked);
+
+            if ($program->earn_mode === EarnMode::Spend) {
+                if ($amount === null || trim($amount) === '') {
+                    throw LedgerException::amountRequiredForPoints();
+                }
+
+                $points = $this->pointsForAmount($program, $this->positive($amount));
+
+                if ($points === 0) {
+                    throw LedgerException::amountTooSmallForPoints();
+                }
+            } else {
+                if ($this->visitPointsReached($locked)) {
+                    throw LedgerException::visitLimitReached(self::VISIT_POINTS_PER_DAY);
+                }
+
+                $points = 1;
+            }
+
+            return $this->earn($card, $points, $user, $note);
+        });
+    }
+
+    /**
+     * The points a charge earns, awarded inside spend()'s transaction. Rewards
+     * off, no rule yet, too small an amount and the visit cap are all quiet:
+     * the charge is what the staff asked for.
+     *
+     * @param  numeric-string  $amount
+     */
+    private function earnOnCharge(Card $card, string $amount, User $user): void
+    {
+        try {
+            $program = $this->earningProgram($card);
+        } catch (LedgerException) {
+            return;
+        }
+
+        if ($program->earn_mode === EarnMode::Spend) {
+            $points = $this->pointsForAmount($program, $amount);
+        } else {
+            $points = $this->visitPointsReached($card) ? 0 : 1;
+        }
+
+        if ($points === 0) {
+            return;
+        }
+
+        try {
+            $this->earn($card, $points, $user);
+        } catch (LedgerException $exception) {
+            // Only the points ceiling can refuse here; the charge still stands.
+            if ($exception->field !== 'points') {
+                throw $exception;
+            }
+        }
+    }
+
+    /**
+     * The card's program, which must have rewards on and a rule.
+     */
+    private function earningProgram(Card $card): Program
+    {
+        $program = Program::query()->whereKey($card->program_id)->firstOrFail();
+
+        if (! $program->rewards_enabled || $program->earn_mode === null) {
+            throw LedgerException::rewardsNotEnabled();
+        }
+
+        return $program;
+    }
+
+    /**
+     * Whole points for an amount at the program's rate, rounded down.
+     *
+     * @param  numeric-string  $amount
+     */
+    private function pointsForAmount(Program $program, string $amount): int
+    {
+        $rate = $program->earn_rate ?? '0';
+
+        if (! is_numeric($rate)) {
+            return 0;
+        }
+
+        return (int) bcdiv(bcmul($amount, $rate, self::SCALE), '1', 0);
+    }
+
+    /**
+     * Whether the card already earned its visit points today, in the
+     * business's local time.
+     */
+    private function visitPointsReached(Card $card): bool
+    {
+        $timezone = Organization::query()
+            ->whereIn('id', Program::query()->select('organization_id')->whereKey($card->program_id))
+            ->value('timezone');
+
+        $startOfDay = now((string) $timezone)->startOfDay()->utc();
+
+        return Transaction::query()
+            ->where('card_id', $card->getKey())
+            ->where('type', TransactionType::Earn->value)
+            ->where('created_at', '>=', $startOfDay)
+            ->count() >= self::VISIT_POINTS_PER_DAY;
     }
 
     /**

@@ -86,6 +86,10 @@ Route::middleware(['auth', 'organization'])->group(function () {
         Route::post('cards/{card}/adjust', [CardLedgerController::class, 'adjust'])->whereUuid('card')->name('cards.adjust');
         Route::post('cards/{card}/activate', [CardLedgerController::class, 'activate'])->whereUuid('card')->name('cards.activate');
 
+        // Rewards points: awarded at the counter; corrected by owners and managers.
+        Route::post('cards/{card}/earn', [CardLedgerController::class, 'earn'])->whereUuid('card')->name('cards.earn');
+        Route::post('cards/{card}/points/adjust', [CardLedgerController::class, 'adjustPoints'])->whereUuid('card')->name('cards.points.adjust');
+
         Route::post('batches', [CardBatchController::class, 'store'])->name('batches.store');
         Route::post('batches/{batch}/void', [CardBatchController::class, 'void'])->whereUuid('batch')->name('batches.void');
         Route::post('batches/{batch}/pdfs', [CardBatchPdfController::class, 'store'])->whereUuid('batch')->name('batches.pdfs.store');
@@ -93,6 +97,7 @@ Route::middleware(['auth', 'organization'])->group(function () {
         // Owners and managers only; the form requests check the role.
         Route::patch('settings/organization', [SettingsController::class, 'updateOrganization'])->name('settings.organization.update');
         Route::patch('settings/program', [SettingsController::class, 'updateProgram'])->name('settings.program.update');
+        Route::patch('settings/rewards', [SettingsController::class, 'updateRewards'])->name('settings.rewards.update');
     });
 });
 

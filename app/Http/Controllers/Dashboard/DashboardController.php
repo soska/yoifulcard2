@@ -31,6 +31,7 @@ class DashboardController extends Controller
         abort_if($organization === null, 403);
 
         $recent = Transaction::query()
+            ->money()
             ->forOrganization($organization)
             ->with(['card:id,code', 'performer:id,name'])
             ->latest()
@@ -72,6 +73,7 @@ class DashboardController extends Controller
         $month = now($organization->timezone)->startOfMonth()->toDateString();
 
         $monthTransactions = Transaction::query()
+            ->money()
             ->forOrganization($organization)
             ->where('created_at', '>=', TransactionFilters::dayStart($month, $organization->timezone))
             ->count();

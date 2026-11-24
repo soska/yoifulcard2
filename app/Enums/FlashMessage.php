@@ -59,11 +59,20 @@ enum FlashMessage: string
     /** "Balance of {code} adjusted." — params: code (also sent: amount, balance, currency) */
     case BalanceAdjusted = 'ledger.adjusted';
 
+    /** "{points} points added to {code}. Total: {total}." — params: code, points, total */
+    case PointsEarned = 'ledger.points_earned';
+
+    /** "Points of {code} adjusted." — params: code (also sent: points, total) */
+    case PointsAdjusted = 'ledger.points_adjusted';
+
     /** "Business settings saved." */
     case BusinessSettingsSaved = 'settings.business_saved';
 
     /** "Program settings saved." */
     case ProgramSettingsSaved = 'settings.program_saved';
+
+    /** "Rewards settings saved." */
+    case RewardsSettingsSaved = 'settings.rewards_saved';
 
     /** "Profile updated." */
     case ProfileUpdated = 'settings.profile_updated';

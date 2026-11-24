@@ -40,10 +40,13 @@ class PublicCardController extends Controller
         return $this->withPrivateHeaders(Inertia::render('public-card/show', [
             'card' => [
                 'balance' => $card->balance,
+                'points' => $card->points,
                 'status' => $card->status->value,
                 // Whether an email is saved, never the address itself.
                 'has_email' => (bool) $card->getAttribute('has_email'),
             ],
+            // Points show only while the business has rewards on.
+            'rewards_enabled' => (bool) $card->getAttribute('rewards_enabled'),
             'organization' => [
                 'name' => $card->getAttribute('organization_name'),
                 'logo_url' => $card->getAttribute('organization_logo_url'),
@@ -128,7 +131,9 @@ class PublicCardController extends Controller
             ->where('cards.qr_token', $token)
             ->first([
                 'cards.balance',
+                'cards.points',
                 'cards.status',
+                'programs.rewards_enabled',
                 DB::raw('cards.email is not null as has_email'),
                 'organizations.name as organization_name',
                 'organizations.logo_url as organization_logo_url',

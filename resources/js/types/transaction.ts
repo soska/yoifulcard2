@@ -7,6 +7,8 @@ export type TransactionRow = {
     id: string;
     card: { id: string; code: string };
     type: TransactionType;
+    /** What the entry counts. Points entries hold whole numbers. */
+    unit: 'money' | 'points';
     /** Decimal string. Negative for an adjustment that lowered the balance. */
     amount: string;
     balance_after: string;

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Enums\CardBatchPdfAction;
 use App\Enums\CardStatus;
 use App\Enums\CardTemplate;
+use App\Enums\EarnMode;
 use App\Enums\FlashMessage;
 use App\Enums\MembershipRole;
 use App\Enums\OrganizationStatus;
@@ -34,6 +35,7 @@ class ExportEnumTypes extends Command
         'CardBatchPdfAction' => CardBatchPdfAction::class,
         'CardStatus' => CardStatus::class,
         'CardTemplate' => CardTemplate::class,
+        'EarnMode' => EarnMode::class,
         'FlashMessage' => FlashMessage::class,
         'MembershipRole' => MembershipRole::class,
         'OrganizationStatus' => OrganizationStatus::class,

@@ -115,14 +115,45 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
         },
         'ledger.charged': (p) => {
             const money = ledgerAmounts(p);
+            const points = Number(p.points ?? 0);
 
-            return money
-                ? __('Charged {amount} to {code}. Balance: {balance}.', {
+            if (!money) {
+                return __('Charged {code}.', { code: p.code ?? '' });
+            }
+
+            // A charge on a program with rewards also earned points.
+            return points > 0
+                ? __(
+                      {
+                          one: 'Charged {amount} to {code}. Balance: {balance}. Earned {count} point (total {total}).',
+                          other: 'Charged {amount} to {code}. Balance: {balance}. Earned {count} points (total {total}).',
+                      },
+                      {
+                          ...money,
+                          code: p.code ?? '',
+                          count: points,
+                          total: Number(p.total ?? 0),
+                      },
+                  )
+                : __('Charged {amount} to {code}. Balance: {balance}.', {
                       ...money,
                       code: p.code ?? '',
-                  })
-                : __('Charged {code}.', { code: p.code ?? '' });
+                  });
         },
+        'ledger.points_earned': (p) =>
+            __(
+                {
+                    one: '{count} point added to {code}. Total: {total}.',
+                    other: '{count} points added to {code}. Total: {total}.',
+                },
+                {
+                    count: Number(p.points ?? 0),
+                    code: p.code ?? '',
+                    total: Number(p.total ?? 0),
+                },
+            ),
+        'ledger.points_adjusted': (p) =>
+            __('Points of {code} adjusted.', { code: p.code ?? '' }),
         'ledger.activated': (p) => {
             const money = ledgerAmounts(p);
 
@@ -137,6 +168,7 @@ function messages(): Record<FlashMessage, (params: FlashParams) => string> {
             __('Balance of {code} adjusted.', { code: p.code ?? '' }),
         'settings.business_saved': () => __('Business settings saved.'),
         'settings.program_saved': () => __('Program settings saved.'),
+        'settings.rewards_saved': () => __('Rewards settings saved.'),
         'settings.profile_updated': () => __('Profile updated.'),
         'settings.password_updated': () => __('Password updated.'),
         'public_card.email_saved': () => __('Thanks! Your email is saved.'),

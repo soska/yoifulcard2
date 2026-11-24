@@ -1,5 +1,6 @@
 import { Form, Head, usePage } from '@inertiajs/react';
 import { Lock } from 'lucide-react';
+import { useState } from 'react';
 import { CardUsageNotice } from '@/components/cards/card-usage-notice';
 import Heading from '@/components/heading';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -27,7 +28,14 @@ import { Spinner } from '@/components/ui/spinner';
 import { edit } from '@/routes/settings';
 import { update as updateOrganization } from '@/routes/settings/organization';
 import { update as updateProgram } from '@/routes/settings/program';
-import type { CardUsage, OrganizationSettings, ProgramSettings } from '@/types';
+import { update as updateRewards } from '@/routes/settings/rewards';
+import type { EarnMode } from '@/types/enums.generated';
+import type {
+    CardUsage,
+    OrganizationSettings,
+    ProgramSettings,
+    RewardsSettings,
+} from '@/types';
 import { __ } from '@/i18n';
 
 type Props = {
@@ -397,6 +405,168 @@ function ProgramForm({
     );
 }
 
+function RewardsForm({
+    rewards,
+    canEdit,
+}: {
+    rewards: RewardsSettings;
+    canEdit: boolean;
+}) {
+    const [enabled, setEnabled] = useState(rewards.enabled);
+    const [mode, setMode] = useState<EarnMode>(rewards.mode ?? 'spend');
+    const modeItems: { value: EarnMode; label: string }[] = [
+        { value: 'spend', label: __('Points for each amount spent') },
+        { value: 'visits', label: __('One point per visit') },
+    ];
+
+    return (
+        <div className="space-y-6">
+            <Heading
+                variant="small"
+                title={__('Rewards')}
+                description={__(
+                    'Give customers points when they buy, and let them redeem rewards later.',
+                )}
+            />
+            <Form
+                {...updateRewards.form()}
+                disableWhileProcessing
+                options={{ preserveScroll: true }}
+            >
+                {({ processing, errors }) => (
+                    <FieldSet disabled={!canEdit}>
+                        <FieldGroup>
+                            {(errors.organization ?? errors.program) && (
+                                <Alert variant="destructive">
+                                    <AlertDescription>
+                                        {errors.organization ?? errors.program}
+                                    </AlertDescription>
+                                </Alert>
+                            )}
+
+                            <input
+                                type="hidden"
+                                name="rewards_enabled"
+                                value={enabled ? '1' : '0'}
+                            />
+                            <Field orientation="horizontal">
+                                <Checkbox
+                                    id="rewards_enabled"
+                                    checked={enabled}
+                                    onCheckedChange={(checked) =>
+                                        setEnabled(checked === true)
+                                    }
+                                    disabled={!canEdit}
+                                />
+                                <FieldLabel
+                                    htmlFor="rewards_enabled"
+                                    className="font-normal"
+                                >
+                                    {__('Turn on rewards')}
+                                </FieldLabel>
+                            </Field>
+
+                            {enabled && (
+                                <>
+                                    <Field data-invalid={!!errors.earn_mode}>
+                                        <FieldLabel htmlFor="earn_mode">
+                                            {__('How points are earned')}
+                                        </FieldLabel>
+                                        <Select
+                                            name="earn_mode"
+                                            value={mode}
+                                            onValueChange={(value) =>
+                                                setMode(value as EarnMode)
+                                            }
+                                            items={modeItems}
+                                            disabled={!canEdit}
+                                        >
+                                            <SelectTrigger
+                                                id="earn_mode"
+                                                className="w-full sm:w-72"
+                                                aria-invalid={
+                                                    !!errors.earn_mode
+                                                }
+                                            >
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {modeItems.map((item) => (
+                                                    <SelectItem
+                                                        key={item.value}
+                                                        value={item.value}
+                                                    >
+                                                        {item.label}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                        <FieldError>
+                                            {errors.earn_mode}
+                                        </FieldError>
+                                    </Field>
+
+                                    {mode === 'spend' ? (
+                                        <Field
+                                            data-invalid={!!errors.earn_rate}
+                                        >
+                                            <FieldLabel htmlFor="earn_rate">
+                                                {__('Points per 1.00 spent')}
+                                            </FieldLabel>
+                                            <Input
+                                                id="earn_rate"
+                                                name="earn_rate"
+                                                inputMode="decimal"
+                                                autoComplete="off"
+                                                defaultValue={
+                                                    rewards.rate ?? '1.00'
+                                                }
+                                                className="w-full sm:w-40"
+                                                aria-invalid={
+                                                    !!errors.earn_rate
+                                                }
+                                                required
+                                            />
+                                            <FieldDescription>
+                                                {__(
+                                                    'Customers earn whole points: a part of a point is dropped.',
+                                                )}
+                                            </FieldDescription>
+                                            <FieldError>
+                                                {errors.earn_rate}
+                                            </FieldError>
+                                        </Field>
+                                    ) : (
+                                        <FieldDescription>
+                                            {__(
+                                                {
+                                                    one: 'A card earns points for up to {count} visit a day.',
+                                                    other: 'A card earns points for up to {count} visits a day.',
+                                                },
+                                                { count: rewards.visit_cap },
+                                            )}
+                                        </FieldDescription>
+                                    )}
+                                </>
+                            )}
+
+                            <div>
+                                <Button
+                                    type="submit"
+                                    disabled={processing || !canEdit}
+                                >
+                                    {processing && <Spinner />}
+                                    {__('Save rewards')}
+                                </Button>
+                            </div>
+                        </FieldGroup>
+                    </FieldSet>
+                )}
+            </Form>
+        </div>
+    );
+}
+
 export default function BusinessSettings({
     organization,
     program,
@@ -423,6 +593,10 @@ export default function BusinessSettings({
             />
 
             {program && <ProgramForm program={program} canEdit={canEdit} />}
+
+            {program && (
+                <RewardsForm rewards={program.rewards} canEdit={canEdit} />
+            )}
         </>
     );
 }

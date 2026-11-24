@@ -12,6 +12,8 @@ import { __ } from '@/i18n';
 
 type Props = {
     card: PublicCard;
+    /** Whether the business has rewards on: points show only then. */
+    rewards_enabled: boolean;
     organization: PublicOrganization;
 };
 
@@ -27,7 +29,11 @@ function tokenFromUrl(url: string): string {
  * email form. A suspended business's card looks the same:
  * the balance belongs to the cardholder.
  */
-export default function PublicCardShow({ card, organization }: Props) {
+export default function PublicCardShow({
+    card,
+    rewards_enabled,
+    organization,
+}: Props) {
     const { url } = usePage();
     const initial = organization.name.trim().charAt(0).toUpperCase();
     return (
@@ -94,6 +100,17 @@ export default function PublicCardShow({ card, organization }: Props) {
                     )}
 
                     <CardFace card={card} organization={organization} />
+
+                    {rewards_enabled && card.status !== 'inactive' && (
+                        <div className="rounded-xl border bg-card px-4 py-3 text-center">
+                            <p className="text-sm text-muted-foreground">
+                                {__('Reward points')}
+                            </p>
+                            <p className="text-3xl font-semibold tabular-nums">
+                                {card.points}
+                            </p>
+                        </div>
+                    )}
 
                     {(card.status === 'active' ||
                         card.status === 'depleted') && (

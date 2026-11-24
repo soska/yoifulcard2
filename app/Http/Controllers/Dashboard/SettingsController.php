@@ -6,7 +6,10 @@ use App\Enums\FlashMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\UpdateOrganizationSettingsRequest;
 use App\Http\Requests\Settings\UpdateProgramSettingsRequest;
+use App\Http\Requests\Settings\UpdateRewardsSettingsRequest;
 use App\Models\Organization;
+use App\Models\Program;
+use App\Services\CardLedger;
 use App\Support\CurrentOrganization;
 use App\Support\Flash;
 use DateTimeZone;
@@ -43,6 +46,7 @@ class SettingsController extends Controller
             'program' => $program === null ? null : [
                 'name' => $program->name,
                 'terms_url' => $program->terms_url,
+                'rewards' => self::rewardsProps($program),
             ],
             'usage' => $organization->cardUsage(),
             'canEdit' => Gate::allows('update', $organization),
@@ -99,6 +103,41 @@ class SettingsController extends Controller
         Flash::success(FlashMessage::ProgramSettingsSaved);
 
         return to_route('settings.edit');
+    }
+
+    /**
+     * Save whether rewards are on and the rule for earning points.
+     */
+    public function updateRewards(UpdateRewardsSettingsRequest $request): RedirectResponse
+    {
+        $program = $this->organization($request)->defaultProgram();
+
+        if ($program === null) {
+            throw ValidationException::withMessages([
+                'program' => __('This business has no active program to issue cards from.'),
+            ]);
+        }
+
+        $program->update($request->toAttributes());
+
+        Flash::success(FlashMessage::RewardsSettingsSaved);
+
+        return to_route('settings.edit');
+    }
+
+    /**
+     * The program's rewards rule as pages see it.
+     *
+     * @return array{enabled: bool, mode: string|null, rate: string|null, visit_cap: int}
+     */
+    public static function rewardsProps(Program $program): array
+    {
+        return [
+            'enabled' => $program->rewards_enabled,
+            'mode' => $program->earn_mode?->value,
+            'rate' => $program->earn_rate,
+            'visit_cap' => CardLedger::VISIT_POINTS_PER_DAY,
+        ];
     }
 
     /**

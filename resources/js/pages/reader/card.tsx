@@ -1,5 +1,5 @@
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
-import { AlertCircle, ArrowLeft, Minus, Plus, Power } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Minus, Plus, Power, Star } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CardStatusBadge } from '@/components/cards/card-status-badge';
 import { suspendedMessage } from '@/components/organization/suspended-banner';
@@ -14,8 +14,8 @@ import { recordRecentScan } from '@/hooks/use-reader-storage';
 import { useMoneyFormat } from '@/hooks/use-money-format';
 import { playReaderSound } from '@/lib/reader-sound';
 import { scan } from '@/routes';
-import { activate, load, spend } from '@/routes/cards';
-import type { CardStatus } from '@/types';
+import { activate, earn, load, spend } from '@/routes/cards';
+import type { CardStatus, RewardsSettings } from '@/types';
 import { __ } from '@/i18n';
 
 type Props = {
@@ -23,18 +23,24 @@ type Props = {
         id: string;
         code: string;
         balance: string;
+        points: number;
         status: CardStatus;
     };
+    rewards: RewardsSettings;
     currency: string;
 };
 
-type Action = 'spend' | 'load' | 'activate';
+type Action = 'spend' | 'load' | 'earn' | 'activate';
 
 const PRESETS = ['10', '20', '50', '100'];
 
 /** The submit button's word for each action, built at render time. */
-function submitLabel(action: Action): string {
+function submitLabel(action: Action, visits: boolean): string {
     switch (action) {
+        case 'earn':
+            return visits
+                ? __('Record visit')
+                : __('Add points', { context: 'verb: add points to a card' });
         case 'spend':
             return __('Charge', { context: 'verb: charge a card' });
         case 'load':
@@ -44,7 +50,7 @@ function submitLabel(action: Action): string {
     }
 }
 
-const routes = { spend, load, activate } as const;
+const routes = { spend, load, earn, activate } as const;
 
 /**
  * A scanned card: charge it or add funds, or, for a preissued card that is
@@ -52,13 +58,17 @@ const routes = { spend, load, activate } as const;
  * routes as the card page, with `reader` set so a success returns to the
  * scanner.
  */
-export default function ReaderCard({ card, currency }: Props) {
+export default function ReaderCard({ card, rewards, currency }: Props) {
     const { currentOrganization } = usePage().props;
     const { formatMoney } = useMoneyFormat();
     const inactive = card.status === 'inactive';
     const [chosen, setChosen] = useState<Action>('spend');
     const action: Action = inactive ? 'activate' : chosen;
     const form = useForm({ amount: '', reader: true });
+    // Rewards need a rule before staff can award points.
+    const earning = rewards.enabled && rewards.mode !== null;
+    // A visit earns a point with nothing to enter.
+    const visit = action === 'earn' && rewards.mode === 'visits';
 
     useEffect(() => {
         recordRecentScan(card.code);
@@ -76,9 +86,16 @@ export default function ReaderCard({ card, currency }: Props) {
     // CardLedger refusals come back on `card`, `organization`, or (when
     // activating at the plan limit) `card_limit`.
     const errors = form.errors as Partial<
-        Record<'amount' | 'card' | 'organization' | 'card_limit', string>
+        Record<
+            'amount' | 'card' | 'organization' | 'card_limit' | 'rewards',
+            string
+        >
     >;
-    const formError = errors.card ?? errors.organization ?? errors.card_limit;
+    const formError =
+        errors.card ??
+        errors.organization ??
+        errors.card_limit ??
+        errors.rewards;
     const amount = form.data.amount.trim();
 
     function submit(event: React.FormEvent) {
@@ -114,6 +131,18 @@ export default function ReaderCard({ card, currency }: Props) {
                             </span>
                             <CardStatusBadge status={card.status} />
                         </div>
+                        {earning && !inactive && (
+                            <p className="flex items-center gap-1 text-sm text-muted-foreground">
+                                <Star className="size-4" />
+                                {__(
+                                    {
+                                        one: '{count} point',
+                                        other: '{count} points',
+                                    },
+                                    { count: card.points },
+                                )}
+                            </p>
+                        )}
                         {inactive ? (
                             <p className="text-2xl font-semibold">
                                 {__('Not activated yet')}
@@ -169,6 +198,12 @@ export default function ReaderCard({ card, currency }: Props) {
                                 <Plus data-icon="inline-start" />
                                 {__('Add funds')}
                             </TabsTrigger>
+                            {earning && (
+                                <TabsTrigger value="earn" className="text-base">
+                                    <Star data-icon="inline-start" />
+                                    {__('Points')}
+                                </TabsTrigger>
+                            )}
                         </TabsList>
                     </Tabs>
                 )}
@@ -181,55 +216,73 @@ export default function ReaderCard({ card, currency }: Props) {
                         </Alert>
                     )}
 
-                    <div className="grid grid-cols-4 gap-2">
-                        {PRESETS.map((preset) => (
-                            <Button
-                                key={preset}
-                                type="button"
-                                variant={
-                                    amount === preset ? 'default' : 'outline'
-                                }
-                                className="h-14 text-lg"
-                                disabled={disabled || form.processing}
-                                onClick={() => form.setData('amount', preset)}
-                            >
-                                {formatMoney(preset, currency)}
-                            </Button>
-                        ))}
-                    </div>
+                    {!visit && (
+                        <div className="grid grid-cols-4 gap-2">
+                            {PRESETS.map((preset) => (
+                                <Button
+                                    key={preset}
+                                    type="button"
+                                    variant={
+                                        amount === preset
+                                            ? 'default'
+                                            : 'outline'
+                                    }
+                                    className="h-14 text-lg"
+                                    disabled={disabled || form.processing}
+                                    onClick={() =>
+                                        form.setData('amount', preset)
+                                    }
+                                >
+                                    {formatMoney(preset, currency)}
+                                </Button>
+                            ))}
+                        </div>
+                    )}
 
-                    <Field data-invalid={!!form.errors.amount}>
-                        <FieldLabel htmlFor="reader-amount">
-                            {__('Amount ({currency})', { currency })}
-                        </FieldLabel>
-                        <Input
-                            id="reader-amount"
-                            name="amount"
-                            inputMode="decimal"
-                            autoComplete="off"
-                            placeholder="0.00"
-                            className="h-14 text-2xl md:text-2xl"
-                            value={form.data.amount}
-                            onChange={(event) =>
-                                form.setData('amount', event.target.value)
-                            }
-                            disabled={disabled || form.processing}
-                            aria-invalid={!!form.errors.amount}
-                            required
-                        />
-                        <FieldError>{form.errors.amount}</FieldError>
-                    </Field>
+                    {visit ? (
+                        <p className="text-sm text-muted-foreground">
+                            {__('The customer earns one point for this visit.')}
+                        </p>
+                    ) : (
+                        <Field data-invalid={!!form.errors.amount}>
+                            <FieldLabel htmlFor="reader-amount">
+                                {__('Amount ({currency})', { currency })}
+                            </FieldLabel>
+                            <Input
+                                id="reader-amount"
+                                name="amount"
+                                inputMode="decimal"
+                                autoComplete="off"
+                                placeholder="0.00"
+                                className="h-14 text-2xl md:text-2xl"
+                                value={form.data.amount}
+                                onChange={(event) =>
+                                    form.setData('amount', event.target.value)
+                                }
+                                disabled={disabled || form.processing}
+                                aria-invalid={!!form.errors.amount}
+                                required
+                            />
+                            <FieldError>{form.errors.amount}</FieldError>
+                        </Field>
+                    )}
 
                     <Button
                         type="submit"
                         size="lg"
                         className="h-16 text-lg"
-                        disabled={disabled || form.processing || amount === ''}
+                        disabled={
+                            disabled ||
+                            form.processing ||
+                            (!visit && amount === '')
+                        }
                         title={blockedReason ?? undefined}
                     >
                         {form.processing && <Spinner />}
-                        {submitLabel(action)}
-                        {amount !== '' &&
+                        {submitLabel(action, visit)}
+                        {!visit &&
+                            action !== 'earn' &&
+                            amount !== '' &&
                             !Number.isNaN(Number(amount)) &&
                             ` ${formatMoney(amount, currency)}`}
                     </Button>

@@ -1,3 +1,5 @@
+import type { EarnMode } from '@/types/enums.generated';
+
 export type DashboardStats = {
     cards: number;
     inactive: number;
@@ -38,7 +40,18 @@ export type OrganizationSettings = {
     timezone: string;
 };
 
+/** How a program's rewards work. */
+export type RewardsSettings = {
+    enabled: boolean;
+    mode: EarnMode | null;
+    /** Points per 1.00 spent, in spend mode. */
+    rate: string | null;
+    /** The most visits that earn points for one card in a day. */
+    visit_cap: number;
+};
+
 export type ProgramSettings = {
     name: string;
     terms_url: string | null;
+    rewards: RewardsSettings;
 };
