@@ -119,17 +119,27 @@ class Card extends Model
     }
 
     /**
-     * SQL condition for cards that take a slot under the card limit. Stock
+     * SQL condition for cards that take a slot under the card limit, with `?`
+     * placeholders for the values countsTowardLimitBindings() returns. Stock
      * (inactive) doesn't, and neither does voided stock: preissued cards
      * cancelled before they were ever activated. Cards created one at a time
      * are active with no activated_at, so batch_id tells voided stock apart.
+     *
+     * @return literal-string
      */
     public static function countsTowardLimitSql(): string
     {
-        $inactive = CardStatus::Inactive->value;
-        $cancelled = CardStatus::Cancelled->value;
+        return 'cards.status <> ? and not (cards.status = ? and cards.activated_at is null and cards.batch_id is not null)';
+    }
 
-        return "cards.status <> '{$inactive}' and not (cards.status = '{$cancelled}' and cards.activated_at is null and cards.batch_id is not null)";
+    /**
+     * The values for countsTowardLimitSql()'s placeholders.
+     *
+     * @return list<string>
+     */
+    public static function countsTowardLimitBindings(): array
+    {
+        return [CardStatus::Inactive->value, CardStatus::Cancelled->value];
     }
 
     /**
@@ -140,7 +150,7 @@ class Card extends Model
      */
     public function scopeCountingTowardLimit(Builder $query): void
     {
-        $query->whereRaw(self::countsTowardLimitSql());
+        $query->whereRaw(self::countsTowardLimitSql(), self::countsTowardLimitBindings());
     }
 
     /**

@@ -174,7 +174,7 @@ class Organization extends Model
         $counts = Card::query()
             ->forOrganization($this)
             ->toBase()
-            ->selectRaw('count(*) filter (where '.Card::countsTowardLimitSql().') as used')
+            ->selectRaw('count(*) filter (where '.Card::countsTowardLimitSql().') as used', Card::countsTowardLimitBindings())
             ->selectRaw('count(*) filter (where status = ?) as stock', [CardStatus::Inactive->value])
             ->first();
 
