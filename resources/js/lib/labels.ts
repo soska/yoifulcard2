@@ -71,7 +71,9 @@ export function transactionTypeLabel(type: TransactionType): string {
         earn: __('Earned', { context: 'transaction type' }),
         redeem: __('Redeemed', { context: 'transaction type' }),
         expire: __('Expired', { context: 'transaction type' }),
-        points_adjustment: __('Points adjustment', { context: 'transaction type' }),
+        points_adjustment: __('Points adjustment', {
+            context: 'transaction type',
+        }),
     };
 
     return labels[type];
